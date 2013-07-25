@@ -1,0 +1,60 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MenuController"
+    },
+    "designerId": "5e947e8b-3edb-4586-8c79-6c66c783e510",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTreepanelItemClick",
+                "implHandler": [
+                    "if(record.get('id') == 'inst-dash'){\r",
+                    "\t//alert(\"instance dash board.\");\r",
+                    "    Ext.getCmp('centerContainer').layout.setActiveItem(0);\r",
+                    "\r",
+                    "}else if (record.get('id') == 'insts'){\r",
+                    "    //alert(\"instances.\");\r",
+                    "    \r",
+                    "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
+                    "    \r",
+                    "}else if (record.get('id') == 'img-tmp'){\r",
+                    "    alert(\"templates.\");\r",
+                    "    \r",
+                    "}else if (record.get('id') == 'img-pkg'){\r",
+                    "    alert(\"packages.\");\r",
+                    "    \r",
+                    "}else if (record.get('id') == 'scal-grp'){\r",
+                    "    alert(\"scal-grp.\");\r",
+                    "    \r",
+                    "}else if (record.get('id') == 'scal-lb'){\r",
+                    "    alert(\"scal-lb.\");\r",
+                    "    \r",
+                    "}else if (record.get('id') == 'user-grp'){\r",
+                    "    alert(\"user-grp.\");\r",
+                    "    \r",
+                    "}else if (record.get('id') == 'users'){\r",
+                    "    alert(\"users.\");\r",
+                    "    \r",
+                    "}"
+                ],
+                "name": "itemclick",
+                "scope": "me",
+                "designer|targetType": "Ext.tree.Panel",
+                "designer|controlQuery": "#westPanel treepanel"
+            },
+            "designerId": "bad357f8-5b29-4987-8920-72575a2a227f"
+        }
+    ]
+}

@@ -1,0 +1,83 @@
+{
+    "name": "peacock",
+    "settings": {
+        "urlPrefix": "http://localhost/peacock",
+        "exportPath": "D:/Apache2.2/htdocs",
+        "spacesToIndent": 4,
+        "lineEnding": "CRLF",
+        "genTimestamps": false,
+        "cacheBust": false,
+        "buildShouldOverwriteIndex": true
+    },
+    "xdsVersion": "2.2.2",
+    "xdsBuild": 991,
+    "schemaVersion": 1,
+    "upgradeVersion": 210000000503,
+    "framework": "ext42",
+    "topInstanceFileMap": {
+        "e45f6741-dc61-42e0-a350-8cf64d373b1c": {
+            "paths": [
+                "metadata/resource/Library"
+            ],
+            "className": "Library"
+        },
+        "dc7d06ae-4f38-4c4a-9284-382e873ff5c1": {
+            "paths": [
+                "metadata/view/MainViewport",
+                "app/view/override/MainViewport.js",
+                "app/view/MainViewport.js",
+                "app/view/Viewport.js"
+            ],
+            "className": "MainViewport"
+        },
+        "cbddf841-19bd-495c-89e5-132aae219ba8": {
+            "paths": [
+                "metadata/resource/css"
+            ],
+            "className": "css"
+        },
+        "f6c61781-da02-4e17-a0db-8e6e154ce1c1": {
+            "paths": [
+                "metadata/view/LoginWindow",
+                "app/view/override/LoginWindow.js",
+                "app/view/LoginWindow.js"
+            ],
+            "className": "LoginWindow"
+        },
+        "69a40ace-9cfa-4847-b6e9-8ec48302c3bd": {
+            "paths": [
+                "metadata/controller/LoginController",
+                "app/controller/override/LoginController.js",
+                "app/controller/LoginController.js"
+            ],
+            "className": "LoginController"
+        },
+        "5e947e8b-3edb-4586-8c79-6c66c783e510": {
+            "paths": [
+                "metadata/controller/MenuController",
+                "app/controller/override/MenuController.js",
+                "app/controller/MenuController.js"
+            ],
+            "className": "MenuController"
+        }
+    },
+    "viewOrderMap": {
+        "view": [
+            "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
+            "f6c61781-da02-4e17-a0db-8e6e154ce1c1"
+        ],
+        "store": [],
+        "controller": [
+            "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
+            "5e947e8b-3edb-4586-8c79-6c66c783e510"
+        ],
+        "model": [],
+        "resource": [
+            "e45f6741-dc61-42e0-a350-8cf64d373b1c",
+            "cbddf841-19bd-495c-89e5-132aae219ba8"
+        ],
+        "app": [
+            "application"
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+    "type": "Ext.app.Application",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "views": [
+            "MainViewport",
+            "LoginWindow"
+        ],
+        "autoCreateViewport": true,
+        "controllers": [
+            "LoginController",
+            "MenuController"
+        ],
+        "name": "Peacock"
+    },
+    "designerId": "application"
+}
