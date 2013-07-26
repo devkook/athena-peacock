@@ -29,7 +29,7 @@ import java.util.UUID;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public final class PeacockIAgentIDGenerator {
+public final class PeacockAgentIDGenerator {
 	
 	/**
 	 * <pre>
@@ -61,4 +61,4 @@ public final class PeacockIAgentIDGenerator {
 	}//end of generateId()
 
 }
-//end of PeacockIAgentIDGenerator.java
+//end of PeacockAgentIDGenerator.java
