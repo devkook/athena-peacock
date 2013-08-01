@@ -23,8 +23,18 @@ package com.athena.peacock.agent.netty;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import com.athena.peacock.common.constant.PeacockConstant;
+import com.athena.peacock.common.netty.PeacockDatagram;
+import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 
 /**
  * <pre>
@@ -34,19 +44,15 @@ import java.util.logging.Logger;
  * @author Sang-cheon Park
  * @version 1.0
  */
+@Component
+@Qualifier("peacockClientHandler")
 public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 
-    private static final Logger logger = Logger.getLogger(PeacockClientHandler.class.getName());
-
-    /**
-     * Creates a client-side handler.
-     */
-    public PeacockClientHandler() {
-    }
+    private static final Logger logger = LoggerFactory.getLogger(PeacockClientHandler.class);
     
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-    	//ctx.writeAndFlush(agent);
+		ctx.writeAndFlush(getAgentInitialInfo());
     }
 
 	@Override
@@ -59,8 +65,29 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.log(Level.WARNING, "Unexpected exception from downstream.", cause);
+        logger.error("Unexpected exception from downstream.", cause);
         ctx.close();
     }
+    
+    /**
+     * <pre>
+     * Agent의 시스템 정보를 조회한다.
+     * </pre>
+     * @return
+     * @throws IOException
+     */
+    private PeacockDatagram<AgentInitialInfoMessage> getAgentInitialInfo() throws IOException {
+    	String agentId = IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI());
+		
+		AgentInitialInfoMessage message = new AgentInitialInfoMessage();
+		message.setAgentId(agentId);
+		message.setOsName(System.getProperty("os.name"));
+		message.setOsArch(System.getProperty("os.arch"));
+		message.setOsVersion(System.getProperty("os.version"));
+		message.setJavaVersion(System.getProperty("java.version"));
+		message.setUserName(System.getProperty("user.name"));
+		
+		return new PeacockDatagram<AgentInitialInfoMessage>(message);
+    }//end of getAgentInitialInfo()
 }
 //end of PeacockClientHandler.java

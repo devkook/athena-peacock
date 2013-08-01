@@ -22,122 +22,85 @@ package com.athena.peacock.agent.netty;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelFuture;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Named;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
+import com.athena.peacock.agent.util.AgentConfigUtil;
+import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
-import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
-import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
-import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
-import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
 /**
  * <pre>
- *
+ * Netty Client
  * </pre>
  * 
  * @author Sang-cheon Park
  * @version 1.0
  */
+@Component
+@Qualifier("peacockClient")
 public class PeacockClient {
 
-    private final String host;
-    private final int port;
+    private final String host = AgentConfigUtil.getConfig(PeacockConstant.SERVER_IP);
+    private final int port = Integer.parseInt(AgentConfigUtil.getConfig(PeacockConstant.SERVER_PORT));
 
-    public PeacockClient(String host, int port) {
-        this.host = host;
-        this.port = port;
-    }
+    @Inject
+    @Named("eventLoopGroup")
+    private EventLoopGroup group;
 
-    public void run() throws Exception {
-        EventLoopGroup group = new NioEventLoopGroup();
-        try {
-            Bootstrap b = new Bootstrap();
-            b.group(group)
-             .channel(NioSocketChannel.class)
-             .handler(new LoggingHandler(LogLevel.WARN))
-             .handler(new PeacockClientInitializer());
+    @Inject
+    @Named("peacockClientInitializer")
+    private PeacockClientInitializer initializer;
+    
+    private Channel channel;
+    
+    /**
+     * <pre>
+     * Bean 생성 시 수행되는 메소드로 Server와의 연결을 수립한다.
+     * </pre>
+     * @throws Exception
+     */
+    @PostConstruct
+	public void start() throws Exception {
+    	Bootstrap b = new Bootstrap();
+        b.group(group)
+         .channel(NioSocketChannel.class)
+         .handler(new LoggingHandler(LogLevel.WARN))
+         .handler(initializer);
+        
+        // Start the connection attempt.
+        channel = b.connect(host, port).sync().channel();
+	}//end of start()
 
-            // Start the connection attempt.
-            Channel ch = b.connect(host, port).sync().channel();
-
-            // Read commands from the stdin.
-            ChannelFuture lastWriteFuture = null;
-            BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            
-            while (true) {
-            	System.out.println("command, response, system_status, initial_info, bye are available");
-            	System.out.print("=> ");
-            	
-                String line = in.readLine();
-                
-                if("command".equals(line)) {
-                	ProvisioningCommandMessage message = new ProvisioningCommandMessage();
-                	PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(message);
-                	
-                	ch.writeAndFlush(datagram);
-                } else if("response".equals(line)) {
-                	ProvisioningResponseMessage message = new ProvisioningResponseMessage();
-                	PeacockDatagram<ProvisioningResponseMessage> datagram = new PeacockDatagram<ProvisioningResponseMessage>(message);
-                	
-                	ch.writeAndFlush(datagram);
-                } else if("system_status".equals(line)) {
-                	AgentSystemStatusMessage message = new AgentSystemStatusMessage();
-                	PeacockDatagram<AgentSystemStatusMessage> datagram = new PeacockDatagram<AgentSystemStatusMessage>(message);
-                	
-                	ch.writeAndFlush(datagram);
-                } else if("initial_info".equals(line)) {
-                	AgentInitialInfoMessage message = new AgentInitialInfoMessage();
-                	PeacockDatagram<AgentInitialInfoMessage> datagram = new PeacockDatagram<AgentInitialInfoMessage>(message);
-                	
-                	ch.writeAndFlush(datagram);
-                } else if("bye".equals(line)) {
-                    // Sends the received line to the server.
-                    lastWriteFuture = ch.writeAndFlush(line);
-                    
-                    // If user typed the 'bye' command, wait until the server closes the connection.
-                    ch.closeFuture().sync();
-                    break;
-                } else {
-                	System.out.println(line + " is invalid command.");
-                	continue;
-                }
-            }
-
-            // Wait until all messages are flushed before closing the channel.
-            if (lastWriteFuture != null) {
-                lastWriteFuture.sync();
-            }
-        } finally {
-            group.shutdownGracefully();
-        }
-    }
-
-    public static void main(String[] args) throws Exception {
-    	
-    	args = new String[]{"localhost", "8080"};
-    	
-        // Print usage if no argument is specified.
-    	if (args.length != 2) {
-            System.err.println(
-                    "Usage: " + PeacockClient.class.getSimpleName() +
-                    " <host> <port>");
-            return;
-        }
-
-        // Parse options.
-        final String host = args[0];
-        final int port = Integer.parseInt(args[1]);
-
-        new PeacockClient(host, port).run();
-    }
-
+	/**
+	 * <pre>
+	 * Bean 소멸 시 수행되는 메소드로 Server와의 연결을 종료한다.
+	 * </pre>
+	 */
+	@PreDestroy
+	public void stop() {
+		channel.close();
+	}//end of stop()
+	
+	/**
+	 * <pre>
+	 * 
+	 * </pre>
+	 * @param datagram
+	 */
+	public void sendMessage(PeacockDatagram<?> datagram) {
+		channel.writeAndFlush(datagram);
+	}//end of send()
+	
 }
 //end of PeacockClient.java

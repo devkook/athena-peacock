@@ -20,6 +20,9 @@
  */
 package com.athena.peacock.controller.netty;
 
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -35,6 +38,8 @@ import io.netty.handler.logging.LoggingHandler;
  * @author Sang-cheon Park
  * @version 1.0
  */
+@Component
+@Qualifier("peacockServer")
 public class PeacockServer {
 
     private final int port;
@@ -73,7 +78,7 @@ public class PeacockServer {
         if (args.length > 0) {
             port = Integer.parseInt(args[0]);
         } else {
-            port = 8080;
+            port = 7700;
         }
         new PeacockServer(port).run();
 	}
