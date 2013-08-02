@@ -20,10 +20,22 @@
  */
 package com.athena.peacock.agent.job;
 
+import java.io.File;
+import java.io.IOException;
+
+import org.apache.commons.io.IOUtils;
+import org.hyperic.sigar.CpuPerc;
+import org.hyperic.sigar.Mem;
+import org.hyperic.sigar.SigarException;
+
 import com.athena.peacock.agent.netty.PeacockClient;
 import com.athena.peacock.agent.scheduler.InternalJobExecutionException;
 import com.athena.peacock.agent.scheduler.quartz.BaseJob;
 import com.athena.peacock.agent.scheduler.quartz.JobExecution;
+import com.athena.peacock.agent.util.SigarUtil;
+import com.athena.peacock.common.constant.PeacockConstant;
+import com.athena.peacock.common.netty.PeacockDatagram;
+import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
 
 /**
  * <pre>
@@ -34,17 +46,55 @@ import com.athena.peacock.agent.scheduler.quartz.JobExecution;
  */
 public class SystemMonitoringJob extends BaseJob {
 	
+	private PeacockClient peacockClient;
+
+	/**
+	 * @param peacockClient the peacockClient to set
+	 */
+	public void setPeacockClient(PeacockClient peacockClient) {
+		this.peacockClient = peacockClient;
+	}
+
 	/* (non-Javadoc)
 	 * @see com.athena.peacock.agent.scheduler.quartz.BaseJob#executeInternal(com.athena.peacock.agent.scheduler.quartz.JobExecution)
 	 */
 	@Override
 	protected void executeInternal(JobExecution context) throws InternalJobExecutionException {
-
-		// TODO Auto-generated method stub
-		System.out.println("TODO System Monitoring using SIGAR");
-
-		PeacockClient client = (PeacockClient)this.context.getBean("peacockClient");
-		//client.send(datagram);
+		try {
+			Mem mem = SigarUtil.getMem();
+			CpuPerc[] cpuPercList = SigarUtil.getCpuPercList();
+			
+			AgentSystemStatusMessage message = new AgentSystemStatusMessage();
+			message.setAgentId(IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI()));
+			message.setActualFreeMem(mem.getActualFree());
+			message.setActualUsedMem(mem.getActualUsed());
+			message.setFreeMem(mem.getFree());
+			message.setFreePercentMem(mem.getFreePercent());
+			message.setRamMem(mem.getRam());
+			message.setTotalMem(mem.getTotal());
+			message.setUsedMem(mem.getUsed());
+			message.setUsedPercentMem(mem.getUsedPercent());
+			
+			for (CpuPerc cpuPerc : cpuPercList) {
+				message.addCombinedCpuPerc(cpuPerc.getCombined());
+				message.addIdleCpuPerc(cpuPerc.getIdle());
+				message.addIrqCpuPerc(cpuPerc.getIrq());
+				message.addNiceCpuPerc(cpuPerc.getNice());
+				message.addSoftIrqCpuPerc(cpuPerc.getSoftIrq());
+				message.addStolenCpuPerc(cpuPerc.getStolen());
+				message.addSysCpuPerc(cpuPerc.getSys());
+				message.addUserCpuPerc(cpuPerc.getUser());
+				message.addWaitCpuPerc(cpuPerc.getWait());
+			}
+			
+			peacockClient.sendMessage(new PeacockDatagram<AgentSystemStatusMessage>(message));
+		} catch (SigarException e) {
+			logger.error("SigarException has occurred.", e);
+			throw new InternalJobExecutionException(e);
+		} catch (IOException e) {
+			logger.error("IOException has occurred.", e);
+			throw new InternalJobExecutionException(e);
+		}
 	}//end of executeInternal()
 
 }

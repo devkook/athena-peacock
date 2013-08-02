@@ -13,13 +13,11 @@
     <bean name="systemMonitoringJobDetail" class="org.springframework.scheduling.quartz.JobDetailBean">
         <property name="jobClass" value="com.athena.peacock.agent.job.SystemMonitoringJob"/>
         <property name="jobListenerNames" value="JobLogListener"/>
-        <!--
         <property name="jobDataAsMap">
             <map>
-                <entry key="monitoringService" value-ref="monitoringService" />
+                <entry key="peacockClient" value-ref="peacockClient" />
             </map>
         </property>
-        -->
     </bean>
 
     <bean id="systemMonitoringTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
