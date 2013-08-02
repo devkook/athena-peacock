@@ -1,0 +1,8 @@
+{
+    "total": 30,
+    "users":[
+            {"id":"id1", "name":"user1", "groups":2, "password":"opensource#1", "createDate":"2013-07-17 16:48 UTC+0900"},
+            {"id":"id2", "name":"user2", "groups":1, "password":"opensource#2", "createDate":"2013-07-17 16:48 UTC+0900"},
+            {"id":"id3", "name":"user3", "groups":3, "password":"opensource#3", "createDate":"2013-07-17 16:48 UTC+0900"}
+    ]
+}
