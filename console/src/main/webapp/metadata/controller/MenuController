@@ -6,6 +6,9 @@
     },
     "codeClass": null,
     "userConfig": {
+        "stores": [
+            "UsersJsonStore"
+        ],
         "designer|userClassName": "MenuController"
     },
     "designerId": "5e947e8b-3edb-4586-8c79-6c66c783e510",
@@ -21,32 +24,36 @@
                 "fn": "onTreepanelItemClick",
                 "implHandler": [
                     "if(record.get('id') == 'inst-dash'){\r",
-                    "\t//alert(\"instance dash board.\");\r",
+                    "    //alert(\"instance dash board.\");\r",
                     "    Ext.getCmp('centerContainer').layout.setActiveItem(0);\r",
                     "\r",
                     "}else if (record.get('id') == 'insts'){\r",
                     "    //alert(\"instances.\");\r",
+                    "\r",
+                    "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
+                    "\r",
+                    "}else if (record.get('id') == 'img-tmp'){\r",
+                    "    alert(\"templates.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'img-pkg'){\r",
+                    "    alert(\"packages.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'scal-grp'){\r",
+                    "    alert(\"scal-grp.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'scal-lb'){\r",
+                    "    alert(\"scal-lb.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'user-grp'){\r",
+                    "    alert(\"user-grp.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'users'){\r",
+                    "\r",
                     "    \r",
                     "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
                     "    \r",
-                    "}else if (record.get('id') == 'img-tmp'){\r",
-                    "    alert(\"templates.\");\r",
-                    "    \r",
-                    "}else if (record.get('id') == 'img-pkg'){\r",
-                    "    alert(\"packages.\");\r",
-                    "    \r",
-                    "}else if (record.get('id') == 'scal-grp'){\r",
-                    "    alert(\"scal-grp.\");\r",
-                    "    \r",
-                    "}else if (record.get('id') == 'scal-lb'){\r",
-                    "    alert(\"scal-lb.\");\r",
-                    "    \r",
-                    "}else if (record.get('id') == 'user-grp'){\r",
-                    "    alert(\"user-grp.\");\r",
-                    "    \r",
-                    "}else if (record.get('id') == 'users'){\r",
-                    "    alert(\"users.\");\r",
-                    "    \r",
+                    "    this.viewUsers();\r",
+                    "\r",
                     "}"
                 ],
                 "name": "itemclick",
@@ -55,6 +62,61 @@
                 "designer|controlQuery": "#westPanel treepanel"
             },
             "designerId": "bad357f8-5b29-4987-8920-72575a2a227f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewUsers",
+                "implHandler": [
+                    "\r",
+                    "var grid = Ext.getCmp('mainGridPanel');\r",
+                    "\r",
+                    "Ext.suspendLayouts();\r",
+                    "grid.setTitle('Users');\r",
+                    "grid.reconfigure(Ext.getStore('UsersJsonStore'), [{\r",
+                    "    text: 'ID',\r",
+                    "    dataIndex: 'id'\r",
+                    "}, {\r",
+                    "    text: 'User Name',\r",
+                    "    dataIndex: 'name'\r",
+                    "}, {\r",
+                    "    text: 'Groups',\r",
+                    "    dataIndex: 'groups'\r",
+                    "}, {\r",
+                    "    text: 'Password',\r",
+                    "    dataIndex: 'password'\r",
+                    "}, {\r",
+                    "    text: 'Create Date',\r",
+                    "    dataIndex: 'createDate',\r",
+                    "    width: 200\r",
+                    "}]);\r",
+                    "\r",
+                    "Ext.resumeLayouts(true);\r",
+                    "\r",
+                    "grid.getStore().load();"
+                ]
+            },
+            "designerId": "c0d36055-865d-4e09-bc2d-7bb5f5254ba8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewInstances",
+                "implHandler": [
+                    ""
+                ]
+            },
+            "designerId": "4f3ed5da-984e-4bb5-8165-1156bda6ecba"
         }
     ]
 }

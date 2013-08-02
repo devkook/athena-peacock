@@ -2,7 +2,7 @@
     "name": "peacock",
     "settings": {
         "urlPrefix": "http://localhost/peacock",
-        "exportPath": "D:/Apache2.2/htdocs",
+        "exportPath": "D:/Apache2.2/htdocs/peacock",
         "spacesToIndent": 4,
         "lineEnding": "CRLF",
         "genTimestamps": false,
@@ -59,6 +59,22 @@
                 "app/controller/MenuController.js"
             ],
             "className": "MenuController"
+        },
+        "0591db92-38ab-44e8-8b5c-c9868aa10269": {
+            "paths": [
+                "metadata/model/UsersModel",
+                "app/model/override/UsersModel.js",
+                "app/model/UsersModel.js"
+            ],
+            "className": "UsersModel"
+        },
+        "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c": {
+            "paths": [
+                "metadata/store/UsersJsonStore",
+                "app/store/override/UsersJsonStore.js",
+                "app/store/UsersJsonStore.js"
+            ],
+            "className": "UsersJsonStore"
         }
     },
     "viewOrderMap": {
@@ -66,12 +82,16 @@
             "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1"
         ],
-        "store": [],
+        "store": [
+            "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c"
+        ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
             "5e947e8b-3edb-4586-8c79-6c66c783e510"
         ],
-        "model": [],
+        "model": [
+            "0591db92-38ab-44e8-8b5c-c9868aa10269"
+        ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",
             "cbddf841-19bd-495c-89e5-132aae219ba8"

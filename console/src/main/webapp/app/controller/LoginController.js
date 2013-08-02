@@ -40,7 +40,7 @@ Ext.define('Peacock.controller.LoginController', {
             },
             success: function(response){
                 var text = response.responseText;
-                alert(text);
+                //alert(text);
 
                 viewport.layout.setActiveItem(1);
                 loginWin.close();

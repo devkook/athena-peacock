@@ -16,6 +16,10 @@
 Ext.define('Peacock.controller.MenuController', {
     extend: 'Ext.app.Controller',
 
+    stores: [
+        'UsersJsonStore'
+    ],
+
     onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
         if(record.get('id') == 'inst-dash'){
             //alert("instance dash board.");
@@ -42,9 +46,46 @@ Ext.define('Peacock.controller.MenuController', {
             alert("user-grp.");
 
         }else if (record.get('id') == 'users'){
-            alert("users.");
+
+
+            Ext.getCmp('centerContainer').layout.setActiveItem(1);
+
+            this.viewUsers();
 
         }
+    },
+
+    viewUsers: function() {
+
+        var grid = Ext.getCmp('mainGridPanel');
+
+        Ext.suspendLayouts();
+        grid.setTitle('Users');
+        grid.reconfigure(Ext.getStore('UsersJsonStore'), [{
+            text: 'ID',
+            dataIndex: 'id'
+        }, {
+            text: 'User Name',
+            dataIndex: 'name'
+        }, {
+            text: 'Groups',
+            dataIndex: 'groups'
+        }, {
+            text: 'Password',
+            dataIndex: 'password'
+        }, {
+            text: 'Create Date',
+            dataIndex: 'createDate',
+            width: 200
+        }]);
+
+        Ext.resumeLayouts(true);
+
+        grid.getStore().load();
+    },
+
+    viewInstances: function() {
+
     },
 
     init: function(application) {

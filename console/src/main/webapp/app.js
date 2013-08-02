@@ -19,6 +19,9 @@ Ext.Loader.setConfig({
 });
 
 Ext.application({
+    models: [
+        'UsersModel'
+    ],
     views: [
         'MainViewport',
         'LoginWindow'

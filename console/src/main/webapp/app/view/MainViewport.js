@@ -189,8 +189,10 @@ Ext.define('Peacock.view.MainViewport', {
                                         {
                                             xtype: 'gridpanel',
                                             region: 'center',
+                                            id: 'mainGridPanel',
                                             minHeight: 100,
                                             title: 'Grid Panel',
+                                            columnLines: true,
                                             columns: [
                                                 {
                                                     xtype: 'gridcolumn',
@@ -218,7 +220,8 @@ Ext.define('Peacock.view.MainViewport', {
                                                     xtype: 'pagingtoolbar',
                                                     dock: 'bottom',
                                                     width: 360,
-                                                    displayInfo: true
+                                                    displayInfo: true,
+                                                    store: 'UsersJsonStore'
                                                 },
                                                 {
                                                     xtype: 'toolbar',

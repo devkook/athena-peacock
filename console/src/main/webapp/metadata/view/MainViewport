@@ -328,8 +328,10 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|region": "center",
+                                        "id": "mainGridPanel",
                                         "minHeight": 100,
-                                        "title": "Grid Panel"
+                                        "title": "Grid Panel",
+                                        "columnLines": true
                                     },
                                     "designerId": "22d67ded-8643-4254-afdc-002d08d91b45",
                                     "cn": [
@@ -408,7 +410,8 @@
                                             "userConfig": {
                                                 "dock": "bottom",
                                                 "width": 360,
-                                                "displayInfo": true
+                                                "displayInfo": true,
+                                                "store": "UsersJsonStore"
                                             },
                                             "designerId": "1ccba6bb-dbfa-4950-a809-a2edfeaa4518"
                                         },
