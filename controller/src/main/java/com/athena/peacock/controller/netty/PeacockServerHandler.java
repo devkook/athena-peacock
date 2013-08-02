@@ -23,14 +23,18 @@ package com.athena.peacock.controller.netty;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.net.SocketAddress;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
 
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
@@ -47,12 +51,14 @@ import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
  * @author Sang-cheon Park
  * @version 1.0
  */
+@Component
+@Qualifier("peacockServerHandler")
+@Sharable
 public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 
-    private static final Logger logger = Logger.getLogger(PeacockServerHandler.class.getName());
+	private static final Logger logger = LoggerFactory.getLogger(PeacockServerHandler.class);
     public static Map<SocketAddress, Channel> CHANNEL_MAP = new ConcurrentHashMap<SocketAddress, Channel>();
 
-    
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -118,7 +124,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-        logger.log(Level.WARNING, "Unexpected exception from downstream.", cause);
+        logger.error("Unexpected exception from downstream.", cause);
         ctx.close();
     }
 

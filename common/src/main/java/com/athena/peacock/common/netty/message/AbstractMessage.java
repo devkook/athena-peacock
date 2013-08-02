@@ -36,6 +36,7 @@ public abstract class AbstractMessage implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	protected String agentId;
 	protected MessageType messageType;
 	
 	public AbstractMessage(MessageType messageType) {
@@ -49,7 +50,21 @@ public abstract class AbstractMessage implements Serializable {
 		return messageType;
 	}
 
-    @Override
+    /**
+	 * @return the agentId
+	 */
+	public String getAgentId() {
+		return agentId;
+	}
+
+	/**
+	 * @param agentId the agentId to set
+	 */
+	public void setAgentId(String agentId) {
+		this.agentId = agentId;
+	}
+
+	@Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

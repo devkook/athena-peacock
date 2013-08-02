@@ -27,6 +27,12 @@ import io.netty.handler.codec.serialization.ClassResolvers;
 import io.netty.handler.codec.serialization.ObjectDecoder;
 import io.netty.handler.codec.serialization.ObjectEncoder;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+
 /**
  * <pre>
  *
@@ -35,7 +41,13 @@ import io.netty.handler.codec.serialization.ObjectEncoder;
  * @author Sang-cheon Park
  * @version 1.0
  */
+@Component
+@Qualifier("peacockClientInitializer")
 public class PeacockClientInitializer extends ChannelInitializer<SocketChannel> {
+	
+	@Inject
+	@Named("peacockClientHandler")
+	private PeacockClientHandler handler;
 	
     @Override
     public void initChannel(SocketChannel ch) throws Exception {
@@ -44,7 +56,7 @@ public class PeacockClientInitializer extends ChannelInitializer<SocketChannel> 
 
         pipeline.addLast("decoder", new ObjectDecoder(Integer.MAX_VALUE, ClassResolvers.cacheDisabled(null)));
         pipeline.addLast("encoder", new ObjectEncoder());
-        pipeline.addLast("handler", new PeacockClientHandler());
+        pipeline.addLast("handler", handler);
     }
 
 }
