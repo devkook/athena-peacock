@@ -60,6 +60,11 @@ public class SystemMonitoringJob extends BaseJob {
 	 */
 	@Override
 	protected void executeInternal(JobExecution context) throws InternalJobExecutionException {
+		
+		if (!peacockClient.isConnected()) {
+			return;
+		}
+		
 		try {
 			Mem mem = SigarUtil.getMem();
 			CpuPerc[] cpuPercList = SigarUtil.getCpuPercList();
@@ -93,6 +98,9 @@ public class SystemMonitoringJob extends BaseJob {
 			throw new InternalJobExecutionException(e);
 		} catch (IOException e) {
 			logger.error("IOException has occurred.", e);
+			throw new InternalJobExecutionException(e);
+		} catch (Exception e) {
+			logger.error("Unhandled Exception has occurred.", e);
 			throw new InternalJobExecutionException(e);
 		}
 	}//end of executeInternal()

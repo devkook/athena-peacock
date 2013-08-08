@@ -21,6 +21,7 @@
 package com.athena.peacock.agent.netty;
 
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.io.File;
@@ -46,6 +47,7 @@ import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
  */
 @Component
 @Qualifier("peacockClientHandler")
+@Sharable
 public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 
     private static final Logger logger = LoggerFactory.getLogger(PeacockClientHandler.class);

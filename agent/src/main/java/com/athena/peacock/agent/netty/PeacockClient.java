@@ -20,8 +20,12 @@
  */
 package com.athena.peacock.agent.netty;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelFuture;
+import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
@@ -32,6 +36,8 @@ import javax.annotation.PreDestroy;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
@@ -51,6 +57,8 @@ import com.athena.peacock.common.netty.PeacockDatagram;
 @Qualifier("peacockClient")
 public class PeacockClient {
 
+    private static final Logger logger = LoggerFactory.getLogger(PeacockClient.class);
+
     private final String host = AgentConfigUtil.getConfig(PeacockConstant.SERVER_IP);
     private final int port = Integer.parseInt(AgentConfigUtil.getConfig(PeacockConstant.SERVER_PORT));
 
@@ -64,6 +72,11 @@ public class PeacockClient {
     
     private Channel channel;
     
+    private boolean connected = false;
+    private final int frequency = 5000;
+    private final int maxretries = 5;
+    private final AtomicInteger count = new AtomicInteger();
+    
     /**
      * <pre>
      * Bean 생성 시 수행되는 메소드로 Server와의 연결을 수립한다.
@@ -72,14 +85,41 @@ public class PeacockClient {
      */
     @PostConstruct
 	public void start() throws Exception {
-    	Bootstrap b = new Bootstrap();
-        b.group(group)
-         .channel(NioSocketChannel.class)
-         .handler(new LoggingHandler(LogLevel.WARN))
-         .handler(initializer);
+    	final Bootstrap b = new Bootstrap()
+    							.group(group)
+						        .channel(NioSocketChannel.class)
+						        .handler(new LoggingHandler(LogLevel.WARN))
+						        .handler(initializer);
         
         // Start the connection attempt.
-        channel = b.connect(host, port).sync().channel();
+        final ChannelFuture connectFuture = b.connect(host, port);
+        
+        connectFuture.addListener(new ChannelFutureListener() {
+        	
+			@Override
+			public void operationComplete(ChannelFuture future) throws Exception {
+				if (future.isSuccess()) {
+                    connected = true;
+                    channel = future.sync().channel();
+				} else {
+					if (count.incrementAndGet() <= maxretries) {
+                        logger.debug("Attempt to reconnect within {} seconds.", frequency / 1000);
+                        
+						try {
+                            Thread.sleep(frequency);
+                        } catch (InterruptedException e) {
+                        	// nothing to do.
+                            logger.error(e.getMessage());
+                        }   
+                        
+                        b.connect(host, port).addListener(this);       
+					} else {
+						// Stop the agent daemon if the connection attempt has failed.
+						System.exit(-1);
+					}
+				}
+			}
+        });
 	}//end of start()
 
 	/**
@@ -89,7 +129,10 @@ public class PeacockClient {
 	 */
 	@PreDestroy
 	public void stop() {
-		channel.close();
+		if (connected) {
+			connected = false;
+			channel.close();
+		}
 	}//end of stop()
 	
 	/**
@@ -97,10 +140,22 @@ public class PeacockClient {
 	 * 
 	 * </pre>
 	 * @param datagram
+	 * @throws Exception 
 	 */
-	public void sendMessage(PeacockDatagram<?> datagram) {
-		channel.writeAndFlush(datagram);
+	public void sendMessage(PeacockDatagram<?> datagram) throws Exception {
+		if (connected) {
+			channel.writeAndFlush(datagram);
+		} else {
+			throw new Exception("Connection closed.");
+		}
 	}//end of send()
+
+	/**
+	 * @return the connected
+	 */
+	public boolean isConnected() {
+		return connected;
+	}
 	
 }
 //end of PeacockClient.java
