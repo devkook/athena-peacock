@@ -1,0 +1,43 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "MachineModel",
+        "storeId": "MachineListStore",
+        "designer|userClassName": "MachineListStore",
+        "pageSize": 10
+    },
+    "designerId": "701365be-42e7-4a94-ada9-8aabf97213da",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "static/machineList.json"
+            },
+            "designerId": "9028887c-5089-4d98-bdc5-65b72a055e0c",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "root": "list"
+                    },
+                    "designerId": "9e054535-9227-455b-ac99-f4e29a9be324"
+                }
+            ]
+        }
+    ]
+}

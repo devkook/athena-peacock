@@ -1,0 +1,130 @@
+{
+    "type": "Ext.tab.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 325,
+        "width": 755,
+        "designer|userClassName": "InstanceTabPanel",
+        "designer|userAlias": "instanceTabPanel",
+        "activeTab": 0
+    },
+    "designerId": "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 214,
+                "padding": null,
+                "width": 400,
+                "autoScroll": true,
+                "layout": "column",
+                "title": "Description"
+            },
+            "designerId": "8fedaf3b-4d90-4c61-bd47-b0e4af8f87c9",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "766a22b5-21a7-4969-8a2c-a2eb35edbf22"
+                },
+                {
+                    "type": "Ext.grid.property.Grid",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|columnWidth": 0.5,
+                        "padding": 5,
+                        "header": false,
+                        "title": "My Property Grid",
+                        "enableColumnHide": false,
+                        "enableColumnResize": false,
+                        "source": [
+                            "{\"Property 1\":\"String\",\"Property 2\":true,\"Property 3\":\"2013-08-08T13:41:39\",\"Property 4\":123}"
+                        ]
+                    },
+                    "designerId": "08f41832-bc28-494e-8423-aede02ead1f1"
+                },
+                {
+                    "type": "Ext.grid.property.Grid",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|columnWidth": 0.5,
+                        "padding": "5 5 5 0",
+                        "header": false,
+                        "title": "My Property Grid",
+                        "source": [
+                            "{\"Property 1\":\"String\",\"Property 2\":true,\"Property 3\":\"2013-08-08T13:41:48\",\"Property 4\":123}"
+                        ]
+                    },
+                    "designerId": "855bceb6-9136-4a37-9fd7-512a1996afde"
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "Software"
+            },
+            "designerId": "4a72e61c-8c7a-4f89-b5f2-58c40434a0bc",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "fe9dd1d4-9fb4-48d4-9195-6506e8dd16ae"
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "Tab 3"
+            },
+            "designerId": "b215bd85-68ad-49c8-bc54-bfc7665ae384",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "475bc072-5454-45b2-a79a-1b8c52dfb303"
+                }
+            ]
+        }
+    ]
+}

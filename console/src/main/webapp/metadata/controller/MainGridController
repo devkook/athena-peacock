@@ -1,0 +1,41 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "MainGridController"
+    },
+    "designerId": "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onGridpanelSelect",
+                "implHandler": [
+                    "alert(Ext.getClassName(record));\r",
+                    "var detailPanel = Ext.getCmp('detailPanel');\r",
+                    "var instTabPanel = Ext.widget('instanceTabPanel');\r",
+                    "\r",
+                    "detailPanel.removeAll(true);\r",
+                    "\r",
+                    "detailPanel.add(instTabPanel);\r",
+                    "\r",
+                    "detailPanel.layout.setActiveItem(0);"
+                ],
+                "name": "select",
+                "scope": "me",
+                "designer|targetType": "Ext.grid.Panel",
+                "designer|controlQuery": "gridpanel"
+            },
+            "designerId": "cc9ac1db-0c31-416c-8c10-dfce43302664"
+        }
+    ]
+}
