@@ -20,16 +20,19 @@ Ext.Loader.setConfig({
 
 Ext.application({
     models: [
-        'UsersModel'
+        'UsersModel',
+        'MachineModel'
     ],
     views: [
         'MainViewport',
-        'LoginWindow'
+        'LoginWindow',
+        'InstanceTabPanel'
     ],
     autoCreateViewport: true,
     controllers: [
         'LoginController',
-        'MenuController'
+        'MenuController',
+        'MainGridController'
     ],
     name: 'Peacock'
 });

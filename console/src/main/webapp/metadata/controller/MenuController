@@ -7,7 +7,8 @@
     "codeClass": null,
     "userConfig": {
         "stores": [
-            "UsersJsonStore"
+            "UsersJsonStore",
+            "MachineListStore"
         ],
         "designer|userClassName": "MenuController"
     },
@@ -31,6 +32,7 @@
                     "    //alert(\"instances.\");\r",
                     "\r",
                     "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
+                    "    this.viewInstances();\r",
                     "\r",
                     "}else if (record.get('id') == 'img-tmp'){\r",
                     "    alert(\"templates.\");\r",
@@ -49,9 +51,9 @@
                     "\r",
                     "}else if (record.get('id') == 'users'){\r",
                     "\r",
-                    "    \r",
+                    "\r",
                     "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
-                    "    \r",
+                    "\r",
                     "    this.viewUsers();\r",
                     "\r",
                     "}"
@@ -73,6 +75,9 @@
             "userConfig": {
                 "fn": "viewUsers",
                 "implHandler": [
+                    "/*\r",
+                    "*  user list 화면 보여주기.\r",
+                    "*/\r",
                     "\r",
                     "var grid = Ext.getCmp('mainGridPanel');\r",
                     "\r",
@@ -113,7 +118,41 @@
             "userConfig": {
                 "fn": "viewInstances",
                 "implHandler": [
-                    ""
+                    "/*\r",
+                    "*  instance list 화면 보여주기.\r",
+                    "*/\r",
+                    "\r",
+                    "var grid = Ext.getCmp('mainGridPanel');\r",
+                    "\r",
+                    "Ext.suspendLayouts();\r",
+                    "grid.setTitle('Instance List');\r",
+                    "grid.reconfigure(Ext.getStore('MachineListStore'), [{\r",
+                    "    text: 'ID',\r",
+                    "    dataIndex: 'machine_id'\r",
+                    "}, {\r",
+                    "    text: 'OS Name',\r",
+                    "    dataIndex: 'os_name',\r",
+                    "    width: 200\r",
+                    "}, {\r",
+                    "    text: 'Template',\r",
+                    "    dataIndex: 'template',\r",
+                    "    width: 200\r",
+                    "}, {\r",
+                    "    text: 'Staus',\r",
+                    "    dataIndex: 'status'\r",
+                    "}, {\r",
+                    "    text: 'Uptime',\r",
+                    "    dataIndex: 'uptime'\r",
+                    "\r",
+                    "}, {\r",
+                    "    text: 'Host',\r",
+                    "    dataIndex: 'host_name',\r",
+                    "    width: 200\r",
+                    "}]);\r",
+                    "\r",
+                    "Ext.resumeLayouts(true);\r",
+                    "\r",
+                    "grid.getStore().load();"
                 ]
             },
             "designerId": "4f3ed5da-984e-4bb5-8165-1156bda6ecba"

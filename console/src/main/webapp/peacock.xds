@@ -75,22 +75,58 @@
                 "app/store/UsersJsonStore.js"
             ],
             "className": "UsersJsonStore"
+        },
+        "701365be-42e7-4a94-ada9-8aabf97213da": {
+            "paths": [
+                "metadata/store/MachineListStore",
+                "app/store/override/MachineListStore.js",
+                "app/store/MachineListStore.js"
+            ],
+            "className": "MachineListStore"
+        },
+        "cda91240-3441-4f20-9a8d-e95babaf9d47": {
+            "paths": [
+                "metadata/model/MachineModel",
+                "app/model/override/MachineModel.js",
+                "app/model/MachineModel.js"
+            ],
+            "className": "MachineModel"
+        },
+        "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f": {
+            "paths": [
+                "metadata/view/InstanceTabPanel",
+                "app/view/override/InstanceTabPanel.js",
+                "app/view/InstanceTabPanel.js"
+            ],
+            "className": "InstanceTabPanel"
+        },
+        "2dec2676-78ee-420d-9cc8-b6af6e78b3ad": {
+            "paths": [
+                "metadata/controller/MainGridController",
+                "app/controller/override/MainGridController.js",
+                "app/controller/MainGridController.js"
+            ],
+            "className": "MainGridController"
         }
     },
     "viewOrderMap": {
         "view": [
             "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
-            "f6c61781-da02-4e17-a0db-8e6e154ce1c1"
+            "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
+            "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f"
         ],
         "store": [
-            "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c"
+            "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
+            "701365be-42e7-4a94-ada9-8aabf97213da"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
-            "5e947e8b-3edb-4586-8c79-6c66c783e510"
+            "5e947e8b-3edb-4586-8c79-6c66c783e510",
+            "2dec2676-78ee-420d-9cc8-b6af6e78b3ad"
         ],
         "model": [
-            "0591db92-38ab-44e8-8b5c-c9868aa10269"
+            "0591db92-38ab-44e8-8b5c-c9868aa10269",
+            "cda91240-3441-4f20-9a8d-e95babaf9d47"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",

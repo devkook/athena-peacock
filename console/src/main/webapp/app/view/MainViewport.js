@@ -262,28 +262,18 @@ Ext.define('Peacock.view.MainViewport', {
                                             ]
                                         },
                                         {
-                                            xtype: 'tabpanel',
-                                            flex: 1,
+                                            xtype: 'panel',
                                             region: 'south',
                                             split: true,
-                                            height: 100,
-                                            maxHeight: 500,
-                                            minHeight: 80,
-                                            activeTab: 0,
-                                            items: [
-                                                {
-                                                    xtype: 'panel',
-                                                    title: 'Tab 1'
-                                                },
-                                                {
-                                                    xtype: 'panel',
-                                                    title: 'Tab 2'
-                                                },
-                                                {
-                                                    xtype: 'panel',
-                                                    title: 'Tab 3'
-                                                }
-                                            ]
+                                            height: 250,
+                                            id: 'detailPanel',
+                                            maxHeight: 600,
+                                            minHeight: 200,
+                                            layout: {
+                                                type: 'card'
+                                            },
+                                            header: false,
+                                            title: 'My Panel'
                                         }
                                     ]
                                 }

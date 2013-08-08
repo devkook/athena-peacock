@@ -17,7 +17,8 @@ Ext.define('Peacock.controller.MenuController', {
     extend: 'Ext.app.Controller',
 
     stores: [
-        'UsersJsonStore'
+        'UsersJsonStore',
+        'MachineListStore'
     ],
 
     onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
@@ -29,6 +30,7 @@ Ext.define('Peacock.controller.MenuController', {
             //alert("instances.");
 
             Ext.getCmp('centerContainer').layout.setActiveItem(1);
+            this.viewInstances();
 
         }else if (record.get('id') == 'img-tmp'){
             alert("templates.");
@@ -56,6 +58,9 @@ Ext.define('Peacock.controller.MenuController', {
     },
 
     viewUsers: function() {
+        /*
+        *  user list 화면 보여주기.
+        */
 
         var grid = Ext.getCmp('mainGridPanel');
 
@@ -85,7 +90,41 @@ Ext.define('Peacock.controller.MenuController', {
     },
 
     viewInstances: function() {
+        /*
+        *  instance list 화면 보여주기.
+        */
 
+        var grid = Ext.getCmp('mainGridPanel');
+
+        Ext.suspendLayouts();
+        grid.setTitle('Instance List');
+        grid.reconfigure(Ext.getStore('MachineListStore'), [{
+            text: 'ID',
+            dataIndex: 'machine_id'
+        }, {
+            text: 'OS Name',
+            dataIndex: 'os_name',
+            width: 200
+        }, {
+            text: 'Template',
+            dataIndex: 'template',
+            width: 200
+        }, {
+            text: 'Staus',
+            dataIndex: 'status'
+        }, {
+            text: 'Uptime',
+            dataIndex: 'uptime'
+
+        }, {
+            text: 'Host',
+            dataIndex: 'host_name',
+            width: 200
+        }]);
+
+        Ext.resumeLayouts(true);
+
+        grid.getStore().load();
     },
 
     init: function(application) {
