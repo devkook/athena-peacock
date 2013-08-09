@@ -60,12 +60,19 @@ public class SystemMonitoringJob extends BaseJob {
 	 */
 	@Override
 	protected void executeInternal(JobExecution context) throws InternalJobExecutionException {
+		
+		if (!peacockClient.isConnected()) {
+			return;
+		}
+		
 		try {
 			Mem mem = SigarUtil.getMem();
-			CpuPerc[] cpuPercList = SigarUtil.getCpuPercList();
+			CpuPerc cpu = SigarUtil.getCpuPerc();
 			
 			AgentSystemStatusMessage message = new AgentSystemStatusMessage();
 			message.setAgentId(IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI()));
+			
+			// set memory info
 			message.setActualFreeMem(mem.getActualFree());
 			message.setActualUsedMem(mem.getActualUsed());
 			message.setFreeMem(mem.getFree());
@@ -75,17 +82,13 @@ public class SystemMonitoringJob extends BaseJob {
 			message.setUsedMem(mem.getUsed());
 			message.setUsedPercentMem(mem.getUsedPercent());
 			
-			for (CpuPerc cpuPerc : cpuPercList) {
-				message.addCombinedCpuPerc(cpuPerc.getCombined());
-				message.addIdleCpuPerc(cpuPerc.getIdle());
-				message.addIrqCpuPerc(cpuPerc.getIrq());
-				message.addNiceCpuPerc(cpuPerc.getNice());
-				message.addSoftIrqCpuPerc(cpuPerc.getSoftIrq());
-				message.addStolenCpuPerc(cpuPerc.getStolen());
-				message.addSysCpuPerc(cpuPerc.getSys());
-				message.addUserCpuPerc(cpuPerc.getUser());
-				message.addWaitCpuPerc(cpuPerc.getWait());
-			}
+			// set cpu info
+			message.setUserCpu(CpuPerc.format(cpu.getUser()).replaceAll("%", ""));
+			message.setSysCpu(CpuPerc.format(cpu.getSys()).replaceAll("%", ""));
+			message.setIdleCpu(CpuPerc.format(cpu.getIdle()).replaceAll("%", ""));
+			message.setNiceCpu(CpuPerc.format(cpu.getNice()).replaceAll("%", ""));
+			message.setWaitCpu(CpuPerc.format(cpu.getWait()).replaceAll("%", ""));
+			message.setCombinedCpu(CpuPerc.format(cpu.getCombined()).replaceAll("%", ""));
 			
 			peacockClient.sendMessage(new PeacockDatagram<AgentSystemStatusMessage>(message));
 		} catch (SigarException e) {
@@ -93,6 +96,9 @@ public class SystemMonitoringJob extends BaseJob {
 			throw new InternalJobExecutionException(e);
 		} catch (IOException e) {
 			logger.error("IOException has occurred.", e);
+			throw new InternalJobExecutionException(e);
+		} catch (Exception e) {
+			logger.error("Unhandled Exception has occurred.", e);
 			throw new InternalJobExecutionException(e);
 		}
 	}//end of executeInternal()

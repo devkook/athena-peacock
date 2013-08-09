@@ -20,9 +20,6 @@
  */
 package com.athena.peacock.common.netty.message;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <pre>
  * 
@@ -33,7 +30,7 @@ import java.util.List;
 public class AgentSystemStatusMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/** Actual total free system memory */
 	private long actualFreeMem;
 	/** Actual total used system memory */
@@ -51,62 +48,20 @@ public class AgentSystemStatusMessage extends AbstractMessage {
 	/** Percent total used system memory */
 	private double usedPercentMem;
 
-//	/** Total system cpu user time */
-//	private long userCpu;
-//	/** Total system cpu kernel time */
-//	private long sysCpu;
-//	/** Total system cpu nice time */
-//	private long niceCpu;
-//	/** Total system cpu idle time */
-//	private long idleCpu;
-//	/** Total system cpu io wait time */
-//	private long waitCpu;
-//	/** Total system cpu time servicing interrupts */
-//	private long irqCpu;
-//	/** Total system cpu time servicing softirqs */
-//	private long softIrqCpu;
-//	/** Total system cpu involuntary wait time */
-//	private long stolenCpu;
-//	/** Total system cpu time */
-//	private long totalCpu;
-//
-//	/** cpu user time */
-//	private long[] userCpus;
-//	/** cpu kernel time */
-//	private long[] sysCpus;
-//	/** cpu nice time */
-//	private long[] niceCpus;
-//	/** cpu idle time */
-//	private long[] idleCpus;
-//	/** cpu io wait time */
-//	private long[] waitCpus;
-//	/** cpu time servicing interrupts */
-//	private long[] irqCpus;
-//	/** cpu time servicing softirqs */
-//	private long[] softIrqCpus;
-//	/** cpu involuntary wait time */
-//	private long[] stolenCpus;
-//	/** cpu time */
-//	private long[] totalCpus;
-	
-	/** Percent user + sys + nice + wait */
-	private List<Double> combinedCpuPerc;
-	/** Percent idle cpu */
-	private List<Double> idleCpuPerc;
-	/** Percent servicing interrupts cpu */
-	private List<Double> irqCpuPerc;
-	/** Percent nice cpu */
-	private List<Double> niceCpuPerc;
-	/** Percent servicing softirqs cpu */
-	private List<Double> softIrqCpuPerc;
-	/** Percent involuntary wait cpu */
-	private List<Double> stolenCpuPerc;
-	/** Percent kernel cpu */
-	private List<Double> sysCpuPerc;
-	/** Percent user cpu */
-	private List<Double> userCpuPerc;
-	/** Percent io wait cpu */
-	private List<Double> waitCpuPerc;
+	/** Percentage of CPU utilization while executing at the user, or application, level. */
+	private String userCpu;
+	/** Percentage of CPU utilization while executing at the system, or kernel, level. */
+	private String sysCpu;
+	/** The percentage of time that the CPU or CPUs were not processing 
+	 *  any commands and the system did not have an outstanding disk I/O request. */
+	private String idleCpu;
+	/** Percentage of time the CPU or CPUs were not processing any commands 
+	 *  but during which the system had an outstanding disk I/O request. */
+	private String waitCpu;
+	/** Percentage of CPU utilization while executing at the user level with nice priority. */
+	private String niceCpu;
+	/**  */
+	private String combinedCpu;
 	
 	public AgentSystemStatusMessage() {
 		super(MessageType.SYSTEM_STATUS);
@@ -225,156 +180,87 @@ public class AgentSystemStatusMessage extends AbstractMessage {
 	}
 
 	/**
-	 * @return the combinedCpuPerc
+	 * @return the userCpu
 	 */
-	public List<Double> getCombinedCpuPerc() {
-		if (combinedCpuPerc == null) {
-			combinedCpuPerc = new ArrayList<Double>();
-		}
-		return combinedCpuPerc;
+	public String getUserCpu() {
+		return userCpu;
 	}
 
 	/**
-	 * @param combinedCpuPerc the combinedCpuPerc to set
+	 * @param userCpu the userCpu to set
 	 */
-	public void addCombinedCpuPerc(Double combinedCpuPerc) {
-		getCombinedCpuPerc().add(combinedCpuPerc);
+	public void setUserCpu(String userCpu) {
+		this.userCpu = userCpu;
 	}
 
 	/**
-	 * @return the idleCpuPerc
+	 * @return the sysCpu
 	 */
-	public List<Double> getIdleCpuPerc() {
-		if (idleCpuPerc == null) {
-			idleCpuPerc = new ArrayList<Double>();
-		}
-		return idleCpuPerc;
+	public String getSysCpu() {
+		return sysCpu;
 	}
 
 	/**
-	 * @param idleCpuPerc the idleCpuPerc to set
+	 * @param sysCpu the sysCpu to set
 	 */
-	public void addIdleCpuPerc(Double idleCpuPerc) {
-		getIdleCpuPerc().add(idleCpuPerc);
+	public void setSysCpu(String sysCpu) {
+		this.sysCpu = sysCpu;
 	}
 
 	/**
-	 * @return the irqCpuPerc
+	 * @return the idleCpu
 	 */
-	public List<Double> getIrqCpuPerc() {
-		if (irqCpuPerc == null) {
-			irqCpuPerc = new ArrayList<Double>();
-		}
-		return irqCpuPerc;
+	public String getIdleCpu() {
+		return idleCpu;
 	}
 
 	/**
-	 * @param irqCpuPerc the irqCpuPerc to set
+	 * @param idleCpu the idleCpu to set
 	 */
-	public void addIrqCpuPerc(Double irqCpuPerc) {
-		getIrqCpuPerc().add(irqCpuPerc);
+	public void setIdleCpu(String idleCpu) {
+		this.idleCpu = idleCpu;
 	}
 
 	/**
-	 * @return the niceCpuPerc
+	 * @return the waitCpu
 	 */
-	public List<Double> getNiceCpuPerc() {
-		if (niceCpuPerc == null) {
-			niceCpuPerc = new ArrayList<Double>();
-		}
-		return niceCpuPerc;
+	public String getWaitCpu() {
+		return waitCpu;
 	}
 
 	/**
-	 * @param niceCpuPerc the niceCpuPerc to set
+	 * @param waitCpu the waitCpu to set
 	 */
-	public void addNiceCpuPerc(Double niceCpuPerc) {
-		getNiceCpuPerc().add(niceCpuPerc);
+	public void setWaitCpu(String waitCpu) {
+		this.waitCpu = waitCpu;
 	}
 
 	/**
-	 * @return the softIrqCpuPerc
+	 * @return the niceCpu
 	 */
-	public List<Double> getSoftIrqCpuPerc() {
-		if (softIrqCpuPerc == null) {
-			softIrqCpuPerc = new ArrayList<Double>();
-		}
-		return softIrqCpuPerc;
+	public String getNiceCpu() {
+		return niceCpu;
 	}
 
 	/**
-	 * @param softIrqCpuPerc the softIrqCpuPerc to set
+	 * @param niceCpu the niceCpu to set
 	 */
-	public void addSoftIrqCpuPerc(Double softIrqCpuPerc) {
-		getSoftIrqCpuPerc().add(softIrqCpuPerc);
+	public void setNiceCpu(String niceCpu) {
+		this.niceCpu = niceCpu;
 	}
 
 	/**
-	 * @return the stolenCpuPerc
+	 * @return the combinedCpu
 	 */
-	public List<Double> getStolenCpuPerc() {
-		if (stolenCpuPerc == null) {
-			stolenCpuPerc = new ArrayList<Double>();
-		}
-		return stolenCpuPerc;
+	public String getCombinedCpu() {
+		return combinedCpu;
 	}
 
 	/**
-	 * @param stolenCpuPerc the stolenCpuPerc to set
+	 * @param combinedCpu the combinedCpu to set
 	 */
-	public void addStolenCpuPerc(Double stolenCpuPerc) {
-		getStolenCpuPerc().add(stolenCpuPerc);
-	}
-
-	/**
-	 * @return the sysCpuPerc
-	 */
-	public List<Double> getSysCpuPerc() {
-		if (sysCpuPerc == null) {
-			sysCpuPerc = new ArrayList<Double>();
-		}
-		return sysCpuPerc;
-	}
-
-	/**
-	 * @param sysCpuPerc the sysCpuPerc to set
-	 */
-	public void addSysCpuPerc(Double sysCpuPerc) {
-		getSysCpuPerc().add(sysCpuPerc);
-	}
-
-	/**
-	 * @return the userCpuPerc
-	 */
-	public List<Double> getUserCpuPerc() {
-		if (userCpuPerc == null) {
-			userCpuPerc = new ArrayList<Double>();
-		}
-		return userCpuPerc;
-	}
-
-	/**
-	 * @param userCpuPerc the userCpuPerc to set
-	 */
-	public void addUserCpuPerc(Double userCpuPerc) {
-		getUserCpuPerc().add(userCpuPerc);
-	}
-
-	/**
-	 * @return the waitCpuPerc
-	 */
-	public List<Double> getWaitCpuPerc() {
-		if (waitCpuPerc == null) {
-			waitCpuPerc = new ArrayList<Double>();
-		}
-		return waitCpuPerc;
-	}
-
-	/**
-	 * @param waitCpuPerc the waitCpuPerc to set
-	 */
-	public void addWaitCpuPerc(Double waitCpuPerc) {
-		getWaitCpuPerc().add(waitCpuPerc);
+	public void setCombinedCpu(String combinedCpu) {
+		this.combinedCpu = combinedCpu;
 	}
 	
 }

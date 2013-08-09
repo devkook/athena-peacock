@@ -37,10 +37,20 @@ public class AgentInitialInfoMessage extends AbstractMessage {
 	private String osArch;
 	/** os.version */
 	private String osVersion;
-	/** java.version */
-	private String javaVersion;
-	/** user.name */
-	private String userName;
+	/** cpu clock */
+	private int cpuClock;
+	/** cpu num */
+	private int cpuNum;
+	/** cpu model */
+	private String cpuModel;
+	/** cpu vendor */
+	private String cpuVendor;
+	/** memory capacity */
+	private long memSize;
+	/** ip address */
+	private String ipAddr;
+	/** host name */
+	private String hostName;
 	
 	public AgentInitialInfoMessage() {
 		super(MessageType.INITIAL_INFO);
@@ -89,31 +99,101 @@ public class AgentInitialInfoMessage extends AbstractMessage {
 	}
 
 	/**
-	 * @return the javaVersion
+	 * @return the cpuClock
 	 */
-	public String getJavaVersion() {
-		return javaVersion;
+	public int getCpuClock() {
+		return cpuClock;
 	}
 
 	/**
-	 * @param javaVersion the javaVersion to set
+	 * @param cpuClock the cpuClock to set
 	 */
-	public void setJavaVersion(String javaVersion) {
-		this.javaVersion = javaVersion;
+	public void setCpuClock(int cpuClock) {
+		this.cpuClock = cpuClock;
 	}
 
 	/**
-	 * @return the userName
+	 * @return the cpuNum
 	 */
-	public String getUserName() {
-		return userName;
+	public int getCpuNum() {
+		return cpuNum;
 	}
 
 	/**
-	 * @param userName the userName to set
+	 * @param cpuNum the cpuNum to set
 	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setCpuNum(int cpuNum) {
+		this.cpuNum = cpuNum;
+	}
+
+	/**
+	 * @return the cpuModel
+	 */
+	public String getCpuModel() {
+		return cpuModel;
+	}
+
+	/**
+	 * @param cpuModel the cpuModel to set
+	 */
+	public void setCpuModel(String cpuModel) {
+		this.cpuModel = cpuModel;
+	}
+
+	/**
+	 * @return the cpuVendor
+	 */
+	public String getCpuVendor() {
+		return cpuVendor;
+	}
+
+	/**
+	 * @param cpuVendor the cpuVendor to set
+	 */
+	public void setCpuVendor(String cpuVendor) {
+		this.cpuVendor = cpuVendor;
+	}
+
+	/**
+	 * @return the memSize
+	 */
+	public long getMemSize() {
+		return memSize;
+	}
+
+	/**
+	 * @param memSize the memSize to set
+	 */
+	public void setMemSize(long memSize) {
+		this.memSize = memSize;
+	}
+
+	/**
+	 * @return the ipAddr
+	 */
+	public String getIpAddr() {
+		return ipAddr;
+	}
+
+	/**
+	 * @param ipAddr the ipAddr to set
+	 */
+	public void setIpAddr(String ipAddr) {
+		this.ipAddr = ipAddr;
+	}
+
+	/**
+	 * @return the hostName
+	 */
+	public String getHostName() {
+		return hostName;
+	}
+
+	/**
+	 * @param hostName the hostName to set
+	 */
+	public void setHostName(String hostName) {
+		this.hostName = hostName;
 	}
 	
 }

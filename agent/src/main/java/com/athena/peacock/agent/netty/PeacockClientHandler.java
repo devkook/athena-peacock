@@ -20,18 +20,23 @@
  */
 package com.athena.peacock.agent.netty;
 
+import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.InetAddress;
 
 import org.apache.commons.io.IOUtils;
+import org.hyperic.sigar.SigarException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.athena.peacock.agent.util.SigarUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
@@ -46,12 +51,20 @@ import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
  */
 @Component
 @Qualifier("peacockClientHandler")
+@Sharable
 public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 
     private static final Logger logger = LoggerFactory.getLogger(PeacockClientHandler.class);
+
+    private boolean connected = false;
+    private Channel channel;
     
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
+		logger.info("channelActive() has invoked.");
+		
+    	connected = true;
+    	channel = ctx.channel();
 		ctx.writeAndFlush(getAgentInitialInfo());
     }
 
@@ -69,14 +82,45 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
         ctx.close();
     }
     
+    /* (non-Javadoc)
+     * @see io.netty.channel.ChannelInboundHandlerAdapter#channelInactive(io.netty.channel.ChannelHandlerContext)
+     */
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+		logger.info("channelInactive() has invoked.");
+
+		// Stop the agent daemon if the connection has lost.
+		System.exit(-1);
+		
+		/*
+    	connected = false;
+    	channel = null;
+    	*/
+    }
+    
     /**
+	 * @return the connected
+	 */
+	public boolean isConnected() {
+		return connected;
+	}
+
+	/**
+	 * @return the channel
+	 */
+	public Channel getChannel() {
+		return channel;
+	}
+
+	/**
      * <pre>
      * Agent의 시스템 정보를 조회한다.
      * </pre>
      * @return
      * @throws IOException
+     * @throws SigarException 
      */
-    private PeacockDatagram<AgentInitialInfoMessage> getAgentInitialInfo() throws IOException {
+    private PeacockDatagram<AgentInitialInfoMessage> getAgentInitialInfo() throws IOException, SigarException {
     	String agentId = IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI());
 		
 		AgentInitialInfoMessage message = new AgentInitialInfoMessage();
@@ -84,8 +128,13 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 		message.setOsName(System.getProperty("os.name"));
 		message.setOsArch(System.getProperty("os.arch"));
 		message.setOsVersion(System.getProperty("os.version"));
-		message.setJavaVersion(System.getProperty("java.version"));
-		message.setUserName(System.getProperty("user.name"));
+		message.setCpuClock(SigarUtil.getCpuClock());
+		message.setCpuNum(SigarUtil.getCpuNum());
+		message.setCpuModel(SigarUtil.getCpuModel());
+		message.setCpuVendor(SigarUtil.getCpuVendor());
+		message.setMemSize(SigarUtil.getMemSize());
+		message.setIpAddr(InetAddress.getLocalHost().getHostAddress());
+		message.setHostName(InetAddress.getLocalHost().getHostName());
 		
 		return new PeacockDatagram<AgentInitialInfoMessage>(message);
     }//end of getAgentInitialInfo()

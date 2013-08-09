@@ -63,6 +63,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
 		logger.info("channelRead0() has invoked.");
+		logger.info("[Server] IP Address => " + ctx.channel().remoteAddress().toString());
 		logger.info("[Server] Object => " + msg.getClass().getName());
 		logger.info("[Server] Contents => " + msg.toString());
 		
