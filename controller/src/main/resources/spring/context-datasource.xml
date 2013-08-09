@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+						http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+						http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+						http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+						
+	<util:properties id="contextProperties" location="classpath:context.properties"/>
+  	
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="#{contextProperties.driver}"/>
+        <property name="url" value="#{contextProperties.url}"/>
+        <property name="username" value="#{contextProperties.username}"/>
+        <property name="password" value="#{contextProperties.password}"/>
+        <!-- property name="minIdle" value="#{jdbc.minIdle}"/>
+        <property name="maxIdle" value="#{jdbc.maxIdle}"/>
+        <property name="maxActive" value="#{jdbc.maxActive}"/>
+        <property name="maxWait" value="#{jdbc.maxWait}"/>
+        <property name="validationQueryTimeout" value="#{jdbc.validationQueryTimeout}"/>
+        <property name="validationQuery" value="#{jdbc.validationQuery}"/ -->
+    </bean>							
+	
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	  <property name="dataSource" ref="dataSource"/>
+	</bean>
+
+	<tx:annotation-driven transaction-manager="txManager" />
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+        <tx:attributes>
+            <tx:method name="insert*" propagation="REQUIRED"/>
+            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="select*" read-only="true"/>
+            <tx:method name="*" rollback-for="Exception"/>
+        </tx:attributes>
+    </tx:advice>
+
+	<aop:config>
+        <aop:advisor advice-ref="txAdvice" pointcut="execution(* *..*Service.*(..))"/>
+    </aop:config>
+    
+	<!-- ========================= APACHE IBATIS INTEGRATION ========================= -->
+
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="/sqlmap/sqlmap-config.xml" />
+        <property name="mappingLocations">
+            <list>
+                <value>classpath:com/athena/peacock/controller/**/*-mapping.xml</value>
+            </list>
+        </property>
+        <property name="dataSource" ref="dataSource" />
+	</bean>
+
+    <bean id="smcTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+        <property name="sqlMapClient" ref="sqlMapClient" />
+    </bean>
+</beans>
