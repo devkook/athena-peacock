@@ -20,13 +20,10 @@
  */
 package com.athena.peacock.agent.util;
 
-import org.hyperic.sigar.Cpu;
 import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.Mem;
-import org.hyperic.sigar.ProcStat;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
-import org.hyperic.sigar.Swap;
 
 /**
  * <pre>
@@ -75,26 +72,94 @@ public final class SigarUtil {
 		
 		return sigar;
 	}//end of getInstance()
+	
+	/**
+	 * <pre>
+	 * CPU Clock을 조회한다 (단위 : Mhz)
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static int getCpuClock() throws SigarException {
+		return getInstance().getCpuInfoList()[0].getMhz();
+	}//end of getCpuClock()
+	
+	/**
+	 * <pre>
+	 * CPU 갯수를 조회한다. (core 포함)
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static int getCpuNum() throws SigarException {
+		return getInstance().getCpuInfoList().length;
+	}//end of getCpuNum()
+	
+	/**
+	 * <pre>
+	 * CPU 모델을 조회한다.
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static String getCpuModel() throws SigarException {
+		return getInstance().getCpuInfoList()[0].getModel();
+	}//end of getCpuModel()
+	
+	/**
+	 * <pre>
+	 * CPU Vendor를 조회한다.
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static String getCpuVendor() throws SigarException {
+		return getInstance().getCpuInfoList()[0].getVendor();
+	}//end of getCpuVendor()
+	
+	/**
+	 * <pre>
+	 * RAM의 크기를 조회한다. (단위 : MByte)
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static long getMemSize() throws SigarException {
+		return getInstance().getMem().getRam();
+	}//end of getMemSize()
 
+	/**
+	 * <pre>
+	 * Memory 상태 정보를 조회한다.
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
 	public static Mem getMem() throws SigarException {
 		return getInstance().getMem();
-	}
+	}//end of getMem()
 	
-	public static Cpu getCpu() throws SigarException {
-		return getInstance().getCpu();
-	}
+	/**
+	 * <pre>
+	 * 전체 CPU 사용량을 조회한다.
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static CpuPerc getCpuPerc() throws SigarException {
+		return getInstance().getCpuPerc();
+	}//end of getCpuPerc()
 	
+	/**
+	 * <pre>
+	 * 개별 CPU 사용량을 조회한다.
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
 	public static CpuPerc[] getCpuPercList() throws SigarException {
 		return getInstance().getCpuPercList();
-	}
-	
-	public static Swap getSwap() throws SigarException {
-		return getInstance().getSwap();
-	}
-	
-	public static ProcStat getasdfasd() throws SigarException {
-		return getInstance().getProcStat();
-	}
+	}//end of getCpuPercList()
 	
 }
 //end of SigarUtil.java

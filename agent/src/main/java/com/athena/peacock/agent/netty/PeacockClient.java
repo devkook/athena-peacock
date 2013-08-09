@@ -20,16 +20,15 @@
  */
 package com.athena.peacock.agent.netty;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.Channel;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -69,10 +68,11 @@ public class PeacockClient {
     @Inject
     @Named("peacockClientInitializer")
     private PeacockClientInitializer initializer;
+	
+	@Inject
+	@Named("peacockClientHandler")
+	private PeacockClientHandler handler;
     
-    private Channel channel;
-    
-    private boolean connected = false;
     private final int frequency = 5000;
     private final int maxretries = 5;
     private final AtomicInteger count = new AtomicInteger();
@@ -99,8 +99,7 @@ public class PeacockClient {
 			@Override
 			public void operationComplete(ChannelFuture future) throws Exception {
 				if (future.isSuccess()) {
-                    connected = true;
-                    channel = future.sync().channel();
+                    future.sync();
 				} else {
 					if (count.incrementAndGet() <= maxretries) {
                         logger.debug("Attempt to reconnect within {} seconds.", frequency / 1000);
@@ -129,9 +128,8 @@ public class PeacockClient {
 	 */
 	@PreDestroy
 	public void stop() {
-		if (connected) {
-			connected = false;
-			channel.close();
+		if (handler.isConnected()) {
+			handler.getChannel().close();
 		}
 	}//end of stop()
 	
@@ -143,8 +141,8 @@ public class PeacockClient {
 	 * @throws Exception 
 	 */
 	public void sendMessage(PeacockDatagram<?> datagram) throws Exception {
-		if (connected) {
-			channel.writeAndFlush(datagram);
+		if (handler.isConnected()) {
+			handler.getChannel().writeAndFlush(datagram);
 		} else {
 			throw new Exception("Connection closed.");
 		}
@@ -154,7 +152,7 @@ public class PeacockClient {
 	 * @return the connected
 	 */
 	public boolean isConnected() {
-		return connected;
+		return handler.isConnected();
 	}
 	
 }
