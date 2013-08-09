@@ -1,0 +1,36 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "TabPanelController"
+    },
+    "designerId": "2d6395da-c4c7-4ef2-922a-c841885d2576",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|params": [
+                    "target"
+                ],
+                "fn": "onTabpanelBeforeActivate",
+                "implHandler": [
+                    "alert(\"tabpanel before active!!\");"
+                ],
+                "name": "beforeactivate",
+                "scope": "me",
+                "designer|targetType": null,
+                "designer|controlQuery": "tabpanel"
+            },
+            "designerId": "f9c12a36-3fc1-448f-9903-a8c32f802a66"
+        }
+    ]
+}
