@@ -22,6 +22,9 @@ Ext.define('Peacock.controller.MenuController', {
     ],
 
     onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
+
+        Peacock.app.debug("MenuController.onTreepanelItemClick.");
+
         if(record.get('id') == 'inst-dash'){
             //alert("instance dash board.");
             Ext.getCmp('centerContainer').layout.setActiveItem(0);

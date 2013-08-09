@@ -107,13 +107,30 @@
                 "app/controller/MainGridController.js"
             ],
             "className": "MainGridController"
+        },
+        "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581": {
+            "paths": [
+                "metadata/view/UserTabPanel",
+                "app/view/override/UserTabPanel.js",
+                "app/view/UserTabPanel.js"
+            ],
+            "className": "UserTabPanel"
+        },
+        "2d6395da-c4c7-4ef2-922a-c841885d2576": {
+            "paths": [
+                "metadata/controller/TabPanelController",
+                "app/controller/override/TabPanelController.js",
+                "app/controller/TabPanelController.js"
+            ],
+            "className": "TabPanelController"
         }
     },
     "viewOrderMap": {
         "view": [
             "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
-            "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f"
+            "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
+            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581"
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
@@ -122,7 +139,8 @@
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
             "5e947e8b-3edb-4586-8c79-6c66c783e510",
-            "2dec2676-78ee-420d-9cc8-b6af6e78b3ad"
+            "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
+            "2d6395da-c4c7-4ef2-922a-c841885d2576"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",

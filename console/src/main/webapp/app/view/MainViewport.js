@@ -182,6 +182,7 @@ Ext.define('Peacock.view.MainViewport', {
                                 },
                                 {
                                     xtype: 'container',
+                                    id: 'borderContainer',
                                     layout: {
                                         type: 'border'
                                     },
@@ -282,10 +283,11 @@ Ext.define('Peacock.view.MainViewport', {
                         {
                             xtype: 'container',
                             region: 'south',
+                            split: true,
                             height: 30,
                             padding: '',
                             layout: {
-                                align: 'center',
+                                align: 'stretch',
                                 pack: 'center',
                                 type: 'vbox'
                             },
@@ -294,6 +296,13 @@ Ext.define('Peacock.view.MainViewport', {
                                     xtype: 'label',
                                     margin: '',
                                     text: '© 2013 , Open Source Consulting, Inc. All rights reserved.'
+                                },
+                                {
+                                    xtype: 'textareafield',
+                                    flex: 1,
+                                    id: 'debugTextArea',
+                                    fieldLabel: 'Label',
+                                    hideLabel: true
                                 }
                             ]
                         }

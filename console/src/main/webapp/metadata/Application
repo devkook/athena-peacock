@@ -12,16 +12,38 @@
         ],
         "views": [
             "MainViewport",
-            "LoginWindow",
-            "InstanceTabPanel"
+            "LoginWindow"
         ],
         "autoCreateViewport": true,
         "controllers": [
             "LoginController",
             "MenuController",
-            "MainGridController"
+            "MainGridController",
+            "TabPanelController"
         ],
         "name": "Peacock"
     },
-    "designerId": "application"
+    "designerId": "application",
+    "cn": [
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "debug",
+                "designer|params": [
+                    "log"
+                ],
+                "implHandler": [
+                    "var debugTextArea = Ext.getCmp(\"debugTextArea\");\r",
+                    "\r",
+                    "debugTextArea.setRawValue(log + \"\\r\\n\" +debugTextArea.getRawValue());"
+                ]
+            },
+            "designerId": "0f988b3a-8c33-46d8-99e2-fe879a009272"
+        }
+    ]
 }

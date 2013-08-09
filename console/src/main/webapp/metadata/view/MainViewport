@@ -314,6 +314,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "id": "borderContainer",
                                 "designer|displayName": "BorderContainer",
                                 "layout": "border"
                             },
@@ -555,7 +556,8 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|region": "south",
-                        "container|align": "center",
+                        "layout|split": true,
+                        "container|align": "stretch",
                         "container|pack": "center",
                         "height": 30,
                         "padding": "",
@@ -572,10 +574,27 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "layout|flex": null,
                                 "margin": "",
                                 "text": "© 2013 , Open Source Consulting, Inc. All rights reserved."
                             },
                             "designerId": "116082a6-394d-4f58-b451-b79757d4a33d"
+                        },
+                        {
+                            "type": "Ext.form.field.TextArea",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": 1,
+                                "id": "debugTextArea",
+                                "designer|displayName": "DebugTextArea",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "6852aafb-d40e-43f3-a80b-b807e1d41f34"
                         }
                     ]
                 }

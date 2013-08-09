@@ -6,6 +6,10 @@
     },
     "codeClass": null,
     "userConfig": {
+        "views": [
+            "InstanceTabPanel",
+            "UserTabPanel"
+        ],
         "designer|userClassName": "MainGridController"
     },
     "designerId": "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
@@ -20,22 +24,68 @@
             "userConfig": {
                 "fn": "onGridpanelSelect",
                 "implHandler": [
-                    "alert(Ext.getClassName(record));\r",
+                    "\r",
+                    "\r",
+                    "/*\r",
+                    "* main grid 에서 한 row 선택시 처리 (상세정보 tab 정보 조회)\r",
+                    "*/\r",
+                    "\r",
+                    "Peacock.app.debug(\"MainGridController.onGridpanelSelect.\");\r",
+                    "\r",
+                    "var modelName = Ext.getClassName(record);\r",
+                    "//alert(modelName);\r",
                     "var detailPanel = Ext.getCmp('detailPanel');\r",
-                    "var instTabPanel = Ext.widget('instanceTabPanel');\r",
+                    "var tabPanel;\r",
                     "\r",
                     "detailPanel.removeAll(true);\r",
                     "\r",
-                    "detailPanel.add(instTabPanel);\r",
+                    "if(modelName.indexOf(\"MachineModel\") > -1){\r",
                     "\r",
+                    "    //tabPanel = Ext.widget('instanceTabPanel');\r",
+                    "    tabPanel = this.getInstanceTabPanelView();\r",
+                    "\r",
+                    "}else if(modelName.indexOf(\"UsersModel\") > -1){\r",
+                    "\r",
+                    "    //tabPanel = Ext.widget('userTabPanel');\r",
+                    "    tabPanel = this.getUserTabPanelView();\r",
+                    "\r",
+                    "}\r",
+                    "\r",
+                    "detailPanel.add(tabPanel);\r",
                     "detailPanel.layout.setActiveItem(0);"
                 ],
                 "name": "select",
                 "scope": "me",
                 "designer|targetType": "Ext.grid.Panel",
-                "designer|controlQuery": "gridpanel"
+                "designer|controlQuery": "#mainGridPanel"
             },
             "designerId": "cc9ac1db-0c31-416c-8c10-dfce43302664"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onGridpanelReconfigure",
+                "implHandler": [
+                    "/*\r",
+                    " * mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.\r",
+                    " */\r",
+                    "Peacock.app.debug(\"MainGridController.onGridpanelReconfigure\");\r",
+                    "\r",
+                    "\r",
+                    "var detailPanel = Ext.getCmp('detailPanel');\r",
+                    "detailPanel.removeAll(true);"
+                ],
+                "name": "reconfigure",
+                "scope": "me",
+                "designer|targetType": "Ext.grid.Panel",
+                "designer|controlQuery": "gridpanel"
+            },
+            "designerId": "524ae91d-bc46-46e0-91a4-7128743681f0"
         }
     ]
 }

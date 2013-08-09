@@ -25,14 +25,21 @@ Ext.application({
     ],
     views: [
         'MainViewport',
-        'LoginWindow',
-        'InstanceTabPanel'
+        'LoginWindow'
     ],
     autoCreateViewport: true,
     controllers: [
         'LoginController',
         'MenuController',
-        'MainGridController'
+        'MainGridController',
+        'TabPanelController'
     ],
-    name: 'Peacock'
+    name: 'Peacock',
+
+    debug: function(log) {
+        var debugTextArea = Ext.getCmp("debugTextArea");
+
+        debugTextArea.setRawValue(log + "\r\n" +debugTextArea.getRawValue());
+    }
+
 });

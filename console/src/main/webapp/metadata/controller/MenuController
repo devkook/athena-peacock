@@ -24,6 +24,9 @@
             "userConfig": {
                 "fn": "onTreepanelItemClick",
                 "implHandler": [
+                    "\r",
+                    "Peacock.app.debug(\"MenuController.onTreepanelItemClick.\");\r",
+                    "\r",
                     "if(record.get('id') == 'inst-dash'){\r",
                     "    //alert(\"instance dash board.\");\r",
                     "    Ext.getCmp('centerContainer').layout.setActiveItem(0);\r",

@@ -16,22 +16,61 @@
 Ext.define('Peacock.controller.MainGridController', {
     extend: 'Ext.app.Controller',
 
+    views: [
+        'InstanceTabPanel',
+        'UserTabPanel'
+    ],
+
     onGridpanelSelect: function(rowmodel, record, index, eOpts) {
-        alert(Ext.getClassName(record));
+
+
+        /*
+        * main grid 에서 한 row 선택시 처리 (상세정보 tab 정보 조회)
+        */
+
+        Peacock.app.debug("MainGridController.onGridpanelSelect.");
+
+        var modelName = Ext.getClassName(record);
+        //alert(modelName);
         var detailPanel = Ext.getCmp('detailPanel');
-        var instTabPanel = Ext.widget('instanceTabPanel');
+        var tabPanel;
 
         detailPanel.removeAll(true);
 
-        detailPanel.add(instTabPanel);
+        if(modelName.indexOf("MachineModel") > -1){
 
+            //tabPanel = Ext.widget('instanceTabPanel');
+            tabPanel = this.getInstanceTabPanelView();
+
+        }else if(modelName.indexOf("UsersModel") > -1){
+
+            //tabPanel = Ext.widget('userTabPanel');
+            tabPanel = this.getUserTabPanelView();
+
+        }
+
+        detailPanel.add(tabPanel);
         detailPanel.layout.setActiveItem(0);
+    },
+
+    onGridpanelReconfigure: function(gridpanel, store, columns, oldStore, oldColumns, eOpts) {
+        /*
+        * mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.
+        */
+        Peacock.app.debug("MainGridController.onGridpanelReconfigure");
+
+
+        var detailPanel = Ext.getCmp('detailPanel');
+        detailPanel.removeAll(true);
     },
 
     init: function(application) {
         this.control({
-            "gridpanel": {
+            "#mainGridPanel": {
                 select: this.onGridpanelSelect
+            },
+            "gridpanel": {
+                reconfigure: this.onGridpanelReconfigure
             }
         });
     }
