@@ -32,7 +32,7 @@ Ext.application({
         'LoginController',
         'MenuController',
         'MainGridController',
-        'TabPanelController'
+        'InstanceTabPanelController'
     ],
     name: 'Peacock',
 

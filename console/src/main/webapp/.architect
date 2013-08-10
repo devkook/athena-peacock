@@ -178,7 +178,6 @@
         },
         "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f": {
             "id": "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
-            "expanded": false,
             "cn": [
                 {
                     "id": "8fedaf3b-4d90-4c61-bd47-b0e4af8f87c9",
@@ -216,10 +215,10 @@
         },
         "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581": {
             "id": "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
-            "expanded": false,
             "cn": [
                 {
                     "id": "f1d12f31-8b5e-4163-a5fd-ef5a1415abd4",
+                    "expanded": false,
                     "cn": [
                         {
                             "id": "91fb1e5b-dab9-4b12-b26d-4aa753e99403"
@@ -231,6 +230,7 @@
                 },
                 {
                     "id": "adfea9b4-cdf7-416e-b374-148242f06b40",
+                    "expanded": false,
                     "cn": [
                         {
                             "id": "0af3d86b-48fa-4e21-97b0-18003c070989"
@@ -374,7 +374,6 @@
         },
         "2dec2676-78ee-420d-9cc8-b6af6e78b3ad": {
             "id": "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
-            "expanded": false,
             "cn": [
                 {
                     "id": "cc9ac1db-0c31-416c-8c10-dfce43302664"
@@ -388,7 +387,10 @@
             "id": "2d6395da-c4c7-4ef2-922a-c841885d2576",
             "cn": [
                 {
-                    "id": "f9c12a36-3fc1-448f-9903-a8c32f802a66"
+                    "id": "5f455417-fc2c-4873-8fb3-44d41d8ad20b"
+                },
+                {
+                    "id": "7200ab6b-1b85-4cac-8767-4ff1ae08432d"
                 }
             ]
         },
@@ -422,7 +424,7 @@
     },
     "inspectorState": {
         "topInstance": "2d6395da-c4c7-4ef2-922a-c841885d2576",
-        "selectedInstance": "2d6395da-c4c7-4ef2-922a-c841885d2576"
+        "selectedInstance": "7200ab6b-1b85-4cac-8767-4ff1ae08432d"
     },
     "codeState": {
         "topInstance": "2d6395da-c4c7-4ef2-922a-c841885d2576"

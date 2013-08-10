@@ -51,6 +51,9 @@
                     "\r",
                     "}\r",
                     "\r",
+                    "tabPanel.selectedRecord = record;\r",
+                    "\r",
+                    "\r",
                     "detailPanel.add(tabPanel);\r",
                     "detailPanel.layout.setActiveItem(0);"
                 ],
@@ -72,8 +75,8 @@
                 "fn": "onGridpanelReconfigure",
                 "implHandler": [
                     "/*\r",
-                    " * mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.\r",
-                    " */\r",
+                    "* mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.\r",
+                    "*/\r",
                     "Peacock.app.debug(\"MainGridController.onGridpanelReconfigure\");\r",
                     "\r",
                     "\r",

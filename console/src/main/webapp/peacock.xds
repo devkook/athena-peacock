@@ -118,11 +118,11 @@
         },
         "2d6395da-c4c7-4ef2-922a-c841885d2576": {
             "paths": [
-                "metadata/controller/TabPanelController",
-                "app/controller/override/TabPanelController.js",
-                "app/controller/TabPanelController.js"
+                "metadata/controller/InstanceTabPanelController",
+                "app/controller/override/InstanceTabPanelController.js",
+                "app/controller/InstanceTabPanelController.js"
             ],
-            "className": "TabPanelController"
+            "className": "InstanceTabPanelController"
         }
     },
     "viewOrderMap": {

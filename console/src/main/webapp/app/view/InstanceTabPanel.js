@@ -39,6 +39,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                         {
                             xtype: 'propertygrid',
                             columnWidth: 0.5,
+                            id: 'instDescGrid1',
                             padding: 5,
                             header: false,
                             title: 'My Property Grid',
@@ -54,6 +55,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                         {
                             xtype: 'propertygrid',
                             columnWidth: 0.5,
+                            id: 'instDescGrid2',
                             padding: '5 5 5 0',
                             header: false,
                             title: 'My Property Grid',

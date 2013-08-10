@@ -49,6 +49,9 @@ Ext.define('Peacock.controller.MainGridController', {
 
         }
 
+        tabPanel.selectedRecord = record;
+
+
         detailPanel.add(tabPanel);
         detailPanel.layout.setActiveItem(0);
     },

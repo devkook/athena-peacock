@@ -49,6 +49,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|columnWidth": 0.5,
+                        "id": "instDescGrid1",
                         "padding": 5,
                         "header": false,
                         "title": "My Property Grid",
@@ -69,6 +70,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|columnWidth": 0.5,
+                        "id": "instDescGrid2",
                         "padding": "5 5 5 0",
                         "header": false,
                         "title": "My Property Grid",
