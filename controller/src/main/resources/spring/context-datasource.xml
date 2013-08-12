@@ -45,7 +45,7 @@
 	<!-- ========================= APACHE IBATIS INTEGRATION ========================= -->
 
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-		<property name="configLocation" value="/sqlmap/sqlmap-config.xml" />
+		<property name="configLocation" value="classpath:sqlmap/sqlmap-config.xml" />
         <property name="mappingLocations">
             <list>
                 <value>classpath:com/athena/peacock/controller/**/*-mapping.xml</value>
