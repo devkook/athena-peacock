@@ -44,16 +44,17 @@ Ext.define('Peacock.controller.MainGridController', {
 
         }else if(modelName.indexOf("UsersModel") > -1){
 
-            //tabPanel = Ext.widget('userTabPanel');
+
             tabPanel = this.getUserTabPanelView();
 
         }
 
-        tabPanel.selectedRecord = record;
-
 
         detailPanel.add(tabPanel);
         detailPanel.layout.setActiveItem(0);
+
+        //tabPanel.selectedRecord = record;
+        //alert(tabPanel.selectedRecord.get("machine_id"));
     },
 
     onGridpanelReconfigure: function(gridpanel, store, columns, oldStore, oldColumns, eOpts) {

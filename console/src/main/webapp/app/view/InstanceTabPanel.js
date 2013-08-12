@@ -70,11 +70,69 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                 },
                 {
                     xtype: 'panel',
-                    title: 'Software'
+                    title: 'Software',
+                    items: [
+                        {
+                            xtype: 'gridpanel',
+                            id: 'instSoftGrid',
+                            header: false,
+                            title: 'My Grid Panel',
+                            store: 'SoftwareListStore',
+                            columns: [
+                                {
+                                    xtype: 'rownumberer'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'software_name',
+                                    text: 'Name'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'version',
+                                    text: 'Version'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    width: 200,
+                                    defaultWidth: 200,
+                                    dataIndex: 'engine_dir',
+                                    text: 'Engine Dir'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    width: 150,
+                                    defaultWidth: 150,
+                                    dataIndex: 'install_dt',
+                                    text: 'Install Date'
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     xtype: 'panel',
-                    title: 'Tab 3'
+                    title: 'OS Package',
+                    items: [
+                        {
+                            xtype: 'gridpanel',
+                            id: 'instOSPkgGrid',
+                            header: false,
+                            title: 'My Grid Panel',
+                            store: 'OSPackageListStore',
+                            columns: [
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'string',
+                                    text: 'String'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    xtype: 'panel',
+                    title: 'Monitoring'
                 }
             ]
         });

@@ -21,7 +21,38 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
     ],
 
     onTabpanelTabChange: function(tabPanel, newCard, oldCard, eOpts) {
-        alert("tabpanel change!!.");
+        var selectedRecords = Ext.getCmp("mainGridPanel").getSelectionModel().getSelection();
+        var grid;
+
+        if(newCard.title == "Description"){
+
+            this.viewDescription();
+
+        }else if(newCard.title == "Software"){
+
+            grid = Ext.getCmp('instSoftGrid');
+
+
+            //Ext.apply(grid.getStore().getProxy().extraParams, {
+            //    id: selectedRecords[0].get("machine_id")
+            //});
+
+            grid.getStore().load({params:{id: selectedRecords[0].get("machine_id")}});
+
+
+        }else if(newCard.title == "OS Package"){
+
+
+            grid = Ext.getCmp('instOSPkgGrid');
+
+
+            grid.getStore().load();
+
+        }else if(newCard.title == "Monitoring"){
+
+            alert(newCard.title);
+
+        }
     },
 
     onTabpanelAdded: function(component, container, pos, eOpts) {
@@ -30,9 +61,35 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
         */
 
         //var tabPanel = this.getInstanceTabPanelView();
-        var grid1 = Ext.getCmp("instDescGrid1");
-        grid1.setSource({aaa : "aaaa11"});
+        this.viewDescription();
 
+
+
+
+
+
+    },
+
+    viewDescription: function() {
+        /*
+        * Instance Descript Tab 화면 조회.
+        */
+
+        var grid1 = Ext.getCmp("instDescGrid1");
+
+        var jsonObj;
+
+        Ext.Ajax.request({
+            url: 'static/machineDesc.json',
+            params: {
+                id: 1
+            },
+            success: function(response){
+                var jsonObj = Ext.JSON.decode(response.responseText);
+
+                grid1.setSource(jsonObj);
+            }
+        });
     },
 
     init: function(application) {

@@ -23,7 +23,38 @@
             "userConfig": {
                 "fn": "onTabpanelTabChange",
                 "implHandler": [
-                    "alert(\"tabpanel change!!.\");"
+                    "var selectedRecords = Ext.getCmp(\"mainGridPanel\").getSelectionModel().getSelection();\r",
+                    "var grid;\r",
+                    "\r",
+                    "if(newCard.title == \"Description\"){\r",
+                    "    \r",
+                    "    this.viewDescription();\r",
+                    "    \r",
+                    "}else if(newCard.title == \"Software\"){\r",
+                    "    \r",
+                    "    grid = Ext.getCmp('instSoftGrid');\r",
+                    "    \r",
+                    "    \r",
+                    "    //Ext.apply(grid.getStore().getProxy().extraParams, {\r",
+                    "    //    id: selectedRecords[0].get(\"machine_id\")\r",
+                    "    //});\r",
+                    "   \r",
+                    "    grid.getStore().load({params:{id: selectedRecords[0].get(\"machine_id\")}});\r",
+                    "    \r",
+                    "    \r",
+                    "}else if(newCard.title == \"OS Package\"){\r",
+                    "    \r",
+                    "\r",
+                    "    grid = Ext.getCmp('instOSPkgGrid');\r",
+                    "\r",
+                    "   \r",
+                    "    grid.getStore().load();\r",
+                    "    \r",
+                    "}else if(newCard.title == \"Monitoring\"){\r",
+                    "    \r",
+                    "    alert(newCard.title);\r",
+                    "    \r",
+                    "}"
                 ],
                 "name": "tabchange",
                 "scope": "me",
@@ -43,12 +74,16 @@
                 "fn": "onTabpanelAdded",
                 "implHandler": [
                     "/*\r",
-                    " * 초기 화면 조회시. (목록에서 선택시)\r",
-                    " */\r",
+                    "* 초기 화면 조회시. (목록에서 선택시)\r",
+                    "*/\r",
                     "\r",
                     "//var tabPanel = this.getInstanceTabPanelView();\r",
-                    "var grid1 = Ext.getCmp(\"instDescGrid1\");\r",
-                    "grid1.setSource({aaa : \"aaaa11\"});\r",
+                    "this.viewDescription();\r",
+                    "\r",
+                    "\r",
+                    "\r",
+                    "\r",
+                    "\r",
                     ""
                 ],
                 "name": "added",
@@ -57,6 +92,39 @@
                 "designer|controlQuery": "instanceTabPanel"
             },
             "designerId": "7200ab6b-1b85-4cac-8767-4ff1ae08432d"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewDescription",
+                "implHandler": [
+                    "/*\r",
+                    "* Instance Descript Tab 화면 조회.\r",
+                    "*/\r",
+                    "\r",
+                    "var grid1 = Ext.getCmp(\"instDescGrid1\");\r",
+                    "\r",
+                    "var jsonObj;\r",
+                    "\r",
+                    "Ext.Ajax.request({\r",
+                    "    url: 'static/machineDesc.json',\r",
+                    "    params: {\r",
+                    "        id: 1\r",
+                    "    },\r",
+                    "    success: function(response){\r",
+                    "        var jsonObj = Ext.JSON.decode(response.responseText);\r",
+                    "\r",
+                    "        grid1.setSource(jsonObj);\r",
+                    "    }\r",
+                    "});"
+                ]
+            },
+            "designerId": "911976df-9b13-4f16-b3de-884713dd9922"
         }
     ]
 }

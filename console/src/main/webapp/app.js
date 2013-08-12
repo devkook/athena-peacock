@@ -21,7 +21,13 @@ Ext.Loader.setConfig({
 Ext.application({
     models: [
         'UsersModel',
-        'MachineModel'
+        'MachineModel',
+        'SoftwareModel',
+        'OSPackageModel'
+    ],
+    stores: [
+        'SoftwareListStore',
+        'OSPackageListStore'
     ],
     views: [
         'MainViewport',

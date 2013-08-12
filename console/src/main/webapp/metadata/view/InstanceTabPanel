@@ -102,6 +102,97 @@
                     },
                     "codeClass": null,
                     "designerId": "fe9dd1d4-9fb4-48d4-9195-6506e8dd16ae"
+                },
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "instSoftGrid",
+                        "header": false,
+                        "title": "My Grid Panel",
+                        "store": "SoftwareListStore"
+                    },
+                    "designerId": "45762f0c-dedf-4334-b10a-88884747911d",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.RowNumberer",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "designerId": "f7e2c8fc-509c-49d2-9c18-d88965526ca7"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "software_name",
+                                "text": "Name"
+                            },
+                            "designerId": "e34c7b59-ee42-4b03-9db3-021ca99fc13a"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "version",
+                                "text": "Version"
+                            },
+                            "designerId": "b500db6a-5ed1-4e7e-8492-93a2d8389e90"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "defaultWidth": 200,
+                                "dataIndex": "engine_dir",
+                                "text": "Engine Dir"
+                            },
+                            "designerId": "27473940-da98-462c-8804-2e473b4d790f"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 150,
+                                "defaultWidth": 150,
+                                "dataIndex": "install_dt",
+                                "text": "Install Date"
+                            },
+                            "designerId": "7b9401e2-cb81-4096-974b-6e5ba2fd0778"
+                        },
+                        {
+                            "type": "Ext.grid.View",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "4be28722-1933-4674-b085-984438aa0280"
+                        }
+                    ]
                 }
             ]
         },
@@ -113,7 +204,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "title": "Tab 3"
+                "title": "OS Package"
             },
             "designerId": "b215bd85-68ad-49c8-bc54-bfc7665ae384",
             "cn": [
@@ -125,6 +216,68 @@
                     },
                     "codeClass": null,
                     "designerId": "475bc072-5454-45b2-a79a-1b8c52dfb303"
+                },
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "instOSPkgGrid",
+                        "header": false,
+                        "title": "My Grid Panel",
+                        "store": "OSPackageListStore"
+                    },
+                    "designerId": "48dd858f-5c9d-4c1d-b2cf-b984d3ec4930",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "string",
+                                "text": "String"
+                            },
+                            "designerId": "4a336289-a3fd-40ec-842b-9e9d7b703cf9"
+                        },
+                        {
+                            "type": "Ext.grid.View",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "1182c72c-9c4f-4824-92be-ce471fcad0a9"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "Monitoring"
+            },
+            "designerId": "071642c3-8d16-4ff6-b621-8c2f7b865437",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "74daab3b-8b5f-42c7-8baa-9bcf1e7893b0"
                 }
             ]
         }

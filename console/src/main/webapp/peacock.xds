@@ -123,6 +123,38 @@
                 "app/controller/InstanceTabPanelController.js"
             ],
             "className": "InstanceTabPanelController"
+        },
+        "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2": {
+            "paths": [
+                "metadata/model/SoftwareModel",
+                "app/model/override/SoftwareModel.js",
+                "app/model/SoftwareModel.js"
+            ],
+            "className": "SoftwareModel"
+        },
+        "4691792c-86b9-41eb-a1ae-5358123d301f": {
+            "paths": [
+                "metadata/store/SoftwareListStore",
+                "app/store/override/SoftwareListStore.js",
+                "app/store/SoftwareListStore.js"
+            ],
+            "className": "SoftwareListStore"
+        },
+        "dc9724ff-cc6e-4218-a964-0eef30683695": {
+            "paths": [
+                "metadata/store/OSPackageListStore",
+                "app/store/override/OSPackageListStore.js",
+                "app/store/OSPackageListStore.js"
+            ],
+            "className": "OSPackageListStore"
+        },
+        "f6255218-a98d-4d06-b343-412084f7fca0": {
+            "paths": [
+                "metadata/model/OSPackageModel",
+                "app/model/override/OSPackageModel.js",
+                "app/model/OSPackageModel.js"
+            ],
+            "className": "OSPackageModel"
         }
     },
     "viewOrderMap": {
@@ -134,7 +166,9 @@
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
-            "701365be-42e7-4a94-ada9-8aabf97213da"
+            "701365be-42e7-4a94-ada9-8aabf97213da",
+            "4691792c-86b9-41eb-a1ae-5358123d301f",
+            "dc9724ff-cc6e-4218-a964-0eef30683695"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -144,7 +178,9 @@
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",
-            "cda91240-3441-4f20-9a8d-e95babaf9d47"
+            "cda91240-3441-4f20-9a8d-e95babaf9d47",
+            "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
+            "f6255218-a98d-4d06-b343-412084f7fca0"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",
