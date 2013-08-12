@@ -20,15 +20,21 @@
  */
 package com.athena.peacock.controller.netty;
 
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.stereotype.Component;
-
 import io.netty.bootstrap.ServerBootstrap;
+import io.netty.channel.Channel;
 import io.netty.channel.EventLoopGroup;
-import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
+
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * <pre>
@@ -41,47 +47,53 @@ import io.netty.handler.logging.LoggingHandler;
 @Component
 @Qualifier("peacockServer")
 public class PeacockServer {
+	
+    @Value("#{contextProperties['listen.port']}")
+    private int port;
 
-    private final int port;
+    @Inject
+    @Named("bossGroup")
+    private EventLoopGroup bossGroup;
+
+    @Inject
+    @Named("workerGroup")
+    private EventLoopGroup workerGroup;
+
+    @Inject
+    @Named("peacockServerInitializer")
+    private PeacockServerInitializer initializer;
+
+    @Inject
+    @Named("peacockServerHandler")
+    private PeacockServerHandler handler;
     
-	public PeacockServer(int port) {
-        this.port = port;
-    }
+    private Channel channel;
+	
+	@PostConstruct
+	public void start() throws Exception {
+		
+		new Thread() {
+			@Override
+			public void run() {
+		        try {
+					ServerBootstrap b = new ServerBootstrap();
+			        b.group(bossGroup, workerGroup)
+			         .channel(NioServerSocketChannel.class)
+			         .handler(new LoggingHandler(LogLevel.WARN))
+			         .childHandler(initializer);
 
-    public void run() throws Exception {
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workerGroup = new NioEventLoopGroup();
-        try {
-            ServerBootstrap b = new ServerBootstrap();
-            b.group(bossGroup, workerGroup)
-             .channel(NioServerSocketChannel.class)
-             .handler(new LoggingHandler(LogLevel.WARN))
-             .childHandler(new PeacockServerInitializer());
-
-            // Bind and start to accept incoming connections.
-            b.bind(port).sync().channel().closeFuture().sync();
-        } finally {
-            bossGroup.shutdownGracefully();
-            workerGroup.shutdownGracefully();
-        }
-    }
-
-	/**
-	 * <pre>
-	 *
-	 * </pre>
-	 * @param args
-	 * @throws Exception 
-	 */
-	public static void main(String[] args) throws Exception {
-        int port;
-        if (args.length > 0) {
-            port = Integer.parseInt(args[0]);
-        } else {
-            port = 7700;
-        }
-        new PeacockServer(port).run();
+			        // Bind and start to accept incoming connections.
+					channel = b.bind(port).sync().channel().closeFuture().sync().channel();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}.start();
 	}
 
+	@PreDestroy
+	public void stop() {
+		channel.close();
+	}
 }
 //end of PeacockServer.java
