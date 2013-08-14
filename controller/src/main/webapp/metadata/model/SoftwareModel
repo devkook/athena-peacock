@@ -1,0 +1,144 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "SoftwareModel"
+    },
+    "designerId": "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "software_id",
+                "type": "int"
+            },
+            "designerId": "525b3f7f-9a30-48e3-84e2-108f2a9dbe7a"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "software_name",
+                "type": "string"
+            },
+            "designerId": "d4d95f0c-144a-40ad-814d-08ec8c57d2b6"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "version",
+                "type": "string"
+            },
+            "designerId": "b0cdffcf-822f-4867-bac1-3fc29355ae00"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "repo_location",
+                "type": "string"
+            },
+            "designerId": "363179db-2fee-48e9-a625-6484525e6f36"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "software_file_name",
+                "type": "string"
+            },
+            "designerId": "6d7c5b28-0e9f-4e04-8002-f1342060b6fb"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "vendor_name",
+                "type": "string"
+            },
+            "designerId": "8fb51981-878e-4d89-9403-e89e3ae8ab82"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "description",
+                "type": "string"
+            },
+            "designerId": "95f7961d-6313-41c9-ae93-0cb4a73e17dc"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "register_dt",
+                "type": "string"
+            },
+            "designerId": "aa6cc132-b963-44d2-bff1-71942b1e92bf"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "engine_dir",
+                "type": "string"
+            },
+            "designerId": "4d025130-3ff7-4d26-a3dc-bfb7e7f85eed"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "install_dt",
+                "type": "string"
+            },
+            "designerId": "da3becb2-df87-422c-8f30-15a8591228c5"
+        }
+    ]
+}

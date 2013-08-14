@@ -1,0 +1,164 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "stores": [
+            "UsersJsonStore",
+            "MachineListStore"
+        ],
+        "designer|userClassName": "MenuController"
+    },
+    "designerId": "5e947e8b-3edb-4586-8c79-6c66c783e510",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTreepanelItemClick",
+                "implHandler": [
+                    "\r",
+                    "Peacock.app.debug(\"MenuController.onTreepanelItemClick.\");\r",
+                    "\r",
+                    "if(record.get('id') == 'inst-dash'){\r",
+                    "    //alert(\"instance dash board.\");\r",
+                    "    Ext.getCmp('centerContainer').layout.setActiveItem(0);\r",
+                    "\r",
+                    "}else if (record.get('id') == 'insts'){\r",
+                    "    //alert(\"instances.\");\r",
+                    "\r",
+                    "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
+                    "    this.viewInstances();\r",
+                    "\r",
+                    "}else if (record.get('id') == 'img-tmp'){\r",
+                    "    alert(\"templates.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'img-pkg'){\r",
+                    "    alert(\"packages.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'scal-grp'){\r",
+                    "    alert(\"scal-grp.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'scal-lb'){\r",
+                    "    alert(\"scal-lb.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'user-grp'){\r",
+                    "    alert(\"user-grp.\");\r",
+                    "\r",
+                    "}else if (record.get('id') == 'users'){\r",
+                    "\r",
+                    "\r",
+                    "    Ext.getCmp('centerContainer').layout.setActiveItem(1);\r",
+                    "\r",
+                    "    this.viewUsers();\r",
+                    "\r",
+                    "}"
+                ],
+                "name": "itemclick",
+                "scope": "me",
+                "designer|targetType": "Ext.tree.Panel",
+                "designer|controlQuery": "#westPanel treepanel"
+            },
+            "designerId": "bad357f8-5b29-4987-8920-72575a2a227f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewUsers",
+                "implHandler": [
+                    "/*\r",
+                    "*  user list 화면 보여주기.\r",
+                    "*/\r",
+                    "\r",
+                    "var grid = Ext.getCmp('mainGridPanel');\r",
+                    "\r",
+                    "Ext.suspendLayouts();\r",
+                    "grid.setTitle('Users');\r",
+                    "grid.reconfigure(Ext.getStore('UsersJsonStore'), [{\r",
+                    "    text: 'ID',\r",
+                    "    dataIndex: 'id'\r",
+                    "}, {\r",
+                    "    text: 'User Name',\r",
+                    "    dataIndex: 'name'\r",
+                    "}, {\r",
+                    "    text: 'Groups',\r",
+                    "    dataIndex: 'groups'\r",
+                    "}, {\r",
+                    "    text: 'Password',\r",
+                    "    dataIndex: 'password'\r",
+                    "}, {\r",
+                    "    text: 'Create Date',\r",
+                    "    dataIndex: 'createDate',\r",
+                    "    width: 200\r",
+                    "}]);\r",
+                    "\r",
+                    "Ext.resumeLayouts(true);\r",
+                    "\r",
+                    "grid.getStore().load();"
+                ]
+            },
+            "designerId": "c0d36055-865d-4e09-bc2d-7bb5f5254ba8"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewInstances",
+                "implHandler": [
+                    "/*\r",
+                    "*  instance list 화면 보여주기.\r",
+                    "*/\r",
+                    "\r",
+                    "var grid = Ext.getCmp('mainGridPanel');\r",
+                    "\r",
+                    "Ext.suspendLayouts();\r",
+                    "grid.setTitle('Instance List');\r",
+                    "grid.reconfigure(Ext.getStore('MachineListStore'), [{\r",
+                    "    text: 'ID',\r",
+                    "    dataIndex: 'machine_id'\r",
+                    "}, {\r",
+                    "    text: 'OS Name',\r",
+                    "    dataIndex: 'os_name',\r",
+                    "    width: 200\r",
+                    "}, {\r",
+                    "    text: 'Template',\r",
+                    "    dataIndex: 'template',\r",
+                    "    width: 200\r",
+                    "}, {\r",
+                    "    text: 'Staus',\r",
+                    "    dataIndex: 'status'\r",
+                    "}, {\r",
+                    "    text: 'Uptime',\r",
+                    "    dataIndex: 'uptime'\r",
+                    "\r",
+                    "}, {\r",
+                    "    text: 'Host',\r",
+                    "    dataIndex: 'host_name',\r",
+                    "    width: 200\r",
+                    "}]);\r",
+                    "\r",
+                    "Ext.resumeLayouts(true);\r",
+                    "\r",
+                    "grid.getStore().load();"
+                ]
+            },
+            "designerId": "4f3ed5da-984e-4bb5-8165-1156bda6ecba"
+        }
+    ]
+}
