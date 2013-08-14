@@ -93,7 +93,9 @@ public class PeacockServer {
 
 	@PreDestroy
 	public void stop() {
-		channel.close();
+		if (channel != null) {
+			channel.close();
+		}
 	}
 }
 //end of PeacockServer.java

@@ -402,6 +402,12 @@
 			<version>4.3.0.Final</version>
 		</dependency>
 		
+		<dependency>
+			<groupId>org.codehaus.plexus</groupId>
+			<artifactId>plexus-utils</artifactId>
+			<version>3.0.12</version>
+		</dependency>
+		
 		<!-- Netty -->
 		<dependency>
 			<groupId>io.netty</groupId>
