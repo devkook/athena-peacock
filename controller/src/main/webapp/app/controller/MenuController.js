@@ -29,45 +29,60 @@ Ext.define('Peacock.controller.MenuController', {
             //alert("instance dash board.");
             Ext.getCmp('centerContainer').layout.setActiveItem(0);
 
-        }else if (record.get('id') == 'insts'){
-            //alert("instances.");
-
-            Ext.getCmp('centerContainer').layout.setActiveItem(1);
-            this.viewInstances();
-
-        }else if (record.get('id') == 'img-tmp'){
-            alert("templates.");
-
-        }else if (record.get('id') == 'img-pkg'){
-            alert("packages.");
-
-        }else if (record.get('id') == 'scal-grp'){
-            alert("scal-grp.");
-
-        }else if (record.get('id') == 'scal-lb'){
-            alert("scal-lb.");
-
-        }else if (record.get('id') == 'user-grp'){
-            alert("user-grp.");
-
-        }else if (record.get('id') == 'users'){
-
+        }else {
 
             Ext.getCmp('centerContainer').layout.setActiveItem(1);
 
-            this.viewUsers();
+            var grid = Ext.getCmp('mainGridPanel');
 
+            var pagingToolbar = grid.getDockedItems('toolbar[dock="bottom"]')[0];
+
+            Ext.suspendLayouts();
+
+
+            if (record.get('id') == 'insts'){
+                //alert("instances.");
+
+
+                this.viewInstances(grid);
+
+            }else if (record.get('id') == 'img-tmp'){
+                alert("templates.");
+
+            }else if (record.get('id') == 'img-pkg'){
+                alert("packages.");
+
+            }else if (record.get('id') == 'scal-grp'){
+                alert("scal-grp.");
+
+            }else if (record.get('id') == 'scal-lb'){
+                alert("scal-lb.");
+
+            }else if (record.get('id') == 'user-grp'){
+                alert("user-grp.");
+
+            }else if (record.get('id') == 'users'){
+
+
+                this.viewUsers(grid);
+            }
+
+
+            pagingToolbar.bindStore(grid.getStore());
+
+
+            Ext.resumeLayouts(true);
+
+            grid.getStore().load();
         }
     },
 
-    viewUsers: function() {
+    viewUsers: function(grid) {
         /*
         *  user list 화면 보여주기.
         */
 
-        var grid = Ext.getCmp('mainGridPanel');
 
-        Ext.suspendLayouts();
         grid.setTitle('Users');
         grid.reconfigure(Ext.getStore('UsersJsonStore'), [{
             text: 'ID',
@@ -87,19 +102,14 @@ Ext.define('Peacock.controller.MenuController', {
             width: 200
         }]);
 
-        Ext.resumeLayouts(true);
-
-        grid.getStore().load();
     },
 
-    viewInstances: function() {
+    viewInstances: function(grid) {
         /*
         *  instance list 화면 보여주기.
         */
 
-        var grid = Ext.getCmp('mainGridPanel');
 
-        Ext.suspendLayouts();
         grid.setTitle('Instance List');
         grid.reconfigure(Ext.getStore('MachineListStore'), [{
             text: 'ID',
@@ -125,9 +135,7 @@ Ext.define('Peacock.controller.MenuController', {
             width: 200
         }]);
 
-        Ext.resumeLayouts(true);
 
-        grid.getStore().load();
     },
 
     init: function(application) {

@@ -1,0 +1,105 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "views": [
+            "UserTabPanel"
+        ],
+        "designer|userClassName": "UsersTabPanelController"
+    },
+    "designerId": "83ebf739-fed3-4351-b886-861dbd8faf89",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTabpanelTabChange",
+                "implHandler": [
+                    "if(newCard.title == \"Groups\"){\r",
+                    "\r",
+                    "    this.viewGroups();\r",
+                    "\r",
+                    "}else if(newCard.title == \"Summary\"){\r",
+                    "    \r",
+                    "    \r",
+                    "    /*\r",
+                    "     * User > Summary Tab 화면 조회.\r",
+                    "     */\r",
+                    "    \r",
+                    "    var grid1 = Ext.getCmp(\"userSummaryGrid\");\r",
+                    "    \r",
+                    "    var jsonObj;\r",
+                    "    \r",
+                    "    Ext.Ajax.request({\r",
+                    "        url: 'static/userSummary.json',\r",
+                    "        params: {\r",
+                    "            id: 1\r",
+                    "        },\r",
+                    "        success: function(response){\r",
+                    "            var jsonObj = Ext.JSON.decode(response.responseText);\r",
+                    "    \r",
+                    "            grid1.setSource(jsonObj);\r",
+                    "        }\r",
+                    "    });\r",
+                    "    \r",
+                    "    \r",
+                    "}"
+                ],
+                "name": "tabchange",
+                "scope": "me",
+                "designer|targetType": "UserTabPanel",
+                "designer|controlQuery": "userTabPanel"
+            },
+            "designerId": "4ee20ee7-78ab-44ff-9c72-3d4bf97bc7f8"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTabpanelAdded",
+                "implHandler": [
+                    "this.viewGroups();"
+                ],
+                "name": "added",
+                "scope": "me",
+                "designer|targetType": "UserTabPanel",
+                "designer|controlQuery": "userTabPanel"
+            },
+            "designerId": "75e1b94c-f917-4c39-af7c-1e32cef4a8d7"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewGroups",
+                "implHandler": [
+                    "\r",
+                    "/*\r",
+                    " * User > Groups Tab 화면 조회.\r",
+                    " */\r",
+                    "\r",
+                    "var grid = Ext.getCmp(\"userGroupsGrid\");\r",
+                    "\r",
+                    "grid.getStore().load();"
+                ]
+            },
+            "designerId": "4f2fd114-74e4-4dbc-8ccb-97091cb7c527"
+        }
+    ]
+}

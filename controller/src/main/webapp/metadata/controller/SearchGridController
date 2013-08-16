@@ -23,7 +23,7 @@
                     "\r",
                     "\r",
                     "if(e.getKey() == e.ENTER){\r",
-                    "    \r",
+                    "\r",
                     "    Ext.getCmp(\"mainGridPanel\").getStore().load();\r",
                     "}"
                 ],

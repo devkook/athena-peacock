@@ -1,0 +1,79 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "UserGroup"
+    },
+    "designerId": "b6faf1a1-93de-4700-b476-0e0342318161",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "group_id",
+                "type": "int"
+            },
+            "designerId": "15bf9323-febd-4134-a6c0-10659b18c422"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "group_name",
+                "type": "string"
+            },
+            "designerId": "48d9848e-60a0-4afd-826b-c32d6e335981"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "desc",
+                "type": "string"
+            },
+            "designerId": "b568edaf-1745-4710-b880-28c6fae3f1b2"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "create_date",
+                "type": "string"
+            },
+            "designerId": "319b589b-2b49-40c9-b6a0-39c972155b29"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "user_id",
+                "type": "int"
+            },
+            "designerId": "d8a7713a-0ce9-4689-814c-135222458522"
+        }
+    ]
+}

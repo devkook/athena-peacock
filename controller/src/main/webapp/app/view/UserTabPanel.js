@@ -30,32 +30,60 @@ Ext.define('Peacock.view.UserTabPanel', {
                     xtype: 'panel',
                     height: 214,
                     width: 400,
-                    layout: {
-                        type: 'column'
-                    },
                     title: 'Groups',
                     items: [
                         {
-                            xtype: 'propertygrid',
-                            columnWidth: 1,
-                            padding: 5,
-                            autoScroll: true,
+                            xtype: 'gridpanel',
+                            id: 'userGroupsGrid',
                             header: false,
-                            title: 'My Property Grid',
-                            enableColumnHide: false,
-                            enableColumnResize: false,
-                            source: {
-                                'Property 1': 'String',
-                                'Property 2': true,
-                                'Property 3': '2013-08-08T13:41:39',
-                                'Property 4': 123
-                            }
+                            title: 'My Grid Panel',
+                            store: 'UserGroupMapStore',
+                            columns: [
+                                {
+                                    xtype: 'rownumberer'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    width: 200,
+                                    dataIndex: 'group_name',
+                                    text: 'Group'
+                                },
+                                {
+                                    xtype: 'actioncolumn',
+                                    align: 'center',
+                                    menuText: 'Actions',
+                                    items: [
+                                        {
+                                            handler: function(view, rowIndex, colIndex, item, e, record, row) {
+                                                alert("Delete "+ record.get("group_name"));
+                                            },
+                                            icon: 'resources/icons/fam/delete.gif',
+                                            tooltip: 'Delete'
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 },
                 {
                     xtype: 'panel',
-                    title: 'Summary'
+                    title: 'Summary',
+                    items: [
+                        {
+                            xtype: 'propertygrid',
+                            id: 'userSummaryGrid',
+                            header: false,
+                            title: 'My Property Grid',
+                            sortableColumns: false,
+                            source: {
+                                'Property 1': 'String',
+                                'Property 2': true,
+                                'Property 3': '2013-08-14T14:18:02',
+                                'Property 4': 123
+                            }
+                        }
+                    ]
                 }
             ]
         });

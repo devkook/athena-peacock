@@ -10,11 +10,13 @@
             "UsersModel",
             "MachineModel",
             "SoftwareModel",
-            "OSPackageModel"
+            "OSPackageModel",
+            "UserGroup"
         ],
         "stores": [
             "SoftwareListStore",
-            "OSPackageListStore"
+            "OSPackageListStore",
+            "UserGroupMapStore"
         ],
         "views": [
             "MainViewport",
@@ -26,7 +28,8 @@
             "MenuController",
             "MainGridController",
             "InstanceTabPanelController",
-            "SearchGridController"
+            "SearchGridController",
+            "UsersTabPanelController"
         ],
         "name": "Peacock"
     },

@@ -23,11 +23,13 @@ Ext.application({
         'UsersModel',
         'MachineModel',
         'SoftwareModel',
-        'OSPackageModel'
+        'OSPackageModel',
+        'UserGroup'
     ],
     stores: [
         'SoftwareListStore',
-        'OSPackageListStore'
+        'OSPackageListStore',
+        'UserGroupMapStore'
     ],
     views: [
         'MainViewport',
@@ -39,7 +41,8 @@ Ext.application({
         'MenuController',
         'MainGridController',
         'InstanceTabPanelController',
-        'SearchGridController'
+        'SearchGridController',
+        'UsersTabPanelController'
     ],
     name: 'Peacock',
 

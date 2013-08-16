@@ -163,6 +163,30 @@
                 "app/controller/SearchGridController.js"
             ],
             "className": "SearchGridController"
+        },
+        "b6faf1a1-93de-4700-b476-0e0342318161": {
+            "paths": [
+                "metadata/model/UserGroup",
+                "app/model/override/UserGroup.js",
+                "app/model/UserGroup.js"
+            ],
+            "className": "UserGroup"
+        },
+        "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd": {
+            "paths": [
+                "metadata/store/UserGroupMapStore",
+                "app/store/override/UserGroupMapStore.js",
+                "app/store/UserGroupMapStore.js"
+            ],
+            "className": "UserGroupMapStore"
+        },
+        "83ebf739-fed3-4351-b886-861dbd8faf89": {
+            "paths": [
+                "metadata/controller/UsersTabPanelController",
+                "app/controller/override/UsersTabPanelController.js",
+                "app/controller/UsersTabPanelController.js"
+            ],
+            "className": "UsersTabPanelController"
         }
     },
     "viewOrderMap": {
@@ -176,20 +200,23 @@
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
             "701365be-42e7-4a94-ada9-8aabf97213da",
             "4691792c-86b9-41eb-a1ae-5358123d301f",
-            "dc9724ff-cc6e-4218-a964-0eef30683695"
+            "dc9724ff-cc6e-4218-a964-0eef30683695",
+            "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
             "5e947e8b-3edb-4586-8c79-6c66c783e510",
             "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
             "2d6395da-c4c7-4ef2-922a-c841885d2576",
-            "5b9bf488-72c4-48a3-bcb8-de4c98ead5da"
+            "5b9bf488-72c4-48a3-bcb8-de4c98ead5da",
+            "83ebf739-fed3-4351-b886-861dbd8faf89"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",
             "cda91240-3441-4f20-9a8d-e95babaf9d47",
             "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
-            "f6255218-a98d-4d06-b343-412084f7fca0"
+            "f6255218-a98d-4d06-b343-412084f7fca0",
+            "b6faf1a1-93de-4700-b476-0e0342318161"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",

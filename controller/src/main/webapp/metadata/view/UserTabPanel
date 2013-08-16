@@ -25,7 +25,6 @@
                 "height": 214,
                 "padding": null,
                 "width": 400,
-                "layout": "column",
                 "title": "Groups"
             },
             "designerId": "f1d12f31-8b5e-4163-a5fd-ef5a1415abd4",
@@ -40,25 +39,107 @@
                     "designerId": "91fb1e5b-dab9-4b12-b26d-4aa753e99403"
                 },
                 {
-                    "type": "Ext.grid.property.Grid",
+                    "type": "Ext.grid.Panel",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "layout|columnWidth": 1,
-                        "padding": 5,
-                        "autoScroll": true,
+                        "id": "userGroupsGrid",
                         "header": false,
-                        "title": "My Property Grid",
-                        "enableColumnHide": false,
-                        "enableColumnResize": false,
-                        "source": [
-                            "{\"Property 1\":\"String\",\"Property 2\":true,\"Property 3\":\"2013-08-08T13:41:39\",\"Property 4\":123}"
-                        ]
+                        "title": "My Grid Panel",
+                        "store": "UserGroupMapStore"
                     },
-                    "designerId": "9df937d8-f389-476c-84e6-34876d8cf7b2"
+                    "designerId": "c9408448-ba64-4ff8-83c9-3e0ad1949204",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.RowNumberer",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "designerId": "53bb0a0a-4ff3-450b-a35f-7b8020f3a428"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "dataIndex": "group_name",
+                                "text": "Group"
+                            },
+                            "designerId": "a88392fe-78b7-4493-8484-a3728e740fca"
+                        },
+                        {
+                            "type": "Ext.grid.column.Action",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "align": "center",
+                                "menuText": "Actions"
+                            },
+                            "designerId": "a15304a1-a793-43aa-8036-772ce0991323",
+                            "cn": [
+                                {
+                                    "type": "actioncolumnitem",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "resources/icons/fam/delete.gif",
+                                        "tooltip": "Delete"
+                                    },
+                                    "designerId": "f70e5cd4-d49d-4ceb-aeb6-908002ef8c18",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "handler",
+                                                "designer|params": [
+                                                    "view",
+                                                    "rowIndex",
+                                                    "colIndex",
+                                                    "item",
+                                                    "e",
+                                                    "record",
+                                                    "row"
+                                                ],
+                                                "implHandler": [
+                                                    "alert(\"Delete \"+ record.get(\"group_name\"));"
+                                                ]
+                                            },
+                                            "designerId": "2aeed140-c160-4e69-822a-be0ef94698d5"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.grid.View",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "b9ac4977-d077-48fc-a110-c3246b2a86bf"
+                        }
+                    ]
                 }
             ]
         },
@@ -82,6 +163,24 @@
                     },
                     "codeClass": null,
                     "designerId": "0af3d86b-48fa-4e21-97b0-18003c070989"
+                },
+                {
+                    "type": "Ext.grid.property.Grid",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "userSummaryGrid",
+                        "header": false,
+                        "title": "My Property Grid",
+                        "sortableColumns": false,
+                        "source": [
+                            "{\"Property 1\":\"String\",\"Property 2\":true,\"Property 3\":\"2013-08-14T14:18:02\",\"Property 4\":123}"
+                        ]
+                    },
+                    "designerId": "f1e810ae-86b8-4b76-8501-ef853bf18979"
                 }
             ]
         }
