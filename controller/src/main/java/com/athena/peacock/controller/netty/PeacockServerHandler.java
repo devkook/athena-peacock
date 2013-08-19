@@ -27,8 +27,9 @@ import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
-import java.net.SocketAddress;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -57,7 +58,6 @@ import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 
 	private static final Logger logger = LoggerFactory.getLogger(PeacockServerHandler.class);
-    public static Map<SocketAddress, Channel> CHANNEL_MAP = new ConcurrentHashMap<SocketAddress, Channel>();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -75,21 +75,27 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 			if(msg instanceof PeacockDatagram) {
 				MessageType messageType = ((PeacockDatagram<?>)msg).getMessageType();
 
-				System.out.println("Message Type => " + messageType.value());
-				
-				if(messageType.equals(MessageType.COMMAND)) {
-					ProvisioningCommandMessage message = ((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage();
-					System.out.println("Message => " + message);
-				} else if(messageType.equals(MessageType.RESPONSE)) {
-					ProvisioningResponseMessage message = ((PeacockDatagram<ProvisioningResponseMessage>)msg).getMessage();
-					System.out.println("Message => " + message);
-				} else if(messageType.equals(MessageType.SYSTEM_STATUS)) {
-					AgentSystemStatusMessage message = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
-					System.out.println("Message => " + message);
-				} else if(messageType.equals(MessageType.INITIAL_INFO)) {
-					AgentInitialInfoMessage message = ((PeacockDatagram<AgentInitialInfoMessage>)msg).getMessage();
-					System.out.println("Message => " + message);
-				} 
+				switch (messageType) {
+					case COMMAND : 
+						ProvisioningCommandMessage commandMsg = ((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage();
+						System.out.println("Message => " + commandMsg);
+						break;
+					case RESPONSE : 
+						ProvisioningResponseMessage responseMsg = ((PeacockDatagram<ProvisioningResponseMessage>)msg).getMessage();
+						System.out.println("Message => " + responseMsg);
+						break;
+					case SYSTEM_STATUS : 
+						AgentSystemStatusMessage statusMsg = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
+						System.out.println("Message => " + statusMsg);
+						break;
+					case INITIAL_INFO : 
+						AgentInitialInfoMessage infoMsg = ((PeacockDatagram<AgentInitialInfoMessage>)msg).getMessage();
+						System.out.println("Message => " + infoMsg);
+						
+						// register a new channel
+						ChannelManagement.registerChannel(infoMsg.getAgentId(), ctx.channel());
+						break;
+				}
 				
 				ctx.write(msg);
 			}
@@ -103,19 +109,16 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 	}
 	
 	@Override
-	public void channelActive(ChannelHandlerContext ctx) throws Exception {		
-		
-		SocketAddress addr = ctx.channel().remoteAddress();
-		System.out.println(addr);
-		
-		CHANNEL_MAP.put(ctx.channel().remoteAddress(), ctx.channel());
-		logger.info("channelActive() has invoked. channel_size => " + CHANNEL_MAP.size());
+	public void channelActive(ChannelHandlerContext ctx) throws Exception {	
+		logger.info("channelActive() has invoked.");
 	}
 	
 	@Override
 	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		CHANNEL_MAP.remove(ctx.channel().remoteAddress());
-		logger.info("channelInactive() has invoked. channel_size => " + CHANNEL_MAP.size());
+		logger.info("channelInactive() has invoked.");
+
+		// deregister a closed channel
+		ChannelManagement.deregisterChannel(ctx.channel());
 	}
 	
 	@Override
@@ -128,6 +131,80 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
         logger.error("Unexpected exception from downstream.", cause);
         ctx.close();
     }
+    
+    public void sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) {
+    	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
+    	
+    	// TODO callback
+    	channel.write(datagram);
+    }
+    
+    /**
+     * <pre>
+     * Channel 관리를 위한 클래스
+     * </pre>
+     * @author Sang-cheon Park
+     * @version 1.0
+     */
+    private static class ChannelManagement {
+    	
+        private static Map<String, Channel> channelMap = new ConcurrentHashMap<String, Channel>();
+        
+        /**
+         * <pre>
+         * 신규 채널을 등록한다.
+         * </pre>
+         * @param agentId
+         * @param channel
+         */
+        public static void registerChannel(String agentId, Channel channel) {
+        	logger.debug("agentId({}) will be added to channelMap.", agentId);
+        	channelMap.put(agentId, channel);
+        }//end of registerChannel()
+        
+        /**
+         * <pre>
+         * agentId에 해당하는 채널을 map에서 제거한다.
+         * </pre>
+         * @param agentId
+         */
+        public static void deregisterChannel(String agentId) {
+        	logger.debug("agentId({}) will be removed from channelMap.", agentId);
+        	channelMap.remove(agentId);
+        }//end of deregisterChannel()
+        
+        /**
+         * <pre>
+         * 연결 종료된 채널을 map에서 제거한다.
+         * </pre>
+         * @param channel
+         */
+        public static void deregisterChannel(Channel channel) {
+        	Iterator<Entry<String, Channel>> iter = channelMap.entrySet().iterator();
+        	
+        	Entry<String, Channel> entry = null;
+        	while (iter.hasNext()) {
+        		entry = iter.next();
+        		
+        		if (entry.getValue() != null && entry.getValue() == channel) {
+        			deregisterChannel(entry.getKey());
+        			break;
+        		}
+        	}
+        }//end of deregisterChannel()
+        
+        /**
+         * <pre>
+         * agentId에 해당하는 채널 정보를 가져온다.
+         * </pre>
+         * @param agentId
+         * @return
+         */
+        public static Channel getChannel(String agentId) {
+        	return channelMap.get(agentId);
+        }//end of getChannel()
+    }
+    //end of ChannelManagement.java
 
 }
 //end of PeacockServerHandler.java

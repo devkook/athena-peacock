@@ -38,6 +38,7 @@ public abstract class AbstractMessage implements Serializable {
 	
 	protected String agentId;
 	protected MessageType messageType;
+	protected boolean blocking;
 	
 	public AbstractMessage(MessageType messageType) {
 		this.messageType = messageType;
@@ -62,6 +63,20 @@ public abstract class AbstractMessage implements Serializable {
 	 */
 	public void setAgentId(String agentId) {
 		this.agentId = agentId;
+	}
+
+	/**
+	 * @return the blocking
+	 */
+	public boolean isBlocking() {
+		return blocking;
+	}
+
+	/**
+	 * @param blocking the blocking to set
+	 */
+	public void setBlocking(boolean blocking) {
+		this.blocking = blocking;
 	}
 
 	@Override

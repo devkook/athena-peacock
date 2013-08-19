@@ -42,8 +42,25 @@
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* *..*Service.*(..))"/>
     </aop:config>
     
+	<!-- ==================================================== -->
+	<!-- MyBatis Setting -->
+	<!-- ==================================================== -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis/mybatis-config.xml" />
+		<property name="mapperLocations" >
+			<list>
+				<value>classpath:com/athena/peacock/controller/**/*Mapper.xsql</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+    
 	<!-- ========================= APACHE IBATIS INTEGRATION ========================= -->
-
+	<!--
 	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
 		<property name="configLocation" value="classpath:sqlmap/sqlmap-config.xml" />
         <property name="mappingLocations">
@@ -57,4 +74,5 @@
     <bean id="smcTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
         <property name="sqlMapClient" ref="sqlMapClient" />
     </bean>
+    -->
 </beans>

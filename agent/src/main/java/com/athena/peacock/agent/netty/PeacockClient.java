@@ -146,7 +146,7 @@ public class PeacockClient {
 		} else {
 			throw new Exception("Connection closed.");
 		}
-	}//end of send()
+	}//end of sendMessage()
 
 	/**
 	 * @return the connected
