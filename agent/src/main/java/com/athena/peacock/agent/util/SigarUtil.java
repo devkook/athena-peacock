@@ -22,6 +22,7 @@ package com.athena.peacock.agent.util;
 
 import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.Mem;
+import org.hyperic.sigar.NetInfo;
 import org.hyperic.sigar.Sigar;
 import org.hyperic.sigar.SigarException;
 
@@ -161,5 +162,15 @@ public final class SigarUtil {
 		return getInstance().getCpuPercList();
 	}//end of getCpuPercList()
 	
+	/**
+	 * <pre>
+	 * Network 정보를 조회한다.
+	 * </pre>
+	 * @return
+	 * @throws SigarException
+	 */
+	public static NetInfo getNetInfo() throws SigarException {
+		return getInstance().getNetInfo();
+	}//end of getNetInfo()
 }
 //end of SigarUtil.java

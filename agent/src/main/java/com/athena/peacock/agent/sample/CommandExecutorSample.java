@@ -61,7 +61,7 @@ public class CommandExecutorSample {
 		//commandLine.createArg().setLine("-n /etc/hosts");
 		
 		/** verify command string */
-		System.out.println("]$ " + commandLine.toString() + "\n");
+		System.out.println("~]$ " + commandLine.toString() + "\n");
 		
 		/** also enable StringWriter, PrintWriter, WriterStreamConsumer and etc. */
 		StringStreamConsumer consumer = new CommandLineUtils.StringStreamConsumer();

@@ -133,8 +133,16 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 		message.setCpuModel(SigarUtil.getCpuModel());
 		message.setCpuVendor(SigarUtil.getCpuVendor());
 		message.setMemSize(SigarUtil.getMemSize());
-		message.setIpAddr(InetAddress.getLocalHost().getHostAddress());
-		message.setHostName(InetAddress.getLocalHost().getHostName());
+		message.setHostName(SigarUtil.getNetInfo().getHostName());
+		//message.setHostName(InetAddress.getLocalHost().getHostName());
+		
+		try {
+			// 
+			message.setIpAddr(InetAddress.getLocalHost().getHostAddress());
+		} catch (Exception e) {
+			// ignore
+			logger.info("[{}] has occurred but ignore this exception.", e.getMessage());
+		}
 		
 		return new PeacockDatagram<AgentInitialInfoMessage>(message);
     }//end of getAgentInitialInfo()
