@@ -1,7 +1,6 @@
 package com.athena.peacock.controller.web.common.dao;
 
 import org.apache.ibatis.session.SqlSession;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**

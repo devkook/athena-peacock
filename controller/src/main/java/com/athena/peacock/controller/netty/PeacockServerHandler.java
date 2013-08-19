@@ -30,7 +30,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Queue;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +64,9 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 
 	private static final Logger logger = LoggerFactory.getLogger(PeacockServerHandler.class);
 
+	private final Lock lock = new ReentrantLock();
+	private final Queue<Callback> callbacks = new ConcurrentLinkedQueue<Callback>();
+
 	@SuppressWarnings("unchecked")
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -83,6 +91,8 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 					case RESPONSE : 
 						ProvisioningResponseMessage responseMsg = ((PeacockDatagram<ProvisioningResponseMessage>)msg).getMessage();
 						System.out.println("Message => " + responseMsg);
+						
+						callbacks.poll().handle(responseMsg);
 						break;
 					case SYSTEM_STATUS : 
 						AgentSystemStatusMessage statusMsg = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
@@ -132,12 +142,31 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
         ctx.close();
     }
     
-    public void sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) {
-    	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
-    	
-    	// TODO callback
-    	channel.write(datagram);
-    }
+    /**
+     * <pre>
+     * 해당 Agent로 Provisiong 관련 명령을 전달하고 응답을 반환한다.
+     * </pre>
+     * @param datagram
+     * @return
+     */
+    public ProvisioningResponseMessage sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) {
+		Callback callback = new Callback(); 
+		lock.lock(); 
+		
+		try { 
+			callbacks.add(callback); 
+	    	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
+	    	
+			if (channel != null) {
+				datagram.getMessage().setBlocking(true);
+				channel.write(datagram);
+			}
+		} finally { 
+		  lock.unlock(); 
+		} 
+		
+		return callback.get(); 
+    }//end of sendMessage()
     
     /**
      * <pre>
@@ -148,7 +177,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
      */
     private static class ChannelManagement {
     	
-        private static Map<String, Channel> channelMap = new ConcurrentHashMap<String, Channel>();
+    	static Map<String, Channel> channelMap = new ConcurrentHashMap<String, Channel>();
         
         /**
          * <pre>
@@ -157,7 +186,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
          * @param agentId
          * @param channel
          */
-        public static void registerChannel(String agentId, Channel channel) {
+        static void registerChannel(String agentId, Channel channel) {
         	logger.debug("agentId({}) will be added to channelMap.", agentId);
         	channelMap.put(agentId, channel);
         }//end of registerChannel()
@@ -168,7 +197,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
          * </pre>
          * @param agentId
          */
-        public static void deregisterChannel(String agentId) {
+        static void deregisterChannel(String agentId) {
         	logger.debug("agentId({}) will be removed from channelMap.", agentId);
         	channelMap.remove(agentId);
         }//end of deregisterChannel()
@@ -179,7 +208,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
          * </pre>
          * @param channel
          */
-        public static void deregisterChannel(Channel channel) {
+        static void deregisterChannel(Channel channel) {
         	Iterator<Entry<String, Channel>> iter = channelMap.entrySet().iterator();
         	
         	Entry<String, Channel> entry = null;
@@ -200,11 +229,40 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
          * @param agentId
          * @return
          */
-        public static Channel getChannel(String agentId) {
+        static Channel getChannel(String agentId) {
         	return channelMap.get(agentId);
         }//end of getChannel()
     }
     //end of ChannelManagement.java
+    
+	/**
+     * <pre>
+     * 서버의 처리 순서대로 받기 위한 콜백 클래스
+     * </pre>
+     * @author Sang-cheon Park
+     * @version 1.0
+	 */
+	static class Callback {
+
+		private final CountDownLatch latch = new CountDownLatch(1);
+
+		private ProvisioningResponseMessage response;
+
+		ProvisioningResponseMessage get() {
+			try {
+				latch.await();
+			} catch (InterruptedException e) {
+				throw new RuntimeException(e);
+			}
+			return response;
+		}
+
+		void handle(ProvisioningResponseMessage response) {
+			this.response = response;
+			latch.countDown();
+		}
+	}
+	//end of Callback.java
 
 }
 //end of PeacockServerHandler.java
