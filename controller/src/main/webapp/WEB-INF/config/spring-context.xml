@@ -92,8 +92,9 @@
 
 
 	
-
+	<!-- 
 	<import resource="spring-cache.xml"/>
 	<import resource="spring-osp.xml"/>
+	 -->
 
 </beans>
