@@ -21,7 +21,11 @@ Ext.define('Peacock.controller.SearchGridController', {
 
         if(e.getKey() == e.ENTER){
 
-            Ext.getCmp("mainGridPanel").getStore().load();
+            Ext.getCmp("mainGridPanel").getStore().load({
+                params:{
+                    search: textfield.getRawValue()
+                }
+            });
         }
     },
 

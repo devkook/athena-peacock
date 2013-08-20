@@ -187,6 +187,14 @@
                 "app/controller/UsersTabPanelController.js"
             ],
             "className": "UsersTabPanelController"
+        },
+        "477b9df4-ddf6-4d33-ac66-2268cb4ad745": {
+            "paths": [
+                "metadata/view/InstanceLaunchWindow",
+                "app/view/override/InstanceLaunchWindow.js",
+                "app/view/InstanceLaunchWindow.js"
+            ],
+            "className": "InstanceLaunchWindow"
         }
     },
     "viewOrderMap": {
@@ -194,7 +202,8 @@
             "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
             "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
-            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581"
+            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
+            "477b9df4-ddf6-4d33-ac66-2268cb4ad745"
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",

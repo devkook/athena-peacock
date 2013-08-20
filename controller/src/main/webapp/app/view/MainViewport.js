@@ -199,21 +199,6 @@ Ext.define('Peacock.view.MainViewport', {
                                                     xtype: 'gridcolumn',
                                                     dataIndex: 'string',
                                                     text: 'String'
-                                                },
-                                                {
-                                                    xtype: 'numbercolumn',
-                                                    dataIndex: 'number',
-                                                    text: 'Number'
-                                                },
-                                                {
-                                                    xtype: 'datecolumn',
-                                                    dataIndex: 'date',
-                                                    text: 'Date'
-                                                },
-                                                {
-                                                    xtype: 'booleancolumn',
-                                                    dataIndex: 'bool',
-                                                    text: 'Boolean'
                                                 }
                                             ],
                                             dockedItems: [
@@ -227,9 +212,43 @@ Ext.define('Peacock.view.MainViewport', {
                                                 {
                                                     xtype: 'toolbar',
                                                     dock: 'top',
+                                                    id: 'mainToolbar',
                                                     items: [
                                                         {
                                                             xtype: 'button',
+                                                            handler: function(button, event) {
+
+
+                                                                Peacock.app.debug("mainButton click. " + Peacock.app.menu_id);
+
+
+                                                                if (Peacock.app.menu_id == 'insts'){
+
+                                                                    var win = Ext.widget('instanceLaunchWindow');
+                                                                    win.show();
+
+                                                                }else if (Peacock.app.menu_id == 'img-tmp'){
+
+
+                                                                }else if (Peacock.app.menu_id == 'img-pkg'){
+
+
+                                                                }else if (Peacock.app.menu_id == 'scal-grp'){
+
+
+                                                                }else if (Peacock.app.menu_id == 'scal-lb'){
+
+
+                                                                }else if (Peacock.app.menu_id == 'user-grp'){
+
+
+                                                                }else if (Peacock.app.menu_id == 'users'){
+
+
+
+                                                                }
+                                                            },
+                                                            id: 'mainButton',
                                                             text: 'MyButton'
                                                         },
                                                         {
@@ -237,14 +256,37 @@ Ext.define('Peacock.view.MainViewport', {
                                                             text: 'Actions',
                                                             menu: {
                                                                 xtype: 'menu',
+                                                                id: 'tbActionMenu',
                                                                 items: [
                                                                     {
                                                                         xtype: 'menuitem',
-                                                                        text: 'Menu Item'
+                                                                        id: 'tbActionStart',
+                                                                        text: 'Start'
                                                                     },
                                                                     {
                                                                         xtype: 'menuitem',
-                                                                        text: 'Menu Item'
+                                                                        id: 'tbActionStop',
+                                                                        text: 'Stop'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionTerminate',
+                                                                        text: 'Terminate'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionEdit',
+                                                                        text: 'Edit'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionDelete',
+                                                                        text: 'Delete'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionRegister',
+                                                                        text: 'Register'
                                                                     }
                                                                 ]
                                                             }

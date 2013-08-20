@@ -24,7 +24,11 @@
                     "\r",
                     "if(e.getKey() == e.ENTER){\r",
                     "\r",
-                    "    Ext.getCmp(\"mainGridPanel\").getStore().load();\r",
+                    "    Ext.getCmp(\"mainGridPanel\").getStore().load({\r",
+                    "        params:{\r",
+                    "            search: textfield.getRawValue()\r",
+                    "        }\r",
+                    "    });\r",
                     "}"
                 ],
                 "name": "keydown",

@@ -23,10 +23,17 @@ Ext.define('Peacock.controller.MenuController', {
 
     onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
 
-        Peacock.app.debug("MenuController.onTreepanelItemClick.");
+        Peacock.app.debug("MenuController.onTreepanelItemClick. " + record.get('id'));
+
+        Peacock.app.menu_id = record.get('id');//선택한 메뉴 id 저장.
+
+
+
+        Ext.getCmp("tbActionMenu").setDisabled(true);
+
 
         if(record.get('id') == 'inst-dash'){
-            //alert("instance dash board.");
+
             Ext.getCmp('centerContainer').layout.setActiveItem(0);
 
         }else {
@@ -102,6 +109,19 @@ Ext.define('Peacock.controller.MenuController', {
             width: 200
         }]);
 
+
+        /*
+        * toolbar menu 활성화
+        */
+        Ext.getCmp("mainButton").setText("Create New User");
+
+        Ext.getCmp("tbActionStart").hide();
+        Ext.getCmp("tbActionStop").hide();
+        Ext.getCmp("tbActionTerminate").hide();
+        Ext.getCmp("tbActionEdit").show();
+        Ext.getCmp("tbActionDelete").show();
+        Ext.getCmp("tbActionRegister").hide();
+
     },
 
     viewInstances: function(grid) {
@@ -134,6 +154,19 @@ Ext.define('Peacock.controller.MenuController', {
             dataIndex: 'host_name',
             width: 200
         }]);
+
+
+        /*
+        * toolbar menu 활성화
+        */
+        Ext.getCmp("mainButton").setText("Launch");
+
+        Ext.getCmp("tbActionStart").show();
+        Ext.getCmp("tbActionStop").show();
+        Ext.getCmp("tbActionTerminate").show();
+        Ext.getCmp("tbActionEdit").hide();
+        Ext.getCmp("tbActionDelete").hide();
+        Ext.getCmp("tbActionRegister").hide();
 
 
     },

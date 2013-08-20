@@ -33,7 +33,8 @@ Ext.application({
     ],
     views: [
         'MainViewport',
-        'LoginWindow'
+        'LoginWindow',
+        'InstanceLaunchWindow'
     ],
     autoCreateViewport: true,
     controllers: [

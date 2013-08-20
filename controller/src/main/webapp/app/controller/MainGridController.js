@@ -30,6 +30,12 @@ Ext.define('Peacock.controller.MainGridController', {
 
         Peacock.app.debug("MainGridController.onGridpanelSelect.");
 
+
+
+        Ext.getCmp("tbActionMenu").setDisabled(false);
+
+
+
         var modelName = Ext.getClassName(record);
         //alert(modelName);
         var detailPanel = Ext.getCmp('detailPanel');
