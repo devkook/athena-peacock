@@ -27,6 +27,9 @@ import org.codehaus.plexus.util.cli.CommandLineUtils;
 import org.codehaus.plexus.util.cli.CommandLineUtils.StringStreamConsumer;
 import org.codehaus.plexus.util.cli.Commandline;
 
+import com.athena.peacock.agent.util.OSUtil;
+import com.athena.peacock.agent.util.OSUtil.OSType;
+
 /**
  * <pre>
  * 
@@ -49,23 +52,49 @@ public class CommandExecutorSample {
 		// http://blog.naver.com/PostView.nhn?blogId=diadld2&logNo=30157625015
 		// http://www.petenetlive.com/KB/Article/0000619.htm
 		
-		File executable = new File("/bin/cat");
+		OSType osType = OSUtil.getOSName();
 		
-		Commandline commandLine = new Commandline();
-		commandLine.setExecutable(executable.getAbsolutePath());
+		File executable = null;
+		Commandline commandLine = null;
+		
+		if (osType.equals(OSType.WINDOWS)) {
+			executable = new File("C:\\Windows\\System32\\wbem\\WMIC.exe");
+			commandLine = new Commandline();
+			commandLine.setExecutable(executable.getAbsolutePath());
+			
+			//commandLine.setExecutable("wmic");  // available only that command is in path
 
-		/** change working directory if necessary */
-		commandLine.setWorkingDirectory("/");
-		
-		/** invoke createArg() and setValue() one by one for each arguments */
-		commandLine.createArg().setValue("-n");
-		commandLine.createArg().setValue("/etc/hosts");
-		
-		/** invoke createArg() and setLine() for entire arguments */
-		//commandLine.createArg().setLine("-n /etc/hosts");
-		
-		/** verify command string */
-		System.out.println("~]$ " + commandLine.toString() + "\n");
+			/** change working directory if necessary */
+			commandLine.setWorkingDirectory("/");
+			
+			/** invoke createArg() and setValue() one by one for each arguments */
+			commandLine.createArg().setValue("product");
+			commandLine.createArg().setValue("get");
+			commandLine.createArg().setValue("name,vendor,version");
+			
+			/** invoke createArg() and setLine() for entire arguments */
+			//commandLine.createArg().setLine("product get name,vendor,version");
+			
+			/** verify command string */
+			System.out.println("C:\\> " + commandLine.toString() + "\n");
+		} else {
+			executable = new File("/bin/cat");
+			commandLine = new Commandline();
+			commandLine.setExecutable(executable.getAbsolutePath());
+			
+			/** change working directory if necessary */
+			commandLine.setWorkingDirectory("/");
+			
+			/** invoke createArg() and setValue() one by one for each arguments */
+			commandLine.createArg().setValue("-n");
+			commandLine.createArg().setValue("/etc/hosts");
+			
+			/** invoke createArg() and setLine() for entire arguments */
+			//commandLine.createArg().setLine("-n /etc/hosts");
+			
+			/** verify command string */
+			System.out.println("~]$ " + commandLine.toString() + "\n");
+		}
 		
 		/** also enable StringWriter, PrintWriter, WriterStreamConsumer and etc. */
 		StringStreamConsumer consumer = new CommandLineUtils.StringStreamConsumer();
