@@ -45,6 +45,10 @@ public class CommandExecutorSample {
 	 */
 	public static void main(String[] args) throws CommandLineException {
 		
+		// Windows wmic usage
+		// http://blog.naver.com/PostView.nhn?blogId=diadld2&logNo=30157625015
+		// http://www.petenetlive.com/KB/Article/0000619.htm
+		
 		File executable = new File("/bin/cat");
 		
 		Commandline commandLine = new Commandline();
