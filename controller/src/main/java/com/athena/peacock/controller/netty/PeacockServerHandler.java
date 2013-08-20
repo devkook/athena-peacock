@@ -92,7 +92,9 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						ProvisioningResponseMessage responseMsg = ((PeacockDatagram<ProvisioningResponseMessage>)msg).getMessage();
 						System.out.println("Message => " + responseMsg);
 						
-						callbacks.poll().handle(responseMsg);
+						if (responseMsg.isBlocking()) {
+							callbacks.poll().handle(responseMsg);
+						}
 						break;
 					case SYSTEM_STATUS : 
 						AgentSystemStatusMessage statusMsg = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
@@ -144,28 +146,38 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
     
     /**
      * <pre>
-     * 해당 Agent로 Provisiong 관련 명령을 전달하고 응답을 반환한다.
+     * 해당 Agent로 Provisioning 관련 명령을 전달하고 필요 시 응답을 반환한다.
      * </pre>
      * @param datagram
      * @return
      */
     public ProvisioningResponseMessage sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) {
-		Callback callback = new Callback(); 
-		lock.lock(); 
-		
-		try { 
-			callbacks.add(callback); 
-	    	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
-	    	
+    	
+    	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
+    	boolean isBlocking = datagram.getMessage().isBlocking();
+    	
+    	if (isBlocking) {
+			Callback callback = new Callback(); 
+			lock.lock(); 
+			
+			try { 
+				callbacks.add(callback); 
+		    	
+				if (channel != null) {
+					channel.write(datagram);
+				}
+			} finally { 
+			  lock.unlock(); 
+			} 
+			
+			return callback.get(); 
+    	} else {
 			if (channel != null) {
-				datagram.getMessage().setBlocking(true);
 				channel.write(datagram);
 			}
-		} finally { 
-		  lock.unlock(); 
-		} 
-		
-		return callback.get(); 
+    		
+    		return null;
+    	}
     }//end of sendMessage()
     
     /**
@@ -242,7 +254,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
      * @author Sang-cheon Park
      * @version 1.0
 	 */
-	static class Callback {
+	private static class Callback {
 
 		private final CountDownLatch latch = new CountDownLatch(1);
 

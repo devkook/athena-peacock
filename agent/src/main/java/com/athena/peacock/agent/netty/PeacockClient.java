@@ -42,7 +42,6 @@ import org.springframework.stereotype.Component;
 
 import com.athena.peacock.agent.util.AgentConfigUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
-import com.athena.peacock.common.netty.PeacockDatagram;
 
 /**
  * <pre>
@@ -129,31 +128,9 @@ public class PeacockClient {
 	@PreDestroy
 	public void stop() {
 		if (handler.isConnected()) {
-			handler.getChannel().close();
+			handler.close();
 		}
 	}//end of stop()
-	
-	/**
-	 * <pre>
-	 * 
-	 * </pre>
-	 * @param datagram
-	 * @throws Exception 
-	 */
-	public void sendMessage(PeacockDatagram<?> datagram) throws Exception {
-		if (handler.isConnected()) {
-			handler.getChannel().writeAndFlush(datagram);
-		} else {
-			throw new Exception("Connection closed.");
-		}
-	}//end of sendMessage()
-
-	/**
-	 * @return the connected
-	 */
-	public boolean isConnected() {
-		return handler.isConnected();
-	}
 	
 }
 //end of PeacockClient.java

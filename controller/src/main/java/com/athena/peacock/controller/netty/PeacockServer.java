@@ -36,9 +36,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.athena.peacock.common.netty.PeacockDatagram;
-import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
-
 /**
  * <pre>
  *
@@ -100,16 +97,5 @@ public class PeacockServer {
 			channel.close();
 		}
 	}
-	
-	/**
-	 * <pre>
-	 * 
-	 * </pre>
-	 * @param datagram
-	 * @throws Exception 
-	 */
-	public void sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) throws Exception {
-		handler.sendMessage(datagram);
-	}//end of sendMessage()
 }
 //end of PeacockServer.java

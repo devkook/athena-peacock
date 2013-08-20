@@ -24,7 +24,6 @@
 	<modules>
 		<module>agent</module>
 		<module>controller</module>
-		<module>console</module>
 		<module>common</module>
 	</modules>
 
@@ -36,18 +35,39 @@
 		<skipTests>true</skipTests>
 		<cobertura.skip>true</cobertura.skip>
 	</properties>
-	
+
 	<build>
-        <plugins>
-            <plugin>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.7</source>
-                    <target>1.7</target>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>   
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<compilerVersion>1.7</compilerVersion>
+					<source>1.7</source>
+					<target>1.7</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>   
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.7.2</version>
+				<configuration>
+					<skipTests>${skipTests}</skipTests>
+					<includes>
+						<include>**/*Test*.java</include>
+					</includes>
+					<excludes>
+						<exclude>**/Abstract*</exclude>
+						<exclude>**/TestUtil*</exclude>
+					</excludes>
+					<runOrder>random</runOrder>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 	
 	<dependencies>
 		<!-- Spring Framework -->
@@ -269,14 +289,6 @@
 			<artifactId>mybatis-spring</artifactId>
 			<version>1.1.0</version>
 		</dependency>
-        
-        <!-- 
-		<dependency>
-			<groupId>org.apache.ibatis</groupId>
-			<artifactId>ibatis-sqlmap</artifactId>
-			<version>2.3.4.726</version>
-		</dependency>
-		 -->
 
 		<!-- logging -->
 		<dependency>
@@ -386,7 +398,6 @@
 			<version>2.1</version>
 		</dependency>
             
-        
         <dependency>
 			<groupId>org.apache.ant</groupId>
 			<artifactId>ant-compress</artifactId>
@@ -427,7 +438,7 @@
 		<dependency>
 			<groupId>io.netty</groupId>
 			<artifactId>netty-all</artifactId>
-			<version>4.0.3.Final</version>
+			<version>4.0.7.Final</version>
 		</dependency>
 		
 		<!-- mysql driver -->

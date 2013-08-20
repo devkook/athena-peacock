@@ -28,7 +28,7 @@ import org.hyperic.sigar.CpuPerc;
 import org.hyperic.sigar.Mem;
 import org.hyperic.sigar.SigarException;
 
-import com.athena.peacock.agent.netty.PeacockClient;
+import com.athena.peacock.agent.netty.PeacockTransmitter;
 import com.athena.peacock.agent.scheduler.InternalJobExecutionException;
 import com.athena.peacock.agent.scheduler.quartz.BaseJob;
 import com.athena.peacock.agent.scheduler.quartz.JobExecution;
@@ -46,13 +46,13 @@ import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
  */
 public class SystemMonitoringJob extends BaseJob {
 	
-	private PeacockClient peacockClient;
+	private PeacockTransmitter peacockTransmitter;
 
 	/**
-	 * @param peacockClient the peacockClient to set
+	 * @param peacockTransmitter the peacockTransmitter to set
 	 */
-	public void setPeacockClient(PeacockClient peacockClient) {
-		this.peacockClient = peacockClient;
+	public void setPeacockTransmitter(PeacockTransmitter peacockTransmitter) {
+		this.peacockTransmitter = peacockTransmitter;
 	}
 
 	/* (non-Javadoc)
@@ -61,7 +61,7 @@ public class SystemMonitoringJob extends BaseJob {
 	@Override
 	protected void executeInternal(JobExecution context) throws InternalJobExecutionException {
 		
-		if (!peacockClient.isConnected()) {
+		if (!peacockTransmitter.isConnected()) {
 			return;
 		}
 		
@@ -90,7 +90,7 @@ public class SystemMonitoringJob extends BaseJob {
 			message.setWaitCpu(CpuPerc.format(cpu.getWait()).replaceAll("%", ""));
 			message.setCombinedCpu(CpuPerc.format(cpu.getCombined()).replaceAll("%", ""));
 			
-			peacockClient.sendMessage(new PeacockDatagram<AgentSystemStatusMessage>(message));
+			peacockTransmitter.sendMessage(new PeacockDatagram<AgentSystemStatusMessage>(message));
 		} catch (SigarException e) {
 			logger.error("SigarException has occurred.", e);
 			throw new InternalJobExecutionException(e);

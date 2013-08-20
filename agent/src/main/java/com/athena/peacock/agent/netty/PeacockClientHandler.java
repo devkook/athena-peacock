@@ -108,9 +108,26 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 	/**
 	 * @return the channel
 	 */
-	public Channel getChannel() {
+	private Channel getChannel() {
 		return channel;
 	}
+
+	/**
+	 * @return the channel
+	 */
+	public void close() {
+		getChannel().close();
+	}
+
+	/**
+	 * <pre>
+	 * 
+	 * </pre>
+	 * @param datagram
+	 */
+	public void sendMessage(PeacockDatagram<?> datagram) {
+		getChannel().writeAndFlush(datagram);
+	}//end of sendMessage()
 
 	/**
      * <pre>

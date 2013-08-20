@@ -15,7 +15,7 @@
         <property name="jobListenerNames" value="JobLogListener"/>
         <property name="jobDataAsMap">
             <map>
-                <entry key="peacockClient" value-ref="peacockClient" />
+                <entry key="peacockTransmitter" value-ref="peacockTransmitter" />
             </map>
         </property>
     </bean>
