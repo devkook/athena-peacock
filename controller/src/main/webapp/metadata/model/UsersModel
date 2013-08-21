@@ -18,7 +18,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "id",
+                "name": "user_id",
                 "type": "string"
             },
             "designerId": "3118db95-0782-46d4-90b2-1a3885ccf61c"
@@ -31,7 +31,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "name",
+                "name": "user_name",
                 "type": "string"
             },
             "designerId": "8950c4ab-2900-41d2-b62d-b791a322801d"
@@ -70,10 +70,140 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "createDate",
+                "name": "reg_dt",
                 "type": "string"
             },
             "designerId": "9143985a-2e3a-4725-9b98-f473955ff136"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "role_id",
+                "type": "int"
+            },
+            "designerId": "c1b8e07a-6d85-4ea8-806f-7790fa1d534e"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "login_id",
+                "type": "string"
+            },
+            "designerId": "7bb3a490-5cdf-44a6-9570-22f68b01f453"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "dept_name",
+                "type": "string"
+            },
+            "designerId": "8403e7ae-7d04-4856-8ba3-62b9d7394ed9"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "email",
+                "type": "string"
+            },
+            "designerId": "23d7519c-3a62-4a49-8330-a3ddc436e3c9"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "is_admin",
+                "type": "boolean"
+            },
+            "designerId": "addf5a4e-f929-44bc-b11e-e72f1582a8db"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "status",
+                "type": "int"
+            },
+            "designerId": "bd2299c8-e959-440a-947f-ef8256202138"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "last_logon",
+                "type": "string"
+            },
+            "designerId": "ec6b02a5-c5e1-4634-917a-cc0d8510bbb7"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "reg_user_id",
+                "type": "int"
+            },
+            "designerId": "6514fd0d-722e-4d84-b7d5-d49a5320a57f"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "upd_user_id",
+                "type": "int"
+            },
+            "designerId": "ab6d964a-ca61-486e-a03c-2a70ba20bad7"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "upd_dt",
+                "type": "string"
+            },
+            "designerId": "4f76b339-bc9b-4eeb-afd7-3a53cdf468ed"
         }
     ]
 }

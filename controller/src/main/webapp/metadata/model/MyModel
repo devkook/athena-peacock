@@ -6,9 +6,9 @@
     },
     "codeClass": null,
     "userConfig": {
-        "designer|userClassName": "UserGroup"
+        "designer|userClassName": "MyModel"
     },
-    "designerId": "b6faf1a1-93de-4700-b476-0e0342318161",
+    "designerId": "ed1de570-cef0-403e-8446-f832008b8a7d",
     "cn": [
         {
             "type": "Ext.data.Field",
@@ -18,10 +18,10 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "group_id",
+                "name": "reg_user_id",
                 "type": "int"
             },
-            "designerId": "15bf9323-febd-4134-a6c0-10659b18c422"
+            "designerId": "7ffa755b-8b5b-485e-a580-1ca9f3ad35e9"
         },
         {
             "type": "Ext.data.Field",
@@ -31,10 +31,10 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "group_name",
+                "name": "reg_dt",
                 "type": "string"
             },
-            "designerId": "48d9848e-60a0-4afd-826b-c32d6e335981"
+            "designerId": "d4e121a8-1272-43a8-bf08-a74d28ec47ee"
         },
         {
             "type": "Ext.data.Field",
@@ -44,36 +44,23 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "desc",
-                "type": "string"
-            },
-            "designerId": "b568edaf-1745-4710-b880-28c6fae3f1b2"
-        },
-        {
-            "type": "Ext.data.Field",
-            "reference": {
-                "name": "fields",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "name": "create_date",
-                "type": "string"
-            },
-            "designerId": "319b589b-2b49-40c9-b6a0-39c972155b29"
-        },
-        {
-            "type": "Ext.data.Field",
-            "reference": {
-                "name": "fields",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "name": "user_id",
+                "name": "upd_user_id",
                 "type": "int"
             },
-            "designerId": "d8a7713a-0ce9-4689-814c-135222458522"
+            "designerId": "c0d5c3ae-86c4-4b0e-998f-1475f98171a8"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "upd_dt",
+                "type": "string"
+            },
+            "designerId": "a3cbb755-7722-425b-8681-4ce62292b622"
         }
     ]
 }

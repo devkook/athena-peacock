@@ -11,17 +11,20 @@
             "MachineModel",
             "SoftwareModel",
             "OSPackageModel",
-            "UserGroup"
+            "UserGroup",
+            "MyModel"
         ],
         "stores": [
             "SoftwareListStore",
             "OSPackageListStore",
-            "UserGroupMapStore"
+            "UserGroupMapStore",
+            "UserGroupListStore"
         ],
         "views": [
             "MainViewport",
             "LoginWindow",
-            "InstanceLaunchWindow"
+            "InstanceLaunchWindow",
+            "UserGroupTabPanel"
         ],
         "autoCreateViewport": true,
         "controllers": [

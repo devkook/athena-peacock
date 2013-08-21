@@ -48,6 +48,11 @@ Ext.define('Peacock.controller.MainGridController', {
             //tabPanel = Ext.widget('instanceTabPanel');
             tabPanel = this.getInstanceTabPanelView();
 
+
+        }else if(modelName.indexOf("UserGroupModel") > -1){
+
+
+
         }else if(modelName.indexOf("UsersModel") > -1){
 
 

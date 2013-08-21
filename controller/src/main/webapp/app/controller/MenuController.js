@@ -66,7 +66,8 @@ Ext.define('Peacock.controller.MenuController', {
                 alert("scal-lb.");
 
             }else if (record.get('id') == 'user-grp'){
-                alert("user-grp.");
+
+                this.viewGroups(grid);
 
             }else if (record.get('id') == 'users'){
 
@@ -90,13 +91,13 @@ Ext.define('Peacock.controller.MenuController', {
         */
 
 
-        grid.setTitle('Users');
+        grid.setTitle('User List');
         grid.reconfigure(Ext.getStore('UsersJsonStore'), [{
             text: 'ID',
-            dataIndex: 'id'
+            dataIndex: 'user_id'
         }, {
             text: 'User Name',
-            dataIndex: 'name'
+            dataIndex: 'user_name'
         }, {
             text: 'Groups',
             dataIndex: 'groups'
@@ -105,7 +106,7 @@ Ext.define('Peacock.controller.MenuController', {
             dataIndex: 'password'
         }, {
             text: 'Create Date',
-            dataIndex: 'createDate',
+            dataIndex: 'reg_dt',
             width: 200
         }]);
 
@@ -169,6 +170,43 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionRegister").hide();
 
 
+    },
+
+    viewGroups: function(grid) {
+        /*
+        *  User Group list 화면 보여주기.
+        */
+
+
+        grid.setTitle('Group List');
+        grid.reconfigure(Ext.getStore('UserGroupListStore'), [{
+            text: 'Group Name',
+            dataIndex: 'group_name'
+        }, {
+            text: 'Users',
+            dataIndex: 'users'
+        }, {
+            text: 'Description',
+            dataIndex: 'desc',
+            width: 200
+        }, {
+            text: 'Create Date',
+            dataIndex: 'reg_dt',
+            width: 200
+        }]);
+
+
+        /*
+        * toolbar menu 활성화
+        */
+        Ext.getCmp("mainButton").setText("Create New Group");
+
+        Ext.getCmp("tbActionStart").hide();
+        Ext.getCmp("tbActionStop").hide();
+        Ext.getCmp("tbActionTerminate").hide();
+        Ext.getCmp("tbActionEdit").show();
+        Ext.getCmp("tbActionDelete").show();
+        Ext.getCmp("tbActionRegister").hide();
     },
 
     init: function(application) {

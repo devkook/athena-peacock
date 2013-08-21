@@ -24,17 +24,20 @@ Ext.application({
         'MachineModel',
         'SoftwareModel',
         'OSPackageModel',
-        'UserGroup'
+        'UserGroupModel',
+        'MyModel'
     ],
     stores: [
         'SoftwareListStore',
         'OSPackageListStore',
-        'UserGroupMapStore'
+        'UserGroupMapStore',
+        'UserGroupListStore'
     ],
     views: [
         'MainViewport',
         'LoginWindow',
-        'InstanceLaunchWindow'
+        'InstanceLaunchWindow',
+        'UserGroupTabPanel'
     ],
     autoCreateViewport: true,
     controllers: [

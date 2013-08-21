@@ -7,10 +7,10 @@
     "codeClass": null,
     "userConfig": {
         "model": "UserGroupModel",
-        "storeId": "UserGroupMapStore",
-        "designer|userClassName": "UserGroupMapStore"
+        "storeId": "UserGroupListStore",
+        "designer|userClassName": "UserGroupListStore"
     },
-    "designerId": "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd",
+    "designerId": "2cf56719-2a28-45f0-abe8-91cbdc08d914",
     "cn": [
         {
             "type": "Ext.data.proxy.Ajax",
@@ -20,9 +20,9 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/userGroups.json"
+                "url": "static/userGroupList.json"
             },
-            "designerId": "2fff5f25-8c6d-4a6b-8799-3d7da61db37d",
+            "designerId": "3a1e1135-1865-42f1-9fb9-8756661d43da",
             "cn": [
                 {
                     "type": "Ext.data.reader.Json",
@@ -34,7 +34,7 @@
                     "userConfig": {
                         "root": "list"
                     },
-                    "designerId": "db596244-462e-4e87-956e-0f79125ff192"
+                    "designerId": "15e3c7f7-9ba1-43b1-ae88-0eb7ba4ec58a"
                 }
             ]
         }
