@@ -15,9 +15,10 @@
 
 Ext.define('Peacock.view.UserGroupTabPanel', {
     extend: 'Ext.tab.Panel',
+    alias: 'widget.userGroupTabPanel',
 
-    height: 250,
-    width: 400,
+    height: 291,
+    width: 765,
     activeTab: 0,
 
     initComponent: function() {
@@ -27,15 +28,58 @@ Ext.define('Peacock.view.UserGroupTabPanel', {
             items: [
                 {
                     xtype: 'panel',
-                    title: 'Tab 1'
+                    title: 'Users',
+                    items: [
+                        {
+                            xtype: 'gridpanel',
+                            id: 'groupUsersGrid',
+                            header: false,
+                            title: 'My Grid Panel',
+                            store: 'UserGroupMapStore',
+                            columns: [
+                                {
+                                    xtype: 'rownumberer'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'user_name',
+                                    text: 'User'
+                                },
+                                {
+                                    xtype: 'actioncolumn',
+                                    align: 'center',
+                                    items: [
+                                        {
+                                            handler: function(view, rowIndex, colIndex, item, e, record, row) {
+                                                alert("Delete "+ record.get("user_name"));
+                                            },
+                                            icon: 'resources/icons/fam/delete.gif',
+                                            tooltip: 'Delete'
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
                 },
                 {
                     xtype: 'panel',
-                    title: 'Tab 2'
-                },
-                {
-                    xtype: 'panel',
-                    title: 'Tab 3'
+                    title: 'Summary',
+                    items: [
+                        {
+                            xtype: 'propertygrid',
+                            id: 'groupSummaryGrid',
+                            header: false,
+                            title: 'My Property Grid',
+                            sortableColumns: false,
+                            source: {
+                                'Property 1': 'String',
+                                'Property 2': true,
+                                'Property 3': '2013-08-22T13:52:51',
+                                'Property 4': 123
+                            }
+                        }
+                    ]
                 }
             ]
         });

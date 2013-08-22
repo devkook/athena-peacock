@@ -17,14 +17,14 @@ Ext.define('Peacock.store.UserGroupMapStore', {
     extend: 'Ext.data.Store',
 
     requires: [
-        'Peacock.model.UserGroupModel'
+        'Peacock.model.UserGroupMapModel'
     ],
 
     constructor: function(cfg) {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
-            model: 'Peacock.model.UserGroupModel',
+            model: 'Peacock.model.UserGroupMapModel',
             storeId: 'UserGroupMapStore',
             proxy: {
                 type: 'ajax',

@@ -1,9 +1,0 @@
-{
-    "total": 30,
-    "list":[
-            {"software_id":1, "software_name":"Apache", "version":"2.2.25", "engine_dir":"/opt/httpd", "install_dt":"2013.7.2"},
-            {"software_id":2, "software_name":"JBoss", "version":"5.1", "engine_dir":"/opt/jboss-eap-5.1", "install_dt":"2013.7.3"},
-            {"software_id":3, "software_name":"JDK", "version":"1.6.30", "engine_dir":"/opt/jdk-1.6", "install_dt":"2013.7.4"}
-
-    ]
-}

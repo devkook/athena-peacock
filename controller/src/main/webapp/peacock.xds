@@ -219,6 +219,22 @@
                 "app/view/UserGroupTabPanel.js"
             ],
             "className": "UserGroupTabPanel"
+        },
+        "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8": {
+            "paths": [
+                "metadata/model/UserGroupMapModel",
+                "app/model/override/UserGroupMapModel.js",
+                "app/model/UserGroupMapModel.js"
+            ],
+            "className": "UserGroupMapModel"
+        },
+        "06afb1ae-22cd-4c26-b63f-bf583f512c21": {
+            "paths": [
+                "metadata/controller/UserGroupTabPanelController",
+                "app/controller/override/UserGroupTabPanelController.js",
+                "app/controller/UserGroupTabPanelController.js"
+            ],
+            "className": "UserGroupTabPanelController"
         }
     },
     "viewOrderMap": {
@@ -242,9 +258,10 @@
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
             "5e947e8b-3edb-4586-8c79-6c66c783e510",
             "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
-            "2d6395da-c4c7-4ef2-922a-c841885d2576",
             "5b9bf488-72c4-48a3-bcb8-de4c98ead5da",
-            "83ebf739-fed3-4351-b886-861dbd8faf89"
+            "2d6395da-c4c7-4ef2-922a-c841885d2576",
+            "83ebf739-fed3-4351-b886-861dbd8faf89",
+            "06afb1ae-22cd-4c26-b63f-bf583f512c21"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",
@@ -252,6 +269,7 @@
             "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
             "f6255218-a98d-4d06-b343-412084f7fca0",
             "b6faf1a1-93de-4700-b476-0e0342318161",
+            "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8",
             "ed1de570-cef0-403e-8446-f832008b8a7d"
         ],
         "resource": [

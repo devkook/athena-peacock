@@ -24,8 +24,9 @@ Ext.application({
         'MachineModel',
         'SoftwareModel',
         'OSPackageModel',
-        'UserGroupModel',
-        'MyModel'
+        'UserGroup',
+        'MyModel',
+        'UserGroupMapModel'
     ],
     stores: [
         'SoftwareListStore',
@@ -36,8 +37,7 @@ Ext.application({
     views: [
         'MainViewport',
         'LoginWindow',
-        'InstanceLaunchWindow',
-        'UserGroupTabPanel'
+        'InstanceLaunchWindow'
     ],
     autoCreateViewport: true,
     controllers: [
@@ -46,7 +46,8 @@ Ext.application({
         'MainGridController',
         'InstanceTabPanelController',
         'SearchGridController',
-        'UsersTabPanelController'
+        'UsersTabPanelController',
+        'UserGroupTabPanelController'
     ],
     name: 'Peacock',
 

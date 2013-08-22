@@ -18,7 +18,8 @@ Ext.define('Peacock.controller.MainGridController', {
 
     views: [
         'InstanceTabPanel',
-        'UserTabPanel'
+        'UserTabPanel',
+        'UserGroupTabPanel'
     ],
 
     onGridpanelSelect: function(rowmodel, record, index, eOpts) {
@@ -29,6 +30,7 @@ Ext.define('Peacock.controller.MainGridController', {
         */
 
         Peacock.app.debug("MainGridController.onGridpanelSelect.");
+        Peacock.app.selectedRecord = record;
 
 
 
@@ -51,7 +53,7 @@ Ext.define('Peacock.controller.MainGridController', {
 
         }else if(modelName.indexOf("UserGroupModel") > -1){
 
-
+            tabPanel = this.getUserGroupTabPanelView();
 
         }else if(modelName.indexOf("UsersModel") > -1){
 

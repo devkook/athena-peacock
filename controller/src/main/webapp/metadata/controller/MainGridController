@@ -8,7 +8,8 @@
     "userConfig": {
         "views": [
             "InstanceTabPanel",
-            "UserTabPanel"
+            "UserTabPanel",
+            "UserGroupTabPanel"
         ],
         "designer|userClassName": "MainGridController"
     },
@@ -31,6 +32,7 @@
                     "*/\r",
                     "\r",
                     "Peacock.app.debug(\"MainGridController.onGridpanelSelect.\");\r",
+                    "Peacock.app.selectedRecord = record;\r",
                     "\r",
                     "\r",
                     "\r",
@@ -49,11 +51,11 @@
                     "\r",
                     "    //tabPanel = Ext.widget('instanceTabPanel');\r",
                     "    tabPanel = this.getInstanceTabPanelView();\r",
-                    "    \r",
-                    "    \r",
+                    "\r",
+                    "\r",
                     "}else if(modelName.indexOf(\"UserGroupModel\") > -1){\r",
-                    "    \r",
-                    "    \r",
+                    "\r",
+                    "\ttabPanel = this.getUserGroupTabPanelView();\r",
                     "\r",
                     "}else if(modelName.indexOf(\"UsersModel\") > -1){\r",
                     "\r",

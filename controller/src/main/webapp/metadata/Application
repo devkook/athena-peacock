@@ -12,7 +12,8 @@
             "SoftwareModel",
             "OSPackageModel",
             "UserGroup",
-            "MyModel"
+            "MyModel",
+            "UserGroupMapModel"
         ],
         "stores": [
             "SoftwareListStore",
@@ -23,8 +24,7 @@
         "views": [
             "MainViewport",
             "LoginWindow",
-            "InstanceLaunchWindow",
-            "UserGroupTabPanel"
+            "InstanceLaunchWindow"
         ],
         "autoCreateViewport": true,
         "controllers": [
@@ -33,7 +33,8 @@
             "MainGridController",
             "InstanceTabPanelController",
             "SearchGridController",
-            "UsersTabPanelController"
+            "UsersTabPanelController",
+            "UserGroupTabPanelController"
         ],
         "name": "Peacock"
     },
