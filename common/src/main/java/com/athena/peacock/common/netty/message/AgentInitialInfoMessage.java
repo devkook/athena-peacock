@@ -30,7 +30,9 @@ package com.athena.peacock.common.netty.message;
 public class AgentInitialInfoMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
-	
+
+	/** mac address */
+	private String macAddr;
 	/** os.name */
 	private String osName;
 	/** os.arch */
@@ -54,6 +56,20 @@ public class AgentInitialInfoMessage extends AbstractMessage {
 	
 	public AgentInitialInfoMessage() {
 		super(MessageType.INITIAL_INFO);
+	}
+
+	/**
+	 * @return the macAddr
+	 */
+	public String getMacAddr() {
+		return macAddr;
+	}
+
+	/**
+	 * @param macAddr the macAddr to set
+	 */
+	public void setMacAddr(String macAddr) {
+		this.macAddr = macAddr;
 	}
 
 	/**
