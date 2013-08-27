@@ -441,7 +441,9 @@
                                                                     "\r",
                                                                     "\r",
                                                                     "}else if (Peacock.app.menu_id == 'user-grp'){\r",
-                                                                    "\r",
+                                                                    "    \r",
+                                                                    "    var win = Ext.widget('createUserGroupWindow');\r",
+                                                                    "    win.show();\r",
                                                                     "\r",
                                                                     "}else if (Peacock.app.menu_id == 'users'){\r",
                                                                     "\r",
@@ -625,16 +627,66 @@
                                     "userConfig": {
                                         "layout|region": "south",
                                         "layout|split": true,
-                                        "height": 250,
-                                        "id": "detailPanel",
-                                        "maxHeight": 600,
-                                        "minHeight": 200,
-                                        "designer|displayName": "DetailPanel",
-                                        "layout": "card",
+                                        "height": 300,
+                                        "designer|displayName": "BaseDetailPanel",
+                                        "layout": "anchor",
                                         "header": false,
                                         "title": "My Panel"
                                     },
-                                    "designerId": "0abe1991-6795-4549-a8ad-ca61190de5a5"
+                                    "designerId": "944d571c-8653-4b57-86ab-3dff1f00b456",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.panel.Panel",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|anchor": "100%",
+                                                "height": 50,
+                                                "margin": 5,
+                                                "designer|displayName": "TitlePanel",
+                                                "header": false,
+                                                "title": "My Panel"
+                                            },
+                                            "designerId": "db2f026f-f689-4442-b023-b4cb5ac338e8",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.form.Label",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "text": "title panel"
+                                                    },
+                                                    "designerId": "5572d3c7-18a5-4f56-92f1-f0ed0f7bb323"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.panel.Panel",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|anchor": "100% -1",
+                                                "height": null,
+                                                "id": "detailPanel",
+                                                "maxHeight": null,
+                                                "minHeight": null,
+                                                "designer|displayName": "DetailPanel",
+                                                "layout": "card",
+                                                "header": false,
+                                                "title": "My Panel"
+                                            },
+                                            "designerId": "0abe1991-6795-4549-a8ad-ca61190de5a5"
+                                        }
+                                    ]
                                 }
                             ]
                         }

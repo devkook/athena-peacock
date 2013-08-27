@@ -241,6 +241,8 @@ Ext.define('Peacock.view.MainViewport', {
 
                                                                 }else if (Peacock.app.menu_id == 'user-grp'){
 
+                                                                    var win = Ext.widget('createUserGroupWindow');
+                                                                    win.show();
 
                                                                 }else if (Peacock.app.menu_id == 'users'){
 
@@ -313,15 +315,38 @@ Ext.define('Peacock.view.MainViewport', {
                                             xtype: 'panel',
                                             region: 'south',
                                             split: true,
-                                            height: 250,
-                                            id: 'detailPanel',
-                                            maxHeight: 600,
-                                            minHeight: 200,
+                                            height: 300,
                                             layout: {
-                                                type: 'card'
+                                                type: 'anchor'
                                             },
                                             header: false,
-                                            title: 'My Panel'
+                                            title: 'My Panel',
+                                            items: [
+                                                {
+                                                    xtype: 'panel',
+                                                    anchor: '100%',
+                                                    height: 50,
+                                                    margin: 5,
+                                                    header: false,
+                                                    title: 'My Panel',
+                                                    items: [
+                                                        {
+                                                            xtype: 'label',
+                                                            text: 'title panel'
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    xtype: 'panel',
+                                                    anchor: '100% -1',
+                                                    id: 'detailPanel',
+                                                    layout: {
+                                                        type: 'card'
+                                                    },
+                                                    header: false,
+                                                    title: 'My Panel'
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

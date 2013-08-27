@@ -235,6 +235,14 @@
                 "app/controller/UserGroupTabPanelController.js"
             ],
             "className": "UserGroupTabPanelController"
+        },
+        "cbc69f81-8fff-4115-963e-644323176928": {
+            "paths": [
+                "metadata/view/CreateUserGroupWindow",
+                "app/view/override/CreateUserGroupWindow.js",
+                "app/view/CreateUserGroupWindow.js"
+            ],
+            "className": "CreateUserGroupWindow"
         }
     },
     "viewOrderMap": {
@@ -244,7 +252,8 @@
             "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
             "477b9df4-ddf6-4d33-ac66-2268cb4ad745",
             "f7029523-2528-4ff5-b4b9-dfdf237e504a",
-            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581"
+            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
+            "cbc69f81-8fff-4115-963e-644323176928"
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
