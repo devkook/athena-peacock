@@ -37,5 +37,7 @@ public final class PeacockConstant {
 	public static final String SERVER_IP 		= "ServerIP";
 	/** Agent에서 접속할 서버의 포트 */
 	public static final String SERVER_PORT 		= "ServerPort";
+	/** 모니터링 항목 리스트 */
+	public static final String MON_FACTOR_LIST 	= "MON_FACTOR_LIST";
 }
 //end of PeacockConstant.java

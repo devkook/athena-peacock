@@ -16,9 +16,11 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 8. 25.		First Draft.
+ * Sang-cheon Park	2013. 8. 27.		First Draft.
  */
 package com.athena.peacock.controller.monitor;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -31,11 +33,12 @@ import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
  * @author Sang-cheon Park
  * @version 1.0
  */
-@Repository
-public class MonitorDao extends AbstractBaseDao {
+@Repository("monFactorDao")
+public class MonFactorDao extends AbstractBaseDao {
 
-	public void insertMonitorData(MonitorDataDto monitorData) {
-		sqlSession.insert("monitorDataMapper.insertMonitorData", monitorData);
+	public List<MonFactorDto> getMonFactorList() {
+		return sqlSession.selectList("MonFactorMapper.getMonFactorList");
 	}
+
 }
-//end of MonitorDao.java
+//end of MonFactorDao.java

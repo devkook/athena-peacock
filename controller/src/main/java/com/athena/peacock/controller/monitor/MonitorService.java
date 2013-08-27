@@ -36,11 +36,11 @@ import org.springframework.stereotype.Service;
 public class MonitorService {
     
 	@Inject
-	@Named("monitorDao")
-	private MonitorDao monitorDao;
+	@Named("monDataDao")
+	private MonDataDao monDataDao;
 
-	public void insertMonitorData(MonitorDataDto monitorData) {
-		monitorDao.insertMonitorData(monitorData);
+	public void insertMonData(MonDataDto monData) {
+		monDataDao.insertMonitorData(monData);
 	}
 }
 //end of MonitorService.java

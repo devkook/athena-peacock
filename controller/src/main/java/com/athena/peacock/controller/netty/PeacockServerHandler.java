@@ -28,6 +28,7 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
@@ -45,6 +46,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
@@ -52,8 +54,10 @@ import com.athena.peacock.common.netty.message.MessageType;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.common.provider.AppContext;
+import com.athena.peacock.controller.common.util.ThreadLocalUtil;
 import com.athena.peacock.controller.machine.MachineDto;
 import com.athena.peacock.controller.machine.MachineService;
+import com.athena.peacock.controller.monitor.MonFactorDto;
 import com.athena.peacock.controller.monitor.MonitorService;
 
 /**
@@ -114,10 +118,13 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 					case SYSTEM_STATUS : 
 						AgentSystemStatusMessage statusMsg = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
 						System.out.println("Message => " + statusMsg);
+						
+						List<MonFactorDto> monFactorList = (List<MonFactorDto>) ThreadLocalUtil.get(PeacockConstant.MON_FACTOR_LIST);
+						System.out.println("===> " + monFactorList);
+
 						break;
 					case INITIAL_INFO : 
 						AgentInitialInfoMessage infoMsg = ((PeacockDatagram<AgentInitialInfoMessage>)msg).getMessage();
-						System.out.println("Message => " + infoMsg);
 						
 						// register a new channel
 						ChannelManagement.registerChannel(infoMsg.getAgentId(), ctx.channel());

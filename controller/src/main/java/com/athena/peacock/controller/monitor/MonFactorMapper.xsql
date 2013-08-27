@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MonFactorMapper">
+
+	<select id="getMonFactorList" parameterType="String" resultType="com.athena.peacock.controller.monitor.MonFactorDto">
+		SELECT MON_FACTOR_ID AS monFactorId
+		       , MON_FACTOR_NAME AS monFactorName
+		       , REG_USER_ID AS regUserId
+		       , REG_DT AS regDt
+		       , UPD_USER_ID AS updUserId
+		       , UPD_DT AS updDt
+		  FROM mon_factor_tbl
+	</select>
+
+</mapper>

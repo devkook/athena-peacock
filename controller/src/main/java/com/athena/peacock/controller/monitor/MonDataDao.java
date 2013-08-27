@@ -18,12 +18,11 @@
  * ---------------	----------------	------------
  * Sang-cheon Park	2013. 8. 25.		First Draft.
  */
-package com.athena.peacock.controller.machine;
+package com.athena.peacock.controller.monitor;
 
-import javax.inject.Inject;
-import javax.inject.Named;
+import org.springframework.stereotype.Repository;
 
-import org.springframework.stereotype.Service;
+import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
 
 /**
  * <pre>
@@ -32,19 +31,11 @@ import org.springframework.stereotype.Service;
  * @author Sang-cheon Park
  * @version 1.0
  */
-@Service("machineService")
-public class MachineService {
-    
-	@Inject
-	@Named("machineDao")
-	private MachineDao machineDao;
+@Repository
+public class MonDataDao extends AbstractBaseDao {
 
-	public void insertMachine(MachineDto machine) {		
-		if (machineDao.getMachine(machine.getMachineId()) != null) {
-			machineDao.updateMachine(machine);
-		} else {
-			machineDao.insertMachine(machine);
-		}
+	public void insertMonitorData(MonDataDto monitorData) {
+		sqlSession.insert("monitorDataMapper.insertMonitorData", monitorData);
 	}
 }
-//end of MachineService.java
+//end of MonDataDao.java

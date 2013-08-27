@@ -29,39 +29,70 @@ import com.athena.peacock.controller.web.common.dao.BaseDto;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public class MonitorFactorDto extends BaseDto {
+public class MonDataDto extends BaseDto {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int monFactorId;
-	private String monFactorName;
-	
+	private String machineId;
+	private String monFactorId;
+	private int monDataId;
+	private String monFactorValue;
+
+	/**
+	 * @return the machineId
+	 */
+	public String getMachineId() {
+		return machineId;
+	}
+
+	/**
+	 * @param machineId the machineId to set
+	 */
+	public void setMachineId(String machineId) {
+		this.machineId = machineId;
+	}
+
 	/**
 	 * @return the monFactorId
 	 */
-	public int getMonFactorId() {
+	public String getMonFactorId() {
 		return monFactorId;
 	}
-	
+
 	/**
 	 * @param monFactorId the monFactorId to set
 	 */
-	public void setMonFactorId(int monFactorId) {
+	public void setMonFactorId(String monFactorId) {
 		this.monFactorId = monFactorId;
 	}
-	
+
 	/**
-	 * @return the monFactorName
+	 * @return the monDataId
 	 */
-	public String getMonFactorName() {
-		return monFactorName;
+	public int getMonDataId() {
+		return monDataId;
+	}
+
+	/**
+	 * @param monDataId the monDataId to set
+	 */
+	public void setMonDataId(int monDataId) {
+		this.monDataId = monDataId;
+	}
+
+	/**
+	 * @return the monFactorValue
+	 */
+	public String getMonFactorValue() {
+		return monFactorValue;
+	}
+
+	/**
+	 * @param monFactorValue the monFactorValue to set
+	 */
+	public void setMonFactorValue(String monFactorValue) {
+		this.monFactorValue = monFactorValue;
 	}
 	
-	/**
-	 * @param monFactorName the monFactorName to set
-	 */
-	public void setMonFactorName(String monFactorName) {
-		this.monFactorName = monFactorName;
-	}
 }
-//end of MonitorFactorDto.java
+//end of MonDataDto.java

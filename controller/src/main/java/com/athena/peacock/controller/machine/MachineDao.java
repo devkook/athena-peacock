@@ -31,7 +31,7 @@ import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
  * @author Sang-cheon Park
  * @version 1.0
  */
-@Repository
+@Repository("machineDao")
 public class MachineDao extends AbstractBaseDao {
 	
 	public MachineDto getMachine(String machineId) {
