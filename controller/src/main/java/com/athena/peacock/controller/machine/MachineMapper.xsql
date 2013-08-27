@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="MachineMapper">
+
+	<insert id="insertMachine" parameterType="com.athena.peacock.controller.machine.MachineDto">
+		INSERT INTO machine_tbl 
+			        (MACHINE_ID, MACHINE_MAC_ADDR, IS_VM, OS_NAME, OS_VER, OS_ARCH, CPU_CLOCK, CPU_NUM
+			        , MEM_SIZE, IP_ADDR, HOST_NAME, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT) 
+		     VALUES (#{machineId}, #{machineMacAddr}, #{isVm}, #{osName}, #{osVer}, #{osArch}, #{cpuClock}, #{cpuNum}
+		     		, #{memSize}, #{ipAddr}, #{hostName}, #{regUserId}, NOW(), #{updUserId}, NOW())
+	</insert>
+
+	<select id="getMachine" parameterType="String" resultType="com.athena.peacock.controller.machine.MachineDto">
+		SELECT MACHINE_ID, MACHINE_MAC_ADDR, IS_VM, OS_NAME, OS_VER, OS_ARCH, CPU_CLOCK, CPU_NUM
+			   , MEM_SIZE, IP_ADDR, HOST_NAME, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT
+		  FROM machine_tbl
+		 WHERE MACHINE_ID = #{machineId}
+	</select>
+	
+	<update id="updateMachine" parameterType="com.athena.peacock.controller.machine.MachineDto">
+		UPDATE machine_tbl
+		   SET MACHINE_MAC_ADDR = #{machineMacAddr}
+		       , IS_VM = #{isVm}
+		       , OS_NAME = #{osName}
+		       , OS_VER = #{osVer}
+		       , OS_ARCH = #{osArch}
+		       , CPU_CLOCK = #{cpuClock}
+		       , CPU_NUM = #{cpuNum}
+			   , MEM_SIZE = #{memSize}
+			   , IP_ADDR = #{ipAddr}
+			   , HOST_NAME = #{hostName}
+			   , UPD_USER_ID = #{updUserId}
+			   , UPD_DT = NOW()
+		 WHERE MACHINE_ID = #{machineId}
+	</update>
+	
+	<delete id="deleteMachine" parameterType="String">
+		DELETE FROM machine_tbl WHERE MACHINE_ID = #{machineId}
+	</delete>
+
+</mapper>

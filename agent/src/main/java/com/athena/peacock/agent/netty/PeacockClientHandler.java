@@ -21,21 +21,20 @@
 package com.athena.peacock.agent.netty;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelHandler.Sharable;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.InetAddress;
 
 import org.apache.commons.io.IOUtils;
-import org.hyperic.sigar.SigarException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import com.athena.peacock.agent.util.MacAddressUtil;
 import com.athena.peacock.agent.util.SigarUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
@@ -134,13 +133,13 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
      * Agent의 시스템 정보를 조회한다.
      * </pre>
      * @return
-     * @throws IOException
-     * @throws SigarException 
+	 * @throws Exception 
      */
-    private PeacockDatagram<AgentInitialInfoMessage> getAgentInitialInfo() throws IOException, SigarException {
+    private PeacockDatagram<AgentInitialInfoMessage> getAgentInitialInfo() throws Exception {
     	String agentId = IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI());
 		
 		AgentInitialInfoMessage message = new AgentInitialInfoMessage();
+		message.setMacAddr(MacAddressUtil.getMacAddressList().get(0));
 		message.setAgentId(agentId);
 		message.setOsName(System.getProperty("os.name"));
 		message.setOsArch(System.getProperty("os.arch"));

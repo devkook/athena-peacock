@@ -37,6 +37,9 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -48,6 +51,10 @@ import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
 import com.athena.peacock.common.netty.message.MessageType;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
+import com.athena.peacock.controller.common.provider.AppContext;
+import com.athena.peacock.controller.machine.MachineDto;
+import com.athena.peacock.controller.machine.MachineService;
+import com.athena.peacock.controller.monitor.MonitorService;
 
 /**
  * <pre>
@@ -63,6 +70,14 @@ import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 
 	private static final Logger logger = LoggerFactory.getLogger(PeacockServerHandler.class);
+	
+	@Inject
+	@Named("machineService")
+	private MachineService machineService;
+	
+	@Inject
+	@Named("monitorService")
+	private MonitorService monitorService;
 
 	private final Lock lock = new ReentrantLock();
 	private final Queue<Callback> callbacks = new ConcurrentLinkedQueue<Callback>();
@@ -106,6 +121,32 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						
 						// register a new channel
 						ChannelManagement.registerChannel(infoMsg.getAgentId(), ctx.channel());
+						
+						String ipAddr = ctx.channel().remoteAddress().toString();
+						ipAddr = ipAddr.substring(1, ipAddr.indexOf(":"));
+						
+						MachineDto machine = new MachineDto();
+						
+						machine.setMachineId(infoMsg.getAgentId());
+						machine.setMachineMacAddr(infoMsg.getMacAddr());
+						machine.setIsVm("Y");
+						machine.setOsName(infoMsg.getOsName());
+						machine.setOsVer(infoMsg.getOsVersion());
+						machine.setOsArch(infoMsg.getOsArch());
+						machine.setCpuClock(Integer.toString(infoMsg.getCpuClock()));
+						machine.setCpuNum(Integer.toString(infoMsg.getCpuNum()));
+						machine.setMemSize(Long.toString(infoMsg.getMemSize()));
+						machine.setIpAddr(ipAddr);
+						machine.setHostName(infoMsg.getHostName());
+						machine.setRegUserId(1);
+						machine.setUpdUserId(1);
+						
+						if (this.machineService == null) {
+							machineService = AppContext.getBean(MachineService.class);
+						}
+						
+						machineService.insertMachine(machine);
+						
 						break;
 				}
 				
@@ -275,6 +316,6 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 		}
 	}
 	//end of Callback.java
-
+	
 }
 //end of PeacockServerHandler.java
