@@ -238,11 +238,11 @@
         },
         "cbc69f81-8fff-4115-963e-644323176928": {
             "paths": [
-                "metadata/view/CreateUserGroupWindow",
-                "app/view/override/CreateUserGroupWindow.js",
-                "app/view/CreateUserGroupWindow.js"
+                "metadata/view/UserGroupFormWindow",
+                "app/view/override/UserGroupFormWindow.js",
+                "app/view/UserGroupFormWindow.js"
             ],
-            "className": "CreateUserGroupWindow"
+            "className": "UserGroupFormWindow"
         }
     },
     "viewOrderMap": {

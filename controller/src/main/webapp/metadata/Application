@@ -25,7 +25,7 @@
             "MainViewport",
             "LoginWindow",
             "InstanceLaunchWindow",
-            "CreateUserGroupWindow"
+            "UserGroupFormWindow"
         ],
         "autoCreateViewport": true,
         "controllers": [

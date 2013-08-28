@@ -38,7 +38,7 @@ Ext.application({
         'MainViewport',
         'LoginWindow',
         'InstanceLaunchWindow',
-        'CreateUserGroupWindow'
+        'UserGroupFormWindow'
     ],
     autoCreateViewport: true,
     controllers: [

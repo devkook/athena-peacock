@@ -241,8 +241,15 @@ Ext.define('Peacock.view.MainViewport', {
 
                                                                 }else if (Peacock.app.menu_id == 'user-grp'){
 
-                                                                    var win = Ext.widget('createUserGroupWindow');
+                                                                    var win = Ext.widget('userGroupFormWindow');
                                                                     win.show();
+
+
+                                                                    /*
+                                                                    Ext.getCmp("userGroupForm").getForm().load({
+                                                                    url : "static/groupSummary.json"
+                                                                    });
+                                                                    */
 
                                                                 }else if (Peacock.app.menu_id == 'users'){
 
