@@ -22,6 +22,8 @@ package com.athena.peacock.agent.job;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import org.apache.commons.io.IOUtils;
 import org.hyperic.sigar.CpuPerc;
@@ -73,14 +75,14 @@ public class SystemMonitoringJob extends BaseJob {
 			message.setAgentId(IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI()));
 			
 			// set memory info
-			message.setActualFreeMem(mem.getActualFree());
-			message.setActualUsedMem(mem.getActualUsed());
-			message.setFreeMem(mem.getFree());
-			message.setFreePercentMem(mem.getFreePercent());
-			message.setRamMem(mem.getRam());
-			message.setTotalMem(mem.getTotal());
-			message.setUsedMem(mem.getUsed());
-			message.setUsedPercentMem(mem.getUsedPercent());
+			message.setActualFreeMem(Long.toString(mem.getActualFree() / 1024L));
+			message.setActualUsedMem(Long.toString(mem.getActualUsed() / 1024L));
+			message.setFreeMem(Long.toString(mem.getFree() / 1024L));
+			message.setFreePercentMem(BigDecimal.valueOf(mem.getFreePercent()).setScale(1, RoundingMode.HALF_UP).toString());
+			message.setRamMem(Long.toString(mem.getRam()));
+			message.setTotalMem(Long.toString(mem.getTotal() / 1024L));
+			message.setUsedMem(Long.toString(mem.getUsed() / 1024L));
+			message.setUsedPercentMem(BigDecimal.valueOf(mem.getUsedPercent()).setScale(1, RoundingMode.HALF_UP).toString());
 			
 			// set cpu info
 			message.setUserCpu(CpuPerc.format(cpu.getUser()).replaceAll("%", ""));

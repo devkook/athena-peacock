@@ -35,7 +35,7 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  */
 @Service("machineService")
-@Transactional(rollbackFor = {Exception.class}, propagation = Propagation.REQUIRED)
+@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
 public class MachineService {
     
 	@Inject

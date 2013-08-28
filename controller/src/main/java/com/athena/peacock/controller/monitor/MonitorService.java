@@ -37,18 +37,17 @@ import org.springframework.transaction.annotation.Transactional;
  * @version 1.0
  */
 @Service("monitorService")
+@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
 public class MonitorService {
     
 	@Inject
 	@Named("monDataDao")
 	private MonDataDao monDataDao;
 
-	@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
 	public void insertMonData(MonDataDto monData) throws Exception {
 		monDataDao.insertMonData(monData);
 	}
 
-	@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
 	public void insertMonDataList(List<MonDataDto> monDataList) throws Exception {
 		for (MonDataDto monData : monDataList) {
 			monDataDao.insertMonData(monData);

@@ -119,8 +119,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						break;
 					case SYSTEM_STATUS : 
 						AgentSystemStatusMessage statusMsg = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
-						System.out.println("Message => " + statusMsg);
-						
+
 						//ThreadLocal cannot use.
 						//List<MonFactorDto> monFactorList = (List<MonFactorDto>) ThreadLocalUtil.get(PeacockConstant.MON_FACTOR_LIST);
 						List<MonFactorDto> monFactorList = AppContext.getBean(MonFactorHandler.class).getMonFactorList();
@@ -238,21 +237,21 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 			}    		
 		} else if (monFactor.getMonFactorName().toLowerCase().indexOf("memory") > -1) {
 			if (monFactor.getMonFactorName().toLowerCase().indexOf("actual_free") > -1) {
-				value = Long.toString(statusMsg.getActualFreeMem());
+				value = statusMsg.getActualFreeMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("actual_used") > -1) {
-				value = Long.toString(statusMsg.getActualUsedMem());
+				value = statusMsg.getActualUsedMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("free_percent") > -1) {
-				value = Double.toString(statusMsg.getFreePercentMem());
+				value = statusMsg.getFreePercentMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("used_percent") > -1) {
-				value = Double.toString(statusMsg.getUsedPercentMem());
+				value = statusMsg.getUsedPercentMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("ram") > -1) {
-				value = Long.toString(statusMsg.getRamMem());
+				value = statusMsg.getRamMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("total") > -1) {
-				value = Long.toString(statusMsg.getTotalMem());
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("fee") > -1) {
-				value = Long.toString(statusMsg.getFreeMem());
+				value = statusMsg.getTotalMem();
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("free") > -1) {
+				value = statusMsg.getFreeMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("used") > -1) {
-				value = Double.toString(statusMsg.getUsedMem());
+				value = statusMsg.getUsedMem();
 			}
 		} 
     	

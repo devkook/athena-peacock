@@ -32,21 +32,21 @@ public class AgentSystemStatusMessage extends AbstractMessage {
 	private static final long serialVersionUID = 1L;
 
 	/** Actual total free system memory */
-	private long actualFreeMem;
+	private String actualFreeMem;
 	/** Actual total used system memory */
-	private long actualUsedMem;
+	private String actualUsedMem;
 	/** Total free system memory */
-	private long freeMem;
+	private String freeMem;
 	/** Percent total free system memory */
-	private double freePercentMem;
+	private String freePercentMem;
 	/** System Random Access Memory */
-	private long ramMem;
+	private String ramMem;
 	/** Total system memory */
-	private long totalMem;
+	private String totalMem;
 	/** Total used system memory */
-	private long usedMem;
+	private String usedMem;
 	/** Percent total used system memory */
-	private double usedPercentMem;
+	private String usedPercentMem;
 
 	/** Percentage of CPU utilization while executing at the user, or application, level. */
 	private String userCpu;
@@ -70,112 +70,112 @@ public class AgentSystemStatusMessage extends AbstractMessage {
 	/**
 	 * @return the actualFreeMem
 	 */
-	public long getActualFreeMem() {
+	public String getActualFreeMem() {
 		return actualFreeMem;
 	}
 
 	/**
 	 * @param actualFreeMem the actualFreeMem to set
 	 */
-	public void setActualFreeMem(long actualFreeMem) {
+	public void setActualFreeMem(String actualFreeMem) {
 		this.actualFreeMem = actualFreeMem;
 	}
 
 	/**
 	 * @return the actualUsedMem
 	 */
-	public long getActualUsedMem() {
+	public String getActualUsedMem() {
 		return actualUsedMem;
 	}
 
 	/**
 	 * @param actualUsedMem the actualUsedMem to set
 	 */
-	public void setActualUsedMem(long actualUsedMem) {
+	public void setActualUsedMem(String actualUsedMem) {
 		this.actualUsedMem = actualUsedMem;
 	}
 
 	/**
 	 * @return the freeMem
 	 */
-	public long getFreeMem() {
+	public String getFreeMem() {
 		return freeMem;
 	}
 
 	/**
 	 * @param freeMem the freeMem to set
 	 */
-	public void setFreeMem(long freeMem) {
+	public void setFreeMem(String freeMem) {
 		this.freeMem = freeMem;
 	}
 
 	/**
 	 * @return the freePercentMem
 	 */
-	public double getFreePercentMem() {
+	public String getFreePercentMem() {
 		return freePercentMem;
 	}
 
 	/**
 	 * @param freePercentMem the freePercentMem to set
 	 */
-	public void setFreePercentMem(double freePercentMem) {
+	public void setFreePercentMem(String freePercentMem) {
 		this.freePercentMem = freePercentMem;
 	}
 
 	/**
 	 * @return the ramMem
 	 */
-	public long getRamMem() {
+	public String getRamMem() {
 		return ramMem;
 	}
 
 	/**
 	 * @param ramMem the ramMem to set
 	 */
-	public void setRamMem(long ramMem) {
+	public void setRamMem(String ramMem) {
 		this.ramMem = ramMem;
 	}
 
 	/**
 	 * @return the totalMem
 	 */
-	public long getTotalMem() {
+	public String getTotalMem() {
 		return totalMem;
 	}
 
 	/**
 	 * @param totalMem the totalMem to set
 	 */
-	public void setTotalMem(long totalMem) {
+	public void setTotalMem(String totalMem) {
 		this.totalMem = totalMem;
 	}
 
 	/**
 	 * @return the usedMem
 	 */
-	public long getUsedMem() {
+	public String getUsedMem() {
 		return usedMem;
 	}
 
 	/**
 	 * @param usedMem the usedMem to set
 	 */
-	public void setUsedMem(long usedMem) {
+	public void setUsedMem(String usedMem) {
 		this.usedMem = usedMem;
 	}
 
 	/**
 	 * @return the usedPercentMem
 	 */
-	public double getUsedPercentMem() {
+	public String getUsedPercentMem() {
 		return usedPercentMem;
 	}
 
 	/**
 	 * @param usedPercentMem the usedPercentMem to set
 	 */
-	public void setUsedPercentMem(double usedPercentMem) {
+	public void setUsedPercentMem(String usedPercentMem) {
 		this.usedPercentMem = usedPercentMem;
 	}
 

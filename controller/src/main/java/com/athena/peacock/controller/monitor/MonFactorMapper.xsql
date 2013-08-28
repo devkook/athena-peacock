@@ -6,6 +6,7 @@
 	<select id="getMonFactorList" parameterType="String" resultType="com.athena.peacock.controller.monitor.MonFactorDto">
 		SELECT MON_FACTOR_ID AS monFactorId
 		       , MON_FACTOR_NAME AS monFactorName
+		       , MON_FACTOR_UNIT AS monFactorUnit
 		       , MON_FACTOR_DESC AS monFactorDesc
 		       , REG_USER_ID AS regUserId
 		       , REG_DT AS regDt
