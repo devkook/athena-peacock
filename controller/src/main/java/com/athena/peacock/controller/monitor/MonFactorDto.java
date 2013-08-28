@@ -35,6 +35,7 @@ public class MonFactorDto extends BaseDto {
 
 	private String monFactorId;
 	private String monFactorName;
+	private String monFactorDesc;
 	
 	/**
 	 * @return the monFactorId
@@ -62,6 +63,20 @@ public class MonFactorDto extends BaseDto {
 	 */
 	public void setMonFactorName(String monFactorName) {
 		this.monFactorName = monFactorName;
+	}
+
+	/**
+	 * @return the monFactorDesc
+	 */
+	public String getMonFactorDesc() {
+		return monFactorDesc;
+	}
+
+	/**
+	 * @param monFactorDesc the monFactorDesc to set
+	 */
+	public void setMonFactorDesc(String monFactorDesc) {
+		this.monFactorDesc = monFactorDesc;
 	}
 }
 //end of MonFactorDto.java

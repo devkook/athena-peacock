@@ -109,86 +109,87 @@ public class CommandExecutorSample {
 		if (returnCode == 0) {
 			// success
 			System.out.println("==============[SUCCEED]==============");
-            System.out.println("+:+:+:+: Default Character Set +:+:+:+:");
             System.out.println(consumer.getOutput());
             
-            List<Product> productList = parse(consumer.getOutput());
-            for (Product product : productList) {
-                System.out.println(product);
-            }
-            
-            int UTF_8 = 0x01;
-            int EUC_KR = 0x02;
-            int KSC5601 = 0x04;
-            int MS949 = 0x08;
-            int ISO8859_1 = 0x10;
-            
-            int mode = 0x00;
-            //mode ^= UTF_8;
-            //mode ^= EUC_KR;
-            //mode ^= KSC5601;
-            //mode ^= MS949;
-            //mode ^= ISO8859_1;
-            
-            if ((mode & UTF_8) == UTF_8) {
-                System.out.println("+:+:+:+: UTF-8 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes(), "UTF-8"));
-                System.out.println("+:+:+:+: EUC-KR => UTF-8 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "UTF-8"));
-                System.out.println("+:+:+:+: KSC5601 => UTF-8 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "UTF-8"));
-                System.out.println("+:+:+:+: MS949 => UTF-8 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "UTF-8"));
-                System.out.println("+:+:+:+: ISO8859_1 => UTF-8 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "UTF-8"));                
-            }
-            if ((mode & EUC_KR) == EUC_KR) {
-                System.out.println("+:+:+:+: EUC-KR +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes(), "EUC-KR"));
-                System.out.println("+:+:+:+: UTF-8 => EUC-KR +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "EUC-KR"));
-                System.out.println("+:+:+:+: KSC5601 => EUC-KR +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "EUC-KR"));
-                System.out.println("+:+:+:+: MS949 => EUC-KR +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "EUC-KR"));
-                System.out.println("+:+:+:+: ISO8859_1 => EUC-KR +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "EUC-KR"));
-            }
-            if ((mode & KSC5601) == KSC5601) {
-                System.out.println("+:+:+:+: KSC5601 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes(), "KSC5601"));
-                System.out.println("+:+:+:+: EUC-KR => KSC5601 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "KSC5601"));
-                System.out.println("+:+:+:+: UTF-8 => KSC5601 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "KSC5601"));
-                System.out.println("+:+:+:+: MS949 => KSC5601 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "KSC5601"));
-                System.out.println("+:+:+:+: ISO8859_1 => KSC5601 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "KSC5601"));
-            } 
-            if ((mode & MS949) == MS949) {
-                System.out.println("+:+:+:+: MS949 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes(), "MS949"));
-                System.out.println("+:+:+:+: EUC-KR => MS949 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "MS949"));
-                System.out.println("+:+:+:+: UTF-8 => MS949 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "MS949"));
-                System.out.println("+:+:+:+: KSC5601 => MS949 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "MS949"));
-                System.out.println("+:+:+:+: ISO8859_1 => MS949 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "MS949"));
-            }
-            if ((mode & ISO8859_1) == ISO8859_1) {
-                System.out.println("+:+:+:+: ISO8859_1 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes(), "ISO8859_1"));
-                System.out.println("+:+:+:+: EUC-KR => ISO8859_1 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "ISO8859_1"));
-                System.out.println("+:+:+:+: UTF-8 => ISO8859_1 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "ISO8859_1"));
-                System.out.println("+:+:+:+: KSC5601 => ISO8859_1 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "ISO8859_1"));
-                System.out.println("+:+:+:+: MS949 => ISO8859_1 +:+:+:+:");
-                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "ISO8859_1"));
+            if (osType.equals(OSType.WINDOWS)) {
+	            List<Product> productList = parse(consumer.getOutput());
+	            for (Product product : productList) {
+	                System.out.println(product);
+	            }
+	            
+	            int UTF_8 = 0x01;
+	            int EUC_KR = 0x02;
+	            int KSC5601 = 0x04;
+	            int MS949 = 0x08;
+	            int ISO8859_1 = 0x10;
+	            
+	            int mode = 0x00;
+	            //mode ^= UTF_8;
+	            //mode ^= EUC_KR;
+	            //mode ^= KSC5601;
+	            //mode ^= MS949;
+	            //mode ^= ISO8859_1;
+	            
+	            if ((mode & UTF_8) == UTF_8) {
+	                System.out.println("+:+:+:+: UTF-8 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes(), "UTF-8"));
+	                System.out.println("+:+:+:+: EUC-KR => UTF-8 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "UTF-8"));
+	                System.out.println("+:+:+:+: KSC5601 => UTF-8 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "UTF-8"));
+	                System.out.println("+:+:+:+: MS949 => UTF-8 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "UTF-8"));
+	                System.out.println("+:+:+:+: ISO8859_1 => UTF-8 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "UTF-8"));                
+	            }
+	            if ((mode & EUC_KR) == EUC_KR) {
+	                System.out.println("+:+:+:+: EUC-KR +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes(), "EUC-KR"));
+	                System.out.println("+:+:+:+: UTF-8 => EUC-KR +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "EUC-KR"));
+	                System.out.println("+:+:+:+: KSC5601 => EUC-KR +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "EUC-KR"));
+	                System.out.println("+:+:+:+: MS949 => EUC-KR +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "EUC-KR"));
+	                System.out.println("+:+:+:+: ISO8859_1 => EUC-KR +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "EUC-KR"));
+	            }
+	            if ((mode & KSC5601) == KSC5601) {
+	                System.out.println("+:+:+:+: KSC5601 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes(), "KSC5601"));
+	                System.out.println("+:+:+:+: EUC-KR => KSC5601 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "KSC5601"));
+	                System.out.println("+:+:+:+: UTF-8 => KSC5601 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "KSC5601"));
+	                System.out.println("+:+:+:+: MS949 => KSC5601 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "KSC5601"));
+	                System.out.println("+:+:+:+: ISO8859_1 => KSC5601 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "KSC5601"));
+	            } 
+	            if ((mode & MS949) == MS949) {
+	                System.out.println("+:+:+:+: MS949 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes(), "MS949"));
+	                System.out.println("+:+:+:+: EUC-KR => MS949 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "MS949"));
+	                System.out.println("+:+:+:+: UTF-8 => MS949 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "MS949"));
+	                System.out.println("+:+:+:+: KSC5601 => MS949 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "MS949"));
+	                System.out.println("+:+:+:+: ISO8859_1 => MS949 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("ISO8859_1"), "MS949"));
+	            }
+	            if ((mode & ISO8859_1) == ISO8859_1) {
+	                System.out.println("+:+:+:+: ISO8859_1 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes(), "ISO8859_1"));
+	                System.out.println("+:+:+:+: EUC-KR => ISO8859_1 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("EUC-KR"), "ISO8859_1"));
+	                System.out.println("+:+:+:+: UTF-8 => ISO8859_1 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("UTF-8"), "ISO8859_1"));
+	                System.out.println("+:+:+:+: KSC5601 => ISO8859_1 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("KSC5601"), "ISO8859_1"));
+	                System.out.println("+:+:+:+: MS949 => ISO8859_1 +:+:+:+:");
+	                System.out.println(new String(consumer.getOutput().getBytes("MS949"), "ISO8859_1"));
+	            }
             }
 		} else {
 			// fail
@@ -225,7 +226,7 @@ public class CommandExecutorSample {
                 product.setVendor(line.substring(vendorIdx, versionIdx).trim());
                 product.setVersion(line.substring(versionIdx).trim());
             } else {
-                // in case of only version exist without vendor info
+                // in case of vendor info does not exist.
                 product.setVendor("");
                 product.setVersion(line.substring(vendorIdx).trim());
             }

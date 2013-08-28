@@ -2,14 +2,13 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL';
 
+DROP SCHEMA IF EXISTS `peacock` ;
 CREATE SCHEMA IF NOT EXISTS `peacock` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
 USE `peacock` ;
 
 -- -----------------------------------------------------
 -- Table `peacock`.`machine_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`machine_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`machine_tbl` (
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
   `MACHINE_MAC_ADDR` VARCHAR(12) NULL ,
@@ -33,8 +32,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`software_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`software_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`software_tbl` (
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
   `SOFTWARE_ID` INT NOT NULL ,
@@ -57,11 +54,10 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`mon_factor_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`mon_factor_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`mon_factor_tbl` (
   `MON_FACTOR_ID` VARCHAR(10) NOT NULL ,
   `MON_FACTOR_NAME` VARCHAR(45) NOT NULL ,
+  `MON_FACTOR_DESC` VARCHAR(255) NULL ,
   `REG_USER_ID` INT(11)  NULL ,
   `REG_DT` DATETIME NULL ,
   `UPD_USER_ID` INT(11)  NULL ,
@@ -73,8 +69,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`mon_data_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`mon_data_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`mon_data_tbl` (
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
   `MON_FACTOR_ID` VARCHAR(10) NOT NULL ,
@@ -103,8 +97,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`os_package_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`os_package_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`os_package_tbl` (
   `PKG_ID` INT(11)  NOT NULL ,
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
@@ -131,8 +123,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`roles_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`roles_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`roles_tbl` (
   `ROLE_ID` INT(11)  NOT NULL ,
   `ROLE_NAME` VARCHAR(30) NULL ,
@@ -148,8 +138,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`users_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`users_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`users_tbl` (
   `USER_ID` INT(11)  NOT NULL ,
   `ROLE_ID` INT(11)  NOT NULL ,
@@ -178,8 +166,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`user_machine_map_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`user_machine_map_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`user_machine_map_tbl` (
   `USER_ID` INT(11)  NOT NULL ,
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
@@ -204,8 +190,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`user_group_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`user_group_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`user_group_tbl` (
   `GROUP_ID` INT(11)  NOT NULL ,
   `GROUP_NAME` VARCHAR(20) NOT NULL ,
@@ -221,8 +205,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`user_group_map_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`user_group_map_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`user_group_map_tbl` (
   `GROUP_ID` INT(11)  NOT NULL ,
   `USER_ID` INT(11)  NOT NULL ,
@@ -248,8 +230,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`as_launch_config_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`as_launch_config_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`as_launch_config_tbl` (
   `LAUNCH_CONFIG_ID` VARCHAR(20) NOT NULL ,
   `LAUNCH_IMG_ID` VARCHAR(45) NULL ,
@@ -265,8 +245,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`as_group_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`as_group_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`as_group_tbl` (
   `AS_GROUP_ID` INT(11)  NOT NULL ,
   `AS_GROU_NAME` VARCHAR(45) NULL ,
@@ -290,8 +268,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`as_policy_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`as_policy_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`as_policy_tbl` (
   `POLICY_ID` INT(11)  NOT NULL ,
   `AS_GROUP_ID` INT(11)  NOT NULL ,
@@ -318,8 +294,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`load_balancer_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`load_balancer_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`load_balancer_tbl` (
   `LOAD_BALANCER_ID` INT(11)  NOT NULL ,
   `LOAD_BALANCER_NAME` VARCHAR(45) NULL ,
@@ -342,8 +316,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`lb_machine_map_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`lb_machine_map_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`lb_machine_map_tbl` (
   `LOAD_BALANCER_ID` INT(11)  NOT NULL ,
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
@@ -369,8 +341,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`machine_package_map_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`machine_package_map_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`machine_package_map_tbl` (
   `MACHINE_ID` VARCHAR(32) NOT NULL ,
   `PKG_ID` INT(11)  NOT NULL ,
@@ -392,8 +362,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`software_repo_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`software_repo_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`software_repo_tbl` (
   `SOFTWARE_ID` INT NOT NULL ,
   `SOFTWARE_NAME` VARCHAR(45) NULL ,
@@ -413,8 +381,6 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 -- Table `peacock`.`config_file_info_tbl`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `peacock`.`config_file_info_tbl` ;
-
 CREATE  TABLE IF NOT EXISTS `peacock`.`config_file_info_tbl` (
   `SOFTWARE_ID` INT NOT NULL ,
   `CONFIG_FILE_ID` INT NOT NULL ,

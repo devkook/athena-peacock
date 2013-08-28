@@ -60,7 +60,7 @@ public class AgentSystemStatusMessage extends AbstractMessage {
 	private String waitCpu;
 	/** Percentage of CPU utilization while executing at the user level with nice priority. */
 	private String niceCpu;
-	/**  */
+	/** Sum of User, Sys, Nice, Wait */
 	private String combinedCpu;
 	
 	public AgentSystemStatusMessage() {

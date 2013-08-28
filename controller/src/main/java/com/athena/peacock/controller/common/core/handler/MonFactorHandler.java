@@ -60,6 +60,8 @@ public class MonFactorHandler implements InitializingTask {
 	public void init() {
 		List<MonFactorDto> monFactorList = monFactorDao.getMonFactorList();
 		ThreadLocalUtil.add(PeacockConstant.MON_FACTOR_LIST, monFactorList);
+		
+		logger.debug("mon_factor_tbl fetch result : [{}]", monFactorList);
 	}
 
 }
