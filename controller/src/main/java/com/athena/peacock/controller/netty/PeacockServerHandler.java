@@ -222,31 +222,13 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
     	String value = null;
     			
     	if (monFactor.getMonFactorName().toLowerCase().indexOf("cpu") > -1) {
-			if (monFactor.getMonFactorName().toLowerCase().indexOf("user") > -1) {
-				value = statusMsg.getUserCpu();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("sys") > -1) {
-				value = statusMsg.getSysCpu();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("idle") > -1) {
+			if (monFactor.getMonFactorName().toLowerCase().indexOf("idle") > -1) {
 				value = statusMsg.getIdleCpu();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("wait") > -1) {
-				value = statusMsg.getWaitCpu();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("nice") > -1) {
-				value = statusMsg.getNiceCpu();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("combined") > -1) {
 				value = statusMsg.getCombinedCpu();
 			}    		
 		} else if (monFactor.getMonFactorName().toLowerCase().indexOf("memory") > -1) {
-			if (monFactor.getMonFactorName().toLowerCase().indexOf("actual_free") > -1) {
-				value = statusMsg.getActualFreeMem();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("actual_used") > -1) {
-				value = statusMsg.getActualUsedMem();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("free_percent") > -1) {
-				value = statusMsg.getFreePercentMem();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("used_percent") > -1) {
-				value = statusMsg.getUsedPercentMem();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("ram") > -1) {
-				value = statusMsg.getRamMem();
-			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("total") > -1) {
+			if (monFactor.getMonFactorName().toLowerCase().indexOf("total") > -1) {
 				value = statusMsg.getTotalMem();
 			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("free") > -1) {
 				value = statusMsg.getFreeMem();
