@@ -22,25 +22,25 @@
         <property name="validationQuery" value="#{jdbc.validationQuery}"/ -->
     </bean>							
 	
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-	  <property name="dataSource" ref="dataSource"/>
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
 
-	<tx:annotation-driven transaction-manager="txManager" />
-
-	<tx:advice id="txAdvice" transaction-manager="txManager">
+	<!-- 
+	<tx:advice id="txAdvice">
         <tx:attributes>
-            <tx:method name="insert*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
-            <tx:method name="delete*" propagation="REQUIRED"/>
+            <tx:method name="insert*" rollback-for="Throwable" propagation="REQUIRED"/>
+            <tx:method name="update*" rollback-for="Throwable" propagation="REQUIRED"/>
+            <tx:method name="delete*" rollback-for="Throwable" propagation="REQUIRED"/>
             <tx:method name="select*" read-only="true"/>
-            <tx:method name="*" rollback-for="Exception"/>
+            <tx:method name="*" rollback-for="Throwable"/>
         </tx:attributes>
     </tx:advice>
 
-	<aop:config>
+	<aop:config proxy-target-class="true">
         <aop:advisor advice-ref="txAdvice" pointcut="execution(* *..*Service.*(..))"/>
     </aop:config>
+    -->
     
 	<!-- ==================================================== -->
 	<!-- MyBatis Setting -->
@@ -58,21 +58,4 @@
 	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
-    
-	<!-- ========================= APACHE IBATIS INTEGRATION ========================= -->
-	<!--
-	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
-		<property name="configLocation" value="classpath:sqlmap/sqlmap-config.xml" />
-        <property name="mappingLocations">
-            <list>
-                <value>classpath:com/athena/peacock/controller/**/*-mapping.xml</value>
-            </list>
-        </property>
-        <property name="dataSource" ref="dataSource" />
-	</bean>
-
-    <bean id="smcTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
-        <property name="sqlMapClient" ref="sqlMapClient" />
-    </bean>
-    -->
 </beans>

@@ -12,8 +12,21 @@
 	</insert>
 
 	<select id="getMachine" parameterType="String" resultType="com.athena.peacock.controller.machine.MachineDto">
-		SELECT MACHINE_ID, MACHINE_MAC_ADDR, IS_VM, OS_NAME, OS_VER, OS_ARCH, CPU_CLOCK, CPU_NUM
-			   , MEM_SIZE, IP_ADDR, HOST_NAME, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT
+		SELECT MACHINE_ID AS machineId
+		       , MACHINE_MAC_ADDR AS machineMacAddr
+		       , IS_VM AS isVm
+		       , OS_NAME AS osName
+		       , OS_VER AS osVer
+		       , OS_ARCH AS osArch
+		       , CPU_CLOCK AS cpuClock
+		       , CPU_NUM AS cpuNum
+			   , MEM_SIZE AS memSize
+			   , IP_ADDR AS ipAddr
+			   , HOST_NAME AS hostName
+			   , REG_USER_ID AS regUserId
+			   , REG_DT AS regDt
+			   , UPD_USER_ID AS updUserId
+			   , UPD_DT AS updDt
 		  FROM machine_tbl
 		 WHERE MACHINE_ID = #{machineId}
 	</select>

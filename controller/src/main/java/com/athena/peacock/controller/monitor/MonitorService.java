@@ -20,10 +20,14 @@
  */
 package com.athena.peacock.controller.monitor;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -39,8 +43,16 @@ public class MonitorService {
 	@Named("monDataDao")
 	private MonDataDao monDataDao;
 
-	public void insertMonData(MonDataDto monData) {
-		monDataDao.insertMonitorData(monData);
+	@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
+	public void insertMonData(MonDataDto monData) throws Exception {
+		monDataDao.insertMonData(monData);
+	}
+
+	@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
+	public void insertMonDataList(List<MonDataDto> monDataList) throws Exception {
+		for (MonDataDto monData : monDataList) {
+			monDataDao.insertMonData(monData);
+		}
 	}
 }
 //end of MonitorService.java

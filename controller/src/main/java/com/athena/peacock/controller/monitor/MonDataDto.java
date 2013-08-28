@@ -36,7 +36,7 @@ public class MonDataDto extends BaseDto {
 	private String machineId;
 	private String monFactorId;
 	private int monDataId;
-	private String monFactorValue;
+	private String monDataValue;
 
 	/**
 	 * @return the machineId
@@ -81,17 +81,17 @@ public class MonDataDto extends BaseDto {
 	}
 
 	/**
-	 * @return the monFactorValue
+	 * @return the monDataValue
 	 */
-	public String getMonFactorValue() {
-		return monFactorValue;
+	public String getMonDataValue() {
+		return monDataValue;
 	}
 
 	/**
-	 * @param monFactorValue the monFactorValue to set
+	 * @param monDataValue the monDataValue to set
 	 */
-	public void setMonFactorValue(String monFactorValue) {
-		this.monFactorValue = monFactorValue;
+	public void setMonDataValue(String monDataValue) {
+		this.monDataValue = monDataValue;
 	}
 	
 }

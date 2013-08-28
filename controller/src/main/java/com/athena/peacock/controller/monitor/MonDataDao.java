@@ -31,11 +31,11 @@ import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
  * @author Sang-cheon Park
  * @version 1.0
  */
-@Repository
+@Repository("monDataDao")
 public class MonDataDao extends AbstractBaseDao {
 
-	public void insertMonitorData(MonDataDto monitorData) {
-		sqlSession.insert("monitorDataMapper.insertMonitorData", monitorData);
+	public void insertMonData(MonDataDto monData) {
+		sqlSession.insert("MonDataMapper.insertMonData", monData);
 	}
 }
 //end of MonDataDao.java

@@ -49,6 +49,8 @@ public class MonFactorHandler implements InitializingTask {
 
     protected final Logger logger = LoggerFactory.getLogger(MonFactorHandler.class);
     
+    private List<MonFactorDto> monFactorList;
+    
     @Inject
     @Named("monFactorDao")
     private MonFactorDao monFactorDao;
@@ -58,10 +60,21 @@ public class MonFactorHandler implements InitializingTask {
 	 */
 	@Override
 	public void init() {
-		List<MonFactorDto> monFactorList = monFactorDao.getMonFactorList();
-		ThreadLocalUtil.add(PeacockConstant.MON_FACTOR_LIST, monFactorList);
-		
-		logger.debug("mon_factor_tbl fetch result : [{}]", monFactorList);
+		try {
+			monFactorList = monFactorDao.getMonFactorList();
+			ThreadLocalUtil.add(PeacockConstant.MON_FACTOR_LIST, monFactorList);
+			
+			logger.debug("mon_factor_tbl fetch result : [{}]", monFactorList);
+		} catch (Exception e) {
+			logger.error("can not initiate mon_factor_tbl info : ", e);
+		}
+	}
+
+	/**
+	 * @return the monFactorList
+	 */
+	public List<MonFactorDto> getMonFactorList() {
+		return monFactorList;
 	}
 
 }

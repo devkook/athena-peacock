@@ -24,6 +24,8 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -33,13 +35,14 @@ import org.springframework.stereotype.Service;
  * @version 1.0
  */
 @Service("machineService")
+@Transactional(rollbackFor = {Exception.class}, propagation = Propagation.REQUIRED)
 public class MachineService {
     
 	@Inject
 	@Named("machineDao")
 	private MachineDao machineDao;
 
-	public void insertMachine(MachineDto machine) {		
+	public void insertMachine(MachineDto machine) throws Exception {		
 		if (machineDao.getMachine(machine.getMachineId()) != null) {
 			machineDao.updateMachine(machine);
 		} else {

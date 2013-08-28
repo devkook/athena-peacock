@@ -27,6 +27,7 @@ import io.netty.channel.ChannelHandler.Sharable;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -44,19 +45,20 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Component;
 
-import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
 import com.athena.peacock.common.netty.message.MessageType;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
+import com.athena.peacock.controller.common.core.handler.MonFactorHandler;
 import com.athena.peacock.controller.common.provider.AppContext;
-import com.athena.peacock.controller.common.util.ThreadLocalUtil;
 import com.athena.peacock.controller.machine.MachineDto;
 import com.athena.peacock.controller.machine.MachineService;
+import com.athena.peacock.controller.monitor.MonDataDto;
 import com.athena.peacock.controller.monitor.MonFactorDto;
 import com.athena.peacock.controller.monitor.MonitorService;
 
@@ -119,9 +121,31 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						AgentSystemStatusMessage statusMsg = ((PeacockDatagram<AgentSystemStatusMessage>)msg).getMessage();
 						System.out.println("Message => " + statusMsg);
 						
-						List<MonFactorDto> monFactorList = (List<MonFactorDto>) ThreadLocalUtil.get(PeacockConstant.MON_FACTOR_LIST);
-						System.out.println("===> " + monFactorList);
-
+						//ThreadLocal cannot use.
+						//List<MonFactorDto> monFactorList = (List<MonFactorDto>) ThreadLocalUtil.get(PeacockConstant.MON_FACTOR_LIST);
+						List<MonFactorDto> monFactorList = AppContext.getBean(MonFactorHandler.class).getMonFactorList();
+						
+						List<MonDataDto> monDataList = new ArrayList<MonDataDto>();
+						MonDataDto monData = null;
+						
+						for (MonFactorDto monFactor : monFactorList) {
+							monData = new MonDataDto();
+							
+							monData.setMachineId(statusMsg.getAgentId());
+							monData.setMonFactorId(monFactor.getMonFactorId());
+							monData.setMonDataValue(getMonDataValue(monFactor, statusMsg));
+							monData.setRegUserId(1);
+							monData.setUpdUserId(1);
+							
+							monDataList.add(monData);
+						}
+						
+						if (this.monitorService == null) {
+							monitorService = AppContext.getBean(MonitorService.class);
+						}
+						
+						monitorService.insertMonDataList(monDataList);
+						
 						break;
 					case INITIAL_INFO : 
 						AgentInitialInfoMessage infoMsg = ((PeacockDatagram<AgentInitialInfoMessage>)msg).getMessage();
@@ -189,7 +213,50 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         logger.error("Unexpected exception from downstream.", cause);
-        ctx.close();
+        
+        if (!(cause instanceof DataAccessException)) {
+        	ctx.close();
+        }
+    }
+    
+    private String getMonDataValue(MonFactorDto monFactor, AgentSystemStatusMessage statusMsg) {
+    	String value = null;
+    			
+    	if (monFactor.getMonFactorName().toLowerCase().indexOf("cpu") > -1) {
+			if (monFactor.getMonFactorName().toLowerCase().indexOf("user") > -1) {
+				value = statusMsg.getUserCpu();
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("sys") > -1) {
+				value = statusMsg.getSysCpu();
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("idle") > -1) {
+				value = statusMsg.getIdleCpu();
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("wait") > -1) {
+				value = statusMsg.getWaitCpu();
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("nice") > -1) {
+				value = statusMsg.getNiceCpu();
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("combined") > -1) {
+				value = statusMsg.getCombinedCpu();
+			}    		
+		} else if (monFactor.getMonFactorName().toLowerCase().indexOf("memory") > -1) {
+			if (monFactor.getMonFactorName().toLowerCase().indexOf("actual_free") > -1) {
+				value = Long.toString(statusMsg.getActualFreeMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("actual_used") > -1) {
+				value = Long.toString(statusMsg.getActualUsedMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("free_percent") > -1) {
+				value = Double.toString(statusMsg.getFreePercentMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("used_percent") > -1) {
+				value = Double.toString(statusMsg.getUsedPercentMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("ram") > -1) {
+				value = Long.toString(statusMsg.getRamMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("total") > -1) {
+				value = Long.toString(statusMsg.getTotalMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("fee") > -1) {
+				value = Long.toString(statusMsg.getFreeMem());
+			} else if (monFactor.getMonFactorName().toLowerCase().indexOf("used") > -1) {
+				value = Double.toString(statusMsg.getUsedMem());
+			}
+		} 
+    	
+    	return value;
     }
     
     /**
