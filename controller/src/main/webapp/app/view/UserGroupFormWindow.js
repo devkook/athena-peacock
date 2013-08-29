@@ -37,6 +37,7 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
                     header: false,
                     title: 'My Form',
                     method: 'post',
+                    waitMsgTarget: true,
                     items: [
                         {
                             xtype: 'textfield',
@@ -88,7 +89,13 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
                         },
                         {
                             xtype: 'button',
-                            text: 'Close'
+                            text: 'Close',
+                            listeners: {
+                                click: {
+                                    fn: me.onButtonClick1,
+                                    scope: me
+                                }
+                            }
                         }
                     ]
                 }
@@ -107,8 +114,12 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
             params: {
                 newStatus: 'delivered'
             },
+            waitMsg: 'Saving Data...',
             success: function(form, action) {
                 Ext.Msg.alert('Success', action.result.msg);
+
+                formPanel.getForm().reset();
+                formPanel.up('window').hide();
             },
             failure: function(form, action) {
                 switch (action.failureType) {
@@ -123,6 +134,20 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
                 }
             }
         });
+    },
+
+    onButtonClick1: function(button, e, eOpts) {
+
+        Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(btn){
+
+            if(btn == "yes"){
+                Ext.getCmp("userGroupForm").getForm().reset();
+                Ext.getCmp("userGroupForm").up("window").hide();
+            }
+
+        });
+
+
     }
 
 });

@@ -402,66 +402,7 @@
                                                         "id": "mainButton",
                                                         "text": "MyButton"
                                                     },
-                                                    "designerId": "3a5e4253-0122-4502-b80e-e23f993dc790",
-                                                    "cn": [
-                                                        {
-                                                            "type": "fixedfunction",
-                                                            "reference": {
-                                                                "name": "items",
-                                                                "type": "array"
-                                                            },
-                                                            "codeClass": null,
-                                                            "userConfig": {
-                                                                "fn": "handler",
-                                                                "designer|params": [
-                                                                    "button",
-                                                                    "event"
-                                                                ],
-                                                                "implHandler": [
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "Peacock.app.debug(\"mainButton click. \" + Peacock.app.menu_id);\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "if (Peacock.app.menu_id == 'insts'){\r",
-                                                                    "\r",
-                                                                    "    var win = Ext.widget('instanceLaunchWindow');\r",
-                                                                    "    win.show();\r",
-                                                                    "\r",
-                                                                    "}else if (Peacock.app.menu_id == 'img-tmp'){\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "}else if (Peacock.app.menu_id == 'img-pkg'){\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "}else if (Peacock.app.menu_id == 'scal-grp'){\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "}else if (Peacock.app.menu_id == 'scal-lb'){\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "}else if (Peacock.app.menu_id == 'user-grp'){\r",
-                                                                    "\r",
-                                                                    "    var win = Ext.widget('userGroupFormWindow');\r",
-                                                                    "    win.show();\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "    /*\r",
-                                                                    "    Ext.getCmp(\"userGroupForm\").getForm().load({\r",
-                                                                    "    url : \"static/groupSummary.json\"\r",
-                                                                    "    });\r",
-                                                                    "    */\r",
-                                                                    "\r",
-                                                                    "}else if (Peacock.app.menu_id == 'users'){\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "\r",
-                                                                    "}"
-                                                                ]
-                                                            },
-                                                            "designerId": "eb5d2647-4b56-403b-9b8f-7843df50d805"
-                                                        }
-                                                    ]
+                                                    "designerId": "3a5e4253-0122-4502-b80e-e23f993dc790"
                                                 },
                                                 {
                                                     "type": "Ext.button.Split",

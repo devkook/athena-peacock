@@ -243,6 +243,14 @@
                 "app/view/UserGroupFormWindow.js"
             ],
             "className": "UserGroupFormWindow"
+        },
+        "c8b56b31-d9db-4a25-9efd-a0443deea71d": {
+            "paths": [
+                "metadata/controller/MainToolbarController",
+                "app/controller/override/MainToolbarController.js",
+                "app/controller/MainToolbarController.js"
+            ],
+            "className": "MainToolbarController"
         }
     },
     "viewOrderMap": {
@@ -270,7 +278,8 @@
             "5b9bf488-72c4-48a3-bcb8-de4c98ead5da",
             "2d6395da-c4c7-4ef2-922a-c841885d2576",
             "83ebf739-fed3-4351-b886-861dbd8faf89",
-            "06afb1ae-22cd-4c26-b63f-bf583f512c21"
+            "06afb1ae-22cd-4c26-b63f-bf583f512c21",
+            "c8b56b31-d9db-4a25-9efd-a0443deea71d"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",

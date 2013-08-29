@@ -48,7 +48,8 @@ Ext.application({
         'InstanceTabPanelController',
         'SearchGridController',
         'UsersTabPanelController',
-        'UserGroupTabPanelController'
+        'UserGroupTabPanelController',
+        'MainToolbarController'
     ],
     name: 'Peacock',
 

@@ -29,7 +29,10 @@
                 "header": false,
                 "title": "My Form",
                 "method": "post",
-                "url": null
+                "url": null,
+                "waitMsgTarget": [
+                    "true"
+                ]
             },
             "designerId": "a31e7ab1-78c4-48a2-86ac-8178212a24de",
             "cn": [
@@ -159,20 +162,24 @@
                                     "    params: {\r",
                                     "        newStatus: 'delivered'\r",
                                     "    },\r",
+                                    "    waitMsg: 'Saving Data...',\r",
                                     "    success: function(form, action) {\r",
-                                    "       Ext.Msg.alert('Success', action.result.msg);\r",
+                                    "        Ext.Msg.alert('Success', action.result.msg);\r",
+                                    "        \r",
+                                    "        formPanel.getForm().reset();\r",
+                                    "        formPanel.up('window').hide();\r",
                                     "    },\r",
                                     "    failure: function(form, action) {\r",
                                     "        switch (action.failureType) {\r",
                                     "            case Ext.form.action.Action.CLIENT_INVALID:\r",
-                                    "                Ext.Msg.alert('Failure', '필수 항목중 누락된 항목이 있는것 같습니다.');\r",
-                                    "                break;\r",
+                                    "            Ext.Msg.alert('Failure', '필수 항목중 누락된 항목이 있는것 같습니다.');\r",
+                                    "            break;\r",
                                     "            case Ext.form.action.Action.CONNECT_FAILURE:\r",
-                                    "                Ext.Msg.alert('Failure', 'Server communication failed');\r",
-                                    "                break;\r",
+                                    "            Ext.Msg.alert('Failure', 'Server communication failed');\r",
+                                    "            break;\r",
                                     "            case Ext.form.action.Action.SERVER_INVALID:\r",
-                                    "               Ext.Msg.alert('Failure', action.result.msg);\r",
-                                    "       }\r",
+                                    "            Ext.Msg.alert('Failure', action.result.msg);\r",
+                                    "        }\r",
                                     "    }\r",
                                     "});"
                                 ],
@@ -194,7 +201,36 @@
                         "layout|flex": null,
                         "text": "Close"
                     },
-                    "designerId": "38ac7877-5e2e-426b-b346-2a9cea9556d9"
+                    "designerId": "38ac7877-5e2e-426b-b346-2a9cea9556d9",
+                    "cn": [
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onButtonClick1",
+                                "implHandler": [
+                                    "\r",
+                                    "Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(btn){\r",
+                                    "    \r",
+                                    "    if(btn == \"yes\"){\r",
+                                    "        Ext.getCmp(\"userGroupForm\").getForm().reset();\r",
+                                    "        Ext.getCmp(\"userGroupForm\").up(\"window\").hide();\r",
+                                    "    }\r",
+                                    "\t\r",
+                                    "});\r",
+                                    "\r",
+                                    ""
+                                ],
+                                "name": "click",
+                                "scope": "me"
+                            },
+                            "designerId": "8ba4fc90-2e4b-44bf-b5da-944f97f12692"
+                        }
+                    ]
                 }
             ]
         }

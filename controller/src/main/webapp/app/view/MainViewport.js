@@ -216,47 +216,6 @@ Ext.define('Peacock.view.MainViewport', {
                                                     items: [
                                                         {
                                                             xtype: 'button',
-                                                            handler: function(button, event) {
-
-
-                                                                Peacock.app.debug("mainButton click. " + Peacock.app.menu_id);
-
-
-                                                                if (Peacock.app.menu_id == 'insts'){
-
-                                                                    var win = Ext.widget('instanceLaunchWindow');
-                                                                    win.show();
-
-                                                                }else if (Peacock.app.menu_id == 'img-tmp'){
-
-
-                                                                }else if (Peacock.app.menu_id == 'img-pkg'){
-
-
-                                                                }else if (Peacock.app.menu_id == 'scal-grp'){
-
-
-                                                                }else if (Peacock.app.menu_id == 'scal-lb'){
-
-
-                                                                }else if (Peacock.app.menu_id == 'user-grp'){
-
-                                                                    var win = Ext.widget('userGroupFormWindow');
-                                                                    win.show();
-
-
-                                                                    /*
-                                                                    Ext.getCmp("userGroupForm").getForm().load({
-                                                                    url : "static/groupSummary.json"
-                                                                    });
-                                                                    */
-
-                                                                }else if (Peacock.app.menu_id == 'users'){
-
-
-
-                                                                }
-                                                            },
                                                             id: 'mainButton',
                                                             text: 'MyButton'
                                                         },
