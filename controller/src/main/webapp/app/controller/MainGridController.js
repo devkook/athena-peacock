@@ -70,24 +70,10 @@ Ext.define('Peacock.controller.MainGridController', {
         //alert(tabPanel.selectedRecord.get("machine_id"));
     },
 
-    onGridpanelReconfigure: function(gridpanel, store, columns, oldStore, oldColumns, eOpts) {
-        /*
-        * mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.
-        */
-        Peacock.app.debug("MainGridController.onGridpanelReconfigure");
-
-
-        var detailPanel = Ext.getCmp('detailPanel');
-        detailPanel.removeAll(true);
-    },
-
     init: function(application) {
         this.control({
             "#mainGridPanel": {
                 select: this.onGridpanelSelect
-            },
-            "gridpanel": {
-                reconfigure: this.onGridpanelReconfigure
             }
         });
     }

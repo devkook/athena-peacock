@@ -25,7 +25,8 @@
             "MainViewport",
             "LoginWindow",
             "InstanceLaunchWindow",
-            "UserGroupFormWindow"
+            "UserGroupFormWindow",
+            "UserFormWindow"
         ],
         "autoCreateViewport": true,
         "controllers": [
@@ -33,10 +34,10 @@
             "MenuController",
             "MainGridController",
             "InstanceTabPanelController",
-            "SearchGridController",
             "UsersTabPanelController",
             "UserGroupTabPanelController",
-            "MainToolbarController"
+            "MainToolbarController",
+            "GlobalAjaxController"
         ],
         "name": "Peacock"
     },

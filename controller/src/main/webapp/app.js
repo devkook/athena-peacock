@@ -38,7 +38,8 @@ Ext.application({
         'MainViewport',
         'LoginWindow',
         'InstanceLaunchWindow',
-        'UserGroupFormWindow'
+        'UserGroupFormWindow',
+        'UserFormWindow'
     ],
     autoCreateViewport: true,
     controllers: [
@@ -46,10 +47,10 @@ Ext.application({
         'MenuController',
         'MainGridController',
         'InstanceTabPanelController',
-        'SearchGridController',
         'UsersTabPanelController',
         'UserGroupTabPanelController',
-        'MainToolbarController'
+        'MainToolbarController',
+        'GlobalAjaxController'
     ],
     name: 'Peacock',
 

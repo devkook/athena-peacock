@@ -1,0 +1,44 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "GlobalAjaxController"
+    },
+    "designerId": "08950a00-7767-4d84-b8e0-a94c8c2ba598",
+    "cn": [
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "init",
+                "designer|params": [
+                    "application"
+                ],
+                "implHandler": [
+                    "\r",
+                    "//Peacock.app.debug(\"GlobalAjaxController.init.\" ); // 에러남.\r",
+                    "\r",
+                    "Ext.Ajax.on(\"requestexception\", function(conn, response, options, eOpts){\r",
+                    "\r",
+                    "\r",
+                    "    Ext.Msg.show({\r",
+                    "        title:'Server Error',\r",
+                    "        msg: 'server-side failure with status code ' + response.status,\r",
+                    "        buttons: Ext.Msg.OK,\r",
+                    "        icon: Ext.Msg.ERROR\r",
+                    "\t});\r",
+                    "});"
+                ]
+            },
+            "designerId": "5844ac5a-a9f9-4f7b-a139-df8e1bcea1fe"
+        }
+    ]
+}

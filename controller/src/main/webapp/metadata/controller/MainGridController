@@ -55,7 +55,7 @@
                     "\r",
                     "}else if(modelName.indexOf(\"UserGroupModel\") > -1){\r",
                     "\r",
-                    "\ttabPanel = this.getUserGroupTabPanelView();\r",
+                    "    tabPanel = this.getUserGroupTabPanelView();\r",
                     "\r",
                     "}else if(modelName.indexOf(\"UsersModel\") > -1){\r",
                     "\r",
@@ -77,32 +77,6 @@
                 "designer|controlQuery": "#mainGridPanel"
             },
             "designerId": "cc9ac1db-0c31-416c-8c10-dfce43302664"
-        },
-        {
-            "type": "controlleraction",
-            "reference": {
-                "name": "listeners",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "onGridpanelReconfigure",
-                "implHandler": [
-                    "/*\r",
-                    "* mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.\r",
-                    "*/\r",
-                    "Peacock.app.debug(\"MainGridController.onGridpanelReconfigure\");\r",
-                    "\r",
-                    "\r",
-                    "var detailPanel = Ext.getCmp('detailPanel');\r",
-                    "detailPanel.removeAll(true);"
-                ],
-                "name": "reconfigure",
-                "scope": "me",
-                "designer|targetType": "Ext.grid.Panel",
-                "designer|controlQuery": "gridpanel"
-            },
-            "designerId": "524ae91d-bc46-46e0-91a4-7128743681f0"
         }
     ]
 }

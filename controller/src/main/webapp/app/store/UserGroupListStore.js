@@ -33,7 +33,21 @@ Ext.define('Peacock.store.UserGroupListStore', {
                     type: 'json',
                     root: 'list'
                 }
+            },
+            listeners: {
+                beforeload: {
+                    fn: me.onJsonstoreBeforeLoad,
+                    scope: me
+                }
             }
         }, cfg)]);
+    },
+
+    onJsonstoreBeforeLoad: function(store, operation, eOpts) {
+
+        Peacock.app.debug("UserGroupListStore.onBeforeLoad.");
+
+        Ext.getCmp('detailPanel').removeAll(true);
     }
+
 });

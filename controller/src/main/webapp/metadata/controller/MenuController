@@ -68,7 +68,7 @@
                     "        alert(\"scal-lb.\");\r",
                     "\r",
                     "    }else if (record.get('id') == 'user-grp'){\r",
-                    "        \r",
+                    "\r",
                     "        this.viewGroups(grid);\r",
                     "\r",
                     "    }else if (record.get('id') == 'users'){\r",

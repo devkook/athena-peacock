@@ -156,14 +156,6 @@
             ],
             "className": "OSPackageModel"
         },
-        "5b9bf488-72c4-48a3-bcb8-de4c98ead5da": {
-            "paths": [
-                "metadata/controller/SearchGridController",
-                "app/controller/override/SearchGridController.js",
-                "app/controller/SearchGridController.js"
-            ],
-            "className": "SearchGridController"
-        },
         "b6faf1a1-93de-4700-b476-0e0342318161": {
             "paths": [
                 "metadata/model/UserGroupModel",
@@ -251,6 +243,22 @@
                 "app/controller/MainToolbarController.js"
             ],
             "className": "MainToolbarController"
+        },
+        "08950a00-7767-4d84-b8e0-a94c8c2ba598": {
+            "paths": [
+                "metadata/controller/GlobalAjaxController",
+                "app/controller/override/GlobalAjaxController.js",
+                "app/controller/GlobalAjaxController.js"
+            ],
+            "className": "GlobalAjaxController"
+        },
+        "abb635b8-446b-4a74-a3f6-5b0bfb607329": {
+            "paths": [
+                "metadata/view/UserFormWindow",
+                "app/view/override/UserFormWindow.js",
+                "app/view/UserFormWindow.js"
+            ],
+            "className": "UserFormWindow"
         }
     },
     "viewOrderMap": {
@@ -261,7 +269,8 @@
             "477b9df4-ddf6-4d33-ac66-2268cb4ad745",
             "f7029523-2528-4ff5-b4b9-dfdf237e504a",
             "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
-            "cbc69f81-8fff-4115-963e-644323176928"
+            "cbc69f81-8fff-4115-963e-644323176928",
+            "abb635b8-446b-4a74-a3f6-5b0bfb607329"
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
@@ -275,11 +284,11 @@
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
             "5e947e8b-3edb-4586-8c79-6c66c783e510",
             "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
-            "5b9bf488-72c4-48a3-bcb8-de4c98ead5da",
             "2d6395da-c4c7-4ef2-922a-c841885d2576",
             "83ebf739-fed3-4351-b886-861dbd8faf89",
             "06afb1ae-22cd-4c26-b63f-bf583f512c21",
-            "c8b56b31-d9db-4a25-9efd-a0443deea71d"
+            "c8b56b31-d9db-4a25-9efd-a0443deea71d",
+            "08950a00-7767-4d84-b8e0-a94c8c2ba598"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",

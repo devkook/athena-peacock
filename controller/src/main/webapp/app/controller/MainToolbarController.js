@@ -39,15 +39,89 @@ Ext.define('Peacock.controller.MainToolbarController', {
 
         }else if (Peacock.app.menu_id == 'user-grp'){
 
+            Ext.widget('userGroupFormWindow').show();
+
+        }else if (Peacock.app.menu_id == 'users'){
+
+            Ext.widget('userFormWindow').show();
+
+        }
+    },
+
+    onMenuitemClick: function(item, e, eOpts) {
+
+        Peacock.app.debug("MainToolbarController Action menu click. " + item.getId());
+
+
+
+        if(item.getId() == "tbActionStart"){
+
+
+
+        }else if(item.getId() == "tbActionStop"){
+
+
+
+        }else if(item.getId() == "tbActionTerminate"){
+
+
+
+        }else if(item.getId() == "tbActionEdit"){
+
+            this.onActionEditClick();
+
+
+        }else if(item.getId() == "tbActionDelete"){
+
+            this.onActionDeleteClick();
+
+
+        }else if(item.getId() == "tbActionRegister"){
+
+
+        }
+    },
+
+    onTextfieldKeydown: function(textfield, e, eOpts) {
+        if(e.getKey() == e.ENTER){
+
+            Ext.getCmp("mainGridPanel").getStore().load({
+                params:{
+                    search: textfield.getRawValue()
+                }
+            });
+        }
+    },
+
+    onActionEditClick: function() {
+
+        if (Peacock.app.menu_id == 'insts'){
+
+
+        }else if (Peacock.app.menu_id == 'img-tmp'){
+
+
+        }else if (Peacock.app.menu_id == 'img-pkg'){
+
+
+        }else if (Peacock.app.menu_id == 'scal-grp'){
+
+
+        }else if (Peacock.app.menu_id == 'scal-lb'){
+
+
+        }else if (Peacock.app.menu_id == 'user-grp'){
+
             var win = Ext.widget('userGroupFormWindow');
             win.show();
 
 
-            /*
+
             Ext.getCmp("userGroupForm").getForm().load({
-            url : "static/groupSummary.json"
+                url : "static/groupSummary.json",
+                waitMsg: 'Loading...'
             });
-            */
+
 
         }else if (Peacock.app.menu_id == 'users'){
 
@@ -56,8 +130,55 @@ Ext.define('Peacock.controller.MainToolbarController', {
         }
     },
 
-    onMenuitemClick: function(item, e, eOpts) {
-        alert(item.getId());
+    onActionDeleteClick: function() {
+
+        var _pararms = {};
+
+        if (Peacock.app.menu_id == 'insts'){
+
+
+        }else if (Peacock.app.menu_id == 'img-tmp'){
+
+
+        }else if (Peacock.app.menu_id == 'img-pkg'){
+
+
+        }else if (Peacock.app.menu_id == 'scal-grp'){
+
+
+        }else if (Peacock.app.menu_id == 'scal-lb'){
+
+
+        }else if (Peacock.app.menu_id == 'user-grp'){
+
+            _pararms = {group_id : Peacock.app.selectedRecord.get("group_id")};
+
+        }else if (Peacock.app.menu_id == 'users'){
+
+
+
+        }
+
+
+
+        Ext.MessageBox.confirm('Confirm', '삭제 하시겠습니까?', function(btn){
+
+            if(btn == "yes"){
+
+                Ext.Ajax.request({
+                    url: 'static/serverResult.json',
+                    params: _pararms,
+                    waitMsg: 'Delete Data...',
+                    success: function(response){
+
+                        Ext.getCmp('mainGridPanel').getStore().reload();
+
+                        Ext.getCmp('detailPanel').removeAll();
+                    }
+                });
+            }
+
+        });
     },
 
     init: function(application) {
@@ -65,8 +186,11 @@ Ext.define('Peacock.controller.MainToolbarController', {
             "#mainToolbar #mainButton": {
                 click: this.onButtonClick
             },
-            "#mainToolba menuitem": {
+            "#mainToolbar menuitem": {
                 click: this.onMenuitemClick
+            },
+            "#mainToolbar textfield": {
+                keydown: this.onTextfieldKeydown
             }
         });
     }

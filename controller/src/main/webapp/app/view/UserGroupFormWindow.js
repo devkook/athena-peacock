@@ -118,8 +118,8 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
             success: function(form, action) {
                 Ext.Msg.alert('Success', action.result.msg);
 
-                formPanel.getForm().reset();
-                formPanel.up('window').hide();
+                Ext.getCmp('mainGridPanel').getStore().reload();
+                formPanel.up('window').close();
             },
             failure: function(form, action) {
                 switch (action.failureType) {
@@ -141,8 +141,8 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
         Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(btn){
 
             if(btn == "yes"){
-                Ext.getCmp("userGroupForm").getForm().reset();
-                Ext.getCmp("userGroupForm").up("window").hide();
+                //Ext.getCmp("userGroupForm").getForm().reset();
+                Ext.getCmp("userGroupForm").up("window").close();
             }
 
         });
