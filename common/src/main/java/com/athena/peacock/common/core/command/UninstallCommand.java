@@ -16,11 +16,12 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 7. 18.		First Draft.
+ * Sang-cheon Park	2013. 9. 2.		First Draft.
  */
-package com.athena.peacock.common.netty.message;
+package com.athena.peacock.common.core.command;
 
-import com.athena.peacock.common.core.command.CommandExecutor;
+import com.athena.peacock.common.core.action.Action;
+import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
 
 /**
@@ -30,29 +31,25 @@ import com.athena.peacock.common.core.command.CommandExecutor;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public class ProvisioningCommandMessage extends AbstractMessage {
+public class UninstallCommand extends Command {
 
-	private static final long serialVersionUID = 1L;
-	
-	private CommandExecutor executor;
-	
-	public ProvisioningCommandMessage() {
-		super(MessageType.COMMAND);
-	}
-
-	/**
-	 * @return the executor
+	/* (non-Javadoc)
+	 * @see com.athena.peacock.common.core.command.Command#execute()
 	 */
-	public CommandExecutor getExecutor() {
-		return executor;
+	@Override
+	public ProvisioningResponseMessage execute() {
+		message = new ProvisioningResponseMessage();
+		
+        for (Action action : actions) {
+        	logger.debug("[{}] will be start.", action.getClass().getCanonicalName());
+        	
+            action.perform();
+            
+        	logger.debug("[{}] has done.", action.getClass().getCanonicalName());
+        }
+        
+        return message;
 	}
 
-	/**
-	 * @param executor the executor to set
-	 */
-	public void setExecutor(CommandExecutor executor) {
-		this.executor = executor;
-	}
-	
 }
-//end of ProvisioningCommand.java
+//end of UninstallCommand.java

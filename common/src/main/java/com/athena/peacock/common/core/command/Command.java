@@ -16,43 +16,41 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 7. 18.		First Draft.
+ * Sang-cheon Park	2013. 9. 2.		First Draft.
  */
-package com.athena.peacock.common.netty.message;
+package com.athena.peacock.common.core.command;
 
-import com.athena.peacock.common.core.command.CommandExecutor;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.athena.peacock.common.core.action.Action;
+import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
 /**
  * <pre>
- * 
+ * Set of action
  * </pre>
  * @author Sang-cheon Park
  * @version 1.0
  */
-public class ProvisioningCommandMessage extends AbstractMessage {
-
-	private static final long serialVersionUID = 1L;
+public abstract class Command {
 	
-	private CommandExecutor executor;
+	protected static final Logger logger = LoggerFactory.getLogger(Command.class);
 	
-	public ProvisioningCommandMessage() {
-		super(MessageType.COMMAND);
-	}
-
-	/**
-	 * @return the executor
-	 */
-	public CommandExecutor getExecutor() {
-		return executor;
-	}
-
-	/**
-	 * @param executor the executor to set
-	 */
-	public void setExecutor(CommandExecutor executor) {
-		this.executor = executor;
+	protected ProvisioningResponseMessage message;
+	protected List<Action> actions;
+	
+	public void addAction(Action action) {
+		if (actions == null) {
+			actions = new ArrayList<Action>();
+		}
+		
+		actions.add(action);
 	}
 	
+    abstract public ProvisioningResponseMessage execute();
 }
-//end of ProvisioningCommand.java
+//end of Command.java

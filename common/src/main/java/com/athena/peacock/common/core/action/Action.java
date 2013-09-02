@@ -16,43 +16,20 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 7. 18.		First Draft.
+ * Sang-cheon Park	2013. 9. 2.		First Draft.
  */
-package com.athena.peacock.common.netty.message;
+package com.athena.peacock.common.core.action;
 
-import com.athena.peacock.common.core.command.CommandExecutor;
-
+import java.io.Serializable;
 
 /**
  * <pre>
- * 
+ * Task unit for provisioning.
  * </pre>
  * @author Sang-cheon Park
  * @version 1.0
  */
-public class ProvisioningCommandMessage extends AbstractMessage {
-
-	private static final long serialVersionUID = 1L;
-	
-	private CommandExecutor executor;
-	
-	public ProvisioningCommandMessage() {
-		super(MessageType.COMMAND);
-	}
-
-	/**
-	 * @return the executor
-	 */
-	public CommandExecutor getExecutor() {
-		return executor;
-	}
-
-	/**
-	 * @param executor the executor to set
-	 */
-	public void setExecutor(CommandExecutor executor) {
-		this.executor = executor;
-	}
-	
+public interface Action extends Serializable {
+    public <T> T perform();
 }
-//end of ProvisioningCommand.java
+//end of Action.java

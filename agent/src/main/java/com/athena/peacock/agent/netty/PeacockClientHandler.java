@@ -39,6 +39,7 @@ import com.athena.peacock.agent.util.SigarUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
+import com.athena.peacock.common.netty.message.MessageType;
 
 /**
  * <pre>
@@ -73,6 +74,12 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 
 		logger.info("[Client] Object => " + msg.getClass().getName());
 		logger.info("[Client] Contents => " + msg.toString());
+		
+		if(msg instanceof PeacockDatagram) {
+			MessageType messageType = ((PeacockDatagram<?>)msg).getMessageType();
+			
+			System.err.println(messageType);
+		}
 	}
 
     @Override

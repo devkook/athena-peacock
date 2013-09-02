@@ -45,9 +45,13 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.dao.DataAccessException;
+import org.springframework.core.NestedRuntimeException;
 import org.springframework.stereotype.Component;
 
+import com.athena.peacock.common.core.action.ShellAction;
+import com.athena.peacock.common.core.command.CommandExecutor;
+import com.athena.peacock.common.core.command.InstallCommand;
+import com.athena.peacock.common.core.command.UninstallCommand;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
@@ -177,10 +181,29 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						
 						machineService.insertMachine(machine);
 						
+						//break;
+						
+						//------- Test Code --------
+						ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+						CommandExecutor executor = new CommandExecutor();
+						InstallCommand instCmd = new InstallCommand();
+						UninstallCommand uninstCmd = new UninstallCommand();
+						
+						ShellAction action = new ShellAction();
+						action.setCommand("/bin/cat");
+						action.addArguments("-n");
+						action.addArguments("/etc/hosts");
+						
+						instCmd.addAction(action);
+						executor.addCommand(uninstCmd);
+						executor.addCommand(instCmd);
+						cmdMsg.setExecutor(executor);
+						
+						PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+						sendMessage(datagram);
+						
 						break;
 				}
-				
-				ctx.write(msg);
 			}
 		}
 	}
@@ -213,7 +236,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         logger.error("Unexpected exception from downstream.", cause);
         
-        if (!(cause instanceof DataAccessException)) {
+        if (!(cause instanceof NestedRuntimeException)) {
         	ctx.close();
         }
     }
