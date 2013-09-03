@@ -28,6 +28,11 @@
                 "bodyPadding": 10,
                 "header": false,
                 "title": "My Form",
+                "fieldDefaults": [
+                    "{\r",
+                    "    msgTarget: 'side'\r",
+                    "}"
+                ],
                 "method": "post",
                 "url": null,
                 "waitMsgTarget": [
@@ -45,28 +50,14 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|anchor": null,
+                        "border": null,
+                        "fieldBodyCls": null,
                         "fieldLabel": "Group ID",
                         "name": "group_id",
-                        "allowBlank": false
+                        "fieldStyle": "border : none",
+                        "readOnly": true
                     },
-                    "designerId": "bb0bd7f0-8de2-4d60-ba81-67a1b6075491",
-                    "cn": [
-                        {
-                            "type": "Ext.XTemplate",
-                            "reference": {
-                                "name": "afterLabelTextTpl",
-                                "type": "object"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "implHandler": [
-                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                ],
-                                "designer|displayName": "afterLabelTextTpl"
-                            },
-                            "designerId": "dcafc351-56f7-49e9-875e-9bc500966f03"
-                        }
-                    ]
+                    "designerId": "bb0bd7f0-8de2-4d60-ba81-67a1b6075491"
                 },
                 {
                     "type": "Ext.form.field.Text",

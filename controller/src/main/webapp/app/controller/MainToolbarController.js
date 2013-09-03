@@ -112,12 +112,14 @@ Ext.define('Peacock.controller.MainToolbarController', {
 
         }else if (Peacock.app.menu_id == 'user-grp'){
 
-            var win = Ext.widget('userGroupFormWindow');
-            win.show();
 
-
+            Ext.widget('userGroupFormWindow').show();
+            Ext.widget('userGroupFormWindow').setTitle("Edit Group");
 
             Ext.getCmp("userGroupForm").getForm().load({
+                params : {
+                    group_id : Peacock.app.selectedRecord.get("group_id")
+                },
                 url : "static/groupSummary.json",
                 waitMsg: 'Loading...'
             });
@@ -125,7 +127,16 @@ Ext.define('Peacock.controller.MainToolbarController', {
 
         }else if (Peacock.app.menu_id == 'users'){
 
+            Ext.widget('userFormWindow').show();
+            Ext.widget('userFormWindow').setTitle("Edit User");
 
+            Ext.getCmp("userForm").getForm().load({
+                params : {
+                    user_id : Peacock.app.selectedRecord.get("user_id")
+                },
+                url : "static/userSummary.json",
+                waitMsg: 'Loading...'
+            });
 
         }
     },
@@ -155,7 +166,7 @@ Ext.define('Peacock.controller.MainToolbarController', {
 
         }else if (Peacock.app.menu_id == 'users'){
 
-
+            _pararms = {user_id : Peacock.app.selectedRecord.get("user_id")};
 
         }
 

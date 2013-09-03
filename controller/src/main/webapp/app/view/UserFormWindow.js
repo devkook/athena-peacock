@@ -32,36 +32,68 @@ Ext.define('Peacock.view.UserFormWindow', {
             items: [
                 {
                     xtype: 'form',
+                    id: 'userForm',
                     bodyPadding: 10,
                     header: false,
                     title: 'My Form',
                     fieldDefaults: {
+                        msgTarget: 'side',
                         labelWidth: 120
                     },
+                    waitMsgTarget: true,
                     items: [
                         {
+                            xtype: 'hiddenfield',
+                            anchor: '100%',
+                            fieldLabel: 'Label',
+                            name: 'user_id'
+                        },
+                        {
                             xtype: 'textfield',
                             anchor: '100%',
+                            afterLabelTextTpl: [
+                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                            ],
                             fieldLabel: 'Login ID',
-                            name: 'login_id'
+                            name: 'login_id',
+                            allowBlank: false
                         },
                         {
                             xtype: 'textfield',
                             anchor: '100%',
+                            id: 'passwd',
+                            afterLabelTextTpl: [
+                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                            ],
                             fieldLabel: 'Password',
-                            name: 'passwd'
+                            name: 'passwd',
+                            inputType: 'password',
+                            allowBlank: false,
+                            emptyText: '4 ~ 20자',
+                            maxLength: 20,
+                            minLength: 4
                         },
                         {
                             xtype: 'textfield',
                             anchor: '100%',
+                            afterLabelTextTpl: [
+                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                            ],
                             fieldLabel: 'Confirm Password',
-                            name: 'passwd2'
+                            name: 'passwd2',
+                            inputType: 'password',
+                            allowBlank: false,
+                            vtype: 'password'
                         },
                         {
                             xtype: 'textfield',
                             anchor: '100%',
+                            afterLabelTextTpl: [
+                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                            ],
                             fieldLabel: 'User Name',
-                            name: 'user_name'
+                            name: 'user_name',
+                            allowBlank: false
                         },
                         {
                             xtype: 'textfield',
@@ -95,11 +127,23 @@ Ext.define('Peacock.view.UserFormWindow', {
                             items: [
                                 {
                                     xtype: 'button',
-                                    text: 'Save'
+                                    text: 'Save',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onButtonClick,
+                                            scope: me
+                                        }
+                                    }
                                 },
                                 {
                                     xtype: 'button',
-                                    text: 'Close'
+                                    text: 'Close',
+                                    listeners: {
+                                        click: {
+                                            fn: me.onButtonClick1,
+                                            scope: me
+                                        }
+                                    }
                                 }
                             ]
                         }
@@ -109,6 +153,47 @@ Ext.define('Peacock.view.UserFormWindow', {
         });
 
         me.callParent(arguments);
+    },
+
+    onButtonClick: function(button, e, eOpts) {
+        var formPanel = Ext.getCmp("userForm");
+
+        formPanel.getForm().submit({
+            clientValidation: true,
+            url: 'static/serverResult.json',
+            params: {
+                newStatus: 'delivered'
+            },
+            waitMsg: 'Saving Data...',
+            success: function(form, action) {
+                Ext.Msg.alert('Success', action.result.msg);
+
+                Ext.getCmp('mainGridPanel').getStore().reload();
+                formPanel.up('window').close();
+            },
+            failure: function(form, action) {
+                switch (action.failureType) {
+                    case Ext.form.action.Action.CLIENT_INVALID:
+                    Ext.Msg.alert('Failure', '유효하지 않은 입력값이 존재합니다.');
+                    break;
+                    case Ext.form.action.Action.CONNECT_FAILURE:
+                    Ext.Msg.alert('Failure', 'Server communication failed');
+                    break;
+                    case Ext.form.action.Action.SERVER_INVALID:
+                    Ext.Msg.alert('Failure', action.result.msg);
+                }
+            }
+        });
+    },
+
+    onButtonClick1: function(button, e, eOpts) {
+        Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(btn){
+
+            if(btn == "yes"){
+                Ext.getCmp("userForm").up("window").close();
+            }
+
+        });
     }
 
 });

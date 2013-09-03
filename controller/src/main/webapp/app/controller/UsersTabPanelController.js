@@ -44,7 +44,7 @@ Ext.define('Peacock.controller.UsersTabPanelController', {
                 success: function(response){
                     var jsonObj = Ext.JSON.decode(response.responseText);
 
-                    grid1.setSource(jsonObj);
+                    grid1.setSource(jsonObj.data);
                 }
             });
 

@@ -36,17 +36,18 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
                     bodyPadding: 10,
                     header: false,
                     title: 'My Form',
+                    fieldDefaults: {
+                        msgTarget: 'side'
+                    },
                     method: 'post',
                     waitMsgTarget: true,
                     items: [
                         {
                             xtype: 'textfield',
-                            afterLabelTextTpl: [
-                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                            ],
                             fieldLabel: 'Group ID',
                             name: 'group_id',
-                            allowBlank: false
+                            fieldStyle: 'border : none',
+                            readOnly: true
                         },
                         {
                             xtype: 'textfield',

@@ -46,7 +46,7 @@
                     "        success: function(response){\r",
                     "            var jsonObj = Ext.JSON.decode(response.responseText);\r",
                     "\r",
-                    "            grid1.setSource(jsonObj);\r",
+                    "            grid1.setSource(jsonObj.data);\r",
                     "        }\r",
                     "    });\r",
                     "\r",
