@@ -40,6 +40,8 @@ import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.MessageType;
+import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
+import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
 /**
  * <pre>
@@ -61,24 +63,33 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
     
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		logger.info("channelActive() has invoked.");
+		logger.debug("channelActive() has invoked.");
 		
     	connected = true;
     	channel = ctx.channel();
 		ctx.writeAndFlush(getAgentInitialInfo());
     }
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, Object msg) throws Exception {
-		logger.info("channelRead0() has invoked.");
+		logger.debug("channelRead0() has invoked.");
 
-		logger.info("[Client] Object => " + msg.getClass().getName());
-		logger.info("[Client] Contents => " + msg.toString());
+		logger.debug("[Client] Object => " + msg.getClass().getName());
+		logger.debug("[Client] Contents => " + msg.toString());
 		
 		if(msg instanceof PeacockDatagram) {
 			MessageType messageType = ((PeacockDatagram<?>)msg).getMessageType();
 			
-			System.err.println(messageType);
+			if (messageType.equals(MessageType.COMMAND)) {
+				ProvisioningResponseMessage response = new ProvisioningResponseMessage();
+				response.setAgentId(((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage().getAgentId());
+				response.setBlocking(((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage().isBlocking());
+				
+				((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage().executeCommands(response);
+				
+				ctx.write(response);
+			}
 		}
 	}
 
@@ -93,7 +104,7 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
      */
     @Override
     public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		logger.info("channelInactive() has invoked.");
+		logger.debug("channelInactive() has invoked.");
 
 		// Stop the agent daemon if the connection has lost.
 		System.exit(-1);

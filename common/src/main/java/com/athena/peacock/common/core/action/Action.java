@@ -29,7 +29,22 @@ import java.io.Serializable;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public interface Action extends Serializable {
-    public <T> T perform();
+public abstract class Action implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	
+	protected int sequence;
+	
+	@SuppressWarnings("unused")
+	private Action() {
+		// Noting to do.
+		// Disabled default constructor.
+	}
+	
+	public Action(int sequence) {
+		this.sequence = sequence;
+	}
+    
+	public abstract <T> T perform();
 }
 //end of Action.java

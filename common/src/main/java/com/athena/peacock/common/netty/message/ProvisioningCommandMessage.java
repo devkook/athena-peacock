@@ -20,8 +20,10 @@
  */
 package com.athena.peacock.common.netty.message;
 
-import com.athena.peacock.common.core.command.CommandExecutor;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.athena.peacock.common.core.command.Command;
 
 /**
  * <pre>
@@ -34,25 +36,41 @@ public class ProvisioningCommandMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	
-	private CommandExecutor executor;
+    private List<Command> commands;
+    
+    /**
+     * <pre>
+     * Adds command object to command list
+     * </pre>
+     *
+     * @param command
+     */
+    public void addCommand(Command command) {
+    	if (commands == null) {
+    		commands = new ArrayList<Command>();
+    	}
+    	
+        commands.add(command);
+    }
+
+    /**
+     * <pre>
+     * Executes command 
+     * </pre>
+     */
+    public void executeCommands(ProvisioningResponseMessage response) {
+    	/*
+    	 * Command 수행에 필요한 단위 Action을 모두 포함시킬 수도 있지만,
+    	 * install, uninstall, configuration 등의 작업을 별도의 Command로 구성할 필요가 있을 경우
+    	 * 사용될 수 있는 실행환경을 제공한다. 
+    	 */
+        for (Command command : commands) {
+            command.execute(response);
+        }
+    }
 	
 	public ProvisioningCommandMessage() {
 		super(MessageType.COMMAND);
 	}
-
-	/**
-	 * @return the executor
-	 */
-	public CommandExecutor getExecutor() {
-		return executor;
-	}
-
-	/**
-	 * @param executor the executor to set
-	 */
-	public void setExecutor(CommandExecutor executor) {
-		this.executor = executor;
-	}
-	
 }
 //end of ProvisioningCommand.java

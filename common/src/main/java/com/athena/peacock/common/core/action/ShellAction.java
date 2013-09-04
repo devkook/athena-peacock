@@ -20,6 +20,7 @@
  */
 package com.athena.peacock.common.core.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -37,8 +38,8 @@ import org.slf4j.LoggerFactory;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public class ShellAction implements Action {
-	
+public class ShellAction extends Action {
+
 	private static final Logger logger = LoggerFactory.getLogger(ShellAction.class);
 	
 	private static final long serialVersionUID = 1L;
@@ -46,6 +47,10 @@ public class ShellAction implements Action {
 	private String workingDiretory;
 	private String command;
 	private List<String> arguments;
+	
+	public ShellAction(int sequence) {
+		super(sequence);
+	}
 
 	/**
 	 * @return the workingDiretory
@@ -79,6 +84,10 @@ public class ShellAction implements Action {
 	 * @return the arguments
 	 */
 	public List<String> getArguments() {
+		if (arguments == null) {
+			arguments = new ArrayList<String>();
+		}
+		
 		return arguments;
 	}
 

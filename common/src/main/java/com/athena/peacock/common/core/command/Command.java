@@ -31,18 +31,29 @@ import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
 /**
  * <pre>
- * Set of action
+ * Set of actions
  * </pre>
  * @author Sang-cheon Park
  * @version 1.0
  */
-public abstract class Command {
+public class Command {
 	
-	protected static final Logger logger = LoggerFactory.getLogger(Command.class);
+	private static final Logger logger = LoggerFactory.getLogger(Command.class);
 	
-	protected ProvisioningResponseMessage message;
-	protected List<Action> actions;
+	private String name;
+	private List<Action> actions;
 	
+	public Command(String name) {
+		this.name = name;
+	}
+
+	/**
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
 	public void addAction(Action action) {
 		if (actions == null) {
 			actions = new ArrayList<Action>();
@@ -51,6 +62,15 @@ public abstract class Command {
 		actions.add(action);
 	}
 	
-    abstract public ProvisioningResponseMessage execute();
+    public void execute(ProvisioningResponseMessage response) {
+    	
+        for (Action action : actions) {
+        	logger.debug("[{}] will be start.", action.getClass().getCanonicalName());
+        	
+        	response.addResult(name, action.perform());
+            
+        	logger.debug("[{}] has done.", action.getClass().getCanonicalName());
+        }
+    }
 }
 //end of Command.java

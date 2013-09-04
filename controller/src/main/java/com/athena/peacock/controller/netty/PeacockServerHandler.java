@@ -49,9 +49,7 @@ import org.springframework.core.NestedRuntimeException;
 import org.springframework.stereotype.Component;
 
 import com.athena.peacock.common.core.action.ShellAction;
-import com.athena.peacock.common.core.command.CommandExecutor;
-import com.athena.peacock.common.core.command.InstallCommand;
-import com.athena.peacock.common.core.command.UninstallCommand;
+import com.athena.peacock.common.core.command.Command;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
@@ -185,19 +183,33 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						
 						//------- Test Code --------
 						ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
-						CommandExecutor executor = new CommandExecutor();
-						InstallCommand instCmd = new InstallCommand();
-						UninstallCommand uninstCmd = new UninstallCommand();
+						cmdMsg.setAgentId(infoMsg.getAgentId());
 						
-						ShellAction action = new ShellAction();
+						Command command = new Command("UNINSTALL");
+						int sequence = 0;
+						ShellAction action = new ShellAction(sequence++);
 						action.setCommand("/bin/cat");
 						action.addArguments("-n");
 						action.addArguments("/etc/hosts");
+						command.addAction(action);
+						cmdMsg.addCommand(command);
 						
-						instCmd.addAction(action);
-						executor.addCommand(uninstCmd);
-						executor.addCommand(instCmd);
-						cmdMsg.setExecutor(executor);
+						command = new Command("INSTALL");
+						sequence = 0;
+						action = new ShellAction(sequence++);
+						action.setCommand("ls");
+						action.addArguments("-al");
+						action.addArguments("~/");
+						command.addAction(action);
+						cmdMsg.addCommand(command);
+						
+						command = new Command("CONFIGURATION");
+						sequence = 0;
+						action = new ShellAction(sequence++);
+						action.setCommand("ls");
+						action.addArguments("~/");
+						command.addAction(action);
+						cmdMsg.addCommand(command);
 						
 						PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
 						sendMessage(datagram);
