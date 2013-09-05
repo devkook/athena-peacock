@@ -45,7 +45,6 @@ import javax.inject.Named;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.core.NestedRuntimeException;
 import org.springframework.stereotype.Component;
 
 import com.athena.peacock.common.core.action.ShellAction;
@@ -248,9 +247,10 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         logger.error("Unexpected exception from downstream.", cause);
         
-        if (!(cause instanceof NestedRuntimeException)) {
-        	ctx.close();
-        }
+        // ctx will not be closed.
+        //if (!(cause instanceof NestedRuntimeException)) {
+        //	ctx.close();
+        //}
     }
     
     private String getMonDataValue(MonFactorDto monFactor, AgentSystemStatusMessage statusMsg) {

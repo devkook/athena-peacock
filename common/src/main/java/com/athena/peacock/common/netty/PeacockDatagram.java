@@ -22,6 +22,9 @@ package com.athena.peacock.common.netty;
 
 import java.io.Serializable;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import com.athena.peacock.common.netty.message.AbstractMessage;
 import com.athena.peacock.common.netty.message.MessageType;
 
@@ -74,6 +77,11 @@ public class PeacockDatagram<T> implements Serializable {
 	public void setMessage(T message) {
 		this.message = message;
 	}
+
+	@Override
+    public String toString() {
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
+    }
 	
 }
 //end of Message.java

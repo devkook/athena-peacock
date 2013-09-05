@@ -20,6 +20,7 @@
  */
 package com.athena.peacock.common.core.command;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,8 +37,10 @@ import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public class Command {
+public class Command implements Serializable {
 	
+	private static final long serialVersionUID = 1L;
+
 	private static final Logger logger = LoggerFactory.getLogger(Command.class);
 	
 	private String name;
