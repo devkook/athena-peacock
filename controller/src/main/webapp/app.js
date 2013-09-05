@@ -26,13 +26,15 @@ Ext.application({
         'OSPackageModel',
         'UserGroup',
         'MyModel',
-        'UserGroupMapModel'
+        'UserGroupMapModel',
+        'ASGroupModel'
     ],
     stores: [
         'SoftwareListStore',
         'OSPackageListStore',
         'UserGroupMapStore',
-        'UserGroupListStore'
+        'UserGroupListStore',
+        'ASGroupListStore'
     ],
     views: [
         'MainViewport',

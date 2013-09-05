@@ -77,10 +77,7 @@ Ext.define('Peacock.view.UserTabPanel', {
                             title: 'My Property Grid',
                             sortableColumns: false,
                             source: {
-                                'Property 1': 'String',
-                                'Property 2': true,
-                                'Property 3': '2013-08-14T14:18:02',
-                                'Property 4': 123
+                                status: 'Loading ...'
                             }
                         }
                     ]

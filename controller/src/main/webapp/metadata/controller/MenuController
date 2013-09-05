@@ -62,7 +62,8 @@
                     "        alert(\"packages.\");\r",
                     "\r",
                     "    }else if (record.get('id') == 'scal-grp'){\r",
-                    "        alert(\"scal-grp.\");\r",
+                    "\r",
+                    "        this.viewScalingGroups(grid);\r",
                     "\r",
                     "    }else if (record.get('id') == 'scal-lb'){\r",
                     "        alert(\"scal-lb.\");\r",
@@ -222,8 +223,8 @@
                 ],
                 "implHandler": [
                     "/*\r",
-                    " *  User Group list 화면 보여주기.\r",
-                    " */\r",
+                    "*  User Group list 화면 보여주기.\r",
+                    "*/\r",
                     "\r",
                     "\r",
                     "grid.setTitle('Group List');\r",
@@ -258,6 +259,59 @@
                 ]
             },
             "designerId": "32b57f72-8f90-47bc-acc5-aab5791d207a"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewScalingGroups",
+                "designer|params": [
+                    "grid"
+                ],
+                "implHandler": [
+                    "\r",
+                    "/*\r",
+                    "*  Scaling Group list 화면 보여주기.\r",
+                    "*/\r",
+                    "\r",
+                    "\r",
+                    "grid.setTitle('Scaling Group List');\r",
+                    "grid.reconfigure(Ext.getStore('ASGroupListStore'), [{\r",
+                    "    xtype: 'rownumberer'\r",
+                    "}, {\r",
+                    "    text: 'SG Name',\r",
+                    "    dataIndex: 'as_group_name'\r",
+                    "}, {\r",
+                    "    text: 'Min',\r",
+                    "    dataIndex: 'min_size'\r",
+                    "}, {\r",
+                    "    text: 'Max',\r",
+                    "    dataIndex: 'max_size'\r",
+                    "}, {\r",
+                    "    text: 'Create Date',\r",
+                    "    dataIndex: 'reg_dt',\r",
+                    "    width: 200\r",
+                    "}]);\r",
+                    "\r",
+                    "\r",
+                    "/*\r",
+                    "* toolbar menu 활성화\r",
+                    "*/\r",
+                    "Ext.getCmp(\"mainButton\").setText(\"Create SG\");\r",
+                    "\r",
+                    "Ext.getCmp(\"tbActionStart\").hide();\r",
+                    "Ext.getCmp(\"tbActionStop\").hide();\r",
+                    "Ext.getCmp(\"tbActionTerminate\").hide();\r",
+                    "Ext.getCmp(\"tbActionEdit\").hide();\r",
+                    "Ext.getCmp(\"tbActionDelete\").show();\r",
+                    "Ext.getCmp(\"tbActionRegister\").hide();"
+                ]
+            },
+            "designerId": "8201c6ba-ff47-4c5f-8599-c25ed5d0db69"
         }
     ]
 }

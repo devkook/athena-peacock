@@ -225,7 +225,7 @@
                     "\r",
                     "}else if (Peacock.app.menu_id == 'users'){\r",
                     "\r",
-                    "\t_pararms = {user_id : Peacock.app.selectedRecord.get(\"user_id\")};\r",
+                    "    _pararms = {user_id : Peacock.app.selectedRecord.get(\"user_id\")};\r",
                     "\r",
                     "}\r",
                     "\r",

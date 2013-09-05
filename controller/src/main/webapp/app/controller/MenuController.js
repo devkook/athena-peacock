@@ -60,7 +60,8 @@ Ext.define('Peacock.controller.MenuController', {
                 alert("packages.");
 
             }else if (record.get('id') == 'scal-grp'){
-                alert("scal-grp.");
+
+                this.viewScalingGroups(grid);
 
             }else if (record.get('id') == 'scal-lb'){
                 alert("scal-lb.");
@@ -205,6 +206,45 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionStop").hide();
         Ext.getCmp("tbActionTerminate").hide();
         Ext.getCmp("tbActionEdit").show();
+        Ext.getCmp("tbActionDelete").show();
+        Ext.getCmp("tbActionRegister").hide();
+    },
+
+    viewScalingGroups: function(grid) {
+
+        /*
+        *  Scaling Group list 화면 보여주기.
+        */
+
+
+        grid.setTitle('Scaling Group List');
+        grid.reconfigure(Ext.getStore('ASGroupListStore'), [{
+            xtype: 'rownumberer'
+        }, {
+            text: 'SG Name',
+            dataIndex: 'as_group_name'
+        }, {
+            text: 'Min',
+            dataIndex: 'min_size'
+        }, {
+            text: 'Max',
+            dataIndex: 'max_size'
+        }, {
+            text: 'Create Date',
+            dataIndex: 'reg_dt',
+            width: 200
+        }]);
+
+
+        /*
+        * toolbar menu 활성화
+        */
+        Ext.getCmp("mainButton").setText("Create SG");
+
+        Ext.getCmp("tbActionStart").hide();
+        Ext.getCmp("tbActionStop").hide();
+        Ext.getCmp("tbActionTerminate").hide();
+        Ext.getCmp("tbActionEdit").hide();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
     },

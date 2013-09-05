@@ -259,6 +259,30 @@
                 "app/view/UserFormWindow.js"
             ],
             "className": "UserFormWindow"
+        },
+        "dec0f37a-8134-4eae-9e8c-48adf859aaaf": {
+            "paths": [
+                "metadata/model/ASGroupModel",
+                "app/model/override/ASGroupModel.js",
+                "app/model/ASGroupModel.js"
+            ],
+            "className": "ASGroupModel"
+        },
+        "79586cda-e7a7-47c0-9419-0f36e13b98f0": {
+            "paths": [
+                "metadata/store/ASGroupListStore",
+                "app/store/override/ASGroupListStore.js",
+                "app/store/ASGroupListStore.js"
+            ],
+            "className": "ASGroupListStore"
+        },
+        "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09": {
+            "paths": [
+                "metadata/view/ASGroupTabPanel",
+                "app/view/override/ASGroupTabPanel.js",
+                "app/view/ASGroupTabPanel.js"
+            ],
+            "className": "ASGroupTabPanel"
         }
     },
     "viewOrderMap": {
@@ -267,6 +291,7 @@
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
             "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
             "477b9df4-ddf6-4d33-ac66-2268cb4ad745",
+            "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09",
             "f7029523-2528-4ff5-b4b9-dfdf237e504a",
             "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
             "cbc69f81-8fff-4115-963e-644323176928",
@@ -278,7 +303,8 @@
             "4691792c-86b9-41eb-a1ae-5358123d301f",
             "dc9724ff-cc6e-4218-a964-0eef30683695",
             "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd",
-            "2cf56719-2a28-45f0-abe8-91cbdc08d914"
+            "2cf56719-2a28-45f0-abe8-91cbdc08d914",
+            "79586cda-e7a7-47c0-9419-0f36e13b98f0"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -297,7 +323,8 @@
             "f6255218-a98d-4d06-b343-412084f7fca0",
             "b6faf1a1-93de-4700-b476-0e0342318161",
             "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8",
-            "ed1de570-cef0-403e-8446-f832008b8a7d"
+            "ed1de570-cef0-403e-8446-f832008b8a7d",
+            "dec0f37a-8134-4eae-9e8c-48adf859aaaf"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",

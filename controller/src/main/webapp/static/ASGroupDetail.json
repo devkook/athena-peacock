@@ -1,0 +1,4 @@
+{
+    success: true,
+    data: {"as_group_name":"Athena SG", "min_size": 1, "max_size":10, "reg_dt":"2013-07-17 16:48 UTC+0900"}
+}

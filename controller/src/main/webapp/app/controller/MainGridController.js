@@ -19,7 +19,8 @@ Ext.define('Peacock.controller.MainGridController', {
     views: [
         'InstanceTabPanel',
         'UserTabPanel',
-        'UserGroupTabPanel'
+        'UserGroupTabPanel',
+        'ASGroupTabPanel'
     ],
 
     onGridpanelSelect: function(rowmodel, record, index, eOpts) {
@@ -37,26 +38,37 @@ Ext.define('Peacock.controller.MainGridController', {
         Ext.getCmp("tbActionMenu").setDisabled(false);
 
 
-
-        var modelName = Ext.getClassName(record);
-        //alert(modelName);
         var detailPanel = Ext.getCmp('detailPanel');
-        var tabPanel;
-
         detailPanel.removeAll(true);
 
-        if(modelName.indexOf("MachineModel") > -1){
+
+        var tabPanel;
+
+
+        if (Peacock.app.menu_id == 'insts'){
 
             //tabPanel = Ext.widget('instanceTabPanel');
             tabPanel = this.getInstanceTabPanelView();
 
+        }else if (Peacock.app.menu_id == 'img-tmp'){
 
-        }else if(modelName.indexOf("UserGroupModel") > -1){
+
+        }else if (Peacock.app.menu_id == 'img-pkg'){
+
+
+        }else if (Peacock.app.menu_id == 'scal-grp'){
+
+            tabPanel = this.getASGroupTabPanelView();
+
+
+        }else if (Peacock.app.menu_id == 'scal-lb'){
+
+
+        }else if (Peacock.app.menu_id == 'user-grp'){
 
             tabPanel = this.getUserGroupTabPanelView();
 
-        }else if(modelName.indexOf("UsersModel") > -1){
-
+        }else if (Peacock.app.menu_id == 'users'){
 
             tabPanel = this.getUserTabPanelView();
 
@@ -66,8 +78,6 @@ Ext.define('Peacock.controller.MainGridController', {
         detailPanel.add(tabPanel);
         detailPanel.layout.setActiveItem(0);
 
-        //tabPanel.selectedRecord = record;
-        //alert(tabPanel.selectedRecord.get("machine_id"));
     },
 
     init: function(application) {
