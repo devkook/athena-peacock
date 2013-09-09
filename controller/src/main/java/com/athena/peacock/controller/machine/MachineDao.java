@@ -20,6 +20,8 @@
  */
 package com.athena.peacock.controller.machine;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
@@ -48,6 +50,10 @@ public class MachineDao extends AbstractBaseDao {
 	
 	public void deleteMachine(String machineId) {
 		sqlSession.delete("MachineMapper.deleteMachine", machineId);
+	}
+
+	public List<MachineDto> getMachineList(MachineDto machine) {
+		return sqlSession.selectList("MachineMapper.getMachineList", machine);
 	}
 }
 //end of MachineDao.java

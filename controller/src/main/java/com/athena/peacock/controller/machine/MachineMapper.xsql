@@ -51,5 +51,36 @@
 	<delete id="deleteMachine" parameterType="String">
 		DELETE FROM machine_tbl WHERE MACHINE_ID = #{machineId}
 	</delete>
+	
+	<select id="getMachineList" parameterType="com.athena.peacock.controller.machine.MachineDto" resultType="com.athena.peacock.controller.machine.MachineDto">
+		SELECT MACHINE_ID AS machineId
+		       , MACHINE_MAC_ADDR AS machineMacAddr
+		       , IS_VM AS isVm
+		       , OS_NAME AS osName
+		       , OS_VER AS osVer
+		       , OS_ARCH AS osArch
+		       , CPU_CLOCK AS cpuClock
+		       , CPU_NUM AS cpuNum
+			   , MEM_SIZE AS memSize
+			   , IP_ADDR AS ipAddr
+			   , HOST_NAME AS hostName
+			   , REG_USER_ID AS regUserId
+			   , REG_DT AS regDt
+			   , UPD_USER_ID AS updUserId
+			   , UPD_DT AS updDt
+		  FROM machine_tbl
+		 WHERE 1=1
+		<if test="machineId != null">AND MACHINE_ID = #{machineId}</if>
+		<if test="machineMacAddr != null">AND MACHINE_MAC_ADDR = #{machineMacAddr}</if>
+		<if test="isVm != null">AND IS_VM = #{isVm}</if>
+		<if test="osName != null">AND OS_NAME = #{osName}</if>
+		<if test="osVer != null">AND OS_VER = #{osVer}</if>
+		<if test="osArch != null">AND OS_ARCH = #{osArch}</if>
+		<if test="cpuClock != null">AND CPU_CLOCK = #{cpuClock}</if>
+		<if test="cpuNum != null">AND CPU_NUM = #{cpuNum}</if>
+		<if test="memSize != null">AND MEM_SIZE = #{memSize}</if>
+		<if test="ipAddr != null">AND IP_ADDR = #{ipAddr}</if>
+		<if test="hostName != null">AND HOST_NAME = #{hostName}</if>
+	</select>
 
 </mapper>

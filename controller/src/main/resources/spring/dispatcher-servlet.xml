@@ -49,5 +49,6 @@
 				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 			</list>
 		</property>
+	 	<!-- <property name="ignoreAcceptHeader" value="true" /> -->
 	</bean>
 </beans>

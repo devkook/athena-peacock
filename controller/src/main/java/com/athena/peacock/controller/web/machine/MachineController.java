@@ -16,44 +16,44 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 8. 25.		First Draft.
+ * Sang-cheon Park	2013. 9. 9.		First Draft.
  */
-package com.athena.peacock.controller.machine;
+package com.athena.peacock.controller.web.machine;
 
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.athena.peacock.controller.machine.MachineDto;
+import com.athena.peacock.controller.machine.MachineService;
 
 /**
  * <pre>
  * 
  * </pre>
+ * 
  * @author Sang-cheon Park
  * @version 1.0
  */
-@Service("machineService")
-@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
-public class MachineService {
-    
+@Controller("machineController")
+@RequestMapping("/machine")
+public class MachineController {
+
 	@Inject
-	@Named("machineDao")
-	private MachineDao machineDao;
+	@Named("machineService")
+	private MachineService machineService;
 
-	public void insertMachine(MachineDto machine) throws Exception {		
-		if (machineDao.getMachine(machine.getMachineId()) != null) {
-			machineDao.updateMachine(machine);
-		} else {
-			machineDao.insertMachine(machine);
-		}
-	}
-
-	public List<MachineDto> getMachineList(MachineDto machine) throws Exception {
-		return machineDao.getMachineList(machine);
+	@RequestMapping("/list")
+	public String list(MachineDto machine, ModelMap model) throws Exception {
+		List<MachineDto> machineList = machineService.getMachineList(machine);
+		model.addAttribute("machineList", machineList);
+		
+		return "jsonView";
 	}
 }
-//end of MachineService.java
+// end of MachineController.java
