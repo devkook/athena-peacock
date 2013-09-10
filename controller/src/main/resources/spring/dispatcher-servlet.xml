@@ -27,8 +27,9 @@
 	<mvc:resources mapping="/resources/**" location="/resources/" />
 	<mvc:resources mapping="/static/**" location="/static/" />
     
-    <!-- View Resolver -->
-    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+    <!-- View Resolver Setting for Spring 3.2.x -->
+	<!--     
+	<bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
 	    <property name="order" value="1" /> 
 		<property name="contentNegotiationManager">
 			<bean class="org.springframework.web.accept.ContentNegotiationManager">
@@ -49,6 +50,29 @@
 				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 			</list>
 		</property>
-	 	<!-- <property name="ignoreAcceptHeader" value="true" /> -->
+	</bean>
+	-->
+	
+    <bean class="org.springframework.web.servlet.view.ContentNegotiatingViewResolver">
+		<property name="order" value="1" />
+		<property name="defaultContentType" value="application/json" />
+		<property name="ignoreAcceptHeader" value="true" />
+		<property name="mediaTypes">
+			<map>
+				<entry key="json" value="application/json" />
+				<entry key="xml" value="application/xml" />
+				<entry key="rss" value="application/rss+xml" />
+			</map>
+		</property>
+		<property name="viewResolvers">
+			<list>
+				<bean class="org.springframework.web.servlet.view.BeanNameViewResolver" />
+			</list>
+		</property>
+		<property name="defaultViews">
+			<list>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
+			</list>
+		</property>
 	</bean>
 </beans>

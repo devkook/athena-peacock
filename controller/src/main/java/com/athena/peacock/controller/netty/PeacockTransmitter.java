@@ -27,8 +27,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.athena.peacock.common.netty.PeacockDatagram;
-import com.athena.peacock.common.netty.message.AbstractMessage;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
+import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
 /**
  * <pre>
@@ -53,7 +53,7 @@ public class PeacockTransmitter {
 	 * @param datagram
 	 * @throws Exception 
 	 */
-    public AbstractMessage sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) throws Exception {
+    public ProvisioningResponseMessage sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) throws Exception {
 		return handler.sendMessage(datagram);
 	}//end of sendMessage()
 }

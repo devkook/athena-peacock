@@ -88,7 +88,7 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 				
 				((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage().executeCommands(response);
 				
-				ctx.write(response);
+				ctx.writeAndFlush(new PeacockDatagram<ProvisioningResponseMessage>(response));
 			}
 		}
 	}

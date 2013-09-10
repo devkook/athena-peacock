@@ -47,8 +47,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.athena.peacock.common.core.action.ShellAction;
-import com.athena.peacock.common.core.command.Command;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
@@ -104,6 +102,8 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 		} else {
 			if(msg instanceof PeacockDatagram) {
 				MessageType messageType = ((PeacockDatagram<?>)msg).getMessageType();
+				
+				System.out.println("messageType => " + messageType.toString());
 
 				switch (messageType) {
 					case COMMAND : 
@@ -115,6 +115,9 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						System.out.println("Message => " + responseMsg);
 						
 						if (responseMsg.isBlocking()) {
+							
+							System.err.println("2. callbacks.size() => " + callbacks.size());
+							
 							callbacks.poll().handle(responseMsg);
 						}
 						break;
@@ -178,41 +181,6 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						
 						machineService.insertMachine(machine);
 						
-						//break;
-						
-						//------- Test Code --------
-						ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
-						cmdMsg.setAgentId(infoMsg.getAgentId());
-						
-						Command command = new Command("UNINSTALL");
-						int sequence = 0;
-						ShellAction action = new ShellAction(sequence++);
-						action.setCommand("/bin/cat");
-						action.addArguments("-n");
-						action.addArguments("/etc/hosts");
-						command.addAction(action);
-						cmdMsg.addCommand(command);
-						
-						command = new Command("INSTALL");
-						sequence = 0;
-						action = new ShellAction(sequence++);
-						action.setCommand("ls");
-						action.addArguments("-al");
-						action.addArguments("~/");
-						command.addAction(action);
-						cmdMsg.addCommand(command);
-						
-						command = new Command("CONFIGURATION");
-						sequence = 0;
-						action = new ShellAction(sequence++);
-						action.setCommand("ls");
-						action.addArguments("~/");
-						command.addAction(action);
-						cmdMsg.addCommand(command);
-						
-						PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
-						sendMessage(datagram);
-						
 						break;
 				}
 			}
@@ -222,7 +190,6 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {
 		logger.info("channelReadComplete() has invoked.");
-		ctx.flush();
 	}
 	
 	@Override
@@ -283,19 +250,20 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
      * @return
      */
     public ProvisioningResponseMessage sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) {
-    	
     	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
     	boolean isBlocking = datagram.getMessage().isBlocking();
-    	
+
     	if (isBlocking) {
 			Callback callback = new Callback(); 
 			lock.lock(); 
 			
 			try { 
 				callbacks.add(callback); 
+				
+				System.err.println("1. callbacks.size() => " + callbacks.size());
 		    	
 				if (channel != null) {
-					channel.write(datagram);
+					channel.writeAndFlush(datagram);
 				}
 			} finally { 
 			  lock.unlock(); 
@@ -304,7 +272,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 			return callback.get(); 
     	} else {
 			if (channel != null) {
-				channel.write(datagram);
+				channel.writeAndFlush(datagram);
 			}
     		
     		return null;
@@ -318,7 +286,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
      * @author Sang-cheon Park
      * @version 1.0
      */
-    private static class ChannelManagement {
+    static class ChannelManagement {
     	
     	static Map<String, Channel> channelMap = new ConcurrentHashMap<String, Channel>();
         
@@ -330,7 +298,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
          * @param channel
          */
         static void registerChannel(String agentId, Channel channel) {
-        	logger.debug("agentId({}) will be added to channelMap.", agentId);
+        	logger.debug("agentId({}) and channel({}) will be added to channelMap.", agentId, channel);
         	channelMap.put(agentId, channel);
         }//end of registerChannel()
         
@@ -385,7 +353,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
      * @author Sang-cheon Park
      * @version 1.0
 	 */
-	private static class Callback {
+	static class Callback {
 
 		private final CountDownLatch latch = new CountDownLatch(1);
 

@@ -61,7 +61,6 @@ public class Starter {
 	 * </pre>
 	 * @param args
 	 */
-	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		/**
 		 * /peacock/conf/peacock.conf 파일을 load 중 에러가 발생했는지의 여부를 검사하고 에러 발생 시 프로그램을 종료한다.
