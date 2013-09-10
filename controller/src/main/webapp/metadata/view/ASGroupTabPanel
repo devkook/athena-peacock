@@ -66,8 +66,8 @@
                 "fn": "onTabpanelAdded",
                 "implHandler": [
                     "/*\r",
-                    " * Scaling Groups > Description Tab 화면 조회.\r",
-                    " */\r",
+                    "* Scaling Groups > Description Tab 화면 조회.\r",
+                    "*/\r",
                     "\r",
                     "var grid1 = Ext.getCmp(\"asGroupDescGrid\");\r",
                     "\r",
@@ -80,7 +80,7 @@
                     "    },\r",
                     "    success: function(response){\r",
                     "        var jsonObj = Ext.JSON.decode(response.responseText);\r",
-                    "        \r",
+                    "\r",
                     "        grid1.setSource(jsonObj.data);\r",
                     "    }\r",
                     "});"

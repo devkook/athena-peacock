@@ -24,7 +24,6 @@ Ext.application({
         'MachineModel',
         'SoftwareModel',
         'OSPackageModel',
-        'UserGroup',
         'MyModel',
         'UserGroupMapModel',
         'ASGroupModel'

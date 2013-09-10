@@ -25,6 +25,7 @@ Ext.define('Peacock.store.ASGroupListStore', {
         cfg = cfg || {};
         me.callParent([Ext.apply({
             model: 'Peacock.model.ASGroupModel',
+            storeId: 'ASGroupListStore',
             proxy: {
                 type: 'ajax',
                 url: 'static/asGroupList.json',

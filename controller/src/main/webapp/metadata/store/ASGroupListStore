@@ -7,6 +7,7 @@
     "codeClass": null,
     "userConfig": {
         "model": "ASGroupModel",
+        "storeId": "ASGroupListStore",
         "designer|userClassName": "ASGroupListStore"
     },
     "designerId": "79586cda-e7a7-47c0-9419-0f36e13b98f0",
