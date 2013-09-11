@@ -55,11 +55,11 @@ import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.common.core.handler.MonFactorHandler;
 import com.athena.peacock.controller.common.provider.AppContext;
-import com.athena.peacock.controller.machine.MachineDto;
-import com.athena.peacock.controller.machine.MachineService;
 import com.athena.peacock.controller.monitor.MonDataDto;
 import com.athena.peacock.controller.monitor.MonFactorDto;
 import com.athena.peacock.controller.monitor.MonitorService;
+import com.athena.peacock.controller.web.machine.MachineDto;
+import com.athena.peacock.controller.web.machine.MachineService;
 
 /**
  * <pre>
@@ -83,9 +83,6 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 	@Inject
 	@Named("monitorService")
 	private MonitorService monitorService;
-
-	private final Lock lock = new ReentrantLock();
-	private final Queue<Callback> callbacks = new ConcurrentLinkedQueue<Callback>();
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -115,10 +112,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						System.out.println("Message => " + responseMsg);
 						
 						if (responseMsg.isBlocking()) {
-							
-							System.err.println("2. callbacks.size() => " + callbacks.size());
-							
-							callbacks.poll().handle(responseMsg);
+							CallbackManagement.poll().handle(responseMsg);
 						}
 						break;
 					case SYSTEM_STATUS : 
@@ -255,18 +249,16 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 
     	if (isBlocking) {
 			Callback callback = new Callback(); 
-			lock.lock(); 
+			CallbackManagement.lock(); 
 			
 			try { 
-				callbacks.add(callback); 
+				CallbackManagement.add(callback); 
 				
-				System.err.println("1. callbacks.size() => " + callbacks.size());
-		    	
 				if (channel != null) {
 					channel.writeAndFlush(datagram);
 				}
 			} finally { 
-			  lock.unlock(); 
+				CallbackManagement.unlock(); 
 			} 
 			
 			return callback.get(); 
@@ -374,6 +366,39 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 		}
 	}
 	//end of Callback.java
+	
+	/**
+	 * <pre>
+	 * Multi-thread 환경에서 Callback 객체를 관리하기 위한 클래스 
+	 * </pre>
+	 * @author Sang-cheon Park
+	 * @version 1.0
+	 */
+	static class CallbackManagement {
+		private static final Lock lock = new ReentrantLock();
+		private static final Queue<Callback> callbacks = new ConcurrentLinkedQueue<Callback>();
+		
+		static void lock() {
+			lock.lock();
+		}
+		
+		static void unlock() {
+			lock.unlock();
+		}
+		
+		static void add(Callback callback) {
+			callbacks.add(callback);
+		}
+		
+		static Callback poll() {
+			return callbacks.poll();
+		}
+		
+		static int getSize() {
+			return callbacks.size();
+		}
+	}
+	//end of CallbackManagement.java
 	
 }
 //end of PeacockServerHandler.java

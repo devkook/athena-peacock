@@ -18,13 +18,16 @@
  * ---------------	----------------	------------
  * Sang-cheon Park	2013. 8. 25.		First Draft.
  */
-package com.athena.peacock.controller.machine;
+package com.athena.peacock.controller.web.machine;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
+import javax.inject.Inject;
+import javax.inject.Named;
 
-import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -33,27 +36,24 @@ import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
  * @author Sang-cheon Park
  * @version 1.0
  */
-@Repository("machineDao")
-public class MachineDao extends AbstractBaseDao {
-	
-	public MachineDto getMachine(String machineId) {
-		return sqlSession.selectOne("MachineMapper.getMachine", machineId);
-	}
-	
-	public void insertMachine(MachineDto machine) {
-		sqlSession.insert("MachineMapper.insertMachine", machine);
-	}
-	
-	public void updateMachine(MachineDto machine) {
-		sqlSession.update("MachineMapper.updateMachine", machine);
-	}
-	
-	public void deleteMachine(String machineId) {
-		sqlSession.delete("MachineMapper.deleteMachine", machineId);
+@Service("machineService")
+@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
+public class MachineService {
+    
+	@Inject
+	@Named("machineDao")
+	private MachineDao machineDao;
+
+	public void insertMachine(MachineDto machine) throws Exception {		
+		if (machineDao.getMachine(machine.getMachineId()) != null) {
+			machineDao.updateMachine(machine);
+		} else {
+			machineDao.insertMachine(machine);
+		}
 	}
 
-	public List<MachineDto> getMachineList(MachineDto machine) {
-		return sqlSession.selectList("MachineMapper.getMachineList", machine);
+	public List<MachineDto> getMachineList(MachineDto machine) throws Exception {
+		return machineDao.getMachineList(machine);
 	}
 }
-//end of MachineDao.java
+//end of MachineService.java
