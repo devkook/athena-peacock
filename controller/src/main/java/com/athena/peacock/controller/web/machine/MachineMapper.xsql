@@ -3,7 +3,7 @@
 
 <mapper namespace="MachineMapper">
 
-	<insert id="insertMachine" parameterType="com.athena.peacock.controller.machine.MachineDto">
+	<insert id="insertMachine" parameterType="com.athena.peacock.controller.web.machine.MachineDto">
 		INSERT INTO machine_tbl 
 			        (MACHINE_ID, MACHINE_MAC_ADDR, IS_VM, OS_NAME, OS_VER, OS_ARCH, CPU_CLOCK, CPU_NUM
 			        , MEM_SIZE, IP_ADDR, HOST_NAME, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT) 
@@ -11,7 +11,7 @@
 		     		, #{memSize}, #{ipAddr}, #{hostName}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
-	<select id="getMachine" parameterType="String" resultType="com.athena.peacock.controller.machine.MachineDto">
+	<select id="getMachine" parameterType="String" resultType="com.athena.peacock.controller.web.machine.MachineDto">
 		SELECT MACHINE_ID AS machineId
 		       , MACHINE_MAC_ADDR AS machineMacAddr
 		       , IS_VM AS isVm
@@ -31,7 +31,7 @@
 		 WHERE MACHINE_ID = #{machineId}
 	</select>
 	
-	<update id="updateMachine" parameterType="com.athena.peacock.controller.machine.MachineDto">
+	<update id="updateMachine" parameterType="com.athena.peacock.controller.web.machine.MachineDto">
 		UPDATE machine_tbl
 		   SET MACHINE_MAC_ADDR = #{machineMacAddr}
 		       , IS_VM = #{isVm}
@@ -52,7 +52,7 @@
 		DELETE FROM machine_tbl WHERE MACHINE_ID = #{machineId}
 	</delete>
 	
-	<select id="getMachineList" parameterType="com.athena.peacock.controller.machine.MachineDto" resultType="com.athena.peacock.controller.machine.MachineDto">
+	<select id="getMachineList" parameterType="com.athena.peacock.controller.web.machine.MachineDto" resultType="com.athena.peacock.controller.web.machine.MachineDto">
 		SELECT MACHINE_ID AS machineId
 		       , MACHINE_MAC_ADDR AS machineMacAddr
 		       , IS_VM AS isVm
