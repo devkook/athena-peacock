@@ -24,6 +24,7 @@
 	<modules>
 		<module>agent</module>
 		<module>controller</module>
+		<module>console</module>
 		<module>common</module>
 	</modules>
 
