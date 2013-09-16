@@ -156,13 +156,133 @@
             ],
             "className": "OSPackageModel"
         },
-        "5b9bf488-72c4-48a3-bcb8-de4c98ead5da": {
+        "b6faf1a1-93de-4700-b476-0e0342318161": {
             "paths": [
-                "metadata/controller/SearchGridController",
-                "app/controller/override/SearchGridController.js",
-                "app/controller/SearchGridController.js"
+                "metadata/model/UserGroupModel",
+                "app/model/override/UserGroupModel.js",
+                "app/model/UserGroupModel.js"
             ],
-            "className": "SearchGridController"
+            "className": "UserGroupModel"
+        },
+        "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd": {
+            "paths": [
+                "metadata/store/UserGroupMapStore",
+                "app/store/override/UserGroupMapStore.js",
+                "app/store/UserGroupMapStore.js"
+            ],
+            "className": "UserGroupMapStore"
+        },
+        "83ebf739-fed3-4351-b886-861dbd8faf89": {
+            "paths": [
+                "metadata/controller/UsersTabPanelController",
+                "app/controller/override/UsersTabPanelController.js",
+                "app/controller/UsersTabPanelController.js"
+            ],
+            "className": "UsersTabPanelController"
+        },
+        "477b9df4-ddf6-4d33-ac66-2268cb4ad745": {
+            "paths": [
+                "metadata/view/InstanceLaunchWindow",
+                "app/view/override/InstanceLaunchWindow.js",
+                "app/view/InstanceLaunchWindow.js"
+            ],
+            "className": "InstanceLaunchWindow"
+        },
+        "ed1de570-cef0-403e-8446-f832008b8a7d": {
+            "paths": [
+                "metadata/model/MyModel",
+                "app/model/override/MyModel.js",
+                "app/model/MyModel.js"
+            ],
+            "className": "MyModel"
+        },
+        "2cf56719-2a28-45f0-abe8-91cbdc08d914": {
+            "paths": [
+                "metadata/store/UserGroupListStore",
+                "app/store/override/UserGroupListStore.js",
+                "app/store/UserGroupListStore.js"
+            ],
+            "className": "UserGroupListStore"
+        },
+        "f7029523-2528-4ff5-b4b9-dfdf237e504a": {
+            "paths": [
+                "metadata/view/UserGroupTabPanel",
+                "app/view/override/UserGroupTabPanel.js",
+                "app/view/UserGroupTabPanel.js"
+            ],
+            "className": "UserGroupTabPanel"
+        },
+        "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8": {
+            "paths": [
+                "metadata/model/UserGroupMapModel",
+                "app/model/override/UserGroupMapModel.js",
+                "app/model/UserGroupMapModel.js"
+            ],
+            "className": "UserGroupMapModel"
+        },
+        "06afb1ae-22cd-4c26-b63f-bf583f512c21": {
+            "paths": [
+                "metadata/controller/UserGroupTabPanelController",
+                "app/controller/override/UserGroupTabPanelController.js",
+                "app/controller/UserGroupTabPanelController.js"
+            ],
+            "className": "UserGroupTabPanelController"
+        },
+        "cbc69f81-8fff-4115-963e-644323176928": {
+            "paths": [
+                "metadata/view/UserGroupFormWindow",
+                "app/view/override/UserGroupFormWindow.js",
+                "app/view/UserGroupFormWindow.js"
+            ],
+            "className": "UserGroupFormWindow"
+        },
+        "c8b56b31-d9db-4a25-9efd-a0443deea71d": {
+            "paths": [
+                "metadata/controller/MainToolbarController",
+                "app/controller/override/MainToolbarController.js",
+                "app/controller/MainToolbarController.js"
+            ],
+            "className": "MainToolbarController"
+        },
+        "08950a00-7767-4d84-b8e0-a94c8c2ba598": {
+            "paths": [
+                "metadata/controller/GlobalAjaxController",
+                "app/controller/override/GlobalAjaxController.js",
+                "app/controller/GlobalAjaxController.js"
+            ],
+            "className": "GlobalAjaxController"
+        },
+        "abb635b8-446b-4a74-a3f6-5b0bfb607329": {
+            "paths": [
+                "metadata/view/UserFormWindow",
+                "app/view/override/UserFormWindow.js",
+                "app/view/UserFormWindow.js"
+            ],
+            "className": "UserFormWindow"
+        },
+        "dec0f37a-8134-4eae-9e8c-48adf859aaaf": {
+            "paths": [
+                "metadata/model/ASGroupModel",
+                "app/model/override/ASGroupModel.js",
+                "app/model/ASGroupModel.js"
+            ],
+            "className": "ASGroupModel"
+        },
+        "79586cda-e7a7-47c0-9419-0f36e13b98f0": {
+            "paths": [
+                "metadata/store/ASGroupListStore",
+                "app/store/override/ASGroupListStore.js",
+                "app/store/ASGroupListStore.js"
+            ],
+            "className": "ASGroupListStore"
+        },
+        "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09": {
+            "paths": [
+                "metadata/view/ASGroupTabPanel",
+                "app/view/override/ASGroupTabPanel.js",
+                "app/view/ASGroupTabPanel.js"
+            ],
+            "className": "ASGroupTabPanel"
         }
     },
     "viewOrderMap": {
@@ -170,26 +290,41 @@
             "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
             "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
-            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581"
+            "477b9df4-ddf6-4d33-ac66-2268cb4ad745",
+            "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09",
+            "f7029523-2528-4ff5-b4b9-dfdf237e504a",
+            "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
+            "cbc69f81-8fff-4115-963e-644323176928",
+            "abb635b8-446b-4a74-a3f6-5b0bfb607329"
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",
             "701365be-42e7-4a94-ada9-8aabf97213da",
             "4691792c-86b9-41eb-a1ae-5358123d301f",
-            "dc9724ff-cc6e-4218-a964-0eef30683695"
+            "dc9724ff-cc6e-4218-a964-0eef30683695",
+            "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd",
+            "2cf56719-2a28-45f0-abe8-91cbdc08d914",
+            "79586cda-e7a7-47c0-9419-0f36e13b98f0"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
             "5e947e8b-3edb-4586-8c79-6c66c783e510",
             "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
             "2d6395da-c4c7-4ef2-922a-c841885d2576",
-            "5b9bf488-72c4-48a3-bcb8-de4c98ead5da"
+            "83ebf739-fed3-4351-b886-861dbd8faf89",
+            "06afb1ae-22cd-4c26-b63f-bf583f512c21",
+            "c8b56b31-d9db-4a25-9efd-a0443deea71d",
+            "08950a00-7767-4d84-b8e0-a94c8c2ba598"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",
             "cda91240-3441-4f20-9a8d-e95babaf9d47",
             "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
-            "f6255218-a98d-4d06-b343-412084f7fca0"
+            "f6255218-a98d-4d06-b343-412084f7fca0",
+            "b6faf1a1-93de-4700-b476-0e0342318161",
+            "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8",
+            "ed1de570-cef0-403e-8446-f832008b8a7d",
+            "dec0f37a-8134-4eae-9e8c-48adf859aaaf"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",

@@ -23,15 +23,24 @@ Ext.application({
         'UsersModel',
         'MachineModel',
         'SoftwareModel',
-        'OSPackageModel'
+        'OSPackageModel',
+        'MyModel',
+        'UserGroupMapModel',
+        'ASGroupModel'
     ],
     stores: [
         'SoftwareListStore',
-        'OSPackageListStore'
+        'OSPackageListStore',
+        'UserGroupMapStore',
+        'UserGroupListStore',
+        'ASGroupListStore'
     ],
     views: [
         'MainViewport',
-        'LoginWindow'
+        'LoginWindow',
+        'InstanceLaunchWindow',
+        'UserGroupFormWindow',
+        'UserFormWindow'
     ],
     autoCreateViewport: true,
     controllers: [
@@ -39,7 +48,10 @@ Ext.application({
         'MenuController',
         'MainGridController',
         'InstanceTabPanelController',
-        'SearchGridController'
+        'UsersTabPanelController',
+        'UserGroupTabPanelController',
+        'MainToolbarController',
+        'GlobalAjaxController'
     ],
     name: 'Peacock',
 

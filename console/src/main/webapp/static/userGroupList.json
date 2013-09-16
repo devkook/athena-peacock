@@ -1,0 +1,7 @@
+{
+    "total":"30",
+    "list":[
+        {"group_id":1, "group_name":"osc-employee", "users": 2, "desc":"Open Source Consulting", "reg_dt":"2013-07-17 16:48 UTC+0900"},
+        {"group_id":2, "group_name":"ncia", "users": 3, "desc":"...", "reg_dt":"2013-07-17 16:48 UTC+0900"}
+    ]
+}

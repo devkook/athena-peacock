@@ -1,0 +1,7 @@
+{
+    "total":"0",
+    "list":[
+        {"user_id":1, "group_id":1, "group_name":"osc-employee", "user_name" : "Bong-Jin Kwon"},
+        {"user_id":1, "group_id":2, "group_name":"ncia", "user_name" : "Hea-Wan Lee"}
+    ]
+}

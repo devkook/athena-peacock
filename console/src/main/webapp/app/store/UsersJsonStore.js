@@ -35,7 +35,22 @@ Ext.define('Peacock.store.UsersJsonStore', {
                     type: 'json',
                     root: 'users'
                 }
+            },
+            listeners: {
+                beforeload: {
+                    fn: me.onJsonstoreBeforeLoad,
+                    scope: me
+                }
             }
         }, cfg)]);
+    },
+
+    onJsonstoreBeforeLoad: function(store, operation, eOpts) {
+
+        Peacock.app.debug("UsersStore.onBeforeLoad.");
+
+
+        Ext.getCmp('detailPanel').removeAll(true);
     }
+
 });

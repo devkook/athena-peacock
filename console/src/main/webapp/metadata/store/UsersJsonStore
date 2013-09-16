@@ -39,6 +39,27 @@
                     "designerId": "a7465cfc-f833-462e-958e-769df1d01eee"
                 }
             ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onJsonstoreBeforeLoad",
+                "implHandler": [
+                    "\r",
+                    "Peacock.app.debug(\"UsersStore.onBeforeLoad.\");\r",
+                    "\r",
+                    "\r",
+                    "Ext.getCmp('detailPanel').removeAll(true);"
+                ],
+                "name": "beforeload",
+                "scope": "me"
+            },
+            "designerId": "bcbcf1a6-4ad2-4582-ba11-dd333a788bca"
         }
     ]
 }

@@ -21,7 +21,7 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
     ],
 
     onTabpanelTabChange: function(tabPanel, newCard, oldCard, eOpts) {
-        var selectedRecords = Ext.getCmp("mainGridPanel").getSelectionModel().getSelection();
+
         var grid;
 
         if(newCard.title == "Description"){
@@ -37,7 +37,11 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
             //    id: selectedRecords[0].get("machine_id")
             //});
 
-            grid.getStore().load({params:{id: selectedRecords[0].get("machine_id")}});
+            grid.getStore().load({
+                params:{
+                    machine_id : Peacock.app.selectedRecord.get("machine_id")
+                }
+            });
 
 
         }else if(newCard.title == "OS Package"){
@@ -46,7 +50,11 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
             grid = Ext.getCmp('instOSPkgGrid');
 
 
-            grid.getStore().load();
+            grid.getStore().load({
+                params:{
+                    machine_id : Peacock.app.selectedRecord.get("machine_id")
+                }
+            });
 
         }else if(newCard.title == "Monitoring"){
 
@@ -82,7 +90,7 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
         Ext.Ajax.request({
             url: 'static/machineDesc.json',
             params: {
-                id: 1
+                machine_id : Peacock.app.selectedRecord.get("machine_id")
             },
             success: function(response){
                 var jsonObj = Ext.JSON.decode(response.responseText);

@@ -8,7 +8,9 @@
     "userConfig": {
         "views": [
             "InstanceTabPanel",
-            "UserTabPanel"
+            "UserTabPanel",
+            "UserGroupTabPanel",
+            "ASGroupTabPanel"
         ],
         "designer|userClassName": "MainGridController"
     },
@@ -31,21 +33,44 @@
                     "*/\r",
                     "\r",
                     "Peacock.app.debug(\"MainGridController.onGridpanelSelect.\");\r",
+                    "Peacock.app.selectedRecord = record;\r",
                     "\r",
-                    "var modelName = Ext.getClassName(record);\r",
-                    "//alert(modelName);\r",
+                    "\r",
+                    "\r",
+                    "Ext.getCmp(\"tbActionMenu\").setDisabled(false);\r",
+                    "\r",
+                    "\r",
                     "var detailPanel = Ext.getCmp('detailPanel');\r",
-                    "var tabPanel;\r",
-                    "\r",
                     "detailPanel.removeAll(true);\r",
                     "\r",
-                    "if(modelName.indexOf(\"MachineModel\") > -1){\r",
+                    "\r",
+                    "var tabPanel;\r",
+                    "\r",
+                    "\r",
+                    "if (Peacock.app.menu_id == 'insts'){\r",
                     "\r",
                     "    //tabPanel = Ext.widget('instanceTabPanel');\r",
                     "    tabPanel = this.getInstanceTabPanelView();\r",
                     "\r",
-                    "}else if(modelName.indexOf(\"UsersModel\") > -1){\r",
+                    "}else if (Peacock.app.menu_id == 'img-tmp'){\r",
                     "\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'img-pkg'){\r",
+                    "\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'scal-grp'){\r",
+                    "\r",
+                    "    tabPanel = this.getASGroupTabPanelView();\r",
+                    "    \r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'scal-lb'){\r",
+                    "\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'user-grp'){\r",
+                    "\r",
+                    "    tabPanel = this.getUserGroupTabPanelView();\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'users'){\r",
                     "\r",
                     "    tabPanel = this.getUserTabPanelView();\r",
                     "\r",
@@ -54,9 +79,7 @@
                     "\r",
                     "detailPanel.add(tabPanel);\r",
                     "detailPanel.layout.setActiveItem(0);\r",
-                    "\r",
-                    "//tabPanel.selectedRecord = record;\r",
-                    "//alert(tabPanel.selectedRecord.get(\"machine_id\"));"
+                    ""
                 ],
                 "name": "select",
                 "scope": "me",
@@ -64,32 +87,6 @@
                 "designer|controlQuery": "#mainGridPanel"
             },
             "designerId": "cc9ac1db-0c31-416c-8c10-dfce43302664"
-        },
-        {
-            "type": "controlleraction",
-            "reference": {
-                "name": "listeners",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "onGridpanelReconfigure",
-                "implHandler": [
-                    "/*\r",
-                    "* mainGridPanel 이 새로운 메뉴화면으로 갱신될때 detailPanel 도 초기화.\r",
-                    "*/\r",
-                    "Peacock.app.debug(\"MainGridController.onGridpanelReconfigure\");\r",
-                    "\r",
-                    "\r",
-                    "var detailPanel = Ext.getCmp('detailPanel');\r",
-                    "detailPanel.removeAll(true);"
-                ],
-                "name": "reconfigure",
-                "scope": "me",
-                "designer|targetType": "Ext.grid.Panel",
-                "designer|controlQuery": "gridpanel"
-            },
-            "designerId": "524ae91d-bc46-46e0-91a4-7128743681f0"
         }
     ]
 }

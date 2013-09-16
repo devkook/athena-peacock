@@ -34,7 +34,21 @@ Ext.define('Peacock.store.MachineListStore', {
                     type: 'json',
                     root: 'list'
                 }
+            },
+            listeners: {
+                beforeload: {
+                    fn: me.onJsonstoreBeforeLoad,
+                    scope: me
+                }
             }
         }, cfg)]);
+    },
+
+    onJsonstoreBeforeLoad: function(store, operation, eOpts) {
+
+        Peacock.app.debug("MachineListStore.onBeforeLoad.");
+
+        Ext.getCmp('detailPanel').removeAll(true);
     }
+
 });

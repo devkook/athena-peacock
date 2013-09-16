@@ -1,0 +1,3 @@
+.noBorder .x-form-text, .noBorder textarea.x-form-field {
+    border : none;
+}

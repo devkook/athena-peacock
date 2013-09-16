@@ -199,21 +199,6 @@ Ext.define('Peacock.view.MainViewport', {
                                                     xtype: 'gridcolumn',
                                                     dataIndex: 'string',
                                                     text: 'String'
-                                                },
-                                                {
-                                                    xtype: 'numbercolumn',
-                                                    dataIndex: 'number',
-                                                    text: 'Number'
-                                                },
-                                                {
-                                                    xtype: 'datecolumn',
-                                                    dataIndex: 'date',
-                                                    text: 'Date'
-                                                },
-                                                {
-                                                    xtype: 'booleancolumn',
-                                                    dataIndex: 'bool',
-                                                    text: 'Boolean'
                                                 }
                                             ],
                                             dockedItems: [
@@ -227,9 +212,11 @@ Ext.define('Peacock.view.MainViewport', {
                                                 {
                                                     xtype: 'toolbar',
                                                     dock: 'top',
+                                                    id: 'mainToolbar',
                                                     items: [
                                                         {
                                                             xtype: 'button',
+                                                            id: 'mainButton',
                                                             text: 'MyButton'
                                                         },
                                                         {
@@ -237,14 +224,37 @@ Ext.define('Peacock.view.MainViewport', {
                                                             text: 'Actions',
                                                             menu: {
                                                                 xtype: 'menu',
+                                                                id: 'tbActionMenu',
                                                                 items: [
                                                                     {
                                                                         xtype: 'menuitem',
-                                                                        text: 'Menu Item'
+                                                                        id: 'tbActionStart',
+                                                                        text: 'Start'
                                                                     },
                                                                     {
                                                                         xtype: 'menuitem',
-                                                                        text: 'Menu Item'
+                                                                        id: 'tbActionStop',
+                                                                        text: 'Stop'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionTerminate',
+                                                                        text: 'Terminate'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionEdit',
+                                                                        text: 'Edit'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionDelete',
+                                                                        text: 'Delete'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionRegister',
+                                                                        text: 'Register'
                                                                     }
                                                                 ]
                                                             }
@@ -271,15 +281,38 @@ Ext.define('Peacock.view.MainViewport', {
                                             xtype: 'panel',
                                             region: 'south',
                                             split: true,
-                                            height: 250,
-                                            id: 'detailPanel',
-                                            maxHeight: 600,
-                                            minHeight: 200,
+                                            height: 300,
                                             layout: {
-                                                type: 'card'
+                                                type: 'anchor'
                                             },
                                             header: false,
-                                            title: 'My Panel'
+                                            title: 'My Panel',
+                                            items: [
+                                                {
+                                                    xtype: 'panel',
+                                                    anchor: '100%',
+                                                    height: 50,
+                                                    margin: 5,
+                                                    header: false,
+                                                    title: 'My Panel',
+                                                    items: [
+                                                        {
+                                                            xtype: 'label',
+                                                            text: 'title panel'
+                                                        }
+                                                    ]
+                                                },
+                                                {
+                                                    xtype: 'panel',
+                                                    anchor: '100% -1',
+                                                    id: 'detailPanel',
+                                                    layout: {
+                                                        type: 'card'
+                                                    },
+                                                    header: false,
+                                                    title: 'My Panel'
+                                                }
+                                            ]
                                         }
                                     ]
                                 }

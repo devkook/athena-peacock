@@ -350,45 +350,6 @@
                                             "designerId": "9821f754-8087-4fb6-af5d-63b3d5423bee"
                                         },
                                         {
-                                            "type": "Ext.grid.column.Number",
-                                            "reference": {
-                                                "name": "columns",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "dataIndex": "number",
-                                                "text": "Number"
-                                            },
-                                            "designerId": "6f445748-c6fe-40a6-89e7-dcbb27c86af0"
-                                        },
-                                        {
-                                            "type": "Ext.grid.column.Date",
-                                            "reference": {
-                                                "name": "columns",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "dataIndex": "date",
-                                                "text": "Date"
-                                            },
-                                            "designerId": "52af9ddd-d3e9-43af-8fc2-987b830bfa3c"
-                                        },
-                                        {
-                                            "type": "Ext.grid.column.Boolean",
-                                            "reference": {
-                                                "name": "columns",
-                                                "type": "array"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "dataIndex": "bool",
-                                                "text": "Boolean"
-                                            },
-                                            "designerId": "64a68da7-4365-4d19-ad73-1fae89350f08"
-                                        },
-                                        {
                                             "type": "Ext.grid.View",
                                             "reference": {
                                                 "name": "viewConfig",
@@ -424,7 +385,8 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "dock": "top"
+                                                "dock": "top",
+                                                "id": "mainToolbar"
                                             },
                                             "designerId": "ba14a9e6-4e16-4a4d-bc7a-c638a377e45a",
                                             "cn": [
@@ -437,6 +399,7 @@
                                                     "codeClass": null,
                                                     "userConfig": {
                                                         "layout|flex": null,
+                                                        "id": "mainButton",
                                                         "text": "MyButton"
                                                     },
                                                     "designerId": "3a5e4253-0122-4502-b80e-e23f993dc790"
@@ -461,6 +424,10 @@
                                                                 "type": "object"
                                                             },
                                                             "codeClass": null,
+                                                            "userConfig": {
+                                                                "id": "tbActionMenu",
+                                                                "designer|displayName": null
+                                                            },
                                                             "designerId": "f91199fa-ac4d-4237-9136-fe9bfb1fd8b4",
                                                             "cn": [
                                                                 {
@@ -471,7 +438,9 @@
                                                                     },
                                                                     "codeClass": null,
                                                                     "userConfig": {
-                                                                        "text": "Menu Item"
+                                                                        "id": "tbActionStart",
+                                                                        "designer|displayName": "Start",
+                                                                        "text": "Start"
                                                                     },
                                                                     "designerId": "4eb8ff67-6da4-4ae1-81cb-388b5e633a47"
                                                                 },
@@ -483,9 +452,67 @@
                                                                     },
                                                                     "codeClass": null,
                                                                     "userConfig": {
-                                                                        "text": "Menu Item"
+                                                                        "id": "tbActionStop",
+                                                                        "designer|displayName": "Stop",
+                                                                        "text": "Stop"
                                                                     },
                                                                     "designerId": "586820b4-b796-44f2-bf13-91d2494cfc9f"
+                                                                },
+                                                                {
+                                                                    "type": "Ext.menu.Item",
+                                                                    "reference": {
+                                                                        "name": "items",
+                                                                        "type": "array"
+                                                                    },
+                                                                    "codeClass": null,
+                                                                    "userConfig": {
+                                                                        "id": "tbActionTerminate",
+                                                                        "designer|displayName": "Terminate",
+                                                                        "text": "Terminate"
+                                                                    },
+                                                                    "designerId": "15ebee33-a68f-429c-9ed6-86e8a3ad8b40"
+                                                                },
+                                                                {
+                                                                    "type": "Ext.menu.Item",
+                                                                    "reference": {
+                                                                        "name": "items",
+                                                                        "type": "array"
+                                                                    },
+                                                                    "codeClass": null,
+                                                                    "userConfig": {
+                                                                        "id": "tbActionEdit",
+                                                                        "designer|displayName": "Edit",
+                                                                        "text": "Edit"
+                                                                    },
+                                                                    "designerId": "24745637-a60c-421a-8e29-46fc1d58315a"
+                                                                },
+                                                                {
+                                                                    "type": "Ext.menu.Item",
+                                                                    "reference": {
+                                                                        "name": "items",
+                                                                        "type": "array"
+                                                                    },
+                                                                    "codeClass": null,
+                                                                    "userConfig": {
+                                                                        "id": "tbActionDelete",
+                                                                        "designer|displayName": "Delete",
+                                                                        "text": "Delete"
+                                                                    },
+                                                                    "designerId": "d1f00376-8b7e-4d2e-a541-9ab270b51c26"
+                                                                },
+                                                                {
+                                                                    "type": "Ext.menu.Item",
+                                                                    "reference": {
+                                                                        "name": "items",
+                                                                        "type": "array"
+                                                                    },
+                                                                    "codeClass": null,
+                                                                    "userConfig": {
+                                                                        "id": "tbActionRegister",
+                                                                        "designer|displayName": "Register",
+                                                                        "text": "Register"
+                                                                    },
+                                                                    "designerId": "b9eb24d7-4c98-4001-b44e-affbbdb7b35a"
                                                                 }
                                                             ]
                                                         }
@@ -548,16 +575,66 @@
                                     "userConfig": {
                                         "layout|region": "south",
                                         "layout|split": true,
-                                        "height": 250,
-                                        "id": "detailPanel",
-                                        "maxHeight": 600,
-                                        "minHeight": 200,
-                                        "designer|displayName": "DetailPanel",
-                                        "layout": "card",
+                                        "height": 300,
+                                        "designer|displayName": "BaseDetailPanel",
+                                        "layout": "anchor",
                                         "header": false,
                                         "title": "My Panel"
                                     },
-                                    "designerId": "0abe1991-6795-4549-a8ad-ca61190de5a5"
+                                    "designerId": "944d571c-8653-4b57-86ab-3dff1f00b456",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.panel.Panel",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|anchor": "100%",
+                                                "height": 50,
+                                                "margin": 5,
+                                                "designer|displayName": "TitlePanel",
+                                                "header": false,
+                                                "title": "My Panel"
+                                            },
+                                            "designerId": "db2f026f-f689-4442-b023-b4cb5ac338e8",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.form.Label",
+                                                    "reference": {
+                                                        "name": "items",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "text": "title panel"
+                                                    },
+                                                    "designerId": "5572d3c7-18a5-4f56-92f1-f0ed0f7bb323"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.panel.Panel",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|anchor": "100% -1",
+                                                "height": null,
+                                                "id": "detailPanel",
+                                                "maxHeight": null,
+                                                "minHeight": null,
+                                                "designer|displayName": "DetailPanel",
+                                                "layout": "card",
+                                                "header": false,
+                                                "title": "My Panel"
+                                            },
+                                            "designerId": "0abe1991-6795-4549-a8ad-ca61190de5a5"
+                                        }
+                                    ]
                                 }
                             ]
                         }
