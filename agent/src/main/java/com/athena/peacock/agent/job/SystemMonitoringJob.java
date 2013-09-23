@@ -32,6 +32,7 @@ import com.athena.peacock.agent.netty.PeacockTransmitter;
 import com.athena.peacock.agent.scheduler.InternalJobExecutionException;
 import com.athena.peacock.agent.scheduler.quartz.BaseJob;
 import com.athena.peacock.agent.scheduler.quartz.JobExecution;
+import com.athena.peacock.agent.util.PropertyUtil;
 import com.athena.peacock.agent.util.SigarUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
@@ -70,7 +71,7 @@ public class SystemMonitoringJob extends BaseJob {
 			Mem mem = SigarUtil.getMem();
 			
 			AgentSystemStatusMessage message = new AgentSystemStatusMessage();
-			message.setAgentId(IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI()));
+			message.setAgentId(IOUtils.toString(new File(PropertyUtil.getProperty(PeacockConstant.AGENT_ID_FILE_KEY)).toURI()));
 			
 			// set cpu info
 			message.setIdleCpu(CpuPerc.format(cpu.getIdle()).replaceAll("%", ""));

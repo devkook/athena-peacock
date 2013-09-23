@@ -30,14 +30,14 @@ package com.athena.peacock.common.constant;
 public final class PeacockConstant {
 
 	/** 서버 접속 정보등의 설정 정보가 저장된 파일 경로 */
-	public static final String CONFIG_FILE 		= "/peacock/conf/agent.conf";
+	public static final String CONFIG_FILE_KEY 		= "peacock.agent.config.file.name";
 	/** Agent ID가 저장된 파일 경로 */
-	public static final String AGENT_ID_FILE	= "/peacock/.agent";
+	public static final String AGENT_ID_FILE_KEY	= "peacock.agent.agent.file.name";
 	/** Agent에서 접속할 서버의 IP */
-	public static final String SERVER_IP 		= "ServerIP";
+	public static final String SERVER_IP 			= "ServerIP";
 	/** Agent에서 접속할 서버의 포트 */
-	public static final String SERVER_PORT 		= "ServerPort";
+	public static final String SERVER_PORT 			= "ServerPort";
 	/** 모니터링 항목 리스트 */
-	public static final String MON_FACTOR_LIST 	= "MON_FACTOR_LIST";
+	public static final String MON_FACTOR_LIST 		= "MON_FACTOR_LIST";
 }
 //end of PeacockConstant.java

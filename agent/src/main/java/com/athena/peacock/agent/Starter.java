@@ -37,14 +37,15 @@ import org.springframework.util.Assert;
 
 import com.athena.peacock.agent.util.AgentConfigUtil;
 import com.athena.peacock.agent.util.PeacockAgentIDGenerator;
+import com.athena.peacock.agent.util.PropertyUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
 
 /**
  * <pre>
  * Peacock Agent 구동을 위한 Starter 클래스로써 다음과 같은 작업을 수행한다.
  * 	<ul>
- * 		<li>/peacock/conf/peacock.conf 파일로부터 설정 정보를 load 한다.</li>
- * 		<li>Agent ID 확인을 위해 /peacock/.agent 파일 존재 여부를 확인하며, 해당 파일이 없을 경우 신규 Agent ID를 생성하고 파일에 저장한다.</li>
+ * 		<li>config/context.properties 파일에 명시된 ${peacock.agent.config.file.name} 파일로부터 설정 정보를 load 한다.</li>
+ * 		<li>Agent ID 확인을 위해 ${peacock.agent.agent.file.name} 파일 존재 여부를 확인하며, 해당 파일이 없을 경우 신규 Agent ID를 생성하고 파일에 저장한다.</li>
  * 		<li>Spring Context 파일을 load 함으로써 초기 시스템 정보 및 Quartz에 의한 1분 단위 시스템 모니터링을 수행하고 서버로 전송한다.</li>
  * 	</ul>
  * </pre>
@@ -62,23 +63,47 @@ public class Starter {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+		
+		String configFile = null;
+		
+		try {
+			configFile = PropertyUtil.getProperty(PeacockConstant.CONFIG_FILE_KEY);
+		} catch (Exception e) {
+			// nothing to do.
+		} finally {
+			if (StringUtils.isEmpty(configFile)) {
+				configFile = "/peacock/conf/agent.conf";
+			}
+		}
+		
 		/**
-		 * /peacock/conf/peacock.conf 파일을 load 중 에러가 발생했는지의 여부를 검사하고 에러 발생 시 프로그램을 종료한다.
+		 * ${peacock.agent.config.file.name} 파일을 load 중 에러가 발생했는지의 여부를 검사하고 에러 발생 시 프로그램을 종료한다.
 		 */
-		String errorMsg = "\n\"/peacock/conf/agent.conf file\" does not exist or cannot read.\n"
-						+ "Please check \"/peacock/conf/agent.conf\" file exists and can read.";
+		String errorMsg = "\n\"" + configFile + "\" file does not exist or cannot read.\n"
+						+ "Please check \"" + configFile + "\" file exists and can read.";
 		
 		Assert.isTrue(AgentConfigUtil.exception == null, errorMsg);
 		Assert.notNull(AgentConfigUtil.getConfig(PeacockConstant.SERVER_IP), "ServerIP cannot be empty.");
 		Assert.notNull(AgentConfigUtil.getConfig(PeacockConstant.SERVER_PORT), "ServerPort cannot be empty.");
 		
 		/**
-		 * Agent ID 확인을 위해 /peacock/.agent 파일 존재 여부를 확인하며, 
+		 * Agent ID 확인을 위해 ${peacock.agent.agent.file.name} 파일 존재 여부를 확인하며, 
 		 * 해당 파일이 없을 경우 신규 Agent ID를 생성하고 파일에 저장한다.
 		 */
+		String agentFile = null;
 		String agentId = null;
 		
-		File file = new File(PeacockConstant.AGENT_ID_FILE);
+		try {
+			agentFile = PropertyUtil.getProperty(PeacockConstant.AGENT_ID_FILE_KEY);
+		} catch (Exception e) {
+			// nothing to do.
+		} finally {
+			if (StringUtils.isEmpty(agentFile)) {
+				agentFile = "/peacock/.agent";
+			}
+		}
+		
+		File file = new File(agentFile);
 		boolean isNew = false;
 		
 		if(file.exists()) {
@@ -90,7 +115,7 @@ public class Starter {
 					throw new IOException();
 				}
 			} catch (IOException e) {
-	            logger.error("/peacock/.agent file cannot read or saved invalid agent ID.", e);
+	            logger.error(agentFile + " file cannot read or saved invalid agent ID.", e);
 	            
 	            agentId = PeacockAgentIDGenerator.generateId();
 	            isNew = true;

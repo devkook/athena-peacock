@@ -35,6 +35,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.athena.peacock.agent.util.MacAddressUtil;
+import com.athena.peacock.agent.util.PropertyUtil;
 import com.athena.peacock.agent.util.SigarUtil;
 import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
@@ -154,7 +155,7 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 	 * @throws Exception 
      */
     private PeacockDatagram<AgentInitialInfoMessage> getAgentInitialInfo() throws Exception {
-    	String agentId = IOUtils.toString(new File(PeacockConstant.AGENT_ID_FILE).toURI());
+    	String agentId = IOUtils.toString(new File(PropertyUtil.getProperty(PeacockConstant.AGENT_ID_FILE_KEY)).toURI());
 		
 		AgentInitialInfoMessage message = new AgentInitialInfoMessage();
 		message.setMacAddr(MacAddressUtil.getMacAddressList().get(0));

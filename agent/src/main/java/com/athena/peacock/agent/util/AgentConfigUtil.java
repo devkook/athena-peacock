@@ -34,7 +34,7 @@ import com.athena.peacock.common.constant.PeacockConstant;
 
 /**
  * <pre>
- * 
+ * agent.conf 파일을 로드하여 주어진 key에 해당하는 value 값을 조회하기 위해 사용하는 유틸 클래스.
  * </pre>
  * @author Sang-cheon Park
  * @version 1.0
@@ -48,8 +48,9 @@ public class AgentConfigUtil {
     
     static {
     	try {
+    		String configFile = PropertyUtil.getProperty(PeacockConstant.CONFIG_FILE_KEY);
         	prop = new Properties();
-        	prop.load(new BufferedInputStream(new FileInputStream(new File(PeacockConstant.CONFIG_FILE))));
+        	prop.load(new BufferedInputStream(new FileInputStream(new File(configFile))));
         } catch (FileNotFoundException e) {
             logger.error("agent.conf file does not exist.", e);
             exception = e;
