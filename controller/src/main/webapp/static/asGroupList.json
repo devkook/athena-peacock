@@ -1,0 +1,7 @@
+{
+    "total":"30",
+    "list":[
+        {"as_group_id":1, "as_group_name":"Athena-SG", "min_size": 1, "max_size":10, "reg_dt":"2013-07-17 16:48 UTC+0900"},
+        {"as_group_id":2, "as_group_name":"Athena-SG22", "min_size": 1, "max_size":15, "reg_dt":"2013-07-17 16:48 UTC+0900"}
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 475,
+        "width": 674,
+        "designer|userClassName": "InstanceLaunchWindow",
+        "designer|userAlias": "instanceLaunchWindow",
+        "title": "Instance Launch Wizard",
+        "modal": true
+    },
+    "designerId": "477b9df4-ddf6-4d33-ac66-2268cb4ad745"
+}

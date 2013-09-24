@@ -1,0 +1,4 @@
+{
+    success: true,
+    data: {"user_id":123, "login_id":"idkbj", "user_name":"user1", "groups":2, "reg_dt":"2013-07-17 16:48 UTC+0900"}
+}

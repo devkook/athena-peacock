@@ -1,0 +1,7 @@
+{
+    "total": 30,
+    "list":[
+            {"pkg_id":1, "pkg_name":"zsh-html", "pkg_arch":"x86_64", "version":"3.2.10", "release":"5.el6", "size":"2.1M", "install_date":"2013.7.2", "summary":"Zsh shell manual", "description":"The zsh shell is..."},
+            {"pkg_id":2, "pkg_name":"yum-plugin", "pkg_arch":"x86_64", "version":"1.1.30", "release":"5.el6", "size":"20K", "install_date":"2013.7.3", "summary":"Yum plugin", "description":"The plugin adds..."}
+    ]
+}

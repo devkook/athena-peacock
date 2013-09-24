@@ -1,0 +1,92 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "views": [
+            "InstanceTabPanel",
+            "UserTabPanel",
+            "UserGroupTabPanel",
+            "ASGroupTabPanel"
+        ],
+        "designer|userClassName": "MainGridController"
+    },
+    "designerId": "2dec2676-78ee-420d-9cc8-b6af6e78b3ad",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onGridpanelSelect",
+                "implHandler": [
+                    "\r",
+                    "\r",
+                    "/*\r",
+                    "* main grid 에서 한 row 선택시 처리 (상세정보 tab 정보 조회)\r",
+                    "*/\r",
+                    "\r",
+                    "Peacock.app.debug(\"MainGridController.onGridpanelSelect.\");\r",
+                    "Peacock.app.selectedRecord = record;\r",
+                    "\r",
+                    "\r",
+                    "\r",
+                    "Ext.getCmp(\"tbActionMenu\").setDisabled(false);\r",
+                    "\r",
+                    "\r",
+                    "var detailPanel = Ext.getCmp('detailPanel');\r",
+                    "detailPanel.removeAll(true);\r",
+                    "\r",
+                    "\r",
+                    "var tabPanel;\r",
+                    "\r",
+                    "\r",
+                    "if (Peacock.app.menu_id == 'insts'){\r",
+                    "\r",
+                    "    //tabPanel = Ext.widget('instanceTabPanel');\r",
+                    "    tabPanel = this.getInstanceTabPanelView();\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'img-tmp'){\r",
+                    "\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'img-pkg'){\r",
+                    "\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'scal-grp'){\r",
+                    "\r",
+                    "    tabPanel = this.getASGroupTabPanelView();\r",
+                    "    \r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'scal-lb'){\r",
+                    "\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'user-grp'){\r",
+                    "\r",
+                    "    tabPanel = this.getUserGroupTabPanelView();\r",
+                    "\r",
+                    "}else if (Peacock.app.menu_id == 'users'){\r",
+                    "\r",
+                    "    tabPanel = this.getUserTabPanelView();\r",
+                    "\r",
+                    "}\r",
+                    "\r",
+                    "\r",
+                    "detailPanel.add(tabPanel);\r",
+                    "detailPanel.layout.setActiveItem(0);\r",
+                    ""
+                ],
+                "name": "select",
+                "scope": "me",
+                "designer|targetType": "Ext.grid.Panel",
+                "designer|controlQuery": "#mainGridPanel"
+            },
+            "designerId": "cc9ac1db-0c31-416c-8c10-dfce43302664"
+        }
+    ]
+}
