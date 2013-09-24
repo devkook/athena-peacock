@@ -1,8 +1,0 @@
-{
-    "total": 30,
-    "list":[
-            {"machine_id":1, "os_name":"Red Hat", "template":"jboss EAP 5.2", "status":"running", "uptime":"184h", "host_name":"svr1"},
-            {"machine_id":2, "os_name":"Red Hat", "template":"jboss EAP 5.2", "status":"running", "uptime":"184h", "host_name":"svr2"},
-            {"machine_id":3, "os_name":"Red Hat", "template":"jboss EAP 5.2", "status":"stop", "uptime":"180h", "host_name":"svr3"}
-    ]
-}
