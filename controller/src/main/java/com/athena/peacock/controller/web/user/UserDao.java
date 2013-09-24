@@ -1,5 +1,7 @@
 package com.athena.peacock.controller.web.user;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
@@ -22,15 +24,19 @@ public class UserDao extends AbstractBaseDao {
 	public UserDao() {
 	}
 
-	public void insertUser(UserDTO user){
+	public void insertUser(UserDto user){
 		sqlSession.insert("UserMapper.insertUser", user);
 	}
 	
-	public UserDTO getUser(int userId){
+	public List<UserDto> getUserList(){
+		return sqlSession.selectList("UserMapper.getUserList");
+	}
+	
+	public UserDto getUser(int userId){
 		return sqlSession.selectOne("UserMapper.getUser", userId);
 	}
 	
-	public void updateUser(UserDTO user){
+	public void updateUser(UserDto user){
 		sqlSession.update("UserMapper.updateUser", user);
 	}
 	
