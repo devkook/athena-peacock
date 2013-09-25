@@ -26,14 +26,14 @@ Ext.define('Peacock.store.UserGroupListStore', {
         me.callParent([Ext.apply({
             model: 'Peacock.model.UserGroupModel',
             storeId: 'UserGroupListStore',
-            proxy: {
+            proxy: me.processMyAjaxProxy5({
                 type: 'ajax',
                 url: 'static/userGroupList.json',
                 reader: {
                     type: 'json',
                     root: 'list'
                 }
-            },
+            }),
             listeners: {
                 beforeload: {
                     fn: me.onJsonstoreBeforeLoad,
@@ -41,6 +41,12 @@ Ext.define('Peacock.store.UserGroupListStore', {
                 }
             }
         }, cfg)]);
+    },
+
+    processMyAjaxProxy5: function(config) {
+        config.actionMethods = {create: "POST", read: "POST", update: "POST", destroy: "POST"};
+
+        return config;
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {

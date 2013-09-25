@@ -36,6 +36,26 @@
                         "root": "list"
                     },
                     "designerId": "9e054535-9227-455b-ac99-f4e29a9be324"
+                },
+                {
+                    "type": "processcfgfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "processMyAjaxProxy1",
+                        "designer|params": [
+                            "config"
+                        ],
+                        "implHandler": [
+                            "config.actionMethods = {create: \"POST\", read: \"POST\", update: \"POST\", destroy: \"POST\"};\r",
+                            "\r",
+                            "return config;"
+                        ]
+                    },
+                    "designerId": "94ffbff4-fe41-40b9-acc6-6f914e4c86fb"
                 }
             ]
         },

@@ -16,43 +16,33 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 24.		First Draft.
+ * Bong-Jin Kwon	2013. 9. 25.		First Draft.
  */
-package com.athena.peacock.controller.common.web;
+package com.athena.peacock.controller.web.common.json;
 
-import java.util.List;
+import java.text.SimpleDateFormat;
+
+import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.map.SerializationConfig.Feature;
 
 /**
  * <pre>
- *  MVC Controller 에서 paging list json 을 반환하기 위한 Wrapper Class.
+ * 
  * </pre>
  * @author Bong-Jin Kwon
  * @version 1.0
  */
-public class PagingList {
+public class JacksonObjectMapper extends ObjectMapper {
 
-	private int total;
-	private List list;
-	
-	public PagingList() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public int getTotal() {
-		return total;
-	}
-
-	public void setTotal(int total) {
-		this.total = total;
-	}
-
-	public List getList() {
-		return list;
-	}
-
-	public void setList(List list) {
-		this.list = list;
+	/**
+	 * <pre>
+	 * 
+	 * </pre>
+	 */
+	public JacksonObjectMapper() {
+		super.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+		setDateFormat(new SimpleDateFormat("yyyy.MM.dd HH:mm:ss z"));
 	}
 
 }
-//end of PagingList.java
+//end of JacksonObjectMapper.java

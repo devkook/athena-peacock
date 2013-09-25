@@ -124,7 +124,7 @@
                     "    dataIndex: 'groups'\r",
                     "}, {\r",
                     "    text: 'Password',\r",
-                    "    dataIndex: 'password'\r",
+                    "    dataIndex: 'passwd'\r",
                     "}, {\r",
                     "    text: 'Create Date',\r",
                     "    dataIndex: 'reg_dt',\r",

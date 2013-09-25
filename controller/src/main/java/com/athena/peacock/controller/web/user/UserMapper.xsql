@@ -5,22 +5,40 @@
 
 <mapper namespace="UserMapper">
 
-	<select id="getUserList" resultType="com.athena.peacock.controller.web.user.UserDto">
+	<sql id="getUserListBase">
 		SELECT 
-			user_id
-		    ,role_id
-		    ,login_id
-		    ,user_name
-		    ,dept_name
-		    ,email
-		    ,is_admin
-		    ,status
-		    ,last_logon
-		    ,reg_user_id
-		    ,reg_dt
-		    ,upd_user_id
-		    ,upd_dt
-		FROM users_tbl
+			a.user_id
+		    ,a.role_id
+		    ,a.login_id
+		    ,a.user_name
+		    ,a.dept_name
+		    ,a.email
+		    ,a.is_admin
+		    ,a.status
+		    ,a.last_logon
+		    ,a.reg_user_id
+		    ,a.reg_dt
+		    ,a.upd_user_id
+		    ,a.upd_dt
+		    ,(SELECT COUNT(*) FROM user_group_map_tbl b WHERE b.user_id = a.user_id) AS groups
+		FROM users_tbl a
+		<where>
+			<if test="search != null">
+			a.user_name LIKE concat('%',#{search},'%')
+			</if>
+		</where>
+		LIMIT #{start}, #{limit} 
+	</sql>
+
+	<select id="getUserList" resultType="com.athena.peacock.controller.web.user.UserDto" parameterType="ExtjsGridParam">
+		<include refid="getUserListBase"/>
+	</select>
+	
+	<select id="getUserListTotalCount" resultType="int" parameterType="ExtjsGridParam">
+		SELECT COUNT(*)
+		FROM (
+			<include refid="getUserListBase"/>
+		) AS T
 	</select>
 
 	<insert id="insertUser" parameterType="com.athena.peacock.controller.web.user.UserDto">

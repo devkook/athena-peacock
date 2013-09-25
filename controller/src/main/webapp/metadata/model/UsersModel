@@ -57,7 +57,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "password",
+                "name": "passwd",
                 "type": "string"
             },
             "designerId": "b453edc1-3a24-4479-966d-c5c8dbb0595c"

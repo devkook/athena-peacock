@@ -16,14 +16,14 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 24.		First Draft.
+ * Bong-Jin Kwon	2013. 9. 25.		First Draft.
  */
 package com.athena.peacock.controller.web.user;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.stereotype.Service;
 
 import com.athena.peacock.controller.web.common.model.ExtjsGridParam;
 
@@ -34,28 +34,40 @@ import com.athena.peacock.controller.web.common.model.ExtjsGridParam;
  * @author Bong-Jin Kwon
  * @version 1.0
  */
-@Controller
-@RequestMapping("/user")
-public class UserController {
-	
-	@Autowired
-	private UserService service;
+@Service
+public class UserService {
 
-	/**
-	 * <pre>
-	 * 
-	 * </pre>
-	 */
-	public UserController() {
+	@Autowired
+	private UserDao dao;
+	
+	public UserService() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	@RequestMapping("/list")
-	public void list(Model model, ExtjsGridParam gridParam){
+	public void insertUser(UserDto user){
+		dao.insertUser(user);
+	}
+	
+	public List<UserDto> getUserList(ExtjsGridParam gridParam){
+		return dao.getUserList(gridParam);
+	}
+	
+	public int getUserListTotalCount(ExtjsGridParam gridParam){
 		
-		model.addAttribute("total", service.getUserListTotalCount(gridParam));
-		model.addAttribute("list", service.getUserList(gridParam));
+		return dao.getUserListTotalCount(gridParam);
+	}
+	
+	public UserDto getUser(int userId){
+		return dao.getUser(userId);
+	}
+	
+	public void updateUser(UserDto user){
+		dao.updateUser(user);
+	}
+	
+	public void deleteUser(int userId){
+		dao.deleteUser(userId);
 	}
 
 }
-//end of UserController.java
+//end of UserService.java

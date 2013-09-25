@@ -20,7 +20,12 @@
  */
 package com.athena.peacock.controller.web.user;
 
-import java.sql.Date;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+import com.athena.peacock.controller.web.common.json.CustomDateSerializer;
 
 /**
  * <pre>
@@ -45,6 +50,9 @@ public class UserDto {
 	private Date reg_dt;
 	private int upd_user_id;
 	private Date upd_dt;
+	
+	private int groups;
+
 
 	/**
 	 * <pre>
@@ -143,6 +151,7 @@ public class UserDto {
 		this.reg_user_id = reg_user_id;
 	}
 
+	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getReg_dt() {
 		return reg_dt;
 	}
@@ -165,6 +174,14 @@ public class UserDto {
 
 	public void setUpd_dt(Date upd_dt) {
 		this.upd_dt = upd_dt;
+	}
+	
+	public int getGroups() {
+		return groups;
+	}
+
+	public void setGroups(int groups) {
+		this.groups = groups;
 	}
 
 }

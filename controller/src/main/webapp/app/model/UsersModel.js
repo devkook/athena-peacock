@@ -30,7 +30,7 @@ Ext.define('Peacock.model.UsersModel', {
             type: 'int'
         },
         {
-            name: 'password',
+            name: 'passwd',
             type: 'string'
         },
         {

@@ -7,4 +7,15 @@
 		<setting name="defaultExecutorType" value="REUSE" />
 		<setting name="defaultStatementTimeout" value="120" />
 	</settings>
+	
+	<typeAliases>
+		<typeAlias alias="ExtjsGridParam" type="com.athena.peacock.controller.web.common.model.ExtjsGridParam"/>
+	
+	</typeAliases>
+	
+	<typeHandlers>
+	    <typeHandler javaType="java.sql.Timestamp" handler="org.apache.ibatis.type.DateTypeHandler"></typeHandler>
+	    <typeHandler javaType="java.sql.Time" handler="org.apache.ibatis.type.DateTypeHandler"></typeHandler>
+	    <typeHandler javaType="java.sql.Date" handler="org.apache.ibatis.type.DateTypeHandler"></typeHandler>
+	</typeHandlers>
 </configuration>

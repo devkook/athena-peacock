@@ -28,14 +28,14 @@ Ext.define('Peacock.store.UsersJsonStore', {
             model: 'Peacock.model.UsersModel',
             storeId: 'UsersJsonStore',
             pageSize: 10,
-            proxy: {
+            proxy: me.processMyAjaxProxy({
                 type: 'ajax',
-                url: 'http://localhost:8080/controller/user/list',
+                url: 'user/list',
                 reader: {
                     type: 'json',
                     root: 'list'
                 }
-            },
+            }),
             listeners: {
                 beforeload: {
                     fn: me.onJsonstoreBeforeLoad,
@@ -43,6 +43,12 @@ Ext.define('Peacock.store.UsersJsonStore', {
                 }
             }
         }, cfg)]);
+    },
+
+    processMyAjaxProxy: function(config) {
+        config.actionMethods = {create: "POST", read: "POST", update: "POST", destroy: "POST"};
+
+        return config;
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {

@@ -104,7 +104,7 @@ Ext.define('Peacock.controller.MenuController', {
             dataIndex: 'groups'
         }, {
             text: 'Password',
-            dataIndex: 'password'
+            dataIndex: 'passwd'
         }, {
             text: 'Create Date',
             dataIndex: 'reg_dt',

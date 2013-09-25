@@ -27,14 +27,14 @@ Ext.define('Peacock.store.MachineListStore', {
             model: 'Peacock.model.MachineModel',
             storeId: 'MachineListStore',
             pageSize: 10,
-            proxy: {
+            proxy: me.processMyAjaxProxy1({
                 type: 'ajax',
                 url: 'static/machineList.json',
                 reader: {
                     type: 'json',
                     root: 'list'
                 }
-            },
+            }),
             listeners: {
                 beforeload: {
                     fn: me.onJsonstoreBeforeLoad,
@@ -42,6 +42,12 @@ Ext.define('Peacock.store.MachineListStore', {
                 }
             }
         }, cfg)]);
+    },
+
+    processMyAjaxProxy1: function(config) {
+        config.actionMethods = {create: "POST", read: "POST", update: "POST", destroy: "POST"};
+
+        return config;
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {

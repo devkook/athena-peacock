@@ -16,46 +16,65 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 24.		First Draft.
+ * Bong-Jin Kwon	2013. 9. 25.		First Draft.
  */
-package com.athena.peacock.controller.web.user;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.athena.peacock.controller.web.common.model.ExtjsGridParam;
+package com.athena.peacock.controller.web.common.model;
 
 /**
  * <pre>
- * 
+ *  Extjs GridPanel 의 request parameter Model
+ *   - Extjs GridPanel 목록 조회 처리 Controller 에서 사용함. 
  * </pre>
  * @author Bong-Jin Kwon
  * @version 1.0
  */
-@Controller
-@RequestMapping("/user")
-public class UserController {
+public class ExtjsGridParam {
 	
-	@Autowired
-	private UserService service;
+	private int page;
+	private int start;
+	private int limit;
+	private String search;//검색어
 
 	/**
 	 * <pre>
 	 * 
 	 * </pre>
 	 */
-	public UserController() {
+	public ExtjsGridParam() {
 		// TODO Auto-generated constructor stub
 	}
-	
-	@RequestMapping("/list")
-	public void list(Model model, ExtjsGridParam gridParam){
-		
-		model.addAttribute("total", service.getUserListTotalCount(gridParam));
-		model.addAttribute("list", service.getUserList(gridParam));
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getStart() {
+		return start;
+	}
+
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public String getSearch() {
+		return search;
+	}
+
+	public void setSearch(String search) {
+		this.search = search;
 	}
 
 }
-//end of UserController.java
+//end of ExtjsGridParam.java

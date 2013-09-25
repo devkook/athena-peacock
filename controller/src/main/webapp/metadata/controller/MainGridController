@@ -61,7 +61,7 @@
                     "}else if (Peacock.app.menu_id == 'scal-grp'){\r",
                     "\r",
                     "    tabPanel = this.getASGroupTabPanelView();\r",
-                    "    \r",
+                    "\r",
                     "\r",
                     "}else if (Peacock.app.menu_id == 'scal-lb'){\r",
                     "\r",

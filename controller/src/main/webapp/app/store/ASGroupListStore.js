@@ -26,14 +26,14 @@ Ext.define('Peacock.store.ASGroupListStore', {
         me.callParent([Ext.apply({
             model: 'Peacock.model.ASGroupModel',
             storeId: 'ASGroupListStore',
-            proxy: {
+            proxy: me.processMyAjaxProxy6({
                 type: 'ajax',
                 url: 'static/asGroupList.json',
                 reader: {
                     type: 'json',
                     root: 'list'
                 }
-            },
+            }),
             listeners: {
                 beforeload: {
                     fn: me.onJsonstoreBeforeLoad,
@@ -41,6 +41,12 @@ Ext.define('Peacock.store.ASGroupListStore', {
                 }
             }
         }, cfg)]);
+    },
+
+    processMyAjaxProxy6: function(config) {
+        config.actionMethods = {create: "POST", read: "POST", update: "POST", destroy: "POST"};
+
+        return config;
     },
 
     onJsonstoreBeforeLoad: function(store, operation, eOpts) {

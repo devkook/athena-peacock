@@ -22,7 +22,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "http://localhost:8080/controller/user/list"
+                "url": "user/list"
             },
             "designerId": "96a72c62-302d-4fa1-9845-184960106720",
             "cn": [
@@ -37,6 +37,26 @@
                         "root": "list"
                     },
                     "designerId": "a7465cfc-f833-462e-958e-769df1d01eee"
+                },
+                {
+                    "type": "processcfgfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "processMyAjaxProxy",
+                        "designer|params": [
+                            "config"
+                        ],
+                        "implHandler": [
+                            "config.actionMethods = {create: \"POST\", read: \"POST\", update: \"POST\", destroy: \"POST\"};\r",
+                            "\r",
+                            "return config;"
+                        ]
+                    },
+                    "designerId": "d7a9a801-1f3a-4198-b75d-9ad32c552a94"
                 }
             ]
         },
