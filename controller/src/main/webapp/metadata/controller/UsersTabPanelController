@@ -39,7 +39,7 @@
                     "    var jsonObj;\r",
                     "\r",
                     "    Ext.Ajax.request({\r",
-                    "        url: 'static/userSummary.json',\r",
+                    "        url: 'user/getUser',\r",
                     "        params: {\r",
                     "            user_id : Peacock.app.selectedRecord.get(\"user_id\")\r",
                     "        },\r",

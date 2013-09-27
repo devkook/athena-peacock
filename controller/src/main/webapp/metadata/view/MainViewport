@@ -358,7 +358,11 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "height": null,
+                                                "id": "mainGridView",
                                                 "minHeight": null
+                                            },
+                                            "configAlternates": {
+                                                "loadMask": "boolean"
                                             },
                                             "designerId": "8bead818-7b64-44e3-a2f9-4f7b40d78eda"
                                         },
@@ -373,7 +377,7 @@
                                                 "dock": "bottom",
                                                 "width": 360,
                                                 "displayInfo": true,
-                                                "store": "UsersJsonStore"
+                                                "store": null
                                             },
                                             "designerId": "1ccba6bb-dbfa-4950-a809-a2edfeaa4518"
                                         },
@@ -562,6 +566,25 @@
                                                     "designerId": "4902a6fe-1a37-4fa3-b8ec-4c12c60709df"
                                                 }
                                             ]
+                                        },
+                                        {
+                                            "type": "processcfgfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "processMainGridPanel",
+                                                "designer|params": [
+                                                    "config"
+                                                ],
+                                                "implHandler": [
+                                                    "\tconfig.viewConfig.loadMask = true;\r",
+                                                    "return config;"
+                                                ]
+                                            },
+                                            "designerId": "66a6c1cf-4b85-4f9f-a401-4c5473555ce6"
                                         }
                                     ]
                                 },

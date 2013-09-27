@@ -151,6 +151,7 @@
             },
             "codeClass": null,
             "userConfig": {
+                "autoScroll": true,
                 "title": "Summary"
             },
             "designerId": "adfea9b4-cdf7-416e-b374-148242f06b40",

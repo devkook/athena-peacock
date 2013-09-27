@@ -17,7 +17,7 @@ Ext.define('Peacock.view.UserFormWindow', {
     extend: 'Ext.window.Window',
     alias: 'widget.userFormWindow',
 
-    height: 303,
+    height: 331,
     width: 388,
     layout: {
         type: 'fit'
@@ -47,6 +47,12 @@ Ext.define('Peacock.view.UserFormWindow', {
                             anchor: '100%',
                             fieldLabel: 'Label',
                             name: 'user_id'
+                        },
+                        {
+                            xtype: 'hiddenfield',
+                            anchor: '100%',
+                            fieldLabel: 'Label',
+                            name: 'role_id'
                         },
                         {
                             xtype: 'textfield',
@@ -112,7 +118,17 @@ Ext.define('Peacock.view.UserFormWindow', {
                             anchor: '100%',
                             fieldLabel: 'is Admin',
                             name: 'is_admin',
-                            boxLabel: 'Admin'
+                            boxLabel: 'Admin',
+                            inputValue: 'true'
+                        },
+                        {
+                            xtype: 'textfield',
+                            anchor: '100%',
+                            fieldLabel: 'Status',
+                            name: 'status',
+                            allowBlank: false,
+                            allowOnlyWhitespace: false,
+                            vtype: 'numeric'
                         }
                     ],
                     dockedItems: [
@@ -158,9 +174,15 @@ Ext.define('Peacock.view.UserFormWindow', {
     onButtonClick: function(button, e, eOpts) {
         var formPanel = Ext.getCmp("userForm");
 
+        var action = "user/create";
+
+        if(formPanel.getForm().findField("user_id").getValue() > 0){
+            action = "user/update";
+        }
+
         formPanel.getForm().submit({
             clientValidation: true,
-            url: 'static/serverResult.json',
+            url: action,
             params: {
                 newStatus: 'delivered'
             },

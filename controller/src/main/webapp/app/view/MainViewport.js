@@ -187,7 +187,7 @@ Ext.define('Peacock.view.MainViewport', {
                                         type: 'border'
                                     },
                                     items: [
-                                        {
+                                        me.processMainGridPanel({
                                             xtype: 'gridpanel',
                                             region: 'center',
                                             id: 'mainGridPanel',
@@ -201,13 +201,15 @@ Ext.define('Peacock.view.MainViewport', {
                                                     text: 'String'
                                                 }
                                             ],
+                                            viewConfig: {
+                                                id: 'mainGridView'
+                                            },
                                             dockedItems: [
                                                 {
                                                     xtype: 'pagingtoolbar',
                                                     dock: 'bottom',
                                                     width: 360,
-                                                    displayInfo: true,
-                                                    store: 'UsersJsonStore'
+                                                    displayInfo: true
                                                 },
                                                 {
                                                     xtype: 'toolbar',
@@ -276,7 +278,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                     ]
                                                 }
                                             ]
-                                        },
+                                        }),
                                         {
                                             xtype: 'panel',
                                             region: 'south',
@@ -350,6 +352,11 @@ Ext.define('Peacock.view.MainViewport', {
         });
 
         me.callParent(arguments);
+    },
+
+    processMainGridPanel: function(config) {
+        config.viewConfig.loadMask = true;
+        return config;
     },
 
     onPanelActivate: function(component, eOpts) {

@@ -15,16 +15,24 @@
 	<context:component-scan base-package="com.athena.peacock.controller"/>
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
-	<mvc:annotation-driven >
+	<mvc:annotation-driven conversion-service="conversionService">
 		<mvc:message-converters register-defaults="false">
-        <bean
-            class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
-            <property name="objectMapper">
-                <bean class="com.athena.peacock.controller.web.common.json.JacksonObjectMapper" />
-            </property>
-        </bean>
-    </mvc:message-converters>
-	</mvc:annotation-driven> 
+	        <bean
+	            class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter">
+	            <property name="objectMapper">
+	                <bean class="com.athena.peacock.controller.web.common.json.JacksonObjectMapper" />
+	            </property>
+	        </bean>
+	    </mvc:message-converters>
+	</mvc:annotation-driven>
+	
+	<bean id="conversionService" class="org.springframework.format.support.FormattingConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.athena.peacock.controller.web.common.converter.StringToNumberConverterFactory"/>
+            </set>
+        </property>
+    </bean>
 	
 	
 	    
@@ -98,11 +106,7 @@
 		</property>
 		<property name="defaultViews">
 			<list>
-				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" >
-					<property name="objectMapper">
-						<bean class="com.athena.peacock.controller.web.common.json.JacksonObjectMapper"/>
-					</property>
-				</bean>
+				<bean class="org.springframework.web.servlet.view.json.MappingJacksonJsonView" />
 			</list>
 		</property>
 	</bean>

@@ -16,34 +16,32 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 25.		First Draft.
+ * Bong-Jin Kwon	2013. 9. 27.		First Draft.
  */
-package com.athena.peacock.controller.web.common.json;
-
-import java.text.SimpleDateFormat;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig.Feature;
+package com.athena.peacock.controller.web.common.model;
 
 /**
  * <pre>
- * DTO Date type 을 json 문자열로 변환시 사용할 포맷 지정.
- * - 주의: Controller 에서 @ResponseBody 로 리턴될때 적용됨.
+ * Single Dto 를 json response 하기위한 클래스.
  * </pre>
  * @author Bong-Jin Kwon
  * @version 1.0
  */
-public class JacksonObjectMapper extends ObjectMapper {
+public class DtoJsonResponse extends SimpleJsonResponse {
 
-	/**
-	 * <pre>
-	 * 
-	 * </pre>
-	 */
-	public JacksonObjectMapper() {
-		super.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
-		setDateFormat(new SimpleDateFormat("yyyy.MM.dd HH:mm:ss z"));
+	private Object data;
+	
+	public DtoJsonResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 }
-//end of JacksonObjectMapper.java
+//end of DtoJsonResponse.java

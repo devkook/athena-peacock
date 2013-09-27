@@ -22,10 +22,14 @@ package com.athena.peacock.controller.web.user;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.athena.peacock.controller.web.common.model.DtoJsonResponse;
 import com.athena.peacock.controller.web.common.model.ExtjsGridParam;
+import com.athena.peacock.controller.web.common.model.GridJsonResponse;
+import com.athena.peacock.controller.web.common.model.SimpleJsonResponse;
 
 /**
  * <pre>
@@ -51,10 +55,76 @@ public class UserController {
 	}
 	
 	@RequestMapping("/list")
-	public void list(Model model, ExtjsGridParam gridParam){
+	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, ExtjsGridParam gridParam){
 		
-		model.addAttribute("total", service.getUserListTotalCount(gridParam));
-		model.addAttribute("list", service.getUserList(gridParam));
+		jsonRes.setTotal(service.getUserListTotalCount(gridParam));
+		jsonRes.setList(service.getUserList(gridParam));
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/create")
+	public @ResponseBody SimpleJsonResponse create(SimpleJsonResponse jsonRes, UserDto user){
+		
+		try{
+			service.insertUser(user);
+			jsonRes.setMsg("Create success.");
+			
+		}catch(Exception e){
+			
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("Create fail.");
+			
+			e.printStackTrace();
+		}
+		
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/update")
+	public @ResponseBody SimpleJsonResponse update(SimpleJsonResponse jsonRes, UserDto user){
+		
+		try{
+			service.updateUser(user);
+			jsonRes.setMsg("Update success.");
+			
+		}catch(Exception e){
+			
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("Update fail.");
+			
+			e.printStackTrace();
+		}
+		
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/delete")
+	public @ResponseBody SimpleJsonResponse delete(SimpleJsonResponse jsonRes, @RequestParam("user_id") int user_id){
+		
+		try{
+			service.deleteUser(user_id);
+			jsonRes.setMsg("Delete success.");
+			
+		}catch(Exception e){
+			
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("Delete fail.");
+			
+			e.printStackTrace();
+		}
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/getUser")
+	public @ResponseBody DtoJsonResponse getUser(DtoJsonResponse jsonRes, @RequestParam("user_id") int user_id){
+		
+		jsonRes.setData(service.getUser(user_id));
+		
+		return jsonRes;
 	}
 
 }

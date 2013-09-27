@@ -51,7 +51,7 @@ Ext.application({
         'UsersTabPanelController',
         'UserGroupTabPanelController',
         'MainToolbarController',
-        'GlobalAjaxController'
+        'GlobalConfigController'
     ],
     name: 'Peacock',
 

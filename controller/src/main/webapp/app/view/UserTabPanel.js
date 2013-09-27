@@ -68,6 +68,7 @@ Ext.define('Peacock.view.UserTabPanel', {
                 },
                 {
                     xtype: 'panel',
+                    autoScroll: true,
                     title: 'Summary',
                     items: [
                         {

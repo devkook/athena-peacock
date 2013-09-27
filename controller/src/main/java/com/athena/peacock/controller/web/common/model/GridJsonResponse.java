@@ -16,34 +16,49 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 25.		First Draft.
+ * Bong-Jin Kwon	2013. 9. 27.		First Draft.
  */
-package com.athena.peacock.controller.web.common.json;
+package com.athena.peacock.controller.web.common.model;
 
-import java.text.SimpleDateFormat;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig.Feature;
+import java.util.List;
 
 /**
  * <pre>
- * DTO Date type 을 json 문자열로 변환시 사용할 포맷 지정.
- * - 주의: Controller 에서 @ResponseBody 로 리턴될때 적용됨.
+ * Extjs Grid에 의한 서버 list 조회 작업 결과에 대한 JSON Response 클래스.
+ * - ex) {"total": 30, "list":[{....},{....}]}
  * </pre>
  * @author Bong-Jin Kwon
  * @version 1.0
  */
-public class JacksonObjectMapper extends ObjectMapper {
+public class GridJsonResponse {
+	
+	private int total;
+	private List list;
 
 	/**
 	 * <pre>
 	 * 
 	 * </pre>
 	 */
-	public JacksonObjectMapper() {
-		super.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
-		setDateFormat(new SimpleDateFormat("yyyy.MM.dd HH:mm:ss z"));
+	public GridJsonResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public List getList() {
+		return list;
+	}
+
+	public void setList(List list) {
+		this.list = list;
 	}
 
 }
-//end of JacksonObjectMapper.java
+//end of GridJsonResponse.java

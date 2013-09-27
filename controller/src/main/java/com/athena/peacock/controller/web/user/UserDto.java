@@ -43,7 +43,7 @@ public class UserDto {
 	private String user_name;
 	private String dept_name;
 	private String email;
-	private String is_admin;
+	private boolean is_admin;
 	private int status;
 	private Date last_logon;
 	private int reg_user_id;
@@ -119,11 +119,11 @@ public class UserDto {
 		this.email = email;
 	}
 
-	public String getIs_admin() {
+	public boolean getIs_admin() {
 		return is_admin;
 	}
 
-	public void setIs_admin(String is_admin) {
+	public void setIs_admin(boolean is_admin) {
 		this.is_admin = is_admin;
 	}
 
@@ -151,7 +151,6 @@ public class UserDto {
 		this.reg_user_id = reg_user_id;
 	}
 
-	@JsonSerialize(using = CustomDateSerializer.class)
 	public Date getReg_dt() {
 		return reg_dt;
 	}

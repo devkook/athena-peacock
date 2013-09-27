@@ -114,9 +114,12 @@ Ext.define('Peacock.controller.MainToolbarController', {
 
 
             Ext.widget('userGroupFormWindow').show();
-            Ext.widget('userGroupFormWindow').setTitle("Edit Group");
 
-            Ext.getCmp("userGroupForm").getForm().load({
+            var formPanel = Ext.getCmp("userGroupForm");
+
+            formPanel.up('window').setTitle("Edit Group");
+
+            formPanel.getForm().load({
                 params : {
                     group_id : Peacock.app.selectedRecord.get("group_id")
                 },
@@ -128,15 +131,19 @@ Ext.define('Peacock.controller.MainToolbarController', {
         }else if (Peacock.app.menu_id == 'users'){
 
             Ext.widget('userFormWindow').show();
-            Ext.widget('userFormWindow').setTitle("Edit User");
 
-            Ext.getCmp("userForm").getForm().load({
+            var formPanel = Ext.getCmp("userForm");
+
+            formPanel.up('window').setTitle("Edit User");
+
+            formPanel.getForm().load({
                 params : {
                     user_id : Peacock.app.selectedRecord.get("user_id")
                 },
-                url : "static/userSummary.json",
+                url : "user/getUser",
                 waitMsg: 'Loading...'
             });
+
 
         }
     },
@@ -177,7 +184,7 @@ Ext.define('Peacock.controller.MainToolbarController', {
             if(btn == "yes"){
 
                 Ext.Ajax.request({
-                    url: 'static/serverResult.json',
+                    url: 'user/delete',
                     params: _pararms,
                     waitMsg: 'Delete Data...',
                     success: function(response){

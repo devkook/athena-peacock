@@ -6,7 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "height": 303,
+        "height": 331,
         "width": 388,
         "designer|userClassName": "UserFormWindow",
         "designer|userAlias": "userFormWindow",
@@ -53,6 +53,20 @@
                         "name": "user_id"
                     },
                     "designerId": "a2bebfba-4b4a-4a19-9b76-04426f5c6a32"
+                },
+                {
+                    "type": "Ext.form.field.Hidden",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|anchor": "100%",
+                        "fieldLabel": "Label",
+                        "name": "role_id"
+                    },
+                    "designerId": "19b5367a-60f8-4f08-8b83-eb21e15f9e11"
                 },
                 {
                     "type": "Ext.form.field.Text",
@@ -228,9 +242,27 @@
                         "layout|anchor": "100%",
                         "fieldLabel": "is Admin",
                         "name": "is_admin",
-                        "boxLabel": "Admin"
+                        "boxLabel": "Admin",
+                        "inputValue": "true"
                     },
                     "designerId": "b1043ef2-6cf6-468c-8714-a08b82ec5d23"
+                },
+                {
+                    "type": "Ext.form.field.Text",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|anchor": "100%",
+                        "fieldLabel": "Status",
+                        "name": "status",
+                        "allowBlank": false,
+                        "allowOnlyWhitespace": false,
+                        "vtype": "numeric"
+                    },
+                    "designerId": "6e7d2313-5d13-47fd-818a-4312d885ce92"
                 },
                 {
                     "type": "Ext.toolbar.Toolbar",
@@ -271,9 +303,15 @@
                                         "implHandler": [
                                             "var formPanel = Ext.getCmp(\"userForm\");\r",
                                             "\r",
+                                            "var action = \"user/create\";\r",
+                                            "\r",
+                                            "if(formPanel.getForm().findField(\"user_id\").getValue() > 0){\r",
+                                            "    action = \"user/update\";\r",
+                                            "}\r",
+                                            "\r",
                                             "formPanel.getForm().submit({\r",
                                             "    clientValidation: true,\r",
-                                            "    url: 'static/serverResult.json',\r",
+                                            "    url: action,\r",
                                             "    params: {\r",
                                             "        newStatus: 'delivered'\r",
                                             "    },\r",

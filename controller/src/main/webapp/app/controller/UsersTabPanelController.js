@@ -37,7 +37,7 @@ Ext.define('Peacock.controller.UsersTabPanelController', {
             var jsonObj;
 
             Ext.Ajax.request({
-                url: 'static/userSummary.json',
+                url: 'user/getUser',
                 params: {
                     user_id : Peacock.app.selectedRecord.get("user_id")
                 },

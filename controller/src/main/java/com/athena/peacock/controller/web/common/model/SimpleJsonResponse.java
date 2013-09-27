@@ -16,34 +16,57 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 25.		First Draft.
+ * Bong-Jin Kwon	2013. 9. 27.		First Draft.
  */
-package com.athena.peacock.controller.web.common.json;
-
-import java.text.SimpleDateFormat;
-
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig.Feature;
+package com.athena.peacock.controller.web.common.model;
 
 /**
  * <pre>
- * DTO Date type 을 json 문자열로 변환시 사용할 포맷 지정.
- * - 주의: Controller 에서 @ResponseBody 로 리턴될때 적용됨.
+ * 서버 C,U,D 작업 결과에 대한 JSON Response 클래스.
+ * - ex) {"success": true, "msg":"Create sucess"}
  * </pre>
  * @author Bong-Jin Kwon
  * @version 1.0
  */
-public class JacksonObjectMapper extends ObjectMapper {
+public class SimpleJsonResponse {
+	
+	/**
+	 * 서버 작업 성공여부
+	 */
+	private boolean success = true;
+	
+	/**
+	 * 서버 작업 결과 메시지.
+	 */
+	private String msg;
 
 	/**
 	 * <pre>
 	 * 
 	 * </pre>
 	 */
-	public JacksonObjectMapper() {
-		super.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
-		setDateFormat(new SimpleDateFormat("yyyy.MM.dd HH:mm:ss z"));
+	public SimpleJsonResponse() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public boolean isSuccess() {
+		return success;
+	}
+
+
+	public void setSuccess(boolean success) {
+		this.success = success;
+	}
+
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
 	}
 
 }
-//end of JacksonObjectMapper.java
+//end of SimpleJsonResponse.java

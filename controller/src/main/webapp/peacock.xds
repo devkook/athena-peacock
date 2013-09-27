@@ -246,11 +246,11 @@
         },
         "08950a00-7767-4d84-b8e0-a94c8c2ba598": {
             "paths": [
-                "metadata/controller/GlobalAjaxController",
-                "app/controller/override/GlobalAjaxController.js",
-                "app/controller/GlobalAjaxController.js"
+                "metadata/controller/GlobalConfigController",
+                "app/controller/override/GlobalConfigController.js",
+                "app/controller/GlobalConfigController.js"
             ],
-            "className": "GlobalAjaxController"
+            "className": "GlobalConfigController"
         },
         "abb635b8-446b-4a74-a3f6-5b0bfb607329": {
             "paths": [
