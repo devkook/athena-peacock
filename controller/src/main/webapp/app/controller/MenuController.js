@@ -188,7 +188,7 @@ Ext.define('Peacock.controller.MenuController', {
             dataIndex: 'users'
         }, {
             text: 'Description',
-            dataIndex: 'desc',
+            dataIndex: 'description',
             width: 200
         }, {
             text: 'Create Date',

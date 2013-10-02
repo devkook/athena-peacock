@@ -20,7 +20,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/userGroupList.json"
+                "url": "usergroup/list"
             },
             "designerId": "3a1e1135-1865-42f1-9fb9-8756661d43da",
             "cn": [

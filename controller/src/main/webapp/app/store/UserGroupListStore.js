@@ -28,7 +28,7 @@ Ext.define('Peacock.store.UserGroupListStore', {
             storeId: 'UserGroupListStore',
             proxy: me.processMyAjaxProxy5({
                 type: 'ajax',
-                url: 'static/userGroupList.json',
+                url: 'usergroup/list',
                 reader: {
                     type: 'json',
                     root: 'list'

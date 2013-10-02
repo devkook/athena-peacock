@@ -123,7 +123,7 @@ Ext.define('Peacock.controller.MainToolbarController', {
                 params : {
                     group_id : Peacock.app.selectedRecord.get("group_id")
                 },
-                url : "static/groupSummary.json",
+                url : "usergroup/getUserGroup",
                 waitMsg: 'Loading...'
             });
 
@@ -151,6 +151,7 @@ Ext.define('Peacock.controller.MainToolbarController', {
     onActionDeleteClick: function() {
 
         var _pararms = {};
+        var _url = "";
 
         if (Peacock.app.menu_id == 'insts'){
 
@@ -169,10 +170,12 @@ Ext.define('Peacock.controller.MainToolbarController', {
 
         }else if (Peacock.app.menu_id == 'user-grp'){
 
+            _url = "usergroup/delete";
             _pararms = {group_id : Peacock.app.selectedRecord.get("group_id")};
 
         }else if (Peacock.app.menu_id == 'users'){
 
+            _url = "user/delete";
             _pararms = {user_id : Peacock.app.selectedRecord.get("user_id")};
 
         }
@@ -184,7 +187,7 @@ Ext.define('Peacock.controller.MainToolbarController', {
             if(btn == "yes"){
 
                 Ext.Ajax.request({
-                    url: 'user/delete',
+                    url: _url,
                     params: _pararms,
                     waitMsg: 'Delete Data...',
                     success: function(response){

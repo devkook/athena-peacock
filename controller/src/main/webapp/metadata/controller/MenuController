@@ -236,7 +236,7 @@
                     "    dataIndex: 'users'\r",
                     "}, {\r",
                     "    text: 'Description',\r",
-                    "    dataIndex: 'desc',\r",
+                    "    dataIndex: 'description',\r",
                     "    width: 200\r",
                     "}, {\r",
                     "    text: 'Create Date',\r",

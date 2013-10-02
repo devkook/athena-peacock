@@ -101,7 +101,7 @@
                     "userConfig": {
                         "layout|anchor": "100%",
                         "fieldLabel": "Description",
-                        "name": "desc"
+                        "name": "description"
                     },
                     "designerId": "fba7766e-15fd-4f4e-b402-2a9d2d791b9b"
                 }
@@ -147,9 +147,15 @@
                                 "implHandler": [
                                     "var formPanel = Ext.getCmp(\"userGroupForm\");\r",
                                     "\r",
+                                    "var action = \"usergroup/create\";\r",
+                                    "\r",
+                                    "if(formPanel.getForm().findField(\"group_id\").getValue() > 0){\r",
+                                    "    action = \"usergroup/update\";\r",
+                                    "}\r",
+                                    "\r",
                                     "formPanel.getForm().submit({\r",
                                     "    clientValidation: true,\r",
-                                    "    url: 'static/serverResult.json',\r",
+                                    "    url: action,\r",
                                     "    params: {\r",
                                     "        newStatus: 'delivered'\r",
                                     "    },\r",

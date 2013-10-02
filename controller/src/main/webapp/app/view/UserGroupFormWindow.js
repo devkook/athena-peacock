@@ -63,7 +63,7 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
                             xtype: 'textareafield',
                             anchor: '100%',
                             fieldLabel: 'Description',
-                            name: 'desc'
+                            name: 'description'
                         }
                     ]
                 }
@@ -109,9 +109,15 @@ Ext.define('Peacock.view.UserGroupFormWindow', {
     onButtonClick: function(button, e, eOpts) {
         var formPanel = Ext.getCmp("userGroupForm");
 
+        var action = "usergroup/create";
+
+        if(formPanel.getForm().findField("group_id").getValue() > 0){
+            action = "usergroup/update";
+        }
+
         formPanel.getForm().submit({
             clientValidation: true,
-            url: 'static/serverResult.json',
+            url: action,
             params: {
                 newStatus: 'delivered'
             },

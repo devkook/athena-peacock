@@ -58,7 +58,7 @@
                     "    var jsonObj;\r",
                     "\r",
                     "    Ext.Ajax.request({\r",
-                    "        url: 'static/groupSummary.json',\r",
+                    "        url: 'usergroup/getUserGroup',\r",
                     "        params: {\r",
                     "            group_id : Peacock.app.selectedRecord.get(\"group_id\")\r",
                     "        },\r",

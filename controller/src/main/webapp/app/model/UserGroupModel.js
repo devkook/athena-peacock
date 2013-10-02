@@ -26,7 +26,7 @@ Ext.define('Peacock.model.UserGroupModel', {
             type: 'string'
         },
         {
-            name: 'desc',
+            name: 'description',
             type: 'string'
         },
         {

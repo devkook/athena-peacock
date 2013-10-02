@@ -44,7 +44,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "desc",
+                "name": "description",
                 "type": "string"
             },
             "designerId": "b568edaf-1745-4710-b880-28c6fae3f1b2"

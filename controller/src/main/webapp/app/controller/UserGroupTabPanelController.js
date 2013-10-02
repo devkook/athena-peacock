@@ -41,7 +41,7 @@ Ext.define('Peacock.controller.UserGroupTabPanelController', {
             var jsonObj;
 
             Ext.Ajax.request({
-                url: 'static/groupSummary.json',
+                url: 'usergroup/getUserGroup',
                 params: {
                     group_id : Peacock.app.selectedRecord.get("group_id")
                 },

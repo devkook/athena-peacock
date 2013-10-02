@@ -16,9 +16,9 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Bong-Jin Kwon	2013. 9. 24.		First Draft.
+ * Bong-Jin Kwon	2013. 10. 2.		First Draft.
  */
-package com.athena.peacock.controller.web.user;
+package com.athena.peacock.controller.web.usergroup;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,44 +30,45 @@ import com.athena.peacock.controller.web.common.model.DtoJsonResponse;
 import com.athena.peacock.controller.web.common.model.ExtjsGridParam;
 import com.athena.peacock.controller.web.common.model.GridJsonResponse;
 import com.athena.peacock.controller.web.common.model.SimpleJsonResponse;
+import com.athena.peacock.controller.web.user.UserDto;
 
 /**
  * <pre>
- * 사용자 관리 컨트롤러.
+ * 사용자 그룹 관리 컨트롤러.
  * </pre>
  * @author Bong-Jin Kwon
  * @version 1.0
  */
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/usergroup")
+public class UserGroupController {
 	
 	@Autowired
-	private UserService service;
+	private UserGroupService service;
 
 	/**
 	 * <pre>
 	 * 
 	 * </pre>
 	 */
-	public UserController() {
+	public UserGroupController() {
 		// TODO Auto-generated constructor stub
 	}
 	
 	@RequestMapping("/list")
 	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, ExtjsGridParam gridParam){
 		
-		jsonRes.setTotal(service.getUserListTotalCount(gridParam));
-		jsonRes.setList(service.getUserList(gridParam));
+		jsonRes.setTotal(service.getUserGroupListTotalCount(gridParam));
+		jsonRes.setList(service.getUserGroupList(gridParam));
 		
 		return jsonRes;
 	}
 	
 	@RequestMapping("/create")
-	public @ResponseBody SimpleJsonResponse create(SimpleJsonResponse jsonRes, UserDto user){
+	public @ResponseBody SimpleJsonResponse create(SimpleJsonResponse jsonRes, UserGroupDto userGroup){
 		
 		try{
-			service.insertUser(user);
+			service.insertUserGroup(userGroup);
 			jsonRes.setMsg("Create success.");
 			
 		}catch(Exception e){
@@ -83,10 +84,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/update")
-	public @ResponseBody SimpleJsonResponse update(SimpleJsonResponse jsonRes, UserDto user){
+	public @ResponseBody SimpleJsonResponse update(SimpleJsonResponse jsonRes, UserGroupDto userGroup){
 		
 		try{
-			service.updateUser(user);
+			service.updateUserGroup(userGroup);
 			jsonRes.setMsg("Update success.");
 			
 		}catch(Exception e){
@@ -102,10 +103,10 @@ public class UserController {
 	}
 	
 	@RequestMapping("/delete")
-	public @ResponseBody SimpleJsonResponse delete(SimpleJsonResponse jsonRes, @RequestParam("user_id") int user_id){
+	public @ResponseBody SimpleJsonResponse delete(SimpleJsonResponse jsonRes, @RequestParam("group_id") int group_id){
 		
 		try{
-			service.deleteUser(user_id);
+			service.deleteUserGroup(group_id);
 			jsonRes.setMsg("Delete success.");
 			
 		}catch(Exception e){
@@ -119,13 +120,13 @@ public class UserController {
 		return jsonRes;
 	}
 	
-	@RequestMapping("/getUser")
-	public @ResponseBody DtoJsonResponse getUser(DtoJsonResponse jsonRes, @RequestParam("user_id") int user_id){
+	@RequestMapping("/getUserGroup")
+	public @ResponseBody DtoJsonResponse getUserGroup(DtoJsonResponse jsonRes, @RequestParam("group_id") int group_id){
 		
-		jsonRes.setData(service.getUser(user_id));
+		jsonRes.setData(service.getUserGroup(group_id));
 		
 		return jsonRes;
 	}
 
 }
-//end of UserController.java
+//end of UserGroupController.java
