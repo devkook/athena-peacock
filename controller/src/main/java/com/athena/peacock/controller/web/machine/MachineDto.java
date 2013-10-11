@@ -44,7 +44,11 @@ public class MachineDto extends BaseDto {
 	private String memSize;
 	private String ipAddr;
 	private String hostName;
-
+	private String sshPort;
+	private String sshUsername;
+	private String sshPassword;
+	private String sshKeyFile;
+	
 	/**
 	 * @return the machineId
 	 */
@@ -197,6 +201,62 @@ public class MachineDto extends BaseDto {
 	 */
 	public void setHostName(String hostName) {
 		this.hostName = hostName;
+	}
+
+	/**
+	 * @return the sshPort
+	 */
+	public String getSshPort() {
+		return sshPort;
+	}
+
+	/**
+	 * @param sshPort the sshPort to set
+	 */
+	public void setSshPort(String sshPort) {
+		this.sshPort = sshPort;
+	}
+
+	/**
+	 * @return the sshUsername
+	 */
+	public String getSshUsername() {
+		return sshUsername;
+	}
+
+	/**
+	 * @param sshUsername the sshUsername to set
+	 */
+	public void setSshUsername(String sshUsername) {
+		this.sshUsername = sshUsername;
+	}
+
+	/**
+	 * @return the sshPassword
+	 */
+	public String getSshPassword() {
+		return sshPassword;
+	}
+
+	/**
+	 * @param sshPassword the sshPassword to set
+	 */
+	public void setSshPassword(String sshPassword) {
+		this.sshPassword = sshPassword;
+	}
+
+	/**
+	 * @return the sshKeyFile
+	 */
+	public String getSshKeyFile() {
+		return sshKeyFile;
+	}
+
+	/**
+	 * @param sshKeyFile the sshKeyFile to set
+	 */
+	public void setSshKeyFile(String sshKeyFile) {
+		this.sshKeyFile = sshKeyFile;
 	}
 }
 //end of MachineDto.java

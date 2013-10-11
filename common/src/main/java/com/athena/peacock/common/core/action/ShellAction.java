@@ -122,8 +122,10 @@ public class ShellAction extends Action {
 			
 			commandLine.setExecutable(command);
 			
-			for (String argument : arguments) {
-				commandLine.createArg().setValue(argument);
+			if (getArguments().size() > 0) {
+				for (String argument : arguments) {
+					commandLine.createArg().setValue(argument);
+				}
 			}
 			
 			/** verify command string */

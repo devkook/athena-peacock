@@ -34,8 +34,6 @@
         </property>
     </bean>
 	
-	
-	    
 	<!-- Enables the @Transactional programming model -->
 	<tx:annotation-driven proxy-target-class="true"/>
 	
@@ -44,6 +42,7 @@
 	<mvc:resources mapping="/app/**" location="/app/" />
 	<mvc:resources mapping="/metadata/**" location="/metadata/" />
 	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<mvc:resources mapping="/repo/**" location="/repo/" />
 	
 	<!-- 
 	405 에러 방지 <mvc:resources mapping="/static/**" location="/static/" /> 대신 아래설정 사용.
@@ -110,7 +109,6 @@
 			</list>
 		</property>
 	</bean>
-
 	
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />

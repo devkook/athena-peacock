@@ -69,6 +69,12 @@ public class PropertyUtil {
 	            	
 	            	properties = (Properties[])ArrayUtils.add(properties, prop);
 	            }
+        	} else {
+        		// jar 배포 환경에서 java -jar로 agent를 실행할 경우..
+            	prop = new Properties();
+            	prop.load(PropertyUtil.class.getResourceAsStream("/config/context.properties"));
+            	
+            	properties = (Properties[])ArrayUtils.add(properties, prop);
         	}
         } catch (FileNotFoundException e) {
             logger.error("Property file(s) are not exist.", e);

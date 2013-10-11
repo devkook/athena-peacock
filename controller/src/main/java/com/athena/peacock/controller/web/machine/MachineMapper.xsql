@@ -23,6 +23,10 @@
 			   , MEM_SIZE AS memSize
 			   , IP_ADDR AS ipAddr
 			   , HOST_NAME AS hostName
+			   , SSH_PORT AS sshPort
+			   , SSH_USERNAME AS sshUsername
+			   , SSH_PASSWORD AS sshPassword
+			   , SSH_KEY_FILE AS sshKeyFile
 			   , REG_USER_ID AS regUserId
 			   , REG_DT AS regDt
 			   , UPD_USER_ID AS updUserId
@@ -43,6 +47,10 @@
 			   , MEM_SIZE = #{memSize}
 			   , IP_ADDR = #{ipAddr}
 			   , HOST_NAME = #{hostName}
+			   , SSH_PORT = #{sshPort}
+			   , SSH_USERNAME = #{sshUsername}
+			   , SSH_PASSWORD = #{sshPassword}
+			   , SSH_KEY_FILE = #{sshKeyFile}
 			   , UPD_USER_ID = #{updUserId}
 			   , UPD_DT = NOW()
 		 WHERE MACHINE_ID = #{machineId}
@@ -64,6 +72,10 @@
 			   , MEM_SIZE AS memSize
 			   , IP_ADDR AS ipAddr
 			   , HOST_NAME AS hostName
+			   , SSH_PORT AS sshPort
+			   , SSH_USERNAME AS sshUsername
+			   , SSH_PASSWORD AS sshPassword
+			   , SSH_KEY_FILE AS sshKeyFile
 			   , REG_USER_ID AS regUserId
 			   , REG_DT AS regDt
 			   , UPD_USER_ID AS updUserId
@@ -81,6 +93,10 @@
 		<if test="memSize != null">AND MEM_SIZE = #{memSize}</if>
 		<if test="ipAddr != null">AND IP_ADDR = #{ipAddr}</if>
 		<if test="hostName != null">AND HOST_NAME = #{hostName}</if>
+		<if test="sshPort != null">AND SSH_PORT = #{sshPort}</if>
+		<if test="sshUsername != null">AND SSH_USERNAME = #{sshUsername}</if>
+		<if test="sshPassword != null">AND SSH_PASSWORD = #{sshPassword}</if>
+		<if test="sshKeyFile != null">AND SSH_KEY_FILE = #{sshKeyFile}</if>
 	</select>
 
 </mapper>
