@@ -124,7 +124,7 @@ public class ShellAction extends Action {
 			
 			if (getArguments().size() > 0) {
 				for (String argument : arguments) {
-					commandLine.createArg().setValue(argument);
+					commandLine.createArg().setLine(argument);
 				}
 			}
 			

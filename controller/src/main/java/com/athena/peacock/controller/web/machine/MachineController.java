@@ -26,6 +26,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -138,6 +139,7 @@ public class MachineController {
 		//List<MachineDto> machineList = machineService.getMachineList(new MachineDto());
 		
 		String targetDir = "/usr/local/apache";
+		String version = "2.2.25";
 		
 		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
 		cmdMsg.setAgentId("e8a478c2faff41c6a94a52540020c3a0");
@@ -149,54 +151,51 @@ public class MachineController {
 		ShellAction s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		//s_action.addArguments("http://apache.mirror.cdnetworks.com/httpd/httpd-2.4.4.tar.gz");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/httpd-2.4.4.tar.gz");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/httpd-" + version + ".tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("tar");
 		s_action.addArguments("xvzf");
-		s_action.addArguments("httpd-2.4.4.tar.gz");
+		s_action.addArguments("httpd-" + version + ".tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4/srclib");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("wget");
-		//s_action.addArguments("http://apache.tt.co.kr/apr/apr-1.4.6.tar.gz");
 		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/apr-1.4.6.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4/srclib");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("wget");
-		//s_action.addArguments("http://apache.tt.co.kr/apr/apr-util-1.5.2.tar.gz");
 		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/apr-util-1.5.2.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4/srclib");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("tar");
 		s_action.addArguments("xvzf");
 		s_action.addArguments("apr-1.4.6.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4/srclib");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("tar");
 		s_action.addArguments("xvzf");
 		s_action.addArguments("apr-util-1.5.2.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4/srclib");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("mv");
 		s_action.addArguments("apr-1.4.6");
 		s_action.addArguments("apr");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4/srclib");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("mv");
 		s_action.addArguments("apr-util-1.5.2");
 		s_action.addArguments("apr-util");
@@ -215,7 +214,7 @@ public class MachineController {
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version);
 		s_action.setCommand("./configure");
 		s_action.addArguments("--prefix=" + targetDir);
 		s_action.addArguments("--enable-mods-shared=most");
@@ -229,16 +228,22 @@ public class MachineController {
 		s_action.addArguments("--enable-expires");
 		s_action.addArguments("--enable-headers");
 		s_action.addArguments("--enable-proxy");
-		s_action.addArguments("--enable-mpms-shared=all");
+		
+		if (version.startsWith("2.2")) {
+			s_action.addArguments("--with-mpm=prefork");
+			//s_action.addArguments("--with-mpm=worker");
+		} else if (version.startsWith("2.3") || version.startsWith("2.4")) {
+			s_action.addArguments("--enable-mpms-shared=all");
+		}
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version);
 		s_action.setCommand("make");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory("/usr/local/src/httpd-2.4.4");
+		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version);
 		s_action.setCommand("make");
 		s_action.addArguments("install");
 		command.addAction(s_action);
@@ -251,7 +256,6 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		//s_action.addArguments("http://www.apache.org/dist/tomcat/tomcat-connectors/jk/tomcat-connectors-1.2.37-src.tar.gz");
 		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/tomcat-connectors-1.2.37-src.tar.gz");
 		command.addAction(s_action);
 		
@@ -288,7 +292,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/conf/httpd.conf");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/httpd.conf");
 		s_action.addArguments("-O");
 		s_action.addArguments("httpd.conf");
 		command.addAction(s_action);
@@ -296,7 +300,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/conf/mod-jk.conf");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/mod-jk.conf");
 		s_action.addArguments("-O");
 		s_action.addArguments("mod-jk.conf");
 		command.addAction(s_action);
@@ -304,7 +308,7 @@ public class MachineController {
 //		s_action = new ShellAction(sequence++);
 //		s_action.setWorkingDiretory(targetDir + "/conf");
 //		s_action.setCommand("wget");
-//		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/conf/workers.properties");
+//		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/workers.properties");
 //		s_action.addArguments("-O");
 //		s_action.addArguments("workers.properties");
 //		command.addAction(s_action);
@@ -317,7 +321,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/conf/uriworkermap.properties");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/uriworkermap.properties");
 		s_action.addArguments("-O");
 		s_action.addArguments("uriworkermap.properties");
 		command.addAction(s_action);
@@ -325,7 +329,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf/extra");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/conf/httpd-mpm.conf");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/httpd-mpm.conf");
 		s_action.addArguments("-O");
 		s_action.addArguments("httpd-mpm.conf");
 		command.addAction(s_action);
@@ -382,6 +386,208 @@ public class MachineController {
 		command.addAction(s_action);
 
 		// Add CHECK Command
+		cmdMsg.addCommand(command);
+		
+		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", response.getResults());
+		
+		return mav;
+	}
+
+	/**
+	 * <pre>
+	 * Agent에 MySQL 설치를 위한 테스트 메소드
+	 * </pre>
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/mysql")
+	public ModelAndView mysql() throws Exception {
+		String dataDir = "/data/mysql";
+		String port = "3316";
+		String password = "peacock";
+		
+		String version = "5.5.34";
+		
+		if (StringUtils.isEmpty(dataDir)) {
+			dataDir = "/var/lib/mysql";
+		}
+		
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId("e8a478c2faff41c6a94a52540020c3a0");
+		cmdMsg.setBlocking(true);
+		
+		Command command = new Command("CONFIGURATION");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/etc");
+		s_action.setCommand("wget");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/mysql/" + version + "/my.cnf");
+		s_action.addArguments("-O");
+		s_action.addArguments("my.cnf");
+		command.addAction(s_action);
+		
+		List<Property> properties = new ArrayList<Property>();
+		Property property = new Property();
+		property.setKey("mysql.datadir");
+		property.setValue(dataDir);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("mysql.port");
+		property.setValue(port);
+		properties.add(property);
+		
+		ConfigAction c_action = new ConfigAction(sequence++);
+		c_action.setFileName("/etc/my.cnf");
+		c_action.setProperties(properties);
+		command.addAction(c_action);
+		
+		// Add CONFIGURATION Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("MySQL INSTALL");
+		sequence = 0;
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/mysql/" + version + "/MySQL-server.rpm");
+		s_action.addArguments("-O");
+		s_action.addArguments("MySQL-server.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("http://10.211.55.2:8080/controller/repo/mysql/" + version + "/MySQL-client.rpm");
+		s_action.addArguments("-O");
+		s_action.addArguments("MySQL-client.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("rpm");
+		s_action.addArguments("-Uvh");
+		s_action.addArguments("MySQL-server.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("rpm");
+		s_action.addArguments("-Uvh");
+		s_action.addArguments("MySQL-client.rpm");
+		command.addAction(s_action);
+		
+		// Add MySQL INSTALL Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("Change Password");
+		sequence = 0;
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("service");
+		s_action.addArguments("mysql");
+		s_action.addArguments("start");
+		command.addAction(s_action);
+
+//		s_action = new ShellAction(sequence++);
+//		s_action.setCommand("sleep");
+//		s_action.addArguments("5");
+//		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mysqladmin");
+		s_action.addArguments("-u");
+		s_action.addArguments("root");
+		s_action.addArguments("password");
+		s_action.addArguments(password);
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mysqladmin");
+		s_action.addArguments("-u");
+		s_action.addArguments("root");
+		s_action.addArguments("-h");
+		s_action.addArguments("localhost.localdomain");
+		s_action.addArguments("-P");
+		s_action.addArguments(port);
+		s_action.addArguments("password");
+		s_action.addArguments(password);
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mysql");
+		s_action.addArguments("-u");
+		s_action.addArguments("root");
+		s_action.addArguments("-p" + password);
+		s_action.addArguments("-e");
+		s_action.addArguments("'select User,Host,Password from mysql.user'");
+		command.addAction(s_action);
+
+		// Add Change Password Command
+		cmdMsg.addCommand(command);
+		
+		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", response.getResults());
+		
+		return mav;
+	}
+	
+
+	/**
+	 * <pre>
+	 * Agent에 MySQL 설치를 위한 테스트 메소드
+	 * </pre>
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/mysql_init")
+	public ModelAndView mysql_init() throws Exception {
+
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId("e8a478c2faff41c6a94a52540020c3a0");
+		cmdMsg.setBlocking(true);
+		
+		Command command = new Command("DELETE");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("service");
+		s_action.addArguments("mysql");
+		s_action.addArguments("stop");
+		command.addAction(s_action);
+
+//		s_action = new ShellAction(sequence++);
+//		s_action.setCommand("sleep");
+//		s_action.addArguments("5");
+//		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("rpm");
+		s_action.addArguments("--erase");
+		s_action.addArguments("MySQL-client");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("rpm");
+		s_action.addArguments("--erase");
+		s_action.addArguments("MySQL-server");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("userdel");
+		s_action.addArguments("-r");
+		s_action.addArguments("mysql");
+		command.addAction(s_action);
+
+		// Add DELETE Command
 		cmdMsg.addCommand(command);
 		
 		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);

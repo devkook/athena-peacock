@@ -429,6 +429,7 @@ CREATE TABLE IF NOT EXISTS `peacock`.`provisioning_item_tbl` (
   `SOFTWARE_ID` INT NOT NULL,
   `ACTION_NAME` VARCHAR(45) NULL,
   `SHELL_COMMAND` VARCHAR(45) NULL,
+  `WORKING_DIR` VARCHAR(255) NULL,
   `SHELL_OPTIONS` VARCHAR(1000) NULL,
   `VARIABLES` VARCHAR(1000) NULL COMMENT 'shell option 또는 config 파일 내에서 치환되어야 할 변수 목록으로 ,(comma)로 구분된다.\n(eg.)\nServerRoot,Port,ServerName',
   `FILE_NAME` VARCHAR(255) NULL,
