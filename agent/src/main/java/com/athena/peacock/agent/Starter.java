@@ -72,7 +72,7 @@ public class Starter {
 			// nothing to do.
 		} finally {
 			if (StringUtils.isEmpty(configFile)) {
-				configFile = "/peacock/conf/agent.conf";
+				configFile = "/peacock/agent/config/agent.conf";
 			}
 		}
 		
@@ -99,7 +99,7 @@ public class Starter {
 			// nothing to do.
 		} finally {
 			if (StringUtils.isEmpty(agentFile)) {
-				agentFile = "/peacock/.agent";
+				agentFile = "/peacock/agent/.agent";
 			}
 		}
 		

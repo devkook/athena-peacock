@@ -151,7 +151,7 @@ public class MachineController {
 		ShellAction s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/httpd-" + version + ".tar.gz");
+		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/httpd-" + version + ".tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -164,13 +164,13 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/apr-1.4.6.tar.gz");
+		s_action.addArguments("${RepositoryUrl}/apache/apr-1.4.6.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/apr-util-1.5.2.tar.gz");
+		s_action.addArguments("${RepositoryUrl}/apache/apr-util-1.5.2.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -256,7 +256,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/tomcat-connectors-1.2.37-src.tar.gz");
+		s_action.addArguments("${RepositoryUrl}/apache/tomcat-connectors-1.2.37-src.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -292,7 +292,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/httpd.conf");
+		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/httpd.conf");
 		s_action.addArguments("-O");
 		s_action.addArguments("httpd.conf");
 		command.addAction(s_action);
@@ -300,7 +300,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/mod-jk.conf");
+		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/mod-jk.conf");
 		s_action.addArguments("-O");
 		s_action.addArguments("mod-jk.conf");
 		command.addAction(s_action);
@@ -308,7 +308,7 @@ public class MachineController {
 //		s_action = new ShellAction(sequence++);
 //		s_action.setWorkingDiretory(targetDir + "/conf");
 //		s_action.setCommand("wget");
-//		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/workers.properties");
+//		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/workers.properties");
 //		s_action.addArguments("-O");
 //		s_action.addArguments("workers.properties");
 //		command.addAction(s_action);
@@ -321,7 +321,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/uriworkermap.properties");
+		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/uriworkermap.properties");
 		s_action.addArguments("-O");
 		s_action.addArguments("uriworkermap.properties");
 		command.addAction(s_action);
@@ -329,7 +329,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf/extra");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/apache/" + version + "/conf/httpd-mpm.conf");
+		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/httpd-mpm.conf");
 		s_action.addArguments("-O");
 		s_action.addArguments("httpd-mpm.conf");
 		command.addAction(s_action);
@@ -426,7 +426,7 @@ public class MachineController {
 		ShellAction s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/etc");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/mysql/" + version + "/my.cnf");
+		s_action.addArguments("${RepositoryUrl}/mysql/" + version + "/my.cnf");
 		s_action.addArguments("-O");
 		s_action.addArguments("my.cnf");
 		command.addAction(s_action);
@@ -456,7 +456,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/mysql/" + version + "/MySQL-server.rpm");
+		s_action.addArguments("${RepositoryUrl}/mysql/" + version + "/MySQL-server.rpm");
 		s_action.addArguments("-O");
 		s_action.addArguments("MySQL-server.rpm");
 		command.addAction(s_action);
@@ -464,7 +464,7 @@ public class MachineController {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		s_action.addArguments("http://10.211.55.2:8080/controller/repo/mysql/" + version + "/MySQL-client.rpm");
+		s_action.addArguments("${RepositoryUrl}/mysql/" + version + "/MySQL-client.rpm");
 		s_action.addArguments("-O");
 		s_action.addArguments("MySQL-client.rpm");
 		command.addAction(s_action);
@@ -494,11 +494,6 @@ public class MachineController {
 		s_action.addArguments("start");
 		command.addAction(s_action);
 
-//		s_action = new ShellAction(sequence++);
-//		s_action.setCommand("sleep");
-//		s_action.addArguments("5");
-//		command.addAction(s_action);
-		
 		s_action = new ShellAction(sequence++);
 		s_action.setCommand("mysqladmin");
 		s_action.addArguments("-u");
@@ -539,11 +534,10 @@ public class MachineController {
 		
 		return mav;
 	}
-	
 
 	/**
 	 * <pre>
-	 * Agent에 MySQL 설치를 위한 테스트 메소드
+	 * Agent에 MySQL 제거를 위한 테스트 메소드
 	 * </pre>
 	 * @return
 	 * @throws Exception
@@ -564,11 +558,6 @@ public class MachineController {
 		s_action.addArguments("stop");
 		command.addAction(s_action);
 
-//		s_action = new ShellAction(sequence++);
-//		s_action.setCommand("sleep");
-//		s_action.addArguments("5");
-//		command.addAction(s_action);
-
 		s_action = new ShellAction(sequence++);
 		s_action.setCommand("rpm");
 		s_action.addArguments("--erase");
@@ -588,6 +577,325 @@ public class MachineController {
 		command.addAction(s_action);
 
 		// Add DELETE Command
+		cmdMsg.addCommand(command);
+		
+		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", response.getResults());
+		
+		return mav;
+	}
+
+	/**
+	 * <pre>
+	 * Agent에 JBoss 설치를 위한 테스트 메소드
+	 * </pre>
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/jboss")
+	public ModelAndView jboss() throws Exception {
+
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId("e8a478c2faff41c6a94a52540020c3a0");
+		cmdMsg.setBlocking(true);
+		
+		/**
+		 * JBoss Variables
+		 */
+		String jbossHome = "/peacock/jboss-as";
+		String serverHome = "/peacock/servers";
+		String serverName = "test1";
+		String partitionName = "partition";
+		String bindAddress = "0.0.0.0";
+		String bindPort = "ports-default";
+		
+		/**
+		 * DataSource Variables
+		 */
+		String databaseType = "mysql";
+		String jndiName = "testDS";
+		String connectionUrl = "jdbc:mysql:/localhost:3316/peacock";
+		String userName = "root";
+		String password = "peacock";
+		String minPoolSize = "10";
+		String maxPoolSize = "20";
+		
+		Command command = new Command("Pre-install");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(jbossHome);
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(serverHome);
+		command.addAction(s_action);
+		
+		// Add Pre-install Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("JBoss INSTALL");
+		sequence = 0;
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/jboss/jboss-eap-5.2.0.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("jboss-eap-5.2.0.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(jbossHome);
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/jboss/jboss-cluster-template-5.2.0.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("jboss-cluster-template-5.2.0.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(serverHome + "/" + serverName);
+		command.addAction(s_action);
+		
+		List<Property> properties = new ArrayList<Property>();
+		Property property = null;
+		
+		property = new Property();
+		property.setKey("jboss.home");
+		property.setValue(jbossHome);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("server.home");
+		property.setValue(serverHome);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("server.name");
+		property.setValue(serverName);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("partition.name");
+		property.setValue(partitionName);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("bind.address");
+		property.setValue(bindAddress);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("bind.port");
+		property.setValue(bindPort);
+		properties.add(property);
+		
+		ConfigAction c_action = new ConfigAction(sequence++);
+		c_action.setFileName(serverHome + "/" + serverName + "/bin/env.sh");
+		c_action.setProperties(properties);
+		command.addAction(c_action);
+		
+		// Add JBoss INSTALL Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("DataSource Configuration");
+		sequence = 0;
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory(serverHome + "/" + serverName);
+		s_action.setCommand("wget");
+		
+		if (databaseType.equals("oracle")) {
+			s_action.addArguments("${RepositoryUrl}/jboss/datasource/oracle-ds.xml");
+		} else if (databaseType.equals("mysql")) {
+			s_action.addArguments("${RepositoryUrl}/jboss/datasource/mysql-ds.xml");
+		} else if (databaseType.equals("cubrid")) {
+			s_action.addArguments("${RepositoryUrl}/jboss/datasource/cubrid-ds.xml");
+		}
+		s_action.addArguments("-O");
+		s_action.addArguments(serverName + "-ds.xml");
+		command.addAction(s_action);
+		
+		properties = new ArrayList<Property>();
+		property = new Property();
+		property.setKey("jndi.name");
+		property.setValue(jndiName);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("connection.url");
+		property.setValue(connectionUrl);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("user.name");
+		property.setValue(userName);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("user.password");
+		property.setValue(password);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("pool.min");
+		property.setValue(minPoolSize);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("pool.max");
+		property.setValue(maxPoolSize);
+		properties.add(property);
+		
+		c_action = new ConfigAction(sequence++);
+		c_action.setFileName(serverHome + "/" + serverName + "/" + serverName + "-ds.xml");
+		c_action.setProperties(properties);
+		command.addAction(c_action);
+		
+		// Add DataSource Configuration Command
+		cmdMsg.addCommand(command);
+		
+		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("result", response.getResults());
+		
+		return mav;
+	}
+
+	/**
+	 * <pre>
+	 * Agent에 Tomcat 설치를 위한 테스트 메소드
+	 * </pre>
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/tomcat")
+	public ModelAndView tomcat() throws Exception {
+
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId("e8a478c2faff41c6a94a52540020c3a0");
+		cmdMsg.setBlocking(true);
+		
+		/**
+		 * Tomcat Variables
+		 */
+		String javaHome = "";
+		String serverName = "test2";
+		String catalinaHome = "/peacock/tomcat";
+		//String catalinaBase = "/peacock/servers/\\$SERVER_NAME";
+		String catalinaBase = "/peacock/servers";
+		String portOffset = "0";
+		String compUser = "root";
+
+		Command command = new Command("Pre-install");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(catalinaHome);
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(catalinaBase + "/" + serverName);
+		command.addAction(s_action);
+		
+		// Add Pre-install Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("Tomcat Install");
+		sequence = 0;
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/tomcat/apache-tomcat-6.0.37.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("apache-tomcat-6.0.37.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(catalinaHome);
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/tomcat/tomcat-template-6.0.37.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("tomcat-template-6.0.37.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(catalinaBase + "/" + serverName);
+		command.addAction(s_action);
+		
+		List<Property> properties = new ArrayList<Property>();
+		Property property = null;
+		
+		property = new Property();
+		property.setKey("java.home");
+		property.setValue(javaHome);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("server.name");
+		property.setValue(serverName);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("catalina.home");
+		property.setValue(catalinaHome);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("catalina.base");
+		property.setValue(catalinaBase);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("port.offset");
+		property.setValue(portOffset);
+		properties.add(property);
+		
+		property = new Property();
+		property.setKey("comp.user");
+		property.setValue(compUser);
+		properties.add(property);
+		
+		ConfigAction c_action = new ConfigAction(sequence++);
+		c_action.setFileName(catalinaBase + "/" + serverName + "/bin/env.sh");
+		c_action.setProperties(properties);
+		command.addAction(c_action);
+		
+		// Add Tomcat INSTALL Command
 		cmdMsg.addCommand(command);
 		
 		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);

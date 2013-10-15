@@ -31,6 +31,9 @@ import org.codehaus.plexus.util.cli.CommandLineUtils.StringStreamConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.athena.peacock.common.constant.PeacockConstant;
+import com.athena.peacock.common.core.action.support.AgentConfigUtil;
+
 /**
  * <pre>
  * Action for Shell Command
@@ -124,7 +127,11 @@ public class ShellAction extends Action {
 			
 			if (getArguments().size() > 0) {
 				for (String argument : arguments) {
-					commandLine.createArg().setLine(argument);
+					if (argument.indexOf("RepositoryUrl") > -1) {
+						commandLine.createArg().setLine(argument.replaceAll("\\$\\{RepositoryUrl\\}", AgentConfigUtil.getConfig(PeacockConstant.REPOSITORY_URL)));
+					} else {
+						commandLine.createArg().setLine(argument);
+					}
 				}
 			}
 			
@@ -149,6 +156,6 @@ public class ShellAction extends Action {
 
 		return consumer.getOutput();
 	}
-
+	
 }
 //end of ShellAction.java

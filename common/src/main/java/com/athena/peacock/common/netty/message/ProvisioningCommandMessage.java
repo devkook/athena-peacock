@@ -37,7 +37,18 @@ public class ProvisioningCommandMessage extends AbstractMessage {
 	private static final long serialVersionUID = 1L;
 	
     private List<Command> commands;
-    
+
+    /**
+	 * @return the commands
+	 */
+	public List<Command> getCommands() {
+    	if (commands == null) {
+    		commands = new ArrayList<Command>();
+    	}
+    	
+    	return commands;
+	}
+	
     /**
      * <pre>
      * Adds command object to command list
@@ -46,14 +57,10 @@ public class ProvisioningCommandMessage extends AbstractMessage {
      * @param command
      */
     public void addCommand(Command command) {
-    	if (commands == null) {
-    		commands = new ArrayList<Command>();
-    	}
-    	
-        commands.add(command);
+    	getCommands().add(command);
     }
 
-    /**
+	/**
      * <pre>
      * Executes command 
      * </pre>

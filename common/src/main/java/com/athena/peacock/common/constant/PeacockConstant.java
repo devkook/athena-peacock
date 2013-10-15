@@ -37,6 +37,8 @@ public final class PeacockConstant {
 	public static final String SERVER_IP 			= "ServerIP";
 	/** Agent에서 접속할 서버의 포트 */
 	public static final String SERVER_PORT 			= "ServerPort";
+	/** wget을 이용한 software 다운로드 url */
+	public static final String REPOSITORY_URL		= "RepositoryUrl";
 	/** 모니터링 항목 리스트 */
 	public static final String MON_FACTOR_LIST 		= "MON_FACTOR_LIST";
 }

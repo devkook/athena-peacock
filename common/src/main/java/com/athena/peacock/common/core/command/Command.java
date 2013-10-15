@@ -57,12 +57,19 @@ public class Command implements Serializable {
 		return name;
 	}
 
-	public void addAction(Action action) {
+	/**
+	 * @return the actions
+	 */
+	public List<Action> getActions() {
 		if (actions == null) {
 			actions = new ArrayList<Action>();
 		}
 		
-		actions.add(action);
+		return actions;
+	}
+
+	public void addAction(Action action) {
+		getActions().add(action);
 	}
 	
     public void execute(ProvisioningResponseMessage response) {

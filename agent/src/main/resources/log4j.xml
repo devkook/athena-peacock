@@ -16,7 +16,7 @@
 	</appender>
 
 	<appender name="ATHENA_PEACOCK_FILE" class="org.apache.log4j.DailyRollingFileAppender">
-		<param name="File" value="/peacock/log/athena-peacock-agent.log"/>
+		<param name="File" value="/peacock/agent/log/athena-peacock-agent.log"/>
 		<param name="Threshold" value="DEBUG"/>
 		<param name="Append" value="true"/>
 		<param name="DatePattern" value="'.'yyyy-MM-dd"/>

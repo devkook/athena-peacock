@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<datasources>
+	<local-tx-datasource>
+		<jndi-name>${jndi.name}</jndi-name>
+		<connection-url>${connection.url}</connection-url>
+		<driver-class>cubrid.jdbc.driver.CUBRIDDriver</driver-class>
+		<user-name>${user.name}</user-name>
+		<password>${user.password}</password>
+		<min-pool-size>${pool.min}</min-pool-size>
+		<max-pool-size>${pool.max}</max-pool-size>
+		
+		<!-- sql to call when connection is created 
+		<new-connection-sql>some arbitrary sql</new-connection-sql>
+		-->
+		<!-- sql to call on an existing pooled connection when it is obtained from 
+			pool - MySQLValidConnectionChecker is preferred for newer drivers 
+		<check-valid-connection-sql>some arbitrary sql</check-valid-connection-sql>
+		-->
+
+	</local-tx-datasource>
+</datasources>
+
