@@ -404,7 +404,7 @@ CREATE TABLE IF NOT EXISTS `peacock`.`config_file_tbl` (
   `CONFIG_FILE_ID` INT NOT NULL,
   `SOFTWARE_ID` INT NOT NULL,
   `CONFIG_FILE_SOURCE_LOCATION` VARCHAR(200) NULL COMMENT 'Software 설치 시 Agent로 복사 될 초기 설정 파일의 위치로\n복사 대상 설정파일이 아닌 경우 null이 될 수 있다.',
-  `CONFIG_FILE_TARGET_LOCATION` VARCHAR(20) NULL COMMENT 'Software가 설치된 Agent의 파일시스템 상의 경로\n(eg.)\nApache :  ${INSTALL_LOCATION}/conf ,\n                ${INSTALL_LOCATION}/conf/extra\nMySQL : /\nTomcat : ${INSTALL_LOCATION}\nJBoss : ${INSTALL_LOCATION}',
+  `CONFIG_FILE_TARGET_LOCATION` VARCHAR(200) NULL COMMENT 'Software가 설치된 Agent의 파일시스템 상의 경로\n(eg.)\nApache :  ${INSTALL_LOCATION}/conf ,\n                ${INSTALL_LOCATION}/conf/extra\nMySQL : /\nTomcat : ${INSTALL_LOCATION}\nJBoss : ${INSTALL_LOCATION}',
   `CONFIG_FILE_NAME` VARCHAR(45) NULL,
   `PROPERTIES` TEXT NULL COMMENT ',(comma)로 구분된 치환 대상 프로퍼티 목록',
   `REG_USER_ID` INT(11) NULL,

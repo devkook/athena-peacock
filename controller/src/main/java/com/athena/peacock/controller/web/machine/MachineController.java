@@ -230,8 +230,8 @@ public class MachineController {
 		s_action.addArguments("--enable-proxy");
 		
 		if (version.startsWith("2.2")) {
-			s_action.addArguments("--with-mpm=prefork");
-			//s_action.addArguments("--with-mpm=worker");
+			//s_action.addArguments("--with-mpm=prefork");
+			s_action.addArguments("--with-mpm=worker");
 		} else if (version.startsWith("2.3") || version.startsWith("2.4")) {
 			s_action.addArguments("--enable-mpms-shared=all");
 		}
@@ -805,7 +805,7 @@ public class MachineController {
 		String catalinaBase = "/peacock/servers";
 		String portOffset = "0";
 		String compUser = "root";
-
+		
 		Command command = new Command("Pre-install");
 		int sequence = 0;
 		
