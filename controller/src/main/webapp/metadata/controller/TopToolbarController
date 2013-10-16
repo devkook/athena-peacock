@@ -1,0 +1,54 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "TopToolbarController"
+    },
+    "designerId": "6d5543ba-521b-41bf-b38c-3a24a2395ad1",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onMenuitemClick",
+                "implHandler": [
+                    "\r",
+                    "if(item.getId() == \"topMyAccountMenu\"){\r",
+                    "\r",
+                    "\talert(\"click! my account.\");\r",
+                    "\r",
+                    "}else if(item.getId() == \"topLogOutMenu\"){\r",
+                    "\tvar viewport = this.getViewport();\r",
+                    "    viewport.layout.setActiveItem(0);\r",
+                    "}"
+                ],
+                "name": "click",
+                "scope": "me",
+                "designer|targetType": "Ext.menu.Item",
+                "designer|controlQuery": "#topToolbar menuitem"
+            },
+            "designerId": "6039982b-4bad-484a-a636-e7243c5fbe8e"
+        },
+        {
+            "type": "controllerref",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "ref": "viewport",
+                "selector": "mainView"
+            },
+            "designerId": "d583e6e8-6f97-4da7-9fe6-1bc9ee5394d8"
+        }
+    ]
+}

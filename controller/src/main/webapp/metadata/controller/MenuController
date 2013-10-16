@@ -32,6 +32,7 @@
                     "\r",
                     "\r",
                     "Ext.getCmp(\"tbActionMenu\").setDisabled(true);\r",
+                    "Ext.getCmp('detailTitleLabel').setText(\"\");\r",
                     "\r",
                     "\r",
                     "if(record.get('id') == 'inst-dash'){\r",
