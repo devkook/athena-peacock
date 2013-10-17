@@ -374,9 +374,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `peacock`.`config_file_info_tbl`
+-- Table `peacock`.`config_tbl`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `peacock`.`config_file_info_tbl` (
+CREATE TABLE IF NOT EXISTS `peacock`.`config_tbl` (
   `MACHINE_ID` VARCHAR(32) NOT NULL,
   `SOFTWARE_ID` INT NOT NULL,
   `CONFIG_FILE_ID` INT NOT NULL,
@@ -398,9 +398,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `peacock`.`config_file_tbl`
+-- Table `peacock`.`config_repo_tbl`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `peacock`.`config_file_tbl` (
+CREATE TABLE IF NOT EXISTS `peacock`.`config_repo_tbl` (
   `CONFIG_FILE_ID` INT NOT NULL,
   `SOFTWARE_ID` INT NOT NULL,
   `CONFIG_FILE_SOURCE_LOCATION` VARCHAR(200) NULL COMMENT 'Software 설치 시 Agent로 복사 될 초기 설정 파일의 위치로\n복사 대상 설정파일이 아닌 경우 null이 될 수 있다.',
