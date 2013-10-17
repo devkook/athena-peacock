@@ -9,8 +9,8 @@
         "cacheBust": false,
         "buildShouldOverwriteIndex": true
     },
-    "xdsVersion": "2.2.2",
-    "xdsBuild": 991,
+    "xdsVersion": "2.2.3",
+    "xdsBuild": 1044,
     "schemaVersion": 1,
     "upgradeVersion": 210000000503,
     "framework": "ext42",
@@ -283,6 +283,14 @@
                 "app/view/ASGroupTabPanel.js"
             ],
             "className": "ASGroupTabPanel"
+        },
+        "6d5543ba-521b-41bf-b38c-3a24a2395ad1": {
+            "paths": [
+                "metadata/controller/TopToolbarController",
+                "app/controller/override/TopToolbarController.js",
+                "app/controller/TopToolbarController.js"
+            ],
+            "className": "TopToolbarController"
         }
     },
     "viewOrderMap": {
@@ -314,7 +322,8 @@
             "83ebf739-fed3-4351-b886-861dbd8faf89",
             "06afb1ae-22cd-4c26-b63f-bf583f512c21",
             "c8b56b31-d9db-4a25-9efd-a0443deea71d",
-            "08950a00-7767-4d84-b8e0-a94c8c2ba598"
+            "08950a00-7767-4d84-b8e0-a94c8c2ba598",
+            "6d5543ba-521b-41bf-b38c-3a24a2395ad1"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",

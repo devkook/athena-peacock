@@ -38,7 +38,8 @@
             "UsersTabPanelController",
             "UserGroupTabPanelController",
             "MainToolbarController",
-            "GlobalConfigController"
+            "GlobalConfigController",
+            "TopToolbarController"
         ],
         "name": "Peacock"
     },
