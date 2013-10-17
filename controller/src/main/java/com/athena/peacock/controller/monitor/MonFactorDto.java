@@ -20,7 +20,7 @@
  */
 package com.athena.peacock.controller.monitor;
 
-import com.athena.peacock.controller.web.common.dao.BaseDto;
+import com.athena.peacock.controller.web.common.dto.BaseDto;
 
 /**
  * <pre>

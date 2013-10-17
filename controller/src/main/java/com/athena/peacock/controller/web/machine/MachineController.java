@@ -40,7 +40,6 @@ import com.athena.peacock.common.core.command.Command;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
-import com.athena.peacock.controller.netty.PeacockServerHandler;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
 
 /**
@@ -62,10 +61,6 @@ public class MachineController {
     @Inject
     @Named("peacockTransmitter")
 	private PeacockTransmitter peacockTransmitter;
-
-    @Inject
-    @Named("peacockServerHandler")
-    private PeacockServerHandler handler;
 
 	@RequestMapping("/list")
 	public ModelAndView list(MachineDto machine, Model model) throws Exception {
