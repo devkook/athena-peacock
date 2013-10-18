@@ -77,7 +77,7 @@
                     "}else if (Peacock.app.menu_id == 'users'){\r",
                     "\r",
                     "    tabPanel = this.getUserTabPanelView();\r",
-                    "\tdetailTitleLabel.setText(record.get(\"user_name\"));\r",
+                    "    detailTitleLabel.setText(record.get(\"user_name\"));\r",
                     "}\r",
                     "\r",
                     "\r",

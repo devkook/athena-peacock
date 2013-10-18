@@ -291,6 +291,38 @@
                 "app/controller/TopToolbarController.js"
             ],
             "className": "TopToolbarController"
+        },
+        "a6562e41-f3bb-4acf-977b-4b564efaa1bd": {
+            "paths": [
+                "metadata/store/ChartCPUJsonStore",
+                "app/store/override/ChartCPUJsonStore.js",
+                "app/store/ChartCPUJsonStore.js"
+            ],
+            "className": "ChartCPUJsonStore"
+        },
+        "8a217455-79b3-42ff-9a47-c9a44bd1f234": {
+            "paths": [
+                "metadata/model/ChartModel",
+                "app/model/override/ChartModel.js",
+                "app/model/ChartModel.js"
+            ],
+            "className": "ChartModel"
+        },
+        "b4fa8fa0-ca01-40a0-ae65-100954fd4750": {
+            "paths": [
+                "metadata/store/ChartMemoryJsonStore",
+                "app/store/override/ChartMemoryJsonStore.js",
+                "app/store/ChartMemoryJsonStore.js"
+            ],
+            "className": "ChartMemoryJsonStore"
+        },
+        "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c": {
+            "paths": [
+                "metadata/store/ChartNetInJsonStore",
+                "app/store/override/ChartNetInJsonStore.js",
+                "app/store/ChartNetInJsonStore.js"
+            ],
+            "className": "ChartNetInJsonStore"
         }
     },
     "viewOrderMap": {
@@ -312,7 +344,10 @@
             "dc9724ff-cc6e-4218-a964-0eef30683695",
             "6620ee89-95c0-4381-b1e4-b0bb93a0d7fd",
             "2cf56719-2a28-45f0-abe8-91cbdc08d914",
-            "79586cda-e7a7-47c0-9419-0f36e13b98f0"
+            "79586cda-e7a7-47c0-9419-0f36e13b98f0",
+            "a6562e41-f3bb-4acf-977b-4b564efaa1bd",
+            "b4fa8fa0-ca01-40a0-ae65-100954fd4750",
+            "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -333,7 +368,8 @@
             "b6faf1a1-93de-4700-b476-0e0342318161",
             "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8",
             "ed1de570-cef0-403e-8446-f832008b8a7d",
-            "dec0f37a-8134-4eae-9e8c-48adf859aaaf"
+            "dec0f37a-8134-4eae-9e8c-48adf859aaaf",
+            "8a217455-79b3-42ff-9a47-c9a44bd1f234"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",

@@ -26,14 +26,18 @@ Ext.application({
         'OSPackageModel',
         'MyModel',
         'UserGroupMapModel',
-        'ASGroupModel'
+        'ASGroupModel',
+        'ChartModel'
     ],
     stores: [
         'SoftwareListStore',
         'OSPackageListStore',
         'UserGroupMapStore',
         'UserGroupListStore',
-        'ASGroupListStore'
+        'ASGroupListStore',
+        'ChartCPUJsonStore',
+        'ChartMemoryJsonStore',
+        'ChartNetInJsonStore'
     ],
     views: [
         'MainViewport',

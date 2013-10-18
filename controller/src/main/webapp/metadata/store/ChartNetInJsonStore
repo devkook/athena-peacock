@@ -1,0 +1,42 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "ChartModel",
+        "storeId": "ChartNetInJsonStore",
+        "designer|userClassName": "ChartNetInJsonStore"
+    },
+    "designerId": "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "static/chart_netin.json"
+            },
+            "designerId": "92ace13f-2a69-40c2-a830-7b341f4c9c66",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "root": null
+                    },
+                    "designerId": "2c12ae6d-2677-4a56-a7c4-e2320a9bed2a"
+                }
+            ]
+        }
+    ]
+}

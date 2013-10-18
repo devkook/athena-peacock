@@ -18,7 +18,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
     alias: 'widget.instanceTabPanel',
 
     height: 325,
-    width: 755,
+    width: 907,
     activeTab: 0,
 
     initComponent: function() {
@@ -166,7 +166,125 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                 },
                 {
                     xtype: 'panel',
-                    title: 'Monitoring'
+                    height: 289,
+                    width: 755,
+                    title: 'Monitoring',
+                    items: [
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartCPUJsonStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'x'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'CPU',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/2
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'y'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'x',
+                                    yField: 'y',
+                                    smooth: 3
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartMemoryJsonStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'x'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'Memory',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/2
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'y'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'x',
+                                    yField: 'y',
+                                    smooth: 3
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartNetInJsonStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'x'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'Network In',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/2
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'y'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'x',
+                                    yField: 'y',
+                                    smooth: 3
+                                }
+                            ]
+                        }
+                    ]
                 }
             ]
         });

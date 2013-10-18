@@ -23,10 +23,10 @@
                     "\r",
                     "if(item.getId() == \"topMyAccountMenu\"){\r",
                     "\r",
-                    "\talert(\"click! my account.\");\r",
+                    "    alert(\"click! my account.\");\r",
                     "\r",
                     "}else if(item.getId() == \"topLogOutMenu\"){\r",
-                    "\tvar viewport = this.getViewport();\r",
+                    "    var viewport = this.getViewport();\r",
                     "    viewport.layout.setActiveItem(0);\r",
                     "}"
                 ],

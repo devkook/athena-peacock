@@ -7,7 +7,7 @@
     "codeClass": null,
     "userConfig": {
         "height": 325,
-        "width": 755,
+        "width": 907,
         "designer|userClassName": "InstanceTabPanel",
         "designer|userAlias": "instanceTabPanel",
         "activeTab": 0
@@ -354,6 +354,8 @@
             },
             "codeClass": null,
             "userConfig": {
+                "height": 289,
+                "width": 755,
                 "title": "Monitoring"
             },
             "designerId": "071642c3-8d16-4ff6-b621-8c2f7b865437",
@@ -366,6 +368,234 @@
                     },
                     "codeClass": null,
                     "designerId": "74daab3b-8b5f-42c7-8baa-9bcf1e7893b0"
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "CPUChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartCPUJsonStore"
+                    },
+                    "designerId": "9545c8e9-afd8-4702-b324-6bbf0eba6bca",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "x"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "CPU",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/2]"
+                                ]
+                            },
+                            "designerId": "be59972c-35e2-4af0-94d4-5dc39a9ec09f"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "y"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "967aaa82-cdf0-4d4c-a595-af1219caa5fd"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "x",
+                                "yField": [
+                                    "y"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "2ef2ca2a-ba10-410e-8038-61c1f4440f05"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "MemoryChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartMemoryJsonStore"
+                    },
+                    "designerId": "e6d7b847-7a64-45ef-bda5-23470f04d384",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "x"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Memory",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/2]"
+                                ]
+                            },
+                            "designerId": "82021933-07f0-4152-82bc-dd7b1d48745b"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "y"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "5ee1a3e6-6185-4803-a9b5-0e668378013d"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "x",
+                                "yField": [
+                                    "y"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "85a1ada0-c479-4d09-9fca-fc7de0458a76"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "NetworkInChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartNetInJsonStore"
+                    },
+                    "designerId": "02e84f61-6893-4a0b-98e0-9512187fa428",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "x"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Network In",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/2]"
+                                ]
+                            },
+                            "designerId": "84df3e36-4816-4e87-8b3f-84e834d16f2f"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "y"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "f9a3a1bc-234f-4790-a178-8dced0fc57c6"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "x",
+                                "yField": [
+                                    "y"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "cefdec4b-6749-4190-8473-6af77af6d4d4"
+                        }
+                    ]
                 }
             ]
         }

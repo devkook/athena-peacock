@@ -58,7 +58,9 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
 
         }else if(newCard.title == "Monitoring"){
 
-            alert(newCard.title);
+            Ext.getStore('ChartCPUJsonStore').load();
+            Ext.getStore('ChartMemoryJsonStore').load();
+            Ext.getStore('ChartNetInJsonStore').load();
 
         }
     },
