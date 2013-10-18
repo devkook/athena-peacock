@@ -379,12 +379,12 @@
                     "userConfig": {
                         "height": 250,
                         "width": 311,
-                        "designer|displayName": "CPUChart",
+                        "designer|displayName": "IdleCPUChart",
                         "animate": [
                             "true"
                         ],
                         "insetPadding": 20,
-                        "store": "ChartCPUJsonStore"
+                        "store": "ChartIdleCPUStore"
                     },
                     "designerId": "9545c8e9-afd8-4702-b324-6bbf0eba6bca",
                     "isBuiltIn": true,
@@ -404,7 +404,7 @@
                                 ],
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
-                                "title": "CPU",
+                                "title": "Idle CPU",
                                 "dateFormat": "m/d G:i",
                                 "step": [
                                     "[\"h\",1/2]"
@@ -435,7 +435,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "xField": "x",
+                                "xField": "regDt",
                                 "yField": [
                                     "y"
                                 ],
@@ -455,12 +455,12 @@
                     "userConfig": {
                         "height": 250,
                         "width": 311,
-                        "designer|displayName": "MemoryChart",
+                        "designer|displayName": "CombCPUChart",
                         "animate": [
                             "true"
                         ],
                         "insetPadding": 20,
-                        "store": "ChartMemoryJsonStore"
+                        "store": "ChartCombCPUStore"
                     },
                     "designerId": "e6d7b847-7a64-45ef-bda5-23470f04d384",
                     "isBuiltIn": true,
@@ -480,7 +480,7 @@
                                 ],
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
-                                "title": "Memory",
+                                "title": "Combined CPU",
                                 "dateFormat": "m/d G:i",
                                 "step": [
                                     "[\"h\",1/2]"
@@ -511,7 +511,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "xField": "x",
+                                "xField": "regDt",
                                 "yField": [
                                     "y"
                                 ],
@@ -531,12 +531,12 @@
                     "userConfig": {
                         "height": 250,
                         "width": 311,
-                        "designer|displayName": "NetworkInChart",
+                        "designer|displayName": "TotalMemChart",
                         "animate": [
                             "true"
                         ],
                         "insetPadding": 20,
-                        "store": "ChartNetInJsonStore"
+                        "store": "ChartTotalMemStore"
                     },
                     "designerId": "02e84f61-6893-4a0b-98e0-9512187fa428",
                     "isBuiltIn": true,
@@ -556,7 +556,7 @@
                                 ],
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
-                                "title": "Network In",
+                                "title": "Total Memory",
                                 "dateFormat": "m/d G:i",
                                 "step": [
                                     "[\"h\",1/2]"
@@ -573,7 +573,7 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "y"
+                                    "monDataValue"
                                 ],
                                 "title": null
                             },
@@ -587,9 +587,9 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "xField": "x",
+                                "xField": "regDt",
                                 "yField": [
-                                    "y"
+                                    "monDataValue"
                                 ],
                                 "smooth": 3
                             },

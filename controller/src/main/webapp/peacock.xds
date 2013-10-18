@@ -294,11 +294,11 @@
         },
         "a6562e41-f3bb-4acf-977b-4b564efaa1bd": {
             "paths": [
-                "metadata/store/ChartCPUJsonStore",
-                "app/store/override/ChartCPUJsonStore.js",
-                "app/store/ChartCPUJsonStore.js"
+                "metadata/store/ChartIdleCPUStore",
+                "app/store/override/ChartIdleCPUStore.js",
+                "app/store/ChartIdleCPUStore.js"
             ],
-            "className": "ChartCPUJsonStore"
+            "className": "ChartIdleCPUStore"
         },
         "8a217455-79b3-42ff-9a47-c9a44bd1f234": {
             "paths": [
@@ -310,19 +310,19 @@
         },
         "b4fa8fa0-ca01-40a0-ae65-100954fd4750": {
             "paths": [
-                "metadata/store/ChartMemoryJsonStore",
-                "app/store/override/ChartMemoryJsonStore.js",
-                "app/store/ChartMemoryJsonStore.js"
+                "metadata/store/ChartCombCPUStore",
+                "app/store/override/ChartCombCPUStore.js",
+                "app/store/ChartCombCPUStore.js"
             ],
-            "className": "ChartMemoryJsonStore"
+            "className": "ChartCombCPUStore"
         },
         "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c": {
             "paths": [
-                "metadata/store/ChartNetInJsonStore",
-                "app/store/override/ChartNetInJsonStore.js",
-                "app/store/ChartNetInJsonStore.js"
+                "metadata/store/ChartTotalMemStore",
+                "app/store/override/ChartTotalMemStore.js",
+                "app/store/ChartTotalMemStore.js"
             ],
-            "className": "ChartNetInJsonStore"
+            "className": "ChartTotalMemStore"
         }
     },
     "viewOrderMap": {

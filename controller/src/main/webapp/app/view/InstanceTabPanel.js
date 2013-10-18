@@ -176,15 +176,15 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                             width: 311,
                             animate: true,
                             insetPadding: 20,
-                            store: 'ChartCPUJsonStore',
+                            store: 'ChartIdleCPUStore',
                             axes: [
                                 {
                                     type: 'Time',
                                     fields: [
-                                        'x'
+                                        'regDt'
                                     ],
                                     position: 'bottom',
-                                    title: 'CPU',
+                                    title: 'Idle CPU',
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
@@ -194,7 +194,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 {
                                     type: 'Numeric',
                                     fields: [
-                                        'y'
+                                        'monDataValue'
                                     ],
                                     position: 'left'
                                 }
@@ -202,8 +202,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                             series: [
                                 {
                                     type: 'line',
-                                    xField: 'x',
-                                    yField: 'y',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
                                     smooth: 3
                                 }
                             ]
@@ -214,15 +214,15 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                             width: 311,
                             animate: true,
                             insetPadding: 20,
-                            store: 'ChartMemoryJsonStore',
+                            store: 'ChartCombCPUStore',
                             axes: [
                                 {
                                     type: 'Time',
                                     fields: [
-                                        'x'
+                                        'regDt'
                                     ],
                                     position: 'bottom',
-                                    title: 'Memory',
+                                    title: 'Combined CPU',
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
@@ -232,7 +232,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 {
                                     type: 'Numeric',
                                     fields: [
-                                        'y'
+                                        'monDataValue'
                                     ],
                                     position: 'left'
                                 }
@@ -240,8 +240,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                             series: [
                                 {
                                     type: 'line',
-                                    xField: 'x',
-                                    yField: 'y',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
                                     smooth: 3
                                 }
                             ]
@@ -252,15 +252,15 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                             width: 311,
                             animate: true,
                             insetPadding: 20,
-                            store: 'ChartNetInJsonStore',
+                            store: 'ChartTotalMemStore',
                             axes: [
                                 {
                                     type: 'Time',
                                     fields: [
-                                        'x'
+                                        'regDt'
                                     ],
                                     position: 'bottom',
-                                    title: 'Network In',
+                                    title: 'Total Memory',
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
@@ -270,7 +270,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 {
                                     type: 'Numeric',
                                     fields: [
-                                        'y'
+                                        'monDataValue'
                                     ],
                                     position: 'left'
                                 }
@@ -278,8 +278,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                             series: [
                                 {
                                     type: 'line',
-                                    xField: 'x',
-                                    yField: 'y',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
                                     smooth: 3
                                 }
                             ]

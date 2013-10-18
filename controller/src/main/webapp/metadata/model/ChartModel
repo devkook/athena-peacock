@@ -18,7 +18,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "x",
+                "name": "regDt",
                 "type": "date"
             },
             "designerId": "72d97b4a-d8b3-4294-81b1-b3684855d5a9"
@@ -31,7 +31,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "y",
+                "name": "monDataValue",
                 "type": "float"
             },
             "designerId": "4e16f1f5-33ef-4a1f-ae04-8cbed280b3be"

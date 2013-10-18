@@ -60,9 +60,9 @@
                     "\r",
                     "}else if(newCard.title == \"Monitoring\"){\r",
                     "\r",
-                    "    Ext.getStore('ChartCPUJsonStore').load();\r",
-                    "    Ext.getStore('ChartMemoryJsonStore').load();\r",
-                    "    Ext.getStore('ChartNetInJsonStore').load();\r",
+                    "    Ext.getStore('ChartIdleCPUStore').load();\r",
+                    "    Ext.getStore('ChartCombCPUStore').load();\r",
+                    "    Ext.getStore('ChartTotalMemStore').load();\r",
                     "\r",
                     "}"
                 ],

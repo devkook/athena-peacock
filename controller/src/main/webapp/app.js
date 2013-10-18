@@ -35,9 +35,9 @@ Ext.application({
         'UserGroupMapStore',
         'UserGroupListStore',
         'ASGroupListStore',
-        'ChartCPUJsonStore',
-        'ChartMemoryJsonStore',
-        'ChartNetInJsonStore'
+        'ChartIdleCPUStore',
+        'ChartCombCPUStore',
+        'ChartTotalMemStore'
     ],
     views: [
         'MainViewport',

@@ -18,11 +18,11 @@ Ext.define('Peacock.model.ChartModel', {
 
     fields: [
         {
-            name: 'x',
+            name: 'regDt',
             type: 'date'
         },
         {
-            name: 'y',
+            name: 'monDataValue',
             type: 'float'
         }
     ]

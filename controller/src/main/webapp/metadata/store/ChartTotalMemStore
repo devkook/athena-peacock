@@ -7,8 +7,8 @@
     "codeClass": null,
     "userConfig": {
         "model": "ChartModel",
-        "storeId": "ChartNetInJsonStore",
-        "designer|userClassName": "ChartNetInJsonStore"
+        "storeId": "ChartTotalMemStore",
+        "designer|userClassName": "ChartTotalMemStore"
     },
     "designerId": "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c",
     "cn": [
