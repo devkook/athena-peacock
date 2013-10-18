@@ -33,8 +33,8 @@ import org.springframework.stereotype.Component;
 import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.controller.common.core.InitializingTask;
 import com.athena.peacock.controller.common.util.ThreadLocalUtil;
-import com.athena.peacock.controller.monitor.MonFactorDao;
-import com.athena.peacock.controller.monitor.MonFactorDto;
+import com.athena.peacock.controller.web.monitor.MonFactorDao;
+import com.athena.peacock.controller.web.monitor.MonFactorDto;
 
 /**
  * <pre>
@@ -74,6 +74,10 @@ public class MonFactorHandler implements InitializingTask {
 	 * @return the monFactorList
 	 */
 	public List<MonFactorDto> getMonFactorList() {
+		if (monFactorList == null) {
+			init();
+		}
+		
 		return monFactorList;
 	}
 

@@ -18,7 +18,7 @@
  * ---------------	----------------	------------
  * Sang-cheon Park	2013. 8. 25.		First Draft.
  */
-package com.athena.peacock.controller.monitor;
+package com.athena.peacock.controller.web.monitor;
 
 import com.athena.peacock.controller.web.common.dto.BaseDto;
 
@@ -37,6 +37,8 @@ public class MonDataDto extends BaseDto {
 	private String monFactorId;
 	private int monDataId;
 	private String monDataValue;
+	private String timeRange = "30m";
+	private String period = "1m";
 
 	/**
 	 * @return the machineId
@@ -92,6 +94,34 @@ public class MonDataDto extends BaseDto {
 	 */
 	public void setMonDataValue(String monDataValue) {
 		this.monDataValue = monDataValue;
+	}
+
+	/**
+	 * @return the timeRange
+	 */
+	public String getTimeRange() {
+		return timeRange;
+	}
+
+	/**
+	 * @param timeRange the timeRange to set
+	 */
+	public void setTimeRange(String timeRange) {
+		this.timeRange = timeRange;
+	}
+
+	/**
+	 * @return the period
+	 */
+	public String getPeriod() {
+		return period;
+	}
+
+	/**
+	 * @param period the period to set
+	 */
+	public void setPeriod(String period) {
+		this.period = period;
 	}
 	
 }

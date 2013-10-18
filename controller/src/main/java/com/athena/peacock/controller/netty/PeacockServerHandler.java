@@ -55,11 +55,11 @@ import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.common.core.handler.MonFactorHandler;
 import com.athena.peacock.controller.common.provider.AppContext;
-import com.athena.peacock.controller.monitor.MonDataDto;
-import com.athena.peacock.controller.monitor.MonFactorDto;
-import com.athena.peacock.controller.monitor.MonitorService;
 import com.athena.peacock.controller.web.machine.MachineDto;
 import com.athena.peacock.controller.web.machine.MachineService;
+import com.athena.peacock.controller.web.monitor.MonDataDto;
+import com.athena.peacock.controller.web.monitor.MonFactorDto;
+import com.athena.peacock.controller.web.monitor.MonitorService;
 
 /**
  * <pre>

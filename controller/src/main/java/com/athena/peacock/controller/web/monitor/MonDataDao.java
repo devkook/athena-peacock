@@ -18,7 +18,9 @@
  * ---------------	----------------	------------
  * Sang-cheon Park	2013. 8. 25.		First Draft.
  */
-package com.athena.peacock.controller.monitor;
+package com.athena.peacock.controller.web.monitor;
+
+import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +38,10 @@ public class MonDataDao extends AbstractBaseDao {
 
 	public void insertMonData(MonDataDto monData) {
 		sqlSession.insert("MonDataMapper.insertMonData", monData);
+	}
+
+	public List<MonDataDto> getMonDataList(MonDataDto monData) {
+		return sqlSession.selectList("MonDataMapper.getMonDataList", monData);
 	}
 }
 //end of MonDataDao.java

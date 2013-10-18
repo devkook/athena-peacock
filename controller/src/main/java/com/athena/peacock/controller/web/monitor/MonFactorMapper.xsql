@@ -3,7 +3,7 @@
 
 <mapper namespace="MonFactorMapper">
 
-	<select id="getMonFactorList" parameterType="String" resultType="com.athena.peacock.controller.monitor.MonFactorDto">
+	<select id="getMonFactorList" parameterType="String" resultType="com.athena.peacock.controller.web.monitor.MonFactorDto">
 		SELECT MON_FACTOR_ID AS monFactorId
 		       , MON_FACTOR_NAME AS monFactorName
 		       , MON_FACTOR_UNIT AS monFactorUnit

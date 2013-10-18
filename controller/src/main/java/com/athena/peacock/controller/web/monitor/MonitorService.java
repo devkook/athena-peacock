@@ -18,7 +18,7 @@
  * ---------------	----------------	------------
  * Sang-cheon Park	2013. 8. 25.		First Draft.
  */
-package com.athena.peacock.controller.monitor;
+package com.athena.peacock.controller.web.monitor;
 
 import java.util.List;
 
@@ -52,6 +52,10 @@ public class MonitorService {
 		for (MonDataDto monData : monDataList) {
 			monDataDao.insertMonData(monData);
 		}
+	}
+	
+	public List<MonDataDto> getMonDataList(MonDataDto monData) throws Exception {
+		return monDataDao.getMonDataList(monData);
 	}
 }
 //end of MonitorService.java

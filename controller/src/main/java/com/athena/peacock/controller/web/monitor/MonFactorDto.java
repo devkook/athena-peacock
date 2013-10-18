@@ -18,7 +18,7 @@
  * ---------------	----------------	------------
  * Sang-cheon Park	2013. 8. 25.		First Draft.
  */
-package com.athena.peacock.controller.monitor;
+package com.athena.peacock.controller.web.monitor;
 
 import com.athena.peacock.controller.web.common.dto.BaseDto;
 
