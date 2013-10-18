@@ -28,8 +28,8 @@ import javax.inject.Named;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.athena.peacock.common.core.action.ConfigAction;
@@ -41,6 +41,7 @@ import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
+import com.athena.peacock.controller.web.common.model.GridJsonResponse;
 
 /**
  * <pre>
@@ -63,13 +64,13 @@ public class MachineController {
 	private PeacockTransmitter peacockTransmitter;
 
 	@RequestMapping("/list")
-	public ModelAndView list(MachineDto machine, Model model) throws Exception {
+	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, MachineDto machine) throws Exception {
 		List<MachineDto> machineList = machineService.getMachineList(machine);
+
+		jsonRes.setTotal(machineList.size());
+		jsonRes.setList(machineList);
 		
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("machineList", machineList);
-		
-		return mav;
+		return jsonRes;
 	}
 
 	/**
