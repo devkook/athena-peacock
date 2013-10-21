@@ -54,3 +54,7 @@ VALUES ('4', '1', '1111', '1111', '1111', '개발팀', '111@naver.com', '0', '1'
 
 INSERT INTO `peacock`.`user_group_tbl` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`, `REG_DT`) VALUES ('1', 'osc-employee', 'Open Source Consulting', NOW());
 INSERT INTO `peacock`.`user_group_tbl` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`, `REG_DT`) VALUES ('2', 'ncia', '...', NOW());
+
+
+INSERT INTO `peacock`.`machine_tbl` (`MACHINE_ID`, `MACHINE_MAC_ADDR`, `IS_VM`, `OS_NAME`, `OS_VER`, `OS_ARCH`, `CPU_CLOCK`, `CPU_NUM`, `MEM_SIZE`, `IP_ADDR`, `HOST_NAME`) 
+VALUES ('475e639f3a07492bad455254003a281d', '5254003a281d', 'Y', 'Linux', '2.6.32-358.el6.x86_64', 'amd64', '3400', '1', '1024', '10.211.55.5', 'localhost.localdomain');
