@@ -66,5 +66,9 @@ public class SoftwareRepoService {
 		return softwareRepoDao.getSoftwareRepoList(softwareRepo);
 	}
 	
+	public List<SoftwareRepoDto> getSoftwareInstallList(String machineId) throws Exception {
+		return softwareRepoDao.getSoftwareInstallList(machineId);
+	}
+	
 }
 //end of SoftwareRepoService.java

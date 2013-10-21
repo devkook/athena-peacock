@@ -25,31 +25,31 @@
 		<if test="monFactorId != null">AND MON_FACTOR_ID = #{monFactorId}</if>
 		<choose>
 			<when test="timeRange == '1h'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 1 HOUR)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 1 HOUR)
 			</when>
 			<when test="timeRange == '3h'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 3 HOUR)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 3 HOUR)
 			</when>
 			<when test="timeRange == '6h'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 6 HOUR)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 6 HOUR)
 			</when>
 			<when test="timeRange == '12h'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 12 HOUR)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 12 HOUR)
 			</when>
 			<when test="timeRange == '24h'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 24 HOUR)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 24 HOUR)
 			</when>
 			<when test="timeRange == '3d'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 3 DAY)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 3 DAY)
 			</when>
 			<when test="timeRange == '1w'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 1 WEEK)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 1 WEEK)
 			</when>
 			<when test="timeRange == '2w'">
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 2 WEEK)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 2 WEEK)
 			</when>
 			<otherwise>
-				AND REG_DT >= DATE_SUB(NOW(), INTERVAL 30 MINUTE)
+				AND REG_DT &gt;= DATE_SUB(NOW(), INTERVAL 30 MINUTE)
 			</otherwise>
 		</choose>
 		<choose>

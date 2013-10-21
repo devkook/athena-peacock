@@ -66,5 +66,23 @@
 		<if test="fileName != null">AND FILE_NAME = #{fileName}</if>
 		<if test="description != null">AND DESCRIPTION = #{description}</if>
 	</select>
+	
+	<select id="getSoftwareInstallList" parameterType="String" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
+		SELECT A.SOFTWARE_ID AS softwareId
+			   , A.SOFTWARE_NAME AS softwareName
+			   , A.SOFTWARE_VERSION AS softwareVersion
+			   , A.SOFTWARE_VENDOR AS softwareVendor
+			   , A.FILE_LOCATION AS fileLocation
+			   , A.FILE_NAME AS fileName
+			   , A.DESCRIPTION AS description
+			   , IFNULL(B.DELETE_YN, 'N') AS installYn
+			   , A.REG_USER_ID AS regUserId
+			   , A.REG_DT AS regDt
+			   , A.UPD_USER_ID AS updUserId
+			   , A.UPD_DT AS updDt
+		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+ 		   AND B.MACHINE_ID = #{machineId}
+	</select>
 
 </mapper>
