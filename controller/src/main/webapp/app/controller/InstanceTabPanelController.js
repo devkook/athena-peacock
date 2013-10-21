@@ -82,6 +82,22 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
                     period : "1m"
                 }
             });
+            Ext.getStore('ChartFreeMemStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_004",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
+            Ext.getStore('ChartUsedMemStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_005",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
 
         }
     },

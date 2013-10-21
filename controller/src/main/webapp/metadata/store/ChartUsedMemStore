@@ -1,0 +1,42 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "ChartModel",
+        "storeId": "ChartUsedMemStore",
+        "designer|userClassName": "ChartUsedMemStore"
+    },
+    "designerId": "2fd3b133-b493-419e-b475-df1433182038",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "monitor/list"
+            },
+            "designerId": "c179d246-6cae-43c3-bd08-5de6a3d52292",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "root": null
+                    },
+                    "designerId": "cf80747e-418d-4647-9bfe-407d60fb4729"
+                }
+            ]
+        }
+    ]
+}

@@ -192,10 +192,11 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     ],
                                     position: 'bottom',
                                     title: 'Idle CPU',
+                                    constrain: true,
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
-                                        1/2
+                                        1/3
                                     ]
                                 },
                                 {
@@ -243,7 +244,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
-                                        1/2
+                                        1/3
                                     ]
                                 },
                                 {
@@ -281,7 +282,83 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
-                                        1/2
+                                        1/3
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'monDataValue'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
+                                    smooth: 3
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartFreeMemStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'regDt'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'Free Memory',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/3
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'monDataValue'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
+                                    smooth: 3
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartUsedMemStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'regDt'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'Used Memory',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/3
                                     ]
                                 },
                                 {

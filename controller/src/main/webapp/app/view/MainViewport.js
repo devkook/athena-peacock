@@ -347,7 +347,7 @@ Ext.define('Peacock.view.MainViewport', {
                                             xtype: 'panel',
                                             region: 'south',
                                             split: true,
-                                            height: 350,
+                                            height: 400,
                                             layout: {
                                                 type: 'anchor'
                                             },
