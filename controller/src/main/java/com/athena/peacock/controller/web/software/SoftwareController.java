@@ -37,6 +37,7 @@ import com.athena.peacock.controller.common.provisioning.ProvisioningDetail;
 import com.athena.peacock.controller.common.provisioning.ProvisioningHandler;
 import com.athena.peacock.controller.web.common.model.GridJsonResponse;
 import com.athena.peacock.controller.web.common.model.SimpleJsonResponse;
+import com.athena.peacock.controller.web.machine.MachineDto;
 
 /**
  * <pre>
@@ -69,13 +70,11 @@ public class SoftwareController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/list")
-	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, String machineId) throws Exception {
-		Assert.isTrue(!StringUtils.isEmpty(machineId), "machineId must not be null.");
+	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, MachineDto machine) throws Exception {
+		Assert.isTrue(!StringUtils.isEmpty(machine.getMachineId()), "machineId must not be null.");
 		
-		List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallList(machineId);
-
-		jsonRes.setTotal(softwareRepoList.size());
-		jsonRes.setList(softwareRepoList);
+		jsonRes.setTotal(softwareRepoService.getSoftwareInstallListCnt(machine));
+		jsonRes.setList(softwareRepoService.getSoftwareInstallList(machine));
 		
 		return jsonRes;
 	}
@@ -98,7 +97,7 @@ public class SoftwareController {
 		// 기 설치 여부 검사
 		boolean installed = false;
 		boolean installedDiffVersion = false;
-		List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallList(provisioningDetail.getMachineId());
+		List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
 		
 		for (SoftwareRepoDto softwareRepo : softwareRepoList) {
 			if (softwareRepo.getSoftwareName().toLowerCase().indexOf(provisioningDetail.getType().toLowerCase()) > -1 && softwareRepo.getInstallYn().equals("Y")) {

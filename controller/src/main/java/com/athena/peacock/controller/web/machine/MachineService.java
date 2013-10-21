@@ -52,8 +52,16 @@ public class MachineService {
 		}
 	}
 
+	public int getMachineListCnt(MachineDto machine) {
+		return machineDao.getMachineListCnt(machine);
+	}
+
 	public List<MachineDto> getMachineList(MachineDto machine) throws Exception {
 		return machineDao.getMachineList(machine);
+	}
+
+	public MachineDto getMachine(String machineId) throws Exception {
+		return machineDao.getMachine(machineId);
 	}
 }
 //end of MachineService.java

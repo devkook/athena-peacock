@@ -58,6 +58,18 @@
 		   AND CONFIG_FILE_ID = #{configFileId}
 	</delete>
 	
+	<select id="getConfigListCnt" parameterType="com.athena.peacock.controller.web.config.ConfigDto" resultType="int">
+		SELECT COUNT(*)
+		  FROM config_tbl
+		 WHERE 1=1
+		<if test="machineId != null">AND MACHINE_ID = #{machineId}</if>
+		<if test="softwareId != null">AND SOFTWARE_ID = #{softwareId}</if>
+		<if test="configFileId != null">AND CONFIG_FILE_ID = #{configFileId}</if>
+		<if test="configFileLocation != null">AND CONFIG_FILE_LOCATION = #{configFileLocation}</if>
+		<if test="configFileName != null">AND CONFIG_FILE_NAME = #{configFileName}</if>
+		<if test="deleteYn != null">AND DELETE_YN = #{deleteYn}</if>
+	</select>
+	
 	<select id="getConfigList" parameterType="com.athena.peacock.controller.web.config.ConfigDto" resultType="com.athena.peacock.controller.web.config.ConfigDto">
 		SELECT MACHINE_ID AS machineId
 			   , SOFTWARE_ID AS softwareId
@@ -78,6 +90,7 @@
 		<if test="configFileLocation != null">AND CONFIG_FILE_LOCATION = #{configFileLocation}</if>
 		<if test="configFileName != null">AND CONFIG_FILE_NAME = #{configFileName}</if>
 		<if test="deleteYn != null">AND DELETE_YN = #{deleteYn}</if>
+		 LIMIT #{start}, #{limit}
 	</select>
 
 </mapper>

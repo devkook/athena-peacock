@@ -51,6 +51,10 @@ public class ConfigRepoDao extends AbstractBaseDao {
 	public ConfigRepoDto getConfigRepo(ConfigRepoDto configRepo) {
 		return sqlSession.selectOne("ConfigRepoMapper.getConfigRepo", configRepo);
 	}
+	
+	public int getConfigRepoListCnt(ConfigRepoDto configRepo) {
+		return sqlSession.selectOne("ConfigRepoMapper.getConfigRepoListCnt", configRepo);
+	}
 
 	public List<ConfigRepoDto> getConfigRepoList(ConfigRepoDto configRepo) {
 		return sqlSession.selectList("ConfigRepoMapper.getConfigRepoList", configRepo);

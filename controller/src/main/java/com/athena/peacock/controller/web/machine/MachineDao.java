@@ -51,6 +51,10 @@ public class MachineDao extends AbstractBaseDao {
 	public void deleteMachine(String machineId) {
 		sqlSession.delete("MachineMapper.deleteMachine", machineId);
 	}
+	
+	public int getMachineListCnt(MachineDto machine) {
+		return sqlSession.selectOne("MachineMapper.getMachineListCnt", machine);
+	}
 
 	public List<MachineDto> getMachineList(MachineDto machine) {
 		return sqlSession.selectList("MachineMapper.getMachineList", machine);
