@@ -28,7 +28,7 @@ Ext.define('Peacock.store.ChartTotalMemStore', {
             storeId: 'ChartTotalMemStore',
             proxy: {
                 type: 'ajax',
-                url: 'static/chart_netin.json',
+                url: 'monitor/list',
                 reader: {
                     type: 'json'
                 }

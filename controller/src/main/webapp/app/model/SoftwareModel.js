@@ -18,27 +18,27 @@ Ext.define('Peacock.model.SoftwareModel', {
 
     fields: [
         {
-            name: 'software_id',
+            name: 'softwareId',
             type: 'int'
         },
         {
-            name: 'software_name',
+            name: 'softwareName',
             type: 'string'
         },
         {
-            name: 'version',
+            name: 'softwareVersion',
             type: 'string'
         },
         {
-            name: 'repo_location',
+            name: 'fileLocation',
             type: 'string'
         },
         {
-            name: 'software_file_name',
+            name: 'fileName',
             type: 'string'
         },
         {
-            name: 'vendor_name',
+            name: 'softwareVendor',
             type: 'string'
         },
         {
@@ -46,7 +46,7 @@ Ext.define('Peacock.model.SoftwareModel', {
             type: 'string'
         },
         {
-            name: 'register_dt',
+            name: 'regDt',
             type: 'string'
         },
         {

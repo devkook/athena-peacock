@@ -18,7 +18,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "software_id",
+                "name": "softwareId",
                 "type": "int"
             },
             "designerId": "525b3f7f-9a30-48e3-84e2-108f2a9dbe7a"
@@ -31,7 +31,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "software_name",
+                "name": "softwareName",
                 "type": "string"
             },
             "designerId": "d4d95f0c-144a-40ad-814d-08ec8c57d2b6"
@@ -44,7 +44,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "version",
+                "name": "softwareVersion",
                 "type": "string"
             },
             "designerId": "b0cdffcf-822f-4867-bac1-3fc29355ae00"
@@ -57,7 +57,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "repo_location",
+                "name": "fileLocation",
                 "type": "string"
             },
             "designerId": "363179db-2fee-48e9-a625-6484525e6f36"
@@ -70,7 +70,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "software_file_name",
+                "name": "fileName",
                 "type": "string"
             },
             "designerId": "6d7c5b28-0e9f-4e04-8002-f1342060b6fb"
@@ -83,7 +83,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "vendor_name",
+                "name": "softwareVendor",
                 "type": "string"
             },
             "designerId": "8fb51981-878e-4d89-9403-e89e3ae8ab82"
@@ -109,7 +109,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "register_dt",
+                "name": "regDt",
                 "type": "string"
             },
             "designerId": "aa6cc132-b963-44d2-bff1-71942b1e92bf"

@@ -18,11 +18,11 @@ Ext.define('Peacock.model.MachineModel', {
 
     fields: [
         {
-            name: 'machine_id',
-            type: 'int'
+            name: 'machineId',
+            type: 'string'
         },
         {
-            name: 'machine_mac_addr',
+            name: 'machineMacAddr',
             type: 'string'
         },
         {
@@ -42,43 +42,43 @@ Ext.define('Peacock.model.MachineModel', {
             type: 'string'
         },
         {
-            name: 'host_name',
+            name: 'hostName',
             type: 'string'
         },
         {
-            name: 'is_vm',
+            name: 'isVm',
             type: 'boolean'
         },
         {
-            name: 'os_name',
+            name: 'osName',
             type: 'string'
         },
         {
-            name: 'os_ver',
+            name: 'osVer',
             type: 'string'
         },
         {
-            name: 'os_arch',
+            name: 'osArch',
             type: 'string'
         },
         {
-            name: 'cpu_clock',
+            name: 'cpuClock',
             type: 'string'
         },
         {
-            name: 'cpu_num',
+            name: 'cpuNum',
             type: 'int'
         },
         {
-            name: 'mem_size',
+            name: 'memSize',
             type: 'string'
         },
         {
-            name: 'ip_addr',
+            name: 'ipAddr',
             type: 'string'
         },
         {
-            name: 'register_dt',
+            name: 'regDt',
             type: 'string'
         }
     ]

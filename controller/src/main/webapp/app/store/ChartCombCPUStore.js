@@ -28,7 +28,7 @@ Ext.define('Peacock.store.ChartCombCPUStore', {
             storeId: 'ChartCombCPUStore',
             proxy: {
                 type: 'ajax',
-                url: 'static/chart_memory.json',
+                url: 'monitor/list',
                 reader: {
                     type: 'json'
                 }

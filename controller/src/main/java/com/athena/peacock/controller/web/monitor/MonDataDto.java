@@ -36,7 +36,7 @@ public class MonDataDto extends BaseDto {
 	private String machineId;
 	private String monFactorId;
 	private int monDataId;
-	private double monDataValue;
+	private String monDataValue;
 	private String timeRange = "30m";
 	private String period = "1m";
 
@@ -85,14 +85,14 @@ public class MonDataDto extends BaseDto {
 	/**
 	 * @return the monDataValue
 	 */
-	public double getMonDataValue() {
+	public String getMonDataValue() {
 		return monDataValue;
 	}
 
 	/**
 	 * @param monDataValue the monDataValue to set
 	 */
-	public void setMonDataValue(double monDataValue) {
+	public void setMonDataValue(String monDataValue) {
 		this.monDataValue = monDataValue;
 	}
 

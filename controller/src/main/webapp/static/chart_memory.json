@@ -1,5 +1,5 @@
 [
-        {"monDataValue":23456, "regDt":"2013-07-17 16:18 UTC+0900"},
-        {"monDataValue":47586, "regDt":"2013-07-17 16:38 UTC+0900"},
-        {"monDataValue":57889, "regDt":"2013-07-17 16:48 UTC+0900"}
+        {"monDataValue":23456.9, "regDt":"2013.07.17 16:18:00 KST", "ddd":"aaa"},
+        {"monDataValue":47586.7, "regDt":"2013.07.17 16:38:00 KST", "ddd":"aaa"},
+        {"monDataValue":57889.0, "regDt":"2013.07.17 16:48:00 KST", "ddd":"aaa"}
 ]

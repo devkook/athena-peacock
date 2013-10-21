@@ -20,7 +20,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/chart_cpu.json"
+                "url": "monitor/list"
             },
             "designerId": "db0a6857-8ba5-44eb-83b3-2cd13fa466a2",
             "cn": [

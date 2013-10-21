@@ -21,7 +21,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/machineList.json"
+                "url": "machine/list"
             },
             "designerId": "9028887c-5089-4d98-bdc5-65b72a055e0c",
             "cn": [

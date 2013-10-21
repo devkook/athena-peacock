@@ -18,6 +18,7 @@ Ext.define('Peacock.model.ChartModel', {
 
     fields: [
         {
+            dateReadFormat: 'Y.m.d H:i:s T',
             name: 'regDt',
             type: 'date'
         },
