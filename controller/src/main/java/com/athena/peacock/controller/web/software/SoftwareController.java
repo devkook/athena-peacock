@@ -89,45 +89,46 @@ public class SoftwareController {
 	 * @throws Exception 
 	 */
 	@RequestMapping("/install")
-	public @ResponseBody SimpleJsonResponse install(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) throws Exception {
+	public @ResponseBody SimpleJsonResponse install(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) {
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getType()), "type must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getVersion()), "version must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
-		
-		// 기 설치 여부 검사
-		boolean installed = false;
-		boolean installedDiffVersion = false;
-		List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
-		
-		for (SoftwareRepoDto softwareRepo : softwareRepoList) {
-			if (softwareRepo.getSoftwareName().toLowerCase().indexOf(provisioningDetail.getType().toLowerCase()) > -1 && softwareRepo.getInstallYn().equals("Y")) {
-				if (softwareRepo.getSoftwareVersion().equals(provisioningDetail.getVersion())) {
-					installed = true;
-				} else {
-					installedDiffVersion = true;
+
+		try {
+			// 기 설치 여부 검사
+			boolean installed = false;
+			boolean installedDiffVersion = false;
+			List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
+			
+			for (SoftwareRepoDto softwareRepo : softwareRepoList) {
+				if (softwareRepo.getSoftwareName().toLowerCase().indexOf(provisioningDetail.getType().toLowerCase()) > -1 && softwareRepo.getInstallYn().equals("Y")) {
+					if (softwareRepo.getSoftwareVersion().equals(provisioningDetail.getVersion())) {
+						installed = true;
+					} else {
+						installedDiffVersion = true;
+					}
 				}
 			}
-		}
+			
+			if (installed) {
+				jsonRes.setSuccess(false);
+				jsonRes.setMsg("이미 설치된 소프트웨어입니다.");
+				return jsonRes;
+			} 
+			
+			if (installedDiffVersion) {
+				jsonRes.setSuccess(false);
+				jsonRes.setMsg("다른 버전의 소프트웨어가 설치되어 있습니다. 해당 소프트웨어 삭제 후 설치하여 주십시오.");
+				return jsonRes;
+			}
 		
-		if (installed) {
-			jsonRes.setSuccess(false);
-			jsonRes.setMsg("이미 설치된 소프트웨어입니다.");
-			return jsonRes;
-		} 
-		
-		if (installedDiffVersion) {
-			jsonRes.setSuccess(false);
-			jsonRes.setMsg("다른 버전의 소프트웨어가 설치되어 있습니다. 해당 소프트웨어 삭제 후 설치하여 주십시오.");
-			return jsonRes;
-		}
-		
-		try {
 			provisioningHandler.install(provisioningDetail);
 			jsonRes.setMsg("Install success.");
-		} catch (Exception e){
+		} catch (Exception e) {
 			jsonRes.setSuccess(false);
 			jsonRes.setMsg("Install fail.");
-			e.printStackTrace();
+			
+			logger.error("Unhandled Expeption has occurred. ", e);
 		}
 		
 		return jsonRes;
@@ -140,17 +141,22 @@ public class SoftwareController {
 	 * @param jsonRes
 	 * @param provisioningDetail
 	 * @return
+	 * @throws Exception 
 	 */
 	@RequestMapping("/remove")
-	public @ResponseBody SimpleJsonResponse remove(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) {
+	public @ResponseBody SimpleJsonResponse remove(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) throws Exception {
+		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getType()), "type must not be null.");
+		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getVersion()), "version must not be null.");
+		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
 		
 		try {
-			//service.insertUser(user);
+			provisioningHandler.remove(provisioningDetail);
 			jsonRes.setMsg("remove success.");
-		} catch (Exception e){
+		} catch (Exception e) {
 			jsonRes.setSuccess(false);
 			jsonRes.setMsg("remove fail.");
-			e.printStackTrace();
+			
+			logger.error("Unhandled Expeption has occurred. ", e);
 		}
 		
 		return jsonRes;

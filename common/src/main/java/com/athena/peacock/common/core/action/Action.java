@@ -45,6 +45,6 @@ public abstract class Action implements Serializable {
 		this.sequence = sequence;
 	}
     
-	public abstract <T> T perform();
+	public abstract String perform();
 }
 //end of Action.java
