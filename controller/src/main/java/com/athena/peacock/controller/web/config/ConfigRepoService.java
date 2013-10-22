@@ -59,6 +59,10 @@ public class ConfigRepoService {
 	public ConfigRepoDto getConfigRepo(ConfigRepoDto configRepo) throws Exception {
 		return configRepoDao.getConfigRepo(configRepo);
 	}
+
+	public int getConfigRepoListCnt(ConfigRepoDto configRepo) {
+		return configRepoDao.getConfigRepoListCnt(configRepo);
+	}
 	
 	public List<ConfigRepoDto> getConfigRepoList(ConfigRepoDto configRepo) throws Exception {
 		return configRepoDao.getConfigRepoList(configRepo);

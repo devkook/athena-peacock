@@ -41,6 +41,7 @@ import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
+import com.athena.peacock.controller.web.common.model.DtoJsonResponse;
 import com.athena.peacock.controller.web.common.model.GridJsonResponse;
 
 /**
@@ -65,10 +66,15 @@ public class MachineController {
 
 	@RequestMapping("/list")
 	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, MachineDto machine) throws Exception {
-		List<MachineDto> machineList = machineService.getMachineList(machine);
+		jsonRes.setTotal(machineService.getMachineListCnt(machine));
+		jsonRes.setList(machineService.getMachineList(machine));
+		
+		return jsonRes;
+	}
 
-		jsonRes.setTotal(machineList.size());
-		jsonRes.setList(machineList);
+	@RequestMapping("/getMachine")
+	public @ResponseBody DtoJsonResponse getMachine(DtoJsonResponse jsonRes, String machineId) throws Exception {
+		jsonRes.setData(machineService.getMachine(machineId));
 		
 		return jsonRes;
 	}

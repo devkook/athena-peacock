@@ -20,7 +20,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/chart_memory.json"
+                "url": "monitor/list"
             },
             "designerId": "5d377f4d-b546-4729-99ed-17a90289f837",
             "cn": [

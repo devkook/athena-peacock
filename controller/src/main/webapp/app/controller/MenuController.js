@@ -136,10 +136,10 @@ Ext.define('Peacock.controller.MenuController', {
         grid.setTitle('Instance List');
         grid.reconfigure(Ext.getStore('MachineListStore'), [{
             text: 'ID',
-            dataIndex: 'machine_id'
+            dataIndex: 'machineId'
         }, {
             text: 'OS Name',
-            dataIndex: 'os_name',
+            dataIndex: 'osName',
             width: 200
         }, {
             text: 'Template',
@@ -154,7 +154,7 @@ Ext.define('Peacock.controller.MenuController', {
 
         }, {
             text: 'Host',
-            dataIndex: 'host_name',
+            dataIndex: 'hostName',
             width: 200
         }]);
 

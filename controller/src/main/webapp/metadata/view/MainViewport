@@ -755,7 +755,7 @@
                                     "userConfig": {
                                         "layout|region": "south",
                                         "layout|split": true,
-                                        "height": 350,
+                                        "height": 400,
                                         "designer|displayName": "BaseDetailPanel",
                                         "layout": "anchor",
                                         "title": "Detail"

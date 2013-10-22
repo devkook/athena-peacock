@@ -28,7 +28,7 @@ Ext.define('Peacock.store.ChartIdleCPUStore', {
             storeId: 'ChartIdleCPUStore',
             proxy: {
                 type: 'ajax',
-                url: 'static/chart_cpu.json',
+                url: 'monitor/list',
                 reader: {
                     type: 'json'
                 }

@@ -323,6 +323,22 @@
                 "app/store/ChartTotalMemStore.js"
             ],
             "className": "ChartTotalMemStore"
+        },
+        "60518488-6347-4c96-80e7-d0eddceb2ebd": {
+            "paths": [
+                "metadata/store/ChartFreeMemStore",
+                "app/store/override/ChartFreeMemStore.js",
+                "app/store/ChartFreeMemStore.js"
+            ],
+            "className": "ChartFreeMemStore"
+        },
+        "2fd3b133-b493-419e-b475-df1433182038": {
+            "paths": [
+                "metadata/store/ChartUsedMemStore",
+                "app/store/override/ChartUsedMemStore.js",
+                "app/store/ChartUsedMemStore.js"
+            ],
+            "className": "ChartUsedMemStore"
         }
     },
     "viewOrderMap": {
@@ -347,7 +363,9 @@
             "79586cda-e7a7-47c0-9419-0f36e13b98f0",
             "a6562e41-f3bb-4acf-977b-4b564efaa1bd",
             "b4fa8fa0-ca01-40a0-ae65-100954fd4750",
-            "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c"
+            "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c",
+            "60518488-6347-4c96-80e7-d0eddceb2ebd",
+            "2fd3b133-b493-419e-b475-df1433182038"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",

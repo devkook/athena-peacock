@@ -53,21 +53,19 @@ public class MonitorController {
 	private MonFactorHandler monFactorHandler;
 	
 	@RequestMapping("/list")
-	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, MonDataDto monData) throws Exception {
+	public @ResponseBody List<MonDataDto> list(MonDataDto monData) throws Exception {
 		Assert.notNull(monData.getMachineId(), "machineId can not be null.");
 		Assert.notNull(monData.getMonFactorId(), "monFactorId can not be null.");
 		
 		List<MonDataDto> monDataList = monitorService.getMonDataList(monData);
 		
-		jsonRes.setTotal(monDataList.size());
-		jsonRes.setList(monDataList);
-		
-		return jsonRes;
+		return monDataList;
 	}
 	
 	@RequestMapping("/factor_list")
 	public @ResponseBody GridJsonResponse factorList(GridJsonResponse jsonRes) throws Exception {
 		
+		// Get all list without paging
 		List<MonFactorDto> monFactorList = monFactorHandler.getMonFactorList();
 		
 		jsonRes.setTotal(monFactorList.size());

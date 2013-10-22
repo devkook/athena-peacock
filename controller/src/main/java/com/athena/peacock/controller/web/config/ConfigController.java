@@ -20,11 +20,11 @@
  */
 package com.athena.peacock.controller.web.config;
 
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +45,8 @@ import com.athena.peacock.controller.web.common.model.SimpleJsonResponse;
 @RequestMapping("/config")
 public class ConfigController {
 
+    protected final Logger logger = LoggerFactory.getLogger(ConfigController.class);
+
 	@Inject
 	@Named("configService")
 	private ConfigService configService;
@@ -58,10 +60,8 @@ public class ConfigController {
 		Assert.notNull(config.getMachineId(), "machineId can not be null.");
 		Assert.notNull(config.getSoftwareId(), "softwareId can not be null.");
 		
-		List<ConfigDto> configList = configService.getConfigList(config);
-		
-		jsonRes.setTotal(configList.size());
-		jsonRes.setList(configList);
+		jsonRes.setTotal(configService.getConfigListCnt(config));
+		jsonRes.setList(configService.getConfigList(config));
 		
 		return jsonRes;
 	}
@@ -70,16 +70,14 @@ public class ConfigController {
 	public @ResponseBody GridJsonResponse repoList(GridJsonResponse jsonRes, ConfigRepoDto configRepo) throws Exception {
 		Assert.notNull(configRepo.getSoftwareId(), "softwareId can not be null.");
 		
-		List<ConfigRepoDto> configRepoList = configRepoService.getConfigRepoList(configRepo);
-		
-		jsonRes.setTotal(configRepoList.size());
-		jsonRes.setList(configRepoList);
+		jsonRes.setTotal(configRepoService.getConfigRepoListCnt(configRepo));
+		jsonRes.setList(configRepoService.getConfigRepoList(configRepo));
 		
 		return jsonRes;
 	}
 	
 	@RequestMapping("/update")
-	public @ResponseBody SimpleJsonResponse update(SimpleJsonResponse jsonRes, ConfigDto config) throws Exception {
+	public @ResponseBody SimpleJsonResponse update(SimpleJsonResponse jsonRes, ConfigDto config) {
 		Assert.notNull(config.getMachineId(), "machineId can not be null.");
 		Assert.notNull(config.getSoftwareId(), "softwareId can not be null.");
 		Assert.notNull(config.getConfigFileId(), "configFileId can not be null.");
@@ -90,7 +88,8 @@ public class ConfigController {
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
 			jsonRes.setMsg("Update fail.");
-			e.printStackTrace();
+			
+			logger.error("Unhandled Expeption has occurred. ", e);
 		}
 		
 		return jsonRes;

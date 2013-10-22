@@ -20,7 +20,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/chart_netin.json"
+                "url": "monitor/list"
             },
             "designerId": "92ace13f-2a69-40c2-a830-7b341f4c9c66",
             "cn": [

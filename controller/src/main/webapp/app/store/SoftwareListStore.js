@@ -28,7 +28,7 @@ Ext.define('Peacock.store.SoftwareListStore', {
             storeId: 'SoftwareListStore',
             proxy: {
                 type: 'ajax',
-                url: 'static/machineSoftList.json',
+                url: 'software/list',
                 reader: {
                     type: 'json',
                     root: 'list'

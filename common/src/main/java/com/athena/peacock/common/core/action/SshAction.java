@@ -82,7 +82,6 @@ public class SshAction extends Action {
 	/* (non-Javadoc)
 	 * @see com.athena.peacock.common.core.action.Action#perform()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public String perform() {
     	logger.debug("\n- Target Host Info : [{}]", targetHost.toString());

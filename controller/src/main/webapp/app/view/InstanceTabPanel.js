@@ -84,27 +84,27 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'software_name',
+                                    width: 200,
+                                    dataIndex: 'softwareName',
                                     text: 'Name'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'version',
+                                    dataIndex: 'softwareVersion',
                                     text: 'Version'
                                 },
                                 {
                                     xtype: 'gridcolumn',
                                     width: 200,
-                                    defaultWidth: 200,
-                                    dataIndex: 'engine_dir',
-                                    text: 'Engine Dir'
+                                    dataIndex: 'regDt',
+                                    text: 'Install Date'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    width: 150,
-                                    defaultWidth: 150,
-                                    dataIndex: 'install_dt',
-                                    text: 'Install Date'
+                                    width: 200,
+                                    defaultWidth: 200,
+                                    dataIndex: 'description',
+                                    text: 'Description'
                                 }
                             ]
                         }
@@ -172,7 +172,14 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                     items: [
                         {
                             xtype: 'chart',
+                            border: 0,
+                            cls: '',
                             height: 250,
+                            id: 'monChart1',
+                            style: {
+                                borderColor: 'red',
+                                borderStyle: 'solid'
+                            },
                             width: 311,
                             animate: true,
                             insetPadding: 20,
@@ -185,10 +192,11 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     ],
                                     position: 'bottom',
                                     title: 'Idle CPU',
+                                    constrain: true,
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
-                                        1/2
+                                        1/3
                                     ]
                                 },
                                 {
@@ -206,7 +214,17 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     yField: 'monDataValue',
                                     smooth: 3
                                 }
-                            ]
+                            ],
+                            listeners: {
+                                mouseenter: {
+                                    fn: me.onChartMouseEnter,
+                                    scope: me
+                                },
+                                mouseleave: {
+                                    fn: me.onMonChart1MouseLeave,
+                                    scope: me
+                                }
+                            }
                         },
                         {
                             xtype: 'chart',
@@ -226,7 +244,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
-                                        1/2
+                                        1/3
                                     ]
                                 },
                                 {
@@ -264,7 +282,83 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     dateFormat: 'm/d G:i',
                                     step: [
                                         'h',
-                                        1/2
+                                        1/3
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'monDataValue'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
+                                    smooth: 3
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartFreeMemStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'regDt'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'Free Memory',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/3
+                                    ]
+                                },
+                                {
+                                    type: 'Numeric',
+                                    fields: [
+                                        'monDataValue'
+                                    ],
+                                    position: 'left'
+                                }
+                            ],
+                            series: [
+                                {
+                                    type: 'line',
+                                    xField: 'regDt',
+                                    yField: 'monDataValue',
+                                    smooth: 3
+                                }
+                            ]
+                        },
+                        {
+                            xtype: 'chart',
+                            height: 250,
+                            width: 311,
+                            animate: true,
+                            insetPadding: 20,
+                            store: 'ChartUsedMemStore',
+                            axes: [
+                                {
+                                    type: 'Time',
+                                    fields: [
+                                        'regDt'
+                                    ],
+                                    position: 'bottom',
+                                    title: 'Used Memory',
+                                    dateFormat: 'm/d G:i',
+                                    step: [
+                                        'h',
+                                        1/3
                                     ]
                                 },
                                 {
@@ -290,6 +384,22 @@ Ext.define('Peacock.view.InstanceTabPanel', {
         });
 
         me.callParent(arguments);
+    },
+
+    onChartMouseEnter: function(e, eOpts) {
+        Peacock.app.debug("IdleCPUChart.onChartMouseEnter.");
+
+
+        //alert(Ext.getClassName(this));//InstanceTabPanel
+
+
+        //Ext.getCmp("monChart1").getEl().setStyle("borderWidth", "3px");
+
+    },
+
+    onMonChart1MouseLeave: function(e, eOpts) {
+
+        //Ext.getCmp("monChart1").getEl().setStyle("borderWidth", "0px");
     }
 
 });

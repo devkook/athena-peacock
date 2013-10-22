@@ -20,7 +20,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/machineSoftList.json"
+                "url": "software/list"
             },
             "designerId": "cafe0f83-020e-406c-9c77-3c67c2be9f66",
             "cn": [

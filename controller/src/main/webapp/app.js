@@ -37,7 +37,9 @@ Ext.application({
         'ASGroupListStore',
         'ChartIdleCPUStore',
         'ChartCombCPUStore',
-        'ChartTotalMemStore'
+        'ChartTotalMemStore',
+        'ChartFreeMemStore',
+        'ChartUsedMemStore'
     ],
     views: [
         'MainViewport',

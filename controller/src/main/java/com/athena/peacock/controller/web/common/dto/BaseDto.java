@@ -42,6 +42,10 @@ public class BaseDto implements Serializable {
 	private int updUserId;
 	private Date updDt;
 	
+	/** 페이징 관련 */
+	private int start;
+	private int limit = 10;
+	
 	/**
 	 * @return the regUserId
 	 */
@@ -96,6 +100,34 @@ public class BaseDto implements Serializable {
 	 */
 	public void setUpdDt(Date updDt) {
 		this.updDt = updDt;
+	}
+
+	/**
+	 * @return the start
+	 */
+	public int getStart() {
+		return start;
+	}
+
+	/**
+	 * @param start the start to set
+	 */
+	public void setStart(int start) {
+		this.start = start;
+	}
+
+	/**
+	 * @return the limit
+	 */
+	public int getLimit() {
+		return limit;
+	}
+
+	/**
+	 * @param limit the limit to set
+	 */
+	public void setLimit(int limit) {
+		this.limit = limit;
 	}
 
 	@Override

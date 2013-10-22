@@ -7,10 +7,10 @@
     "codeClass": null,
     "userConfig": {
         "model": "ChartModel",
-        "storeId": "ChartIdleCPUStore",
-        "designer|userClassName": "ChartIdleCPUStore"
+        "storeId": "ChartUsedMemStore",
+        "designer|userClassName": "ChartUsedMemStore"
     },
-    "designerId": "a6562e41-f3bb-4acf-977b-4b564efaa1bd",
+    "designerId": "2fd3b133-b493-419e-b475-df1433182038",
     "cn": [
         {
             "type": "Ext.data.proxy.Ajax",
@@ -22,7 +22,7 @@
             "userConfig": {
                 "url": "monitor/list"
             },
-            "designerId": "db0a6857-8ba5-44eb-83b3-2cd13fa466a2",
+            "designerId": "c179d246-6cae-43c3-bd08-5de6a3d52292",
             "cn": [
                 {
                     "type": "Ext.data.reader.Json",
@@ -34,7 +34,7 @@
                     "userConfig": {
                         "root": null
                     },
-                    "designerId": "321a4eab-4157-45ba-838d-f5a46fe3bfc0"
+                    "designerId": "cf80747e-418d-4647-9bfe-407d60fb4729"
                 }
             ]
         }

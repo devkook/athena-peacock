@@ -11,7 +11,7 @@
 		     		, #{fileName}, #{description}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
-	<select id="getSoftwareRepo" parameterType="String" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
+	<select id="getSoftwareRepo" parameterType="int" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
 		SELECT SOFTWARE_ID AS softwareId
 			   , SOFTWARE_NAME AS softwareName
 			   , SOFTWARE_VERSION AS softwareVersion
@@ -40,9 +40,22 @@
 		 WHERE SOFTWARE_ID = #{softwareId}
 	</update>
 	
-	<delete id="deleteSoftwareRepo" parameterType="String">
+	<delete id="deleteSoftwareRepo" parameterType="int">
 		DELETE FROM software_repo_tbl WHERE SOFTWARE_ID = #{softwareId}
 	</delete>
+	
+	<select id="getSoftwareRepoListCnt" parameterType="com.athena.peacock.controller.web.software.SoftwareRepoDto" resultType="int">
+		SELECT COUNT(*)
+		  FROM software_repo_tbl
+		 WHERE 1=1
+		<if test="softwareId != null">AND SOFTWARE_ID = #{softwareId}</if>
+		<if test="softwareName != null">AND SOFTWARE_NAME = #{softwareName}</if>
+		<if test="softwareVersion != null">AND SOFTWARE_VERSION = #{softwareVersion}</if>
+		<if test="softwareVendor != null">AND SOFTWARE_VENDOR = #{softwareVendor}</if>
+		<if test="fileLocation != null">AND FILE_LOCATION = #{fileLocation}</if>
+		<if test="fileName != null">AND FILE_NAME = #{fileName}</if>
+		<if test="description != null">AND DESCRIPTION = #{description}</if>
+	</select>
 	
 	<select id="getSoftwareRepoList" parameterType="com.athena.peacock.controller.web.software.SoftwareRepoDto" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
 		SELECT SOFTWARE_ID AS softwareId
@@ -65,9 +78,36 @@
 		<if test="fileLocation != null">AND FILE_LOCATION = #{fileLocation}</if>
 		<if test="fileName != null">AND FILE_NAME = #{fileName}</if>
 		<if test="description != null">AND DESCRIPTION = #{description}</if>
+		 LIMIT #{start}, #{limit}
 	</select>
 	
-	<select id="getSoftwareInstallList" parameterType="String" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
+	<select id="getSoftwareInstallListCnt" parameterType="com.athena.peacock.controller.web.machine.MachineDto" resultType="int">
+		SELECT COUNT(*)
+		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+ 		   AND B.MACHINE_ID = #{machineId}
+	</select>
+	
+	<select id="getSoftwareInstallList" parameterType="com.athena.peacock.controller.web.machine.MachineDto" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
+		SELECT A.SOFTWARE_ID AS softwareId
+			   , A.SOFTWARE_NAME AS softwareName
+			   , A.SOFTWARE_VERSION AS softwareVersion
+			   , A.SOFTWARE_VENDOR AS softwareVendor
+			   , A.FILE_LOCATION AS fileLocation
+			   , A.FILE_NAME AS fileName
+			   , A.DESCRIPTION AS description
+			   , IFNULL(B.DELETE_YN, 'N') AS installYn
+			   , A.REG_USER_ID AS regUserId
+			   , A.REG_DT AS regDt
+			   , A.UPD_USER_ID AS updUserId
+			   , A.UPD_DT AS updDt
+		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+ 		   AND B.MACHINE_ID = #{machineId}
+		 LIMIT #{start}, #{limit}
+	</select>
+	
+	<select id="getSoftwareInstallListAll" parameterType="String" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
 		SELECT A.SOFTWARE_ID AS softwareId
 			   , A.SOFTWARE_NAME AS softwareName
 			   , A.SOFTWARE_VERSION AS softwareVersion

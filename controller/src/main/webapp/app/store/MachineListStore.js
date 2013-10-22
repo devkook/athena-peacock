@@ -29,7 +29,7 @@ Ext.define('Peacock.store.MachineListStore', {
             pageSize: 10,
             proxy: me.processMyAjaxProxy1({
                 type: 'ajax',
-                url: 'static/machineList.json',
+                url: 'machine/list',
                 reader: {
                     type: 'json',
                     root: 'list'

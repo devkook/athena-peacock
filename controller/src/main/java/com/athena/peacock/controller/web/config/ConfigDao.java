@@ -53,6 +53,10 @@ public class ConfigDao extends AbstractBaseDao {
 		return sqlSession.selectOne("ConfigMapper.getConfig", config);
 	}
 
+	public int getConfigListCnt(ConfigDto config) {
+		return sqlSession.selectOne("ConfigMapper.getConfigListCnt", config);
+	}
+
 	public List<ConfigDto> getConfigList(ConfigDto config) {
 		return sqlSession.selectList("ConfigMapper.getConfigList", config);
 	}

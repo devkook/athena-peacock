@@ -135,7 +135,8 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "software_name",
+                                "width": 200,
+                                "dataIndex": "softwareName",
                                 "text": "Name"
                             },
                             "designerId": "e34c7b59-ee42-4b03-9db3-021ca99fc13a"
@@ -148,7 +149,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "version",
+                                "dataIndex": "softwareVersion",
                                 "text": "Version"
                             },
                             "designerId": "b500db6a-5ed1-4e7e-8492-93a2d8389e90"
@@ -162,11 +163,10 @@
                             "codeClass": null,
                             "userConfig": {
                                 "width": 200,
-                                "defaultWidth": 200,
-                                "dataIndex": "engine_dir",
-                                "text": "Engine Dir"
+                                "dataIndex": "regDt",
+                                "text": "Install Date"
                             },
-                            "designerId": "27473940-da98-462c-8804-2e473b4d790f"
+                            "designerId": "7b9401e2-cb81-4096-974b-6e5ba2fd0778"
                         },
                         {
                             "type": "Ext.grid.column.Column",
@@ -176,12 +176,12 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "width": 150,
-                                "defaultWidth": 150,
-                                "dataIndex": "install_dt",
-                                "text": "Install Date"
+                                "width": 200,
+                                "defaultWidth": 200,
+                                "dataIndex": "description",
+                                "text": "Description"
                             },
-                            "designerId": "7b9401e2-cb81-4096-974b-6e5ba2fd0778"
+                            "designerId": "27473940-da98-462c-8804-2e473b4d790f"
                         },
                         {
                             "type": "Ext.grid.View",
@@ -377,7 +377,17 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "border": 0,
+                        "cls": "",
                         "height": 250,
+                        "id": "monChart1",
+                        "padding": null,
+                        "style": [
+                            "{\r",
+                            "    borderColor: 'red',\r",
+                            "\tborderStyle: 'solid'\r",
+                            "}"
+                        ],
                         "width": 311,
                         "designer|displayName": "IdleCPUChart",
                         "animate": [
@@ -400,14 +410,15 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "x"
+                                    "regDt"
                                 ],
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
                                 "title": "Idle CPU",
+                                "constrain": true,
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/2]"
+                                    "[\"h\",1/3]"
                                 ]
                             },
                             "designerId": "be59972c-35e2-4af0-94d4-5dc39a9ec09f"
@@ -421,7 +432,7 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "y"
+                                    "monDataValue"
                                 ],
                                 "title": null
                             },
@@ -437,11 +448,53 @@
                             "userConfig": {
                                 "xField": "regDt",
                                 "yField": [
-                                    "y"
+                                    "monDataValue"
                                 ],
                                 "smooth": 3
                             },
                             "designerId": "2ef2ca2a-ba10-410e-8038-61c1f4440f05"
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onChartMouseEnter",
+                                "implHandler": [
+                                    "Peacock.app.debug(\"IdleCPUChart.onChartMouseEnter.\");\r",
+                                    "\r",
+                                    "\r",
+                                    "//alert(Ext.getClassName(this));//InstanceTabPanel\r",
+                                    "\r",
+                                    "\r",
+                                    "//Ext.getCmp(\"monChart1\").getEl().setStyle(\"borderWidth\", \"3px\");\r",
+                                    ""
+                                ],
+                                "name": "mouseenter",
+                                "scope": "me"
+                            },
+                            "designerId": "b6da81f5-dd69-4e65-ae62-888149e9049c"
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onMonChart1MouseLeave",
+                                "implHandler": [
+                                    "\r",
+                                    "//Ext.getCmp(\"monChart1\").getEl().setStyle(\"borderWidth\", \"0px\");"
+                                ],
+                                "name": "mouseleave",
+                                "scope": "me"
+                            },
+                            "designerId": "9348d200-0b08-4776-b923-7a4e37794e4d"
                         }
                     ]
                 },
@@ -476,14 +529,14 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "x"
+                                    "regDt"
                                 ],
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
                                 "title": "Combined CPU",
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/2]"
+                                    "[\"h\",1/3]"
                                 ]
                             },
                             "designerId": "82021933-07f0-4152-82bc-dd7b1d48745b"
@@ -497,7 +550,7 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "y"
+                                    "monDataValue"
                                 ],
                                 "title": null
                             },
@@ -513,7 +566,7 @@
                             "userConfig": {
                                 "xField": "regDt",
                                 "yField": [
-                                    "y"
+                                    "monDataValue"
                                 ],
                                 "smooth": 3
                             },
@@ -552,14 +605,14 @@
                             "codeClass": null,
                             "userConfig": {
                                 "fields": [
-                                    "x"
+                                    "regDt"
                                 ],
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
                                 "title": "Total Memory",
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/2]"
+                                    "[\"h\",1/3]"
                                 ]
                             },
                             "designerId": "84df3e36-4816-4e87-8b3f-84e834d16f2f"
@@ -594,6 +647,158 @@
                                 "smooth": 3
                             },
                             "designerId": "cefdec4b-6749-4190-8473-6af77af6d4d4"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "FreeMemChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartFreeMemStore"
+                    },
+                    "designerId": "4c92816a-0790-4b03-a766-537f3254453f",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Free Memory",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "008f43ed-84ed-44dc-989f-0fa80d21bbc6"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "d16f5675-ef43-4a26-ba83-5344207aa9d2"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "c27a61b0-76a1-4df4-b8d7-8c65ea365fa4"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "UsedMemChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartUsedMemStore"
+                    },
+                    "designerId": "1c8433ff-4632-461f-a694-05e0b6d337ee",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Used Memory",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "ec7b8834-cd20-49a2-baa9-2e6fe05b4874"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "35cc6e31-371d-4de9-b791-43948673e303"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "9eb8951c-6ade-4d96-a1ce-fe4aa970e057"
                         }
                     ]
                 }

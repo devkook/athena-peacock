@@ -21,9 +21,7 @@
 package com.athena.peacock.common.netty.message;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <pre>
@@ -36,7 +34,7 @@ public class ProvisioningResponseMessage extends AbstractMessage {
 
 	private static final long serialVersionUID = 1L;
 	
-	Map<String, List<Object>> results;
+	private List<String> results;
 	
 	public ProvisioningResponseMessage() {
 		super(MessageType.RESPONSE);
@@ -45,35 +43,16 @@ public class ProvisioningResponseMessage extends AbstractMessage {
 	/**
 	 * @return the results
 	 */
-	public Map<String, List<Object>> getResults() {
+	public List<String> getResults() {
 		if (results == null) {
-			results = new HashMap<String, List<Object>>();
+			results = new ArrayList<String>();
 		}
 		
 		return results;
 	}
 	
-	/**
-	 * <pre>
-	 * 
-	 * </pre>
-	 * @param name Command Name
-	 * @return
-	 */
-	public List<Object> getResult(String name) {
-		Map<String, List<Object>> _results = getResults();
-		List<Object> _list = _results.get(name);
-		
-		if (_list == null) {
-			_list = new ArrayList<Object>();
-			_results.put(name, _list);
-		}
-		
-		return _list;
-	}
-	
-	public void addResult(String name, Object result) {
-		getResult(name).add(result);
+	public void addResult(String result) {
+		getResults().add(result);
 	}
 
 }

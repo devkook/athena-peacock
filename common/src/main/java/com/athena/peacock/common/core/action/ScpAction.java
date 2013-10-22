@@ -94,7 +94,6 @@ public class ScpAction extends Action {
 	/* (non-Javadoc)
 	 * @see com.athena.peacock.common.core.action.Action#perform()
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public String perform() {
     	logger.debug("\n- Target Host Info : [{}]\n- Source : [{}]\n- Target : [{}]", new Object[]{targetHost.toString(), source, target});

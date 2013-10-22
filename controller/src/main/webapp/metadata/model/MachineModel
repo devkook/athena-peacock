@@ -18,8 +18,8 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "machine_id",
-                "type": "int"
+                "name": "machineId",
+                "type": "string"
             },
             "designerId": "17de7ac5-983a-4d1e-b0bf-e34bc9870ad3"
         },
@@ -31,7 +31,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "machine_mac_addr",
+                "name": "machineMacAddr",
                 "type": "string"
             },
             "designerId": "bb5fa571-2b0a-438b-aede-6b96bff97ed9"
@@ -96,7 +96,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "host_name",
+                "name": "hostName",
                 "type": "string"
             },
             "designerId": "d6ae2b1a-ba26-4ce9-b2fa-dcab3a6ebc00"
@@ -109,7 +109,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "is_vm",
+                "name": "isVm",
                 "type": "boolean"
             },
             "designerId": "bf712b30-8697-4109-8298-0bee2d0665f6"
@@ -122,7 +122,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "os_name",
+                "name": "osName",
                 "type": "string"
             },
             "designerId": "f45db878-c9ce-4109-8540-5a88fd6f27dd"
@@ -135,7 +135,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "os_ver",
+                "name": "osVer",
                 "type": "string"
             },
             "designerId": "b25b2c23-fe58-4f36-b11d-c34c050d1a67"
@@ -148,7 +148,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "os_arch",
+                "name": "osArch",
                 "type": "string"
             },
             "designerId": "8a2fe13d-3e8b-4fe3-ab8a-e46e2ab22f6b"
@@ -161,7 +161,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "cpu_clock",
+                "name": "cpuClock",
                 "type": "string"
             },
             "designerId": "dd7bd833-c30a-479e-9d0d-844877e47464"
@@ -174,7 +174,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "cpu_num",
+                "name": "cpuNum",
                 "type": "int"
             },
             "designerId": "9b9b7033-5adf-46b0-824d-4c75bab074e1"
@@ -187,7 +187,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "mem_size",
+                "name": "memSize",
                 "type": "string"
             },
             "designerId": "1e088648-6c04-4047-b978-29bf8141a8be"
@@ -200,7 +200,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "ip_addr",
+                "name": "ipAddr",
                 "type": "string"
             },
             "designerId": "6e14da56-3936-4ed7-bdff-0c3810ac5bac"
@@ -213,7 +213,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "register_dt",
+                "name": "regDt",
                 "type": "string"
             },
             "designerId": "0918c1bc-dba0-42ae-a618-e6ae1dfa761a"

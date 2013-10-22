@@ -39,7 +39,7 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
 
             grid.getStore().load({
                 params:{
-                    machine_id : Peacock.app.selectedRecord.get("machine_id")
+                    machineId : Peacock.app.selectedRecord.get("machineId")
                 }
             });
 
@@ -52,15 +52,52 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
 
             grid.getStore().load({
                 params:{
-                    machine_id : Peacock.app.selectedRecord.get("machine_id")
+                    machineId : Peacock.app.selectedRecord.get("machineId")
                 }
             });
 
         }else if(newCard.title == "Monitoring"){
 
-            Ext.getStore('ChartIdleCPUStore').load();
-            Ext.getStore('ChartCombCPUStore').load();
-            Ext.getStore('ChartTotalMemStore').load();
+            Ext.getStore('ChartIdleCPUStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_001",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
+            Ext.getStore('ChartCombCPUStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_002",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
+            Ext.getStore('ChartTotalMemStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_003",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
+            Ext.getStore('ChartFreeMemStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_004",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
+            Ext.getStore('ChartUsedMemStore').load({
+                params:{
+                    machineId : Peacock.app.selectedRecord.get("machineId"),
+                    monFactorId : "FACTOR_005",
+                    timeRange : "30m",
+                    period : "1m"
+                }
+            });
 
         }
     },

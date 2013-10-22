@@ -69,6 +69,10 @@ public class ConfigService {
 	public ConfigDto getConfig(ConfigDto config) throws Exception {
 		return configDao.getConfig(config);
 	}
+
+	public int getConfigListCnt(ConfigDto config) {
+		return configDao.getConfigListCnt(config);
+	}
 	
 	public List<ConfigDto> getConfigList(ConfigDto config) throws Exception {
 		return configDao.getConfigList(config);

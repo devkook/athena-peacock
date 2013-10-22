@@ -12,11 +12,11 @@ INSERT INTO peacock.mon_factor_tbl(MON_FACTOR_ID,MON_FACTOR_NAME,MON_FACTOR_UNIT
 VALUES ('FACTOR_005','USED_MEMORY','KB','Total used system memory',1,NOW(),1,NOW());
 
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
-VALUES (1,'Apache HTTP Daemon','2.2.25','Apache Software Foundation','/repo/apache/2.2.25/','httpd-2.2.25.tar.gz','Apache HTTP Daemon',1,NOW(),1,NOW());
+VALUES (1,'Apache','2.2.25','Apache Software Foundation','/repo/apache/2.2.25/','httpd-2.2.25.tar.gz','Apache HTTP Daemon',1,NOW(),1,NOW());
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
-VALUES (2,'MySQL Community Server','5.5.34','Oracle Corporation','/repo/mysql/5.5.34/','MySQL-server.rpm,MySQL-client.rpm','MySQL 5.5.34',1,NOW(),1,NOW());
+VALUES (2,'MySQL','5.5.34','Oracle Corporation','/repo/mysql/5.5.34/','MySQL-server.rpm,MySQL-client.rpm','MySQL 5.5.34',1,NOW(),1,NOW());
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
-VALUES (3,'JBoss EAP','5.2.0','Red Hat,Inc.','/repo/jboss/','jboss-eap-5.2.0.zip,jboss-cluster-template-5.2.0.zip','JBoss EAP 5.2.0',1,NOW(),1,NOW());
+VALUES (3,'JBoss','5.2.0','Red Hat,Inc.','/repo/jboss/','jboss-eap-5.2.0.zip,jboss-cluster-template-5.2.0.zip','JBoss EAP 5.2.0',1,NOW(),1,NOW());
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
 VALUES (4,'Tomcat','6.0.37','Apache Software Foundation','/repo/tomcat/','apache-tomcat-6.0.37.zip,tomcat-template-6.0.37.zip','Apache Tomcat 6.0.37',1,NOW(),1,NOW());
 
@@ -54,3 +54,7 @@ VALUES ('4', '1', '1111', '1111', '1111', '개발팀', '111@naver.com', '0', '1'
 
 INSERT INTO `peacock`.`user_group_tbl` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`, `REG_DT`) VALUES ('1', 'osc-employee', 'Open Source Consulting', NOW());
 INSERT INTO `peacock`.`user_group_tbl` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`, `REG_DT`) VALUES ('2', 'ncia', '...', NOW());
+
+
+INSERT INTO `peacock`.`machine_tbl` (`MACHINE_ID`, `MACHINE_MAC_ADDR`, `IS_VM`, `OS_NAME`, `OS_VER`, `OS_ARCH`, `CPU_CLOCK`, `CPU_NUM`, `MEM_SIZE`, `IP_ADDR`, `HOST_NAME`) 
+VALUES ('475e639f3a07492bad455254003a281d', '5254003a281d', 'Y', 'Linux', '2.6.32-358.el6.x86_64', 'amd64', '3400', '1', '1024', '10.211.55.5', 'localhost.localdomain');

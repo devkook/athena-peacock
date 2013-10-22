@@ -29,6 +29,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.athena.peacock.controller.web.config.ConfigDao;
+import com.athena.peacock.controller.web.config.ConfigDto;
 import com.athena.peacock.controller.web.software.SoftwareDto;
 
 /**
@@ -46,8 +48,25 @@ public class SoftwareService {
 	@Named("softwareDao")
 	private SoftwareDao softwareDao;
 	
-	public void insertSoftware(SoftwareDto software) throws Exception {
-		softwareDao.insertSoftware(software);
+	@Inject
+	@Named("configDao")
+	private ConfigDao configDao;
+	
+	public void insertSoftware(SoftwareDto software, List<ConfigDto> configList) throws Exception {		
+		if (softwareDao.getSoftware(software) != null) {
+			softwareDao.updateSoftware(software);
+		} else {
+			softwareDao.insertSoftware(software);
+		}
+		
+		// 기존에 존재하는 config 파일 정보를 삭제 처리한다.
+		if (configList.size() > 0) {
+			configDao.deleteConfig(configList.get(0));
+		}
+		
+		for (ConfigDto config : configList) {
+			configDao.insertConfig(config);
+		}
 	}
 	
 	public void updateSoftware(SoftwareDto software) throws Exception {

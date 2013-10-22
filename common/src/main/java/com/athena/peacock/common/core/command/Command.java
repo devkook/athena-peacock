@@ -77,7 +77,7 @@ public class Command implements Serializable {
         for (Action action : actions) {
         	logger.debug("[{}] will be start.", action.getClass().getCanonicalName());
         	
-        	response.addResult(name, action.perform());
+        	response.addResult(action.perform());
             
         	logger.debug("[{}] has done.", action.getClass().getCanonicalName());
         }

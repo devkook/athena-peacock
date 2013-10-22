@@ -33,7 +33,7 @@ import java.util.List;
 public class GridJsonResponse {
 	
 	private int total;
-	private List list;
+	private List<?> list;
 
 	/**
 	 * <pre>
@@ -52,11 +52,11 @@ public class GridJsonResponse {
 		this.total = total;
 	}
 
-	public List getList() {
+	public List<?> getList() {
 		return list;
 	}
 
-	public void setList(List list) {
+	public void setList(List<?> list) {
 		this.list = list;
 	}
 
