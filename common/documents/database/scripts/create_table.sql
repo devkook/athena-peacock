@@ -391,10 +391,9 @@ CREATE TABLE IF NOT EXISTS `peacock`.`config_tbl` (
   `UPD_USER_ID` INT(11) NULL,
   `UPD_DT` DATETIME NULL,
   PRIMARY KEY (`MACHINE_ID`, `SOFTWARE_ID`, `CONFIG_FILE_ID`),
-  INDEX `fk_config_file_info_tbl_software_tbl1_idx` (`MACHINE_ID` ASC, `SOFTWARE_ID` ASC),
   CONSTRAINT `fk_config_file_info_tbl_software_tbl1`
-    FOREIGN KEY (`MACHINE_ID`)
-    REFERENCES `peacock`.`software_tbl` (`MACHINE_ID`)
+    FOREIGN KEY (`MACHINE_ID` , `SOFTWARE_ID`)
+    REFERENCES `peacock`.`software_tbl` (`MACHINE_ID` , `SOFTWARE_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
