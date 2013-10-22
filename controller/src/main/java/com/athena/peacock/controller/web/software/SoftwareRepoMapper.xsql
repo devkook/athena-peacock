@@ -11,7 +11,7 @@
 		     		, #{fileName}, #{description}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
-	<select id="getSoftwareRepo" parameterType="String" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
+	<select id="getSoftwareRepo" parameterType="int" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
 		SELECT SOFTWARE_ID AS softwareId
 			   , SOFTWARE_NAME AS softwareName
 			   , SOFTWARE_VERSION AS softwareVersion
@@ -40,7 +40,7 @@
 		 WHERE SOFTWARE_ID = #{softwareId}
 	</update>
 	
-	<delete id="deleteSoftwareRepo" parameterType="String">
+	<delete id="deleteSoftwareRepo" parameterType="int">
 		DELETE FROM software_repo_tbl WHERE SOFTWARE_ID = #{softwareId}
 	</delete>
 	

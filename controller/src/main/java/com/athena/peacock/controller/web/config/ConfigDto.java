@@ -38,7 +38,7 @@ public class ConfigDto extends BaseDto {
 
 	private String machineId;
 	private Integer softwareId;
-	private String configFileId;
+	private Integer configFileId;
 	private String configFileLocation;
 	private String configFileName;
 	private String configFileContents;
@@ -75,14 +75,14 @@ public class ConfigDto extends BaseDto {
 	/**
 	 * @return the configFileId
 	 */
-	public String getConfigFileId() {
+	public Integer getConfigFileId() {
 		return configFileId;
 	}
 
 	/**
 	 * @param configFileId the configFileId to set
 	 */
-	public void setConfigFileId(String configFileId) {
+	public void setConfigFileId(Integer configFileId) {
 		this.configFileId = configFileId;
 	}
 

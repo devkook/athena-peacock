@@ -32,9 +32,13 @@ import java.io.Serializable;
 public class ProvisioningDetail implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	
+	/** Controller에서 각 Software의 config 파일을 읽기 위한 url prefix */
+	private String urlPrefix;
 
 	/** Apache, Tomcat, JBoss, MySQL 공통 Variables */
-	private String type;
+	private Integer softwareId;
+	private String softwareName;
 	private String version;
 	private String machineId;
 	private String serverName;
@@ -44,6 +48,7 @@ public class ProvisioningDetail implements Serializable {
 	/** Apache Variables */
 	private String targetDir;
 	private String serverRoot;
+	private String serverDomain;
 	
 	/** Tomcat Variables */
 	private String javaHome;
@@ -69,17 +74,45 @@ public class ProvisioningDetail implements Serializable {
 	private String dataDir;
 
 	/**
-	 * @return the type
+	 * @return the urlPrefix
 	 */
-	public String getType() {
-		return type;
+	public String getUrlPrefix() {
+		return urlPrefix;
 	}
 
 	/**
-	 * @param type the type to set
+	 * @param urlPrefix the urlPrefix to set
 	 */
-	public void setType(String type) {
-		this.type = type;
+	public void setUrlPrefix(String urlPrefix) {
+		this.urlPrefix = urlPrefix;
+	}
+
+	/**
+	 * @return the softwareId
+	 */
+	public Integer getSoftwareId() {
+		return softwareId;
+	}
+
+	/**
+	 * @param softwareId the softwareId to set
+	 */
+	public void setSoftwareId(Integer softwareId) {
+		this.softwareId = softwareId;
+	}
+
+	/**
+	 * @return the softwareName
+	 */
+	public String getSoftwareName() {
+		return softwareName;
+	}
+
+	/**
+	 * @param softwareName the softwareName to set
+	 */
+	public void setSoftwareName(String softwareName) {
+		this.softwareName = softwareName;
 	}
 
 	/**
@@ -178,6 +211,20 @@ public class ProvisioningDetail implements Serializable {
 	 */
 	public void setServerRoot(String serverRoot) {
 		this.serverRoot = serverRoot;
+	}
+
+	/**
+	 * @return the serverDomain
+	 */
+	public String getServerDomain() {
+		return serverDomain;
+	}
+
+	/**
+	 * @param serverDomain the serverDomain to set
+	 */
+	public void setServerDomain(String serverDomain) {
+		this.serverDomain = serverDomain;
 	}
 
 	/**

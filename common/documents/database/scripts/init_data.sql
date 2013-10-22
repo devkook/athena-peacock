@@ -12,11 +12,11 @@ INSERT INTO peacock.mon_factor_tbl(MON_FACTOR_ID,MON_FACTOR_NAME,MON_FACTOR_UNIT
 VALUES ('FACTOR_005','USED_MEMORY','KB','Total used system memory',1,NOW(),1,NOW());
 
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
-VALUES (1,'Apache HTTP Daemon','2.2.25','Apache Software Foundation','/repo/apache/2.2.25/','httpd-2.2.25.tar.gz','Apache HTTP Daemon',1,NOW(),1,NOW());
+VALUES (1,'Apache','2.2.25','Apache Software Foundation','/repo/apache/2.2.25/','httpd-2.2.25.tar.gz','Apache HTTP Daemon',1,NOW(),1,NOW());
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
-VALUES (2,'MySQL Community Server','5.5.34','Oracle Corporation','/repo/mysql/5.5.34/','MySQL-server.rpm,MySQL-client.rpm','MySQL 5.5.34',1,NOW(),1,NOW());
+VALUES (2,'MySQL','5.5.34','Oracle Corporation','/repo/mysql/5.5.34/','MySQL-server.rpm,MySQL-client.rpm','MySQL 5.5.34',1,NOW(),1,NOW());
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
-VALUES (3,'JBoss EAP','5.2.0','Red Hat,Inc.','/repo/jboss/','jboss-eap-5.2.0.zip,jboss-cluster-template-5.2.0.zip','JBoss EAP 5.2.0',1,NOW(),1,NOW());
+VALUES (3,'JBoss','5.2.0','Red Hat,Inc.','/repo/jboss/','jboss-eap-5.2.0.zip,jboss-cluster-template-5.2.0.zip','JBoss EAP 5.2.0',1,NOW(),1,NOW());
 INSERT INTO peacock.software_repo_tbl (SOFTWARE_ID,SOFTWARE_NAME,SOFTWARE_VERSION,SOFTWARE_VENDOR,FILE_LOCATION,FILE_NAME,DESCRIPTION,REG_USER_ID,REG_DT,UPD_USER_ID,UPD_DT) 
 VALUES (4,'Tomcat','6.0.37','Apache Software Foundation','/repo/tomcat/','apache-tomcat-6.0.37.zip,tomcat-template-6.0.37.zip','Apache Tomcat 6.0.37',1,NOW(),1,NOW());
 

@@ -20,26 +20,29 @@
  */
 package com.athena.peacock.controller.common.provisioning;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
-import com.athena.peacock.common.core.action.ConfigAction;
 import com.athena.peacock.common.core.action.FileWriteAction;
 import com.athena.peacock.common.core.action.ShellAction;
-import com.athena.peacock.common.core.action.support.Property;
 import com.athena.peacock.common.core.command.Command;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
+import com.athena.peacock.controller.web.config.ConfigDto;
+import com.athena.peacock.controller.web.software.SoftwareDto;
+import com.athena.peacock.controller.web.software.SoftwareService;
 
 /**
  * <pre>
@@ -58,10 +61,20 @@ public class ProvisioningHandler {
     @Named("peacockTransmitter")
 	private PeacockTransmitter peacockTransmitter;
 
+	@Inject
+	@Named("softwareService")
+	private SoftwareService softwareService;
+
 	public List<String> install(ProvisioningDetail provisioningDetail) throws Exception {
-		if (provisioningDetail.getType().toLowerCase().equals("apache")) {
+		if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("apache") > -1) {
 			return apache_install(provisioningDetail);
-		} else
+		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("mysql") > -1) {
+			return apache_install(provisioningDetail);
+		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("jboss") > -1) {
+			return apache_install(provisioningDetail);
+		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("tomcat") > -1) {
+			return apache_install(provisioningDetail);
+		}
 			
 		return null;
 	}
@@ -77,6 +90,9 @@ public class ProvisioningHandler {
 		
 		String targetDir = provisioningDetail.getTargetDir();
 		String version = provisioningDetail.getVersion();
+		String serverRoot = (provisioningDetail.getServerRoot() == null ? targetDir : provisioningDetail.getServerRoot());
+		String port = (provisioningDetail.getPort() == null ? "80" : provisioningDetail.getPort());
+		String serverDomain = (provisioningDetail.getServerDomain() == null ? "localhost" : provisioningDetail.getServerDomain());
 		
 		Command command = new Command("Apache INSTALL");
 		int sequence = 0;
@@ -139,14 +155,27 @@ public class ProvisioningHandler {
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
-		s_action.addArguments("${RepositoryUrl}/apache/pcre-devel-8.13-1.4.x86_64.rpm");
+		s_action.addArguments("${RepositoryUrl}/apache/pcre-7.8-6.el6.x86_64.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/apache/pcre-devel-7.8-6.el6.x86_64.rpm");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("rpm");
 		s_action.addArguments("-Uvh");
-		s_action.addArguments("pcre-devel-8.13-1.4.x86_64.rpm");
+		s_action.addArguments("pcre-7.8-6.el6.x86_64.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("rpm");
+		s_action.addArguments("-Uvh");
+		s_action.addArguments("pcre-devel-7.8-6.el6.x86_64.rpm");
 		command.addAction(s_action);
 		
 		/*
@@ -239,13 +268,16 @@ public class ProvisioningHandler {
 		
 		command = new Command("CONFIGURATION");
 		sequence = 0;
-		s_action = new ShellAction(sequence++);
-		s_action.setWorkingDiretory(targetDir + "/conf");
-		s_action.setCommand("wget");
-		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/httpd.conf");
-		s_action.addArguments("-O");
-		s_action.addArguments("httpd.conf");
-		command.addAction(s_action);
+		
+		String httpdConf = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd.conf"));
+		httpdConf = httpdConf.replaceAll("\\$\\{ServerRoot\\}", serverRoot)
+					.replaceAll("\\$\\{Port\\}", port)
+					.replaceAll("\\$\\{ServerName\\}", serverDomain);
+		
+		FileWriteAction fw_action = new FileWriteAction(sequence++);
+		fw_action.setContents(httpdConf);
+		fw_action.setFileName(targetDir + "/conf/httpd.conf");
+		command.addAction(fw_action);
 		
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
@@ -255,18 +287,13 @@ public class ProvisioningHandler {
 		s_action.addArguments("mod-jk.conf");
 		command.addAction(s_action);
 
-//		s_action = new ShellAction(sequence++);
-//		s_action.setWorkingDiretory(targetDir + "/conf");
-//		s_action.setCommand("wget");
-//		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/workers.properties");
-//		s_action.addArguments("-O");
-//		s_action.addArguments("workers.properties");
-//		command.addAction(s_action);
-
-		FileWriteAction fw_action = new FileWriteAction(sequence++);
-		fw_action.setContents("/*.jsp=loadbalancer\r\n/*.do=loadbalancer");
-		fw_action.setFileName(targetDir + "/conf/workers.properties");
-		command.addAction(fw_action);
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory(targetDir + "/conf");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/conf/workers.properties");
+		s_action.addArguments("-O");
+		s_action.addArguments("workers.properties");
+		command.addAction(s_action);
 
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory(targetDir + "/conf");
@@ -284,62 +311,69 @@ public class ProvisioningHandler {
 		s_action.addArguments("httpd-mpm.conf");
 		command.addAction(s_action);
 		
-		List<Property> properties = new ArrayList<Property>();
-		Property property = new Property();
-		property.setKey("ServerRoot");
-		property.setValue(targetDir);
-		properties.add(property);
-		
-		property = new Property();
-		property.setKey("Port");
-		property.setValue("80");
-		properties.add(property);
-		
-		property = new Property();
-		property.setKey("ServerName");
-		property.setValue("localhost");
-		properties.add(property);
-
-		ConfigAction c_action = new ConfigAction(sequence++);
-		c_action.setFileName(targetDir + "/conf/httpd.conf");
-		c_action.setProperties(properties);
-		command.addAction(c_action);
-		
 		// Add CONFIGURATION Command
-		cmdMsg.addCommand(command);
-		
-		command = new Command("CHECK");
-		sequence = 0;
-		s_action = new ShellAction(sequence++);
-		s_action.setCommand(targetDir + "/bin/apachectl");
-		s_action.addArguments("-V");
-		command.addAction(s_action);
-
-		s_action = new ShellAction(sequence++);
-		s_action.setCommand(targetDir + "/bin/apachectl");
-		s_action.addArguments("-l");
-		command.addAction(s_action);
-
-		s_action = new ShellAction(sequence++);
-		s_action.setCommand(targetDir + "/bin/apachectl");
-		s_action.addArguments("start");
-		command.addAction(s_action);
-
-		s_action = new ShellAction(sequence++);
-		s_action.setCommand("sleep");
-		s_action.addArguments("1");
-		command.addAction(s_action);
-
-		s_action = new ShellAction(sequence++);
-		s_action.setCommand("curl");
-		s_action.addArguments("http://localhost");
-		command.addAction(s_action);
-
-		// Add CHECK Command
 		cmdMsg.addCommand(command);
 		
 		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		software.setInstallLocation(targetDir);
+		software.setDescription("Apache HTTP Daemon");
+		software.setDeleteYn("N");
+		
+		List<ConfigDto> configList = new ArrayList<ConfigDto>();
+		ConfigDto config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(targetDir + "/conf");
+		config.setConfigFileName("httpd.conf");
+		config.setConfigFileContents(httpdConf);
+		config.setDeleteYn("N");
+		configList.add(config);
+		
+		config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(targetDir + "/conf");
+		config.setConfigFileName("mod-jk.conf");
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/mod-jk.conf")));
+		config.setDeleteYn("N");
+		configList.add(config);
+		
+		config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(targetDir + "/conf");
+		config.setConfigFileName("workers.properties");
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/workers.properties")));
+		config.setDeleteYn("N");
+		configList.add(config);
+		
+		config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(targetDir + "/conf");
+		config.setConfigFileName("uriworkermap.properties");
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/uriworkermap.properties")));
+		config.setDeleteYn("N");
+		configList.add(config);
+		
+		config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(targetDir + "/conf/extra");
+		config.setConfigFileName("httpd-mpm.conf");
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd-mpm.conf")));
+		config.setDeleteYn("N");
+		configList.add(config);
+		
+		softwareService.insertSoftware(software, configList);
 		
 		return response.getResults();
 	}

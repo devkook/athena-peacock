@@ -24,6 +24,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -55,6 +56,10 @@ public class SoftwareController {
 	@Inject
 	@Named("softwareRepoService")
 	private SoftwareRepoService softwareRepoService;
+
+	@Inject
+	@Named("softwareService")
+	private SoftwareService softwareService;
 	
 	@Inject
 	@Named("provisioningHandler")
@@ -89,19 +94,24 @@ public class SoftwareController {
 	 * @throws Exception 
 	 */
 	@RequestMapping("/install")
-	public @ResponseBody SimpleJsonResponse install(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) {
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getType()), "type must not be null.");
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getVersion()), "version must not be null.");
+	public @ResponseBody SimpleJsonResponse install(HttpServletRequest request, SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) {
+		Assert.isTrue(provisioningDetail.getSoftwareId() != null, "softwareId must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
+		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getTargetDir()), "targetDir must not be null.");
 
 		try {
 			// 기 설치 여부 검사
 			boolean installed = false;
 			boolean installedDiffVersion = false;
+			
+			SoftwareRepoDto software = softwareRepoService.getSoftwareRepo(provisioningDetail.getSoftwareId());
+			provisioningDetail.setSoftwareName(software.getSoftwareName());
+			provisioningDetail.setVersion(software.getSoftwareVersion());
+			
 			List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
 			
 			for (SoftwareRepoDto softwareRepo : softwareRepoList) {
-				if (softwareRepo.getSoftwareName().toLowerCase().indexOf(provisioningDetail.getType().toLowerCase()) > -1 && softwareRepo.getInstallYn().equals("Y")) {
+				if (softwareRepo.getSoftwareName().equals(provisioningDetail.getSoftwareName()) && softwareRepo.getInstallYn().equals("Y")) {
 					if (softwareRepo.getSoftwareVersion().equals(provisioningDetail.getVersion())) {
 						installed = true;
 					} else {
@@ -122,6 +132,9 @@ public class SoftwareController {
 				return jsonRes;
 			}
 		
+			String urlPrefix = "http://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "/repo";
+			provisioningDetail.setUrlPrefix(urlPrefix);
+			
 			provisioningHandler.install(provisioningDetail);
 			jsonRes.setMsg("Install success.");
 		} catch (Exception e) {
@@ -145,7 +158,7 @@ public class SoftwareController {
 	 */
 	@RequestMapping("/remove")
 	public @ResponseBody SimpleJsonResponse remove(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) throws Exception {
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getType()), "type must not be null.");
+		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getSoftwareName()), "softwareName must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getVersion()), "version must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
 		

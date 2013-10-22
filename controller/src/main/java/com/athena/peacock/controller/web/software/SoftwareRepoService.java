@@ -55,11 +55,11 @@ public class SoftwareRepoService {
 		softwareRepoDao.updateSoftwareRepo(softwareRepo);
 	}
 	
-	public void deleteSoftwareRepo(String softwareId) throws Exception {
+	public void deleteSoftwareRepo(int softwareId) throws Exception {
 		softwareRepoDao.deleteSoftwareRepo(softwareId);
 	}
 	
-	public SoftwareRepoDto getSoftwareRepo(String softwareId) throws Exception {
+	public SoftwareRepoDto getSoftwareRepo(int softwareId) throws Exception {
 		return softwareRepoDao.getSoftwareRepo(softwareId);
 	}
 	
