@@ -38,36 +38,176 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                     items: [
                         {
                             xtype: 'form',
+                            id: 'instDescForm',
                             defaults: {
                                 border: false,
                                 xtype: 'panel',
                                 flex: 1,
                                 layout: 'anchor'
                             },
-                            layout: {
-                                type: 'hbox'
-                            },
                             bodyPadding: 10,
                             bodyStyle: 'padding:5px 5px 0',
+                            header: false,
                             title: 'My Form',
                             fieldDefaults: {
-                                msgTarget: 'side'
+                                msgTarget: 'side',
+                                margin: '0 10',
+                                readOnly: true
                             },
                             items: [
                                 {
-                                    xtype: 'textfield',
-                                    flex: 1,
-                                    fieldLabel: 'Label'
+                                    xtype: 'fieldcontainer',
+                                    height: 34,
+                                    defaults: {
+                                        flex: 1
+                                    },
+                                    layout: {
+                                        align: 'middle',
+                                        type: 'hbox'
+                                    },
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'ID',
+                                            name: 'machineId'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Host',
+                                            name: 'hostName'
+                                        }
+                                    ]
                                 },
                                 {
-                                    xtype: 'textfield',
-                                    flex: 1,
-                                    fieldLabel: 'Label'
+                                    xtype: 'fieldcontainer',
+                                    height: 34,
+                                    defaults: {
+                                        flex: 1
+                                    },
+                                    layout: {
+                                        align: 'middle',
+                                        type: 'hbox'
+                                    },
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'OS Name',
+                                            name: 'osName'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'OS Version',
+                                            name: 'osVer'
+                                        }
+                                    ]
                                 },
                                 {
-                                    xtype: 'textfield',
-                                    flex: 1,
-                                    fieldLabel: 'Label'
+                                    xtype: 'fieldcontainer',
+                                    height: 34,
+                                    defaults: {
+                                        flex: 1
+                                    },
+                                    layout: {
+                                        align: 'middle',
+                                        type: 'hbox'
+                                    },
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Mac Address',
+                                            name: 'machineMacAddr'
+                                        },
+                                        {
+                                            xtype: 'checkboxfield',
+                                            flex: 1,
+                                            fieldLabel: 'Is VM',
+                                            name: 'isVm',
+                                            boxLabel: 'VM',
+                                            inputValue: 'Y',
+                                            uncheckedValue: 'N'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldcontainer',
+                                    height: 34,
+                                    defaults: {
+                                        flex: 1
+                                    },
+                                    layout: {
+                                        align: 'middle',
+                                        type: 'hbox'
+                                    },
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'IP Address',
+                                            name: 'ipAddr'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'OS Arch',
+                                            name: 'osArch'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldcontainer',
+                                    height: 34,
+                                    defaults: {
+                                        flex: 1
+                                    },
+                                    layout: {
+                                        align: 'middle',
+                                        type: 'hbox'
+                                    },
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'CPU Clock',
+                                            name: 'cpuClock'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Core',
+                                            name: 'cpuNum'
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldcontainer',
+                                    height: 34,
+                                    defaults: {
+                                        flex: 1
+                                    },
+                                    layout: {
+                                        align: 'middle',
+                                        type: 'hbox'
+                                    },
+                                    fieldLabel: 'Label',
+                                    hideLabel: true,
+                                    items: [
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Memory Size',
+                                            name: 'memSize'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Create Time',
+                                            name: 'regDt'
+                                        }
+                                    ]
                                 }
                             ]
                         }

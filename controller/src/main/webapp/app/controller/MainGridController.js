@@ -50,7 +50,7 @@ Ext.define('Peacock.controller.MainGridController', {
 
             //tabPanel = Ext.widget('instanceTabPanel');
             tabPanel = this.getInstanceTabPanelView();
-            detailTitleLabel.setText(record.get("os_name"));
+            detailTitleLabel.setText("Instance: "+record.get("hostName") + " (" + record.get("ipAddr") + ")");
 
         }else if (Peacock.app.menu_id == 'img-tmp'){
 
