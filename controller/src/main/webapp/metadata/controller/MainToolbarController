@@ -97,6 +97,9 @@
                     "}else if(item.getId() == \"tbActionRegister\"){\r",
                     "\r",
                     "\r",
+                    "}else if(item.getId() == \"tbActionSWInstall\"){\r",
+                    "    Ext.widget('swInstallLaunchWindow').show();\r",
+                    "\r",
                     "}"
                 ],
                 "name": "click",

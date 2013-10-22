@@ -26,7 +26,7 @@
                 "padding": null,
                 "width": 400,
                 "autoScroll": true,
-                "layout": "column",
+                "layout": "fit",
                 "title": "Description"
             },
             "designerId": "8fedaf3b-4d90-4c61-bd47-b0e4af8f87c9",
@@ -41,44 +41,76 @@
                     "designerId": "766a22b5-21a7-4969-8a2c-a2eb35edbf22"
                 },
                 {
-                    "type": "Ext.grid.property.Grid",
+                    "type": "Ext.form.Panel",
                     "reference": {
                         "name": "items",
                         "type": "array"
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "layout|columnWidth": 0.5,
-                        "id": "instDescGrid1",
-                        "padding": 5,
-                        "header": false,
-                        "title": "My Property Grid",
-                        "enableColumnHide": false,
-                        "enableColumnResize": false,
-                        "source": [
-                            "{\"Property 1\":\"String\",\"Property 2\":true,\"Property 3\":\"2013-08-08T13:41:39\",\"Property 4\":123}"
+                        "defaults": [
+                            "{\r",
+                            "    border: false,\r",
+                            "    xtype: 'panel',\r",
+                            "    flex: 1,\r",
+                            "    layout: 'anchor'\r",
+                            "}"
+                        ],
+                        "layout": "hbox",
+                        "bodyPadding": 10,
+                        "bodyStyle": "padding:5px 5px 0",
+                        "title": "My Form",
+                        "fieldDefaults": [
+                            "{\r",
+                            "    msgTarget: 'side'\r",
+                            "}"
                         ]
                     },
-                    "designerId": "08f41832-bc28-494e-8423-aede02ead1f1"
-                },
-                {
-                    "type": "Ext.grid.property.Grid",
-                    "reference": {
-                        "name": "items",
-                        "type": "array"
+                    "configAlternates": {
+                        "bodyStyle": "string"
                     },
-                    "codeClass": null,
-                    "userConfig": {
-                        "layout|columnWidth": 0.5,
-                        "id": "instDescGrid2",
-                        "padding": "5 5 5 0",
-                        "header": false,
-                        "title": "My Property Grid",
-                        "source": [
-                            "{\"Property 1\":\"String\",\"Property 2\":true,\"Property 3\":\"2013-08-08T13:41:48\",\"Property 4\":123}"
-                        ]
-                    },
-                    "designerId": "855bceb6-9136-4a37-9fd7-512a1996afde"
+                    "designerId": "3da7bb64-8814-42b3-b9cf-c3dd8e5e6f93",
+                    "cn": [
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": 1,
+                                "fieldLabel": "Label"
+                            },
+                            "designerId": "78ef9935-b430-41a5-9038-ae354874c71e"
+                        },
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": 1,
+                                "fieldLabel": "Label"
+                            },
+                            "designerId": "29412159-c15d-42aa-84d3-2d751e030a16"
+                        },
+                        {
+                            "type": "Ext.form.field.Text",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "layout|flex": 1,
+                                "fieldLabel": "Label"
+                            },
+                            "designerId": "d3021742-a219-4ea5-9d48-071a9050c6c4"
+                        }
+                    ]
                 }
             ]
         },

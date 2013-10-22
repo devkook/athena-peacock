@@ -339,6 +339,30 @@
                 "app/store/ChartUsedMemStore.js"
             ],
             "className": "ChartUsedMemStore"
+        },
+        "65dc1da1-b32e-43b4-be55-97e00e72a703": {
+            "paths": [
+                "metadata/view/SWInstallLaunchWindow",
+                "app/view/override/SWInstallLaunchWindow.js",
+                "app/view/SWInstallLaunchWindow.js"
+            ],
+            "className": "SWInstallLaunchWindow"
+        },
+        "8c147303-3716-45ef-8473-86d87330d2db": {
+            "paths": [
+                "metadata/store/SoftwareComboStore",
+                "app/store/override/SoftwareComboStore.js",
+                "app/store/SoftwareComboStore.js"
+            ],
+            "className": "SoftwareComboStore"
+        },
+        "68ac6662-84a7-4c61-b9df-05659cec9d2f": {
+            "paths": [
+                "metadata/controller/SWinstallController",
+                "app/controller/override/SWinstallController.js",
+                "app/controller/SWinstallController.js"
+            ],
+            "className": "SWinstallController"
         }
     },
     "viewOrderMap": {
@@ -347,6 +371,7 @@
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
             "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
             "477b9df4-ddf6-4d33-ac66-2268cb4ad745",
+            "65dc1da1-b32e-43b4-be55-97e00e72a703",
             "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09",
             "f7029523-2528-4ff5-b4b9-dfdf237e504a",
             "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
@@ -365,7 +390,8 @@
             "b4fa8fa0-ca01-40a0-ae65-100954fd4750",
             "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c",
             "60518488-6347-4c96-80e7-d0eddceb2ebd",
-            "2fd3b133-b493-419e-b475-df1433182038"
+            "2fd3b133-b493-419e-b475-df1433182038",
+            "8c147303-3716-45ef-8473-86d87330d2db"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -376,7 +402,8 @@
             "06afb1ae-22cd-4c26-b63f-bf583f512c21",
             "c8b56b31-d9db-4a25-9efd-a0443deea71d",
             "08950a00-7767-4d84-b8e0-a94c8c2ba598",
-            "6d5543ba-521b-41bf-b38c-3a24a2395ad1"
+            "6d5543ba-521b-41bf-b38c-3a24a2395ad1",
+            "68ac6662-84a7-4c61-b9df-05659cec9d2f"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",

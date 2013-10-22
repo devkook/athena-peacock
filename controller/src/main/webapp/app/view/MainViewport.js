@@ -321,6 +321,11 @@ Ext.define('Peacock.view.MainViewport', {
                                                                         xtype: 'menuitem',
                                                                         id: 'tbActionRegister',
                                                                         text: 'Register'
+                                                                    },
+                                                                    {
+                                                                        xtype: 'menuitem',
+                                                                        id: 'tbActionSWInstall',
+                                                                        text: 'S/W Install'
                                                                     }
                                                                 ]
                                                             }

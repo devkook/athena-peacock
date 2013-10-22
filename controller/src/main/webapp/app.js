@@ -39,14 +39,16 @@ Ext.application({
         'ChartCombCPUStore',
         'ChartTotalMemStore',
         'ChartFreeMemStore',
-        'ChartUsedMemStore'
+        'ChartUsedMemStore',
+        'SoftwareComboStore'
     ],
     views: [
         'MainViewport',
         'LoginWindow',
         'InstanceLaunchWindow',
         'UserGroupFormWindow',
-        'UserFormWindow'
+        'UserFormWindow',
+        'SWInstallLaunchWindow'
     ],
     autoCreateViewport: true,
     controllers: [
@@ -58,7 +60,8 @@ Ext.application({
         'UserGroupTabPanelController',
         'MainToolbarController',
         'GlobalConfigController',
-        'TopToolbarController'
+        'TopToolbarController',
+        'SWinstallController'
     ],
     name: 'Peacock',
 

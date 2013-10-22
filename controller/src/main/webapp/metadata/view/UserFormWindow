@@ -109,6 +109,8 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|anchor": "100%",
+                        "cls": "",
+                        "componentCls": "origin-passwd",
                         "id": "passwd",
                         "fieldLabel": "Password",
                         "name": "passwd",

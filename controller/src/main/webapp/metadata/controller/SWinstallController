@@ -1,0 +1,54 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "SWinstallController"
+    },
+    "designerId": "68ac6662-84a7-4c61-b9df-05659cec9d2f",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onSoftwareComboboxChange",
+                "implHandler": [
+                    "Peacock.app.debug(\"SWInstallController.onSoftwareComboboxChange. newValue = \" + newValue);\r",
+                    "\r",
+                    "var frmId = null;\r",
+                    "\r",
+                    "if(newValue == 1){\r",
+                    "    frmId = \"apache\";\r",
+                    "    \r",
+                    "}else if(newValue == 2){\r",
+                    "    frmId = \"mysql\";\r",
+                    "    \r",
+                    "}else if(newValue == 3){\r",
+                    "    frmId = \"jboss\";\r",
+                    "\r",
+                    "}else if(newValue == 4){\r",
+                    "    frmId = \"tomcat\";\r",
+                    "    \r",
+                    "    \r",
+                    "}\r",
+                    "\r",
+                    "//var paramPanel = this.getParamPanel();\r",
+                    "var paramPanel = Ext.getCmp(\"swParamPanel\");\r",
+                    "paramPanel.layout.setActiveItem(frmId);"
+                ],
+                "name": "change",
+                "scope": "me",
+                "designer|targetType": "Ext.form.field.ComboBox",
+                "designer|controlQuery": "#softwareCombo"
+            },
+            "designerId": "fb36ccbc-68ba-44cc-916b-23b7ddebc7bf"
+        }
+    ]
+}

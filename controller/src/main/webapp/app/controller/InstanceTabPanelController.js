@@ -107,8 +107,7 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
         * 초기 화면 조회시. (목록에서 선택시)
         */
 
-        //var tabPanel = this.getInstanceTabPanelView();
-        this.viewDescription();
+        //this.viewDescription();
 
 
 
