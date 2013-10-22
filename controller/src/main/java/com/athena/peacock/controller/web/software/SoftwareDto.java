@@ -34,8 +34,10 @@ public class SoftwareDto extends BaseDto {
 	private static final long serialVersionUID = 1L;
 
 	private String machineId;
-	private int softwareId;
+	private Integer softwareId;
 	private String installLocation;
+	private String installStat;
+	private String installLog;
 	private String description;
 	private String deleteYn;
 	
@@ -56,14 +58,14 @@ public class SoftwareDto extends BaseDto {
 	/**
 	 * @return the softwareId
 	 */
-	public int getSoftwareId() {
+	public Integer getSoftwareId() {
 		return softwareId;
 	}
 	
 	/**
 	 * @param softwareId the softwareId to set
 	 */
-	public void setSoftwareId(int softwareId) {
+	public void setSoftwareId(Integer softwareId) {
 		this.softwareId = softwareId;
 	}
 	
@@ -79,6 +81,34 @@ public class SoftwareDto extends BaseDto {
 	 */
 	public void setInstallLocation(String installLocation) {
 		this.installLocation = installLocation;
+	}
+
+	/**
+	 * @return the installStat
+	 */
+	public String getInstallStat() {
+		return installStat;
+	}
+
+	/**
+	 * @param installStat the installStat to set
+	 */
+	public void setInstallStat(String installStat) {
+		this.installStat = installStat;
+	}
+
+	/**
+	 * @return the installLog
+	 */
+	public String getInstallLog() {
+		return installLog;
+	}
+
+	/**
+	 * @param installLog the installLog to set
+	 */
+	public void setInstallLog(String installLog) {
+		this.installLog = installLog;
 	}
 	
 	/**

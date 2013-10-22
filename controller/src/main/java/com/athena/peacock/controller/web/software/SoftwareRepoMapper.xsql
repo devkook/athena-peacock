@@ -11,7 +11,7 @@
 		     		, #{fileName}, #{description}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
-	<select id="getSoftwareRepo" parameterType="int" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
+	<select id="getSoftwareRepo" parameterType="int" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
 		SELECT SOFTWARE_ID AS softwareId
 			   , SOFTWARE_NAME AS softwareName
 			   , SOFTWARE_VERSION AS softwareVersion

@@ -28,10 +28,12 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
 import com.athena.peacock.common.core.action.FileWriteAction;
 import com.athena.peacock.common.core.action.ShellAction;
@@ -65,25 +67,25 @@ public class ProvisioningHandler {
 	@Named("softwareService")
 	private SoftwareService softwareService;
 
-	public List<String> install(ProvisioningDetail provisioningDetail) throws Exception {
+	public void install(ProvisioningDetail provisioningDetail) throws Exception {
 		if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("apache") > -1) {
-			return apache_install(provisioningDetail);
+			apacheInstall(provisioningDetail);
 		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("mysql") > -1) {
-			return apache_install(provisioningDetail);
+			mysqlInstall(provisioningDetail);
 		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("jboss") > -1) {
-			return apache_install(provisioningDetail);
+			jbossInstall(provisioningDetail);
 		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("tomcat") > -1) {
-			return apache_install(provisioningDetail);
+			tomcatInstall(provisioningDetail);
 		}
-			
-		return null;
 	}
 
 	public String remove(ProvisioningDetail provisioningDetail) {
 		return null;
 	}
     
-	private List<String> apache_install(ProvisioningDetail provisioningDetail) throws Exception {
+	private void apacheInstall(ProvisioningDetail provisioningDetail) throws Exception {
+		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getTargetDir()), "targetDir must not be null.");
+		
 		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
 		cmdMsg.setAgentId(provisioningDetail.getMachineId());
 		cmdMsg.setBlocking(true);
@@ -210,6 +212,7 @@ public class ProvisioningHandler {
 		
 		if (version.startsWith("2.2")) {
 			//s_action.addArguments("--with-mpm=prefork");
+			s_action.addArguments("--enable-so");
 			s_action.addArguments("--with-mpm=worker");
 		} else if (version.startsWith("2.3") || version.startsWith("2.4")) {
 			s_action.addArguments("--enable-mpms-shared=all");
@@ -269,7 +272,7 @@ public class ProvisioningHandler {
 		command = new Command("CONFIGURATION");
 		sequence = 0;
 		
-		String httpdConf = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd.conf"));
+		String httpdConf = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd.conf"), "UTF-8");
 		httpdConf = httpdConf.replaceAll("\\$\\{ServerRoot\\}", serverRoot)
 					.replaceAll("\\$\\{Port\\}", port)
 					.replaceAll("\\$\\{ServerName\\}", serverDomain);
@@ -311,12 +314,35 @@ public class ProvisioningHandler {
 		s_action.addArguments("httpd-mpm.conf");
 		command.addAction(s_action);
 		
+		String httpd = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/httpd"), "UTF-8");
+		httpd = httpd.replaceAll("\\$\\{TARGET_DIR\\}", targetDir);
+		
+		fw_action = new FileWriteAction(sequence++);
+		fw_action.setContents(httpd);
+		fw_action.setFileName("/etc/init.d/httpd");
+		command.addAction(fw_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("chmod");
+		s_action.addArguments("+x");
+		s_action.addArguments("/etc/init.d/httpd");
+		command.addAction(s_action);
+		
 		// Add CONFIGURATION Command
 		cmdMsg.addCommand(command);
 		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
-		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
-		
+		if (provisioningDetail.getAutoStart().equals("Y")) {
+			command = new Command("Service Start");
+			sequence = 0;
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("service");
+			s_action.addArguments("httpd");
+			s_action.addArguments("start");
+			command.addAction(s_action);
+			
+			cmdMsg.addCommand(command);
+		}
+
 		/***************************************************************
 		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
 		 ***************************************************************/
@@ -324,6 +350,7 @@ public class ProvisioningHandler {
 		software.setSoftwareId(provisioningDetail.getSoftwareId());
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(targetDir);
+		software.setInstallStat("RUNNING");
 		software.setDescription("Apache HTTP Daemon");
 		software.setDeleteYn("N");
 		
@@ -342,7 +369,7 @@ public class ProvisioningHandler {
 		config.setSoftwareId(provisioningDetail.getSoftwareId());
 		config.setConfigFileLocation(targetDir + "/conf");
 		config.setConfigFileName("mod-jk.conf");
-		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/mod-jk.conf")));
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/mod-jk.conf"), "UTF-8"));
 		config.setDeleteYn("N");
 		configList.add(config);
 		
@@ -351,7 +378,7 @@ public class ProvisioningHandler {
 		config.setSoftwareId(provisioningDetail.getSoftwareId());
 		config.setConfigFileLocation(targetDir + "/conf");
 		config.setConfigFileName("workers.properties");
-		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/workers.properties")));
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/workers.properties"), "UTF-8"));
 		config.setDeleteYn("N");
 		configList.add(config);
 		
@@ -360,7 +387,7 @@ public class ProvisioningHandler {
 		config.setSoftwareId(provisioningDetail.getSoftwareId());
 		config.setConfigFileLocation(targetDir + "/conf");
 		config.setConfigFileName("uriworkermap.properties");
-		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/uriworkermap.properties")));
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/uriworkermap.properties"), "UTF-8"));
 		config.setDeleteYn("N");
 		configList.add(config);
 		
@@ -369,13 +396,196 @@ public class ProvisioningHandler {
 		config.setSoftwareId(provisioningDetail.getSoftwareId());
 		config.setConfigFileLocation(targetDir + "/conf/extra");
 		config.setConfigFileName("httpd-mpm.conf");
-		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd-mpm.conf")));
+		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd-mpm.conf"), "UTF-8"));
 		config.setDeleteYn("N");
 		configList.add(config);
 		
-		softwareService.insertSoftware(software, configList);
+		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
+	}
+	
+	private void mysqlInstall(ProvisioningDetail provisioningDetail) throws Exception {
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
+
+		String version = provisioningDetail.getVersion();
+		String dataDir = (provisioningDetail.getDataDir() == null ? "/var/lib/mysql" : provisioningDetail.getDataDir());
+		String port = (provisioningDetail.getPort() == null ? "3306" : provisioningDetail.getPort());
+		String password = provisioningDetail.getPassword();
 		
-		return response.getResults();
+		Command command = new Command("CONFIGURATION");
+		int sequence = 0;
+		
+		String myCnf = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/mysql/" + version + "/my.cnf"), "UTF-8");
+		myCnf = myCnf.replaceAll("\\$\\{mysql.datadir\\}", dataDir)
+					.replaceAll("\\$\\{mysql.port\\}", port);
+		
+		FileWriteAction fw_action = new FileWriteAction(sequence++);
+		fw_action.setContents(myCnf);
+		fw_action.setFileName("/etc/my.cnf");
+		command.addAction(fw_action);
+		
+		// Add CONFIGURATION Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("MySQL INSTALL");
+		sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/mysql/" + version + "/MySQL-server.rpm");
+		s_action.addArguments("-O");
+		s_action.addArguments("MySQL-server.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/mysql/" + version + "/MySQL-client.rpm");
+		s_action.addArguments("-O");
+		s_action.addArguments("MySQL-client.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("rpm");
+		s_action.addArguments("-Uvh");
+		s_action.addArguments("MySQL-server.rpm");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("rpm");
+		s_action.addArguments("-Uvh");
+		s_action.addArguments("MySQL-client.rpm");
+		command.addAction(s_action);
+		
+		// Add MySQL INSTALL Command
+		cmdMsg.addCommand(command);
+		
+		if (!StringUtils.isEmpty(password)) {
+			command = new Command("Change Password");
+			sequence = 0;
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("service");
+			s_action.addArguments("mysql");
+			s_action.addArguments("start");
+			command.addAction(s_action);
+
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("mysqladmin");
+			s_action.addArguments("-u");
+			s_action.addArguments("root");
+			s_action.addArguments("password");
+			s_action.addArguments(password);
+			command.addAction(s_action);
+
+			if (provisioningDetail.getAutoStart().equals("N")) {
+				s_action = new ShellAction(sequence++);
+				s_action.setCommand("service");
+				s_action.addArguments("mysql");
+				s_action.addArguments("stop");
+				command.addAction(s_action);
+			}
+			
+			// Add Change Password Command
+			cmdMsg.addCommand(command);
+		} else {
+			if (provisioningDetail.getAutoStart().equals("Y")) {
+				command = new Command("Service Start");
+				sequence = 0;
+				s_action = new ShellAction(sequence++);
+				s_action.setCommand("service");
+				s_action.addArguments("mysql");
+				s_action.addArguments("start");
+				command.addAction(s_action);
+
+				// Add Service Start Command
+				cmdMsg.addCommand(command);
+			}
+		}
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		software.setInstallLocation(dataDir);
+		software.setInstallStat("RUNNING");
+		software.setDescription("MySQL 5.5.34");
+		software.setDeleteYn("N");
+		
+		List<ConfigDto> configList = new ArrayList<ConfigDto>();
+		ConfigDto config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation("/etc");
+		config.setConfigFileName("my.cnf");
+		config.setConfigFileContents(myCnf);
+		config.setDeleteYn("N");
+		configList.add(config);
+
+		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
+	}
+	
+	private List<String> jbossInstall(ProvisioningDetail provisioningDetail) throws Exception {
+		
+		
+		return null;
+	}
+	
+	private List<String> tomcatInstall(ProvisioningDetail provisioningDetail) throws Exception {
+		
+		
+		return null;
 	}
 }
 //end of ProvisioningHandler.java
+
+class InstallThread extends Thread {
+
+	private PeacockTransmitter peacockTransmitter;
+	private SoftwareService softwareService;
+	private ProvisioningCommandMessage cmdMsg;
+	private SoftwareDto software;
+	private List<ConfigDto> configList;
+	
+	public InstallThread(PeacockTransmitter peacockTransmitter, SoftwareService softwareService,
+			ProvisioningCommandMessage cmdMsg, SoftwareDto software, List<ConfigDto> configList) {
+		this.peacockTransmitter = peacockTransmitter;
+		this.softwareService = softwareService;
+		this.cmdMsg = cmdMsg;
+		this.software = software;
+		this.configList = configList;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			System.out.println("software => " + software);
+			System.out.println("softwareService => " + softwareService);
+			
+			softwareService.insertSoftware(software);
+			
+			PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+			ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+			
+			StringBuilder sb = new StringBuilder("");
+			List<String> results = response.getResults();
+			for (String result : results) {
+				sb.append(result + "\n");
+			}
+			software.setInstallStat("COMPLETE");
+			software.setInstallLog(sb.toString());
+			
+			softwareService.insertSoftware(software, configList);
+		} catch (Exception e) {
+			software.setInstallStat("ERROR");
+			software.setInstallLog(e.getMessage());
+			
+			e.printStackTrace();
+		}
+	}
+}
