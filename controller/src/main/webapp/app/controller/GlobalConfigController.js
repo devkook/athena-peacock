@@ -67,7 +67,8 @@ Ext.define('Peacock.controller.GlobalConfigController', {
             daterangeText: 'Start date must be less than end date',
 
             password: function(val, field) {
-                var pwd = field.up('form').down('#passwd');
+                //var pwd = field.up('form').down('#passwd');
+                pwd = field.previousNode('textfield');
                 return (val == pwd.getValue());
             },
 

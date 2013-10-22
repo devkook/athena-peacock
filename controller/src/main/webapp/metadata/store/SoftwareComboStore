@@ -1,0 +1,49 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "storeId": "MyArrayStore",
+        "designer|userClassName": "SoftwareComboStore",
+        "data": [
+            "[\r",
+            "    {\"name\" : \"Apache\", \"value\": \"1\"},\r",
+            "    {\"name\" : \"MySQL\", \"value\": \"2\"},\r",
+            "    {\"name\" : \"JBoss\", \"value\": \"3\"},\r",
+            "    {\"name\" : \"Tomcat\", \"value\": \"4\"}\r",
+            "    \r",
+            "]"
+        ]
+    },
+    "designerId": "8c147303-3716-45ef-8473-86d87330d2db",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "name"
+            },
+            "designerId": "9829672f-28d5-4303-a79e-d3b65c1b5265"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "value",
+                "type": "string"
+            },
+            "designerId": "7a57406e-0614-43db-8d73-aefa5fd86959"
+        }
+    ]
+}

@@ -67,6 +67,8 @@ Ext.define('Peacock.view.UserFormWindow', {
                         {
                             xtype: 'textfield',
                             anchor: '100%',
+                            cls: '',
+                            componentCls: 'origin-passwd',
                             id: 'passwd',
                             afterLabelTextTpl: [
                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'

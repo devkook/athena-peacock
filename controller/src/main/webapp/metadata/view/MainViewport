@@ -674,6 +674,20 @@
                                                                         "text": "Register"
                                                                     },
                                                                     "designerId": "b9eb24d7-4c98-4001-b44e-affbbdb7b35a"
+                                                                },
+                                                                {
+                                                                    "type": "Ext.menu.Item",
+                                                                    "reference": {
+                                                                        "name": "items",
+                                                                        "type": "array"
+                                                                    },
+                                                                    "codeClass": null,
+                                                                    "userConfig": {
+                                                                        "id": "tbActionSWInstall",
+                                                                        "designer|displayName": "SW Install",
+                                                                        "text": "S/W Install"
+                                                                    },
+                                                                    "designerId": "23290a86-a3e6-41c8-ab97-5ddf00643322"
                                                                 }
                                                             ]
                                                         }
@@ -737,7 +751,7 @@
                                                     "config"
                                                 ],
                                                 "implHandler": [
-                                                    "\tconfig.viewConfig.loadMask = true;\r",
+                                                    "config.viewConfig.loadMask = true;\r",
                                                     "return config;"
                                                 ]
                                             },

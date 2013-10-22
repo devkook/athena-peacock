@@ -32,39 +32,44 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                     width: 400,
                     autoScroll: true,
                     layout: {
-                        type: 'column'
+                        type: 'fit'
                     },
                     title: 'Description',
                     items: [
                         {
-                            xtype: 'propertygrid',
-                            columnWidth: 0.5,
-                            id: 'instDescGrid1',
-                            padding: 5,
-                            header: false,
-                            title: 'My Property Grid',
-                            enableColumnHide: false,
-                            enableColumnResize: false,
-                            source: {
-                                'Property 1': 'String',
-                                'Property 2': true,
-                                'Property 3': '2013-08-08T13:41:39',
-                                'Property 4': 123
-                            }
-                        },
-                        {
-                            xtype: 'propertygrid',
-                            columnWidth: 0.5,
-                            id: 'instDescGrid2',
-                            padding: '5 5 5 0',
-                            header: false,
-                            title: 'My Property Grid',
-                            source: {
-                                'Property 1': 'String',
-                                'Property 2': true,
-                                'Property 3': '2013-08-08T13:41:48',
-                                'Property 4': 123
-                            }
+                            xtype: 'form',
+                            defaults: {
+                                border: false,
+                                xtype: 'panel',
+                                flex: 1,
+                                layout: 'anchor'
+                            },
+                            layout: {
+                                type: 'hbox'
+                            },
+                            bodyPadding: 10,
+                            bodyStyle: 'padding:5px 5px 0',
+                            title: 'My Form',
+                            fieldDefaults: {
+                                msgTarget: 'side'
+                            },
+                            items: [
+                                {
+                                    xtype: 'textfield',
+                                    flex: 1,
+                                    fieldLabel: 'Label'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    flex: 1,
+                                    fieldLabel: 'Label'
+                                },
+                                {
+                                    xtype: 'textfield',
+                                    flex: 1,
+                                    fieldLabel: 'Label'
+                                }
+                            ]
                         }
                     ]
                 },

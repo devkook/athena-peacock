@@ -79,6 +79,9 @@ Ext.define('Peacock.controller.MainToolbarController', {
         }else if(item.getId() == "tbActionRegister"){
 
 
+        }else if(item.getId() == "tbActionSWInstall"){
+            Ext.widget('swInstallLaunchWindow').show();
+
         }
     },
 
