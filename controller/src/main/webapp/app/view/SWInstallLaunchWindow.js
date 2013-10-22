@@ -24,7 +24,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
         align: 'stretch',
         type: 'vbox'
     },
-    title: 'S/W Install Launch Wizard',
+    title: 'Software Install Launch Wizard',
     modal: true,
 
     initComponent: function() {
@@ -149,6 +149,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                             xtype: 'form',
                             id: 'tomcat',
                             bodyPadding: 10,
+                            header: false,
                             title: 'TomcatParamForm',
                             items: [
                                 {
@@ -156,9 +157,88 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                     title: 'Tomcat Install',
                                     items: [
                                         {
+                                            xtype: 'combobox',
+                                            anchor: '40%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Version',
+                                            name: 'version',
+                                            allowBlank: false,
+                                            forceSelection: true,
+                                            queryMode: 'local',
+                                            store: [
+                                                '6.0.37'
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Java Home',
+                                            name: 'javaHome',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Server Name',
+                                            name: 'serverName',
+                                            allowBlank: false
+                                        },
+                                        {
                                             xtype: 'textfield',
                                             anchor: '100%',
-                                            fieldLabel: 'Label'
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Catalina Home',
+                                            name: 'catalinaHome',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '100%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Catalina Base',
+                                            name: 'catalinaBase',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '30%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Port Offset',
+                                            name: 'portOffset',
+                                            allowBlank: false,
+                                            vtype: 'numeric'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '40%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Comp User',
+                                            name: 'compUser',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'checkboxfield',
+                                            fieldLabel: 'Start Service',
+                                            name: 'autoStart',
+                                            boxLabel: 'Start Service after Installation ',
+                                            inputValue: 'Y',
+                                            uncheckedValue: 'N'
                                         }
                                     ]
                                 }
@@ -167,8 +247,180 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                         {
                             xtype: 'form',
                             id: 'jboss',
+                            autoScroll: true,
                             bodyPadding: 10,
-                            title: 'JBossParamForm'
+                            header: false,
+                            title: 'JBossParamForm',
+                            items: [
+                                {
+                                    xtype: 'fieldset',
+                                    title: 'JBoss Install',
+                                    items: [
+                                        {
+                                            xtype: 'combobox',
+                                            anchor: '40%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Version',
+                                            name: 'version',
+                                            allowBlank: false,
+                                            forceSelection: true,
+                                            queryMode: 'local',
+                                            store: [
+                                                '5.2.0'
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Java Home',
+                                            name: 'javaHome',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'JBoss Home',
+                                            name: 'jbossHome',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '80%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Server Home',
+                                            name: 'serverHome',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Server Name',
+                                            name: 'serverName',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Partition Name',
+                                            name: 'partitionName',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Bind Address',
+                                            name: 'bindAddress',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'combobox',
+                                            anchor: '40%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Bind Port',
+                                            name: 'bindPort',
+                                            allowBlank: false,
+                                            forceSelection: true,
+                                            queryMode: 'local',
+                                            store: [
+                                                'ports-default',
+                                                'ports-01',
+                                                'ports-02',
+                                                'ports-03'
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    xtype: 'fieldset',
+                                    collapsed: true,
+                                    collapsible: true,
+                                    title: 'Data Source Setting [Optional]',
+                                    items: [
+                                        {
+                                            xtype: 'combobox',
+                                            anchor: '40%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Database Type',
+                                            name: 'databaseType',
+                                            allowBlank: false,
+                                            forceSelection: true,
+                                            queryMode: 'local',
+                                            store: [
+                                                'mysql',
+                                                'oracle',
+                                                'cubrid'
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '60%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'JNDI Name',
+                                            name: 'jndiName',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '100%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'JDBC URL',
+                                            name: 'connectionUrl',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'User Name',
+                                            name: 'userName',
+                                            allowBlank: false
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            afterLabelTextTpl: [
+                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
+                                            ],
+                                            fieldLabel: 'Password',
+                                            name: 'Password',
+                                            inputType: 'password',
+                                            allowBlank: false,
+                                            emptyText: '',
+                                            maxLength: 20,
+                                            minLength: 4
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             xtype: 'form',
@@ -176,6 +428,10 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                             bodyPadding: 10,
                             header: false,
                             title: 'MySQLParamForm',
+                            fieldDefaults: {
+                                msgTarget: 'side',
+                                labelWidth: 120
+                            },
                             items: [
                                 {
                                     xtype: 'fieldset',
@@ -193,8 +449,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             forceSelection: true,
                                             queryMode: 'local',
                                             store: [
-                                                '2.2.25',
-                                                '2.4.4'
+                                                '5.5.34'
                                             ]
                                         },
                                         {
@@ -203,7 +458,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
                                             ],
-                                            fieldLabel: 'Target Dir',
+                                            fieldLabel: 'Data Dir',
                                             name: 'dataDir',
                                             allowBlank: false
                                         },
@@ -220,7 +475,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         },
                                         {
                                             xtype: 'textfield',
-                                            anchor: '100%',
+                                            anchor: '50%',
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
                                             ],
@@ -234,7 +489,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         },
                                         {
                                             xtype: 'textfield',
-                                            anchor: '100%',
+                                            anchor: '50%',
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
                                             ],
@@ -243,6 +498,14 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             inputType: 'password',
                                             allowBlank: false,
                                             vtype: 'password'
+                                        },
+                                        {
+                                            xtype: 'checkboxfield',
+                                            fieldLabel: 'Start Service',
+                                            name: 'autoStart',
+                                            boxLabel: 'Start Service after Installation ',
+                                            inputValue: 'Y',
+                                            uncheckedValue: 'N'
                                         }
                                     ]
                                 }
