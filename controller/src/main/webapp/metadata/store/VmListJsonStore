@@ -1,0 +1,83 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "VmModel",
+        "storeId": "VmListJsonStore",
+        "designer|userClassName": "VmListJsonStore"
+    },
+    "designerId": "8314ad20-f299-4495-9e22-d9aa015c9af4",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "url": "rhevm/vms/list"
+            },
+            "designerId": "b8196b7b-63a3-484a-aada-553ae7f8082d",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Json",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "root": "list"
+                    },
+                    "designerId": "f1e2b7ac-2849-40a6-a9d4-c8418e667890"
+                },
+                {
+                    "type": "processcfgfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "processMyAjaxProxy9",
+                        "designer|params": [
+                            "config"
+                        ],
+                        "implHandler": [
+                            "config.actionMethods = {create: \"POST\", read: \"POST\", update: \"POST\", destroy: \"POST\"};\r",
+                            "\r",
+                            "return config;"
+                        ]
+                    },
+                    "designerId": "0229f606-93e3-4b1d-a26b-5c825e8f13e0"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onJsonstoreBeforeLoad",
+                "implHandler": [
+                    "\r",
+                    "Peacock.app.debug(\"VmStore.onBeforeLoad.\");\r",
+                    "\r",
+                    "\r",
+                    "Ext.getCmp('detailPanel').removeAll(true);"
+                ],
+                "name": "beforeload",
+                "scope": "me"
+            },
+            "designerId": "d7ffe001-0609-4c35-aa23-010e601eb2ed"
+        }
+    ]
+}

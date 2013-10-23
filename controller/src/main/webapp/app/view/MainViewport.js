@@ -165,12 +165,12 @@ Ext.define('Peacock.view.MainViewport', {
                                         children: [
                                             {
                                                 text: 'Virtual Machines',
-                                                id: 'img-tmp',
+                                                id: 'rhevm-vms',
                                                 leaf: true
                                             },
                                             {
                                                 text: 'Templates',
-                                                id: 'img-pkg',
+                                                id: 'rhevm-tmps',
                                                 leaf: true
                                             }
                                         ]
@@ -369,7 +369,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                         {
                                                             xtype: 'label',
                                                             id: 'detailTitleLabel',
-                                                            style: 'font-size: 16px',
+                                                            style: '',
                                                             text: 'title panel'
                                                         }
                                                     ]

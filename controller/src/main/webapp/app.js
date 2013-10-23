@@ -27,7 +27,8 @@ Ext.application({
         'MyModel',
         'UserGroupMapModel',
         'ASGroupModel',
-        'ChartModel'
+        'ChartModel',
+        'VmModel'
     ],
     stores: [
         'SoftwareListStore',
@@ -40,7 +41,8 @@ Ext.application({
         'ChartTotalMemStore',
         'ChartFreeMemStore',
         'ChartUsedMemStore',
-        'SoftwareComboStore'
+        'SoftwareComboStore',
+        'VmListJsonStore'
     ],
     views: [
         'MainViewport',
@@ -48,7 +50,8 @@ Ext.application({
         'InstanceLaunchWindow',
         'UserGroupFormWindow',
         'UserFormWindow',
-        'SWInstallLaunchWindow'
+        'SWInstallLaunchWindow',
+        'VMTabPanel'
     ],
     autoCreateViewport: true,
     controllers: [

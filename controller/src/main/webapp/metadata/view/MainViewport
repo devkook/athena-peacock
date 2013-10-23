@@ -320,12 +320,12 @@
                                     "        children: [\r",
                                     "            {\r",
                                     "                text: 'Virtual Machines',\r",
-                                    "                id: 'img-tmp',\r",
+                                    "                id: 'rhevm-vms',\r",
                                     "                leaf: true\r",
                                     "            },\r",
                                     "            {\r",
                                     "                text: 'Templates',\r",
-                                    "                id: 'img-pkg',\r",
+                                    "                id: 'rhevm-tmps',\r",
                                     "                leaf: true\r",
                                     "            }\r",
                                     "        ]\r",
@@ -803,7 +803,7 @@
                                                     "codeClass": null,
                                                     "userConfig": {
                                                         "id": "detailTitleLabel",
-                                                        "style": "font-size: 16px",
+                                                        "style": "",
                                                         "text": "title panel"
                                                     },
                                                     "configAlternates": {

@@ -54,10 +54,10 @@ Ext.define('Peacock.controller.MenuController', {
 
                 this.viewInstances(grid);
 
-            }else if (record.get('id') == 'img-tmp'){
-                alert("templates.");
+            }else if (record.get('id') == 'rhevm-vms'){
+                this.viewVirtualMachines(grid);
 
-            }else if (record.get('id') == 'img-pkg'){
+            }else if (record.get('id') == 'rhevm-tmps'){
                 alert("packages.");
 
             }else if (record.get('id') == 'scal-grp'){
@@ -248,6 +248,59 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionEdit").hide();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
+    },
+
+    viewVirtualMachines: function(grid) {
+        /*
+        *  user list 화면 보여주기.
+        */
+
+
+        grid.setTitle('Virtual Machine List');
+        grid.reconfigure(Ext.getStore('VmListJsonStore'), [{
+            text: 'Name',
+            dataIndex: 'name',
+            width: 200    
+        }, {
+            text: 'Domain',
+            dataIndex: 'domain'
+        }, {
+            text: 'Cluster',
+            dataIndex: 'cluster'
+        }, {
+            text: 'Host',
+            dataIndex: 'host',
+            width: 150    
+        }, {
+            text: 'OS',
+            dataIndex: 'os',
+            width: 250    
+        }, {
+            text: 'Status',
+            dataIndex: 'status'    
+        }, {
+            text: 'Create Time',
+            dataIndex: 'creationTime',
+            width: 170
+        }, {
+            text: 'Description',
+            dataIndex: 'description',
+            width: 300    
+        }]);
+
+
+        /*
+        * toolbar menu 활성화
+        */
+        Ext.getCmp("mainButton").setText("Launch");
+
+        Ext.getCmp("tbActionStart").hide();
+        Ext.getCmp("tbActionStop").hide();
+        Ext.getCmp("tbActionTerminate").hide();
+        Ext.getCmp("tbActionEdit").show();
+        Ext.getCmp("tbActionDelete").show();
+        Ext.getCmp("tbActionRegister").hide();
+
     },
 
     init: function(application) {

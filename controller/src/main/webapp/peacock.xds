@@ -363,6 +363,30 @@
                 "app/controller/SWinstallController.js"
             ],
             "className": "SWinstallController"
+        },
+        "d1fd0f0a-36d8-4bc1-bf79-5f6ca88e8f48": {
+            "paths": [
+                "metadata/model/VmModel",
+                "app/model/override/VmModel.js",
+                "app/model/VmModel.js"
+            ],
+            "className": "VmModel"
+        },
+        "8314ad20-f299-4495-9e22-d9aa015c9af4": {
+            "paths": [
+                "metadata/store/VmListJsonStore",
+                "app/store/override/VmListJsonStore.js",
+                "app/store/VmListJsonStore.js"
+            ],
+            "className": "VmListJsonStore"
+        },
+        "454e2a87-d493-40ad-9408-e56f9ba227ab": {
+            "paths": [
+                "metadata/view/VMTabPanel",
+                "app/view/override/VMTabPanel.js",
+                "app/view/VMTabPanel.js"
+            ],
+            "className": "VMTabPanel"
         }
     },
     "viewOrderMap": {
@@ -370,6 +394,7 @@
             "dc7d06ae-4f38-4c4a-9284-382e873ff5c1",
             "f6c61781-da02-4e17-a0db-8e6e154ce1c1",
             "e3e8bd45-a4c6-42c0-9429-cd43c8fac14f",
+            "454e2a87-d493-40ad-9408-e56f9ba227ab",
             "477b9df4-ddf6-4d33-ac66-2268cb4ad745",
             "65dc1da1-b32e-43b4-be55-97e00e72a703",
             "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09",
@@ -391,7 +416,8 @@
             "2f4dfec9-eee8-4b86-960d-b1fc24c1c38c",
             "60518488-6347-4c96-80e7-d0eddceb2ebd",
             "2fd3b133-b493-419e-b475-df1433182038",
-            "8c147303-3716-45ef-8473-86d87330d2db"
+            "8c147303-3716-45ef-8473-86d87330d2db",
+            "8314ad20-f299-4495-9e22-d9aa015c9af4"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -407,6 +433,7 @@
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",
+            "d1fd0f0a-36d8-4bc1-bf79-5f6ca88e8f48",
             "cda91240-3441-4f20-9a8d-e95babaf9d47",
             "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
             "f6255218-a98d-4d06-b343-412084f7fca0",

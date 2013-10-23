@@ -10,7 +10,8 @@
             "InstanceTabPanel",
             "UserTabPanel",
             "UserGroupTabPanel",
-            "ASGroupTabPanel"
+            "ASGroupTabPanel",
+            "VMTabPanel"
         ],
         "designer|userClassName": "MainGridController"
     },
@@ -54,10 +55,11 @@
                     "    tabPanel = this.getInstanceTabPanelView();\r",
                     "    detailTitleLabel.setText(\"Instance: \"+record.get(\"hostName\") + \" (\" + record.get(\"ipAddr\") + \")\");\r",
                     "\r",
-                    "}else if (Peacock.app.menu_id == 'img-tmp'){\r",
+                    "}else if (Peacock.app.menu_id == 'rhevm-vms'){\r",
+                    "\ttabPanel = this.getVMTabPanelView();\r",
+                    "    detailTitleLabel.setText(\"Name: \"+record.get(\"name\"));\r",
                     "\r",
-                    "\r",
-                    "}else if (Peacock.app.menu_id == 'img-pkg'){\r",
+                    "}else if (Peacock.app.menu_id == 'rhevm-tmps'){\r",
                     "\r",
                     "\r",
                     "}else if (Peacock.app.menu_id == 'scal-grp'){\r",

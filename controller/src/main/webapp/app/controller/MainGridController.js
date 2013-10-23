@@ -20,7 +20,8 @@ Ext.define('Peacock.controller.MainGridController', {
         'InstanceTabPanel',
         'UserTabPanel',
         'UserGroupTabPanel',
-        'ASGroupTabPanel'
+        'ASGroupTabPanel',
+        'VMTabPanel'
     ],
 
     onGridpanelSelect: function(rowmodel, record, index, eOpts) {
@@ -52,10 +53,11 @@ Ext.define('Peacock.controller.MainGridController', {
             tabPanel = this.getInstanceTabPanelView();
             detailTitleLabel.setText("Instance: "+record.get("hostName") + " (" + record.get("ipAddr") + ")");
 
-        }else if (Peacock.app.menu_id == 'img-tmp'){
+        }else if (Peacock.app.menu_id == 'rhevm-vms'){
+            tabPanel = this.getVMTabPanelView();
+            detailTitleLabel.setText("Name: "+record.get("name"));
 
-
-        }else if (Peacock.app.menu_id == 'img-pkg'){
+        }else if (Peacock.app.menu_id == 'rhevm-tmps'){
 
 
         }else if (Peacock.app.menu_id == 'scal-grp'){

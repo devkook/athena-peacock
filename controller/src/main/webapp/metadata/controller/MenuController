@@ -56,10 +56,10 @@
                     "\r",
                     "        this.viewInstances(grid);\r",
                     "\r",
-                    "    }else if (record.get('id') == 'img-tmp'){\r",
-                    "        alert(\"templates.\");\r",
+                    "    }else if (record.get('id') == 'rhevm-vms'){\r",
+                    "        this.viewVirtualMachines(grid);\r",
                     "\r",
-                    "    }else if (record.get('id') == 'img-pkg'){\r",
+                    "    }else if (record.get('id') == 'rhevm-tmps'){\r",
                     "        alert(\"packages.\");\r",
                     "\r",
                     "    }else if (record.get('id') == 'scal-grp'){\r",
@@ -313,6 +313,73 @@
                 ]
             },
             "designerId": "8201c6ba-ff47-4c5f-8599-c25ed5d0db69"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewVirtualMachines",
+                "designer|params": [
+                    "grid"
+                ],
+                "implHandler": [
+                    "/*\r",
+                    "*  user list 화면 보여주기.\r",
+                    "*/\r",
+                    "\r",
+                    "\r",
+                    "grid.setTitle('Virtual Machine List');\r",
+                    "grid.reconfigure(Ext.getStore('VmListJsonStore'), [{\r",
+                    "    text: 'Name',\r",
+                    "    dataIndex: 'name',\r",
+                    "    width: 200    \r",
+                    "}, {\r",
+                    "    text: 'Domain',\r",
+                    "    dataIndex: 'domain'\r",
+                    "}, {\r",
+                    "    text: 'Cluster',\r",
+                    "    dataIndex: 'cluster'\r",
+                    "}, {\r",
+                    "    text: 'Host',\r",
+                    "    dataIndex: 'host',\r",
+                    "    width: 150    \r",
+                    "}, {\r",
+                    "    text: 'OS',\r",
+                    "    dataIndex: 'os',\r",
+                    "    width: 250    \r",
+                    "}, {\r",
+                    "    text: 'Status',\r",
+                    "    dataIndex: 'status'    \r",
+                    "}, {\r",
+                    "    text: 'Create Time',\r",
+                    "    dataIndex: 'creationTime',\r",
+                    "    width: 170\r",
+                    "}, {\r",
+                    "    text: 'Description',\r",
+                    "    dataIndex: 'description',\r",
+                    "    width: 300    \r",
+                    "}]);\r",
+                    "\r",
+                    "\r",
+                    "/*\r",
+                    "* toolbar menu 활성화\r",
+                    "*/\r",
+                    "Ext.getCmp(\"mainButton\").setText(\"Launch\");\r",
+                    "\r",
+                    "Ext.getCmp(\"tbActionStart\").hide();\r",
+                    "Ext.getCmp(\"tbActionStop\").hide();\r",
+                    "Ext.getCmp(\"tbActionTerminate\").hide();\r",
+                    "Ext.getCmp(\"tbActionEdit\").show();\r",
+                    "Ext.getCmp(\"tbActionDelete\").show();\r",
+                    "Ext.getCmp(\"tbActionRegister\").hide();\r",
+                    ""
+                ]
+            },
+            "designerId": "520d9703-315d-4b24-8fae-0b17bc302fae"
         }
     ]
 }

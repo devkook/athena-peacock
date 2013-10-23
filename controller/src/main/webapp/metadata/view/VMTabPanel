@@ -1,0 +1,1114 @@
+{
+    "type": "Ext.tab.Panel",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 325,
+        "width": 907,
+        "designer|userClassName": "VMTabPanel",
+        "designer|userAlias": "vmTabPanel",
+        "activeTab": 0
+    },
+    "designerId": "454e2a87-d493-40ad-9408-e56f9ba227ab",
+    "cn": [
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 214,
+                "padding": null,
+                "width": 400,
+                "autoScroll": true,
+                "layout": "fit",
+                "title": "General"
+            },
+            "designerId": "4434d917-9d6a-43fc-93f1-596cf703a4e3",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "94d7d050-e3e9-47ef-b772-f053e2a7f16a"
+                },
+                {
+                    "type": "Ext.form.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "vmDescForm1",
+                        "defaults": [
+                            "{\r",
+                            "    border: false,\r",
+                            "    xtype: 'panel',\r",
+                            "    flex: 1,\r",
+                            "    layout: 'anchor'\r",
+                            "}"
+                        ],
+                        "bodyPadding": 10,
+                        "bodyStyle": "padding:5px 5px 0",
+                        "header": false,
+                        "title": "My Form",
+                        "fieldDefaults": [
+                            "{\r",
+                            "    msgTarget: 'side',\r",
+                            "    margin : '0 10',\r",
+                            "    readOnly : true\r",
+                            "}"
+                        ]
+                    },
+                    "configAlternates": {
+                        "bodyStyle": "string"
+                    },
+                    "designerId": "cc422cf2-b6f8-4129-b967-6cec009a6df1",
+                    "cn": [
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "middle",
+                                "height": 34,
+                                "defaults": [
+                                    "{\r",
+                                    "    flex: 1\r",
+                                    "}"
+                                ],
+                                "layout": "hbox",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "a01a911c-d2f0-41fb-ad02-396ab265a31d",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "ID",
+                                        "name": "machineId"
+                                    },
+                                    "designerId": "f96c96d6-58f0-4e21-b291-ad420f82c071"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "Host",
+                                        "name": "hostName"
+                                    },
+                                    "designerId": "ae957247-8e6e-4cf0-ac43-80bf892b8d17"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "middle",
+                                "height": 34,
+                                "defaults": [
+                                    "{\r",
+                                    "    flex: 1\r",
+                                    "}"
+                                ],
+                                "layout": "hbox",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "4a5ce04c-b740-4340-9c56-f8a5b79df34a",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "OS Name",
+                                        "name": "osName"
+                                    },
+                                    "designerId": "179b5a77-bd4f-4e3c-969d-4c95fd3940c7"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "OS Version",
+                                        "name": "osVer"
+                                    },
+                                    "designerId": "ee0677f6-0d57-485c-9f8f-04f3184869b6"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "middle",
+                                "height": 34,
+                                "defaults": [
+                                    "{\r",
+                                    "    flex: 1\r",
+                                    "}"
+                                ],
+                                "layout": "hbox",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "94a6367e-58ad-4f99-961f-97d448f36659",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "Mac Address",
+                                        "name": "machineMacAddr"
+                                    },
+                                    "designerId": "b446dbf8-7006-41a5-9c98-2cba9cf622cc"
+                                },
+                                {
+                                    "type": "Ext.form.field.Checkbox",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "fieldLabel": "Is VM",
+                                        "name": "isVm",
+                                        "boxLabel": "VM",
+                                        "inputValue": "Y",
+                                        "uncheckedValue": "N"
+                                    },
+                                    "designerId": "da52f6bd-c329-4136-b780-8e202af273c6"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "middle",
+                                "height": 34,
+                                "defaults": [
+                                    "{\r",
+                                    "    flex: 1\r",
+                                    "}"
+                                ],
+                                "layout": "hbox",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "fdd7fa80-1cbc-4238-a447-19b5cd3a37fd",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "IP Address",
+                                        "name": "ipAddr"
+                                    },
+                                    "designerId": "05c6474d-ed27-419a-860f-aba00906462f"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "OS Arch",
+                                        "name": "osArch"
+                                    },
+                                    "designerId": "36f82969-9995-4131-8424-664d83468330"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "middle",
+                                "height": 34,
+                                "defaults": [
+                                    "{\r",
+                                    "    flex: 1\r",
+                                    "}"
+                                ],
+                                "layout": "hbox",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "49b77b0d-8946-45bc-9611-2be875db982d",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "CPU Clock",
+                                        "name": "cpuClock"
+                                    },
+                                    "designerId": "2ca7cb5d-8107-4f42-84ba-a6d11e353cf8"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "Core",
+                                        "name": "cpuNum"
+                                    },
+                                    "designerId": "333086c7-c27d-492d-9abc-8e39320d44e9"
+                                }
+                            ]
+                        },
+                        {
+                            "type": "Ext.form.FieldContainer",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "container|align": "middle",
+                                "height": 34,
+                                "defaults": [
+                                    "{\r",
+                                    "    flex: 1\r",
+                                    "}"
+                                ],
+                                "layout": "hbox",
+                                "fieldLabel": "Label",
+                                "hideLabel": true
+                            },
+                            "designerId": "573e9b2f-4759-4343-a621-831f6fd75390",
+                            "cn": [
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "Memory Size",
+                                        "name": "memSize"
+                                    },
+                                    "designerId": "b24d11f6-a196-4336-ae67-f3e86e1d3bda"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "fieldLabel": "Create Time",
+                                        "name": "regDt"
+                                    },
+                                    "designerId": "be7d493b-063d-445e-9295-dadeae55bf3b"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "Network Interface"
+            },
+            "designerId": "a8011dfa-7e82-418c-9cb9-682e51cc4dc3",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "52221c0d-bc9b-434f-a137-498969b0e12b"
+                },
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "instSoftGrid1",
+                        "header": false,
+                        "title": "My Grid Panel",
+                        "store": "SoftwareListStore"
+                    },
+                    "designerId": "3065ad71-bd91-4437-a77b-67af7d008bb3",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.RowNumberer",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "designerId": "09d76b30-7de8-4fd2-b537-06bdbf3f4e5e"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "dataIndex": "softwareName",
+                                "text": "Name"
+                            },
+                            "designerId": "c647764d-5e1a-48da-b380-f9e07b09a6a6"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "softwareVersion",
+                                "text": "Version"
+                            },
+                            "designerId": "445f1630-4968-42a5-99e6-2d90e2230829"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "dataIndex": "regDt",
+                                "text": "Install Date"
+                            },
+                            "designerId": "19674f18-694b-4aae-b2a1-f18a542f68b2"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "defaultWidth": 200,
+                                "dataIndex": "description",
+                                "text": "Description"
+                            },
+                            "designerId": "35466cb2-3627-48b5-8b3f-954b7acc6c66"
+                        },
+                        {
+                            "type": "Ext.grid.View",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "b8a966f7-acd4-4e3e-9076-9a3eb0d8ba31"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "title": "Virtual Disk"
+            },
+            "designerId": "fe4c53ea-593d-4ceb-87f7-dd0fe2b5606c",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "0bfb5425-272b-485a-90ab-f5183ee3a74a"
+                },
+                {
+                    "type": "Ext.grid.Panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "id": "instOSPkgGrid1",
+                        "header": false,
+                        "title": "My Grid Panel",
+                        "store": "OSPackageListStore"
+                    },
+                    "designerId": "45b6021a-8c86-4733-ae95-26faac40064c",
+                    "cn": [
+                        {
+                            "type": "Ext.grid.RowNumberer",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "designerId": "936d697d-5c8b-4bba-b2f2-358889e3a810"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "pkg_name",
+                                "text": "Name"
+                            },
+                            "designerId": "aba4288c-eff0-4431-8fd7-85e057198218"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "pkg_arch",
+                                "text": "Arch"
+                            },
+                            "designerId": "e92073cd-d8e4-4533-a244-c1b16c95758a"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "version",
+                                "text": "Version"
+                            },
+                            "designerId": "73c6ae17-845e-49b9-9f80-70e2f60282ca"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "release",
+                                "text": "Release"
+                            },
+                            "designerId": "b1088749-70bd-4acd-8ae7-1ed4d4830a65"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "size",
+                                "text": "Size"
+                            },
+                            "designerId": "fd9e9a23-5b2b-4107-860e-f1b6356e1a98"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "summary",
+                                "text": "Summary"
+                            },
+                            "designerId": "f6b04ae2-3186-44cd-95ce-b7732acdb68f"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "dataIndex": "description",
+                                "text": "Description"
+                            },
+                            "designerId": "afb83f78-17fd-4670-a97e-9c2f6b5c9cba"
+                        },
+                        {
+                            "type": "Ext.grid.View",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "designerId": "09a25412-dbac-4206-8dd2-7a4c29e1dcf5"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Ext.panel.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "height": 289,
+                "width": 755,
+                "autoScroll": true,
+                "title": "Snapshots"
+            },
+            "designerId": "6ba4bc00-4a47-408b-895d-4fd80470ea95",
+            "cn": [
+                {
+                    "type": "Ext.tab.Tab",
+                    "reference": {
+                        "name": "tabConfig",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "a56bb615-3486-49bf-98b5-3cca5c4cb8a2"
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "border": 0,
+                        "cls": "",
+                        "height": 250,
+                        "id": "monChart2",
+                        "padding": null,
+                        "style": [
+                            "{\r",
+                            "    borderColor: 'red',\r",
+                            "\tborderStyle: 'solid'\r",
+                            "}"
+                        ],
+                        "width": 311,
+                        "designer|displayName": "IdleCPUChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartIdleCPUStore"
+                    },
+                    "designerId": "416de6f0-437d-4089-a70d-f4b721d8e3db",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Idle CPU",
+                                "constrain": true,
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "f905ccfb-cf0c-4b08-8131-e81f829bfe48"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "2876a891-59c6-4c7c-adb0-5fc8b93c8070"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "f5bb91bf-6b7b-4790-aef9-da3b97bfccb3"
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onChartMouseEnter",
+                                "implHandler": [
+                                    "Peacock.app.debug(\"IdleCPUChart.onChartMouseEnter.\");\r",
+                                    "\r",
+                                    "\r",
+                                    "//alert(Ext.getClassName(this));//InstanceTabPanel\r",
+                                    "\r",
+                                    "\r",
+                                    "//Ext.getCmp(\"monChart1\").getEl().setStyle(\"borderWidth\", \"3px\");\r",
+                                    ""
+                                ],
+                                "name": "mouseenter",
+                                "scope": "me"
+                            },
+                            "designerId": "ca557a56-93f9-4d3b-a08c-41149e83fd94"
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onMonChart1MouseLeave",
+                                "implHandler": [
+                                    "\r",
+                                    "//Ext.getCmp(\"monChart1\").getEl().setStyle(\"borderWidth\", \"0px\");"
+                                ],
+                                "name": "mouseleave",
+                                "scope": "me"
+                            },
+                            "designerId": "42f5380b-9418-4dae-9b99-e3e6e33b3030"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "CombCPUChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartCombCPUStore"
+                    },
+                    "designerId": "38802746-90d2-41e3-88e0-43d562f7b231",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Combined CPU",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "fb0f81fa-9285-4f85-bcdf-dd4e07dc8d4f"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "f495fdd4-672a-4c13-b5c2-4e677bc54217"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "cffe7e92-dea7-4ec2-a602-0dbcaaf6d3c7"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "TotalMemChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartTotalMemStore"
+                    },
+                    "designerId": "96ee9c9d-c960-4a79-bbae-9d12bfcfa5e2",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Total Memory",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "e13e2b26-7c89-4d5d-86e0-ae43d132bc31"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "356fcfd3-155f-486d-a9a9-27b6bf9fb7d2"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "79a1742c-395a-4a03-8532-2494cc5042d8"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "FreeMemChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartFreeMemStore"
+                    },
+                    "designerId": "2ce70607-0e83-46f4-b548-a86a4951ea5a",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Free Memory",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "d51028b8-b1c7-4d45-b9cc-a2fffd2c8717"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "bf6f3c2d-16dc-4995-b74b-c0f7f4f89f27"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "30c234f5-835b-4960-9e58-99879e8f515c"
+                        }
+                    ]
+                },
+                {
+                    "type": "Ext.chart.Chart",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "height": 250,
+                        "width": 311,
+                        "designer|displayName": "UsedMemChart",
+                        "animate": [
+                            "true"
+                        ],
+                        "insetPadding": 20,
+                        "store": "ChartUsedMemStore"
+                    },
+                    "designerId": "99e65f05-27fb-4afb-b617-0edd1f971b86",
+                    "isBuiltIn": true,
+                    "iconCls": "icon-line-chart",
+                    "autoName": "LineChart",
+                    "cn": [
+                        {
+                            "type": "Ext.chart.axis.Time",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "regDt"
+                                ],
+                                "designer|displayName": "TimeAxis",
+                                "position": "bottom",
+                                "title": "Used Memory",
+                                "dateFormat": "m/d G:i",
+                                "step": [
+                                    "[\"h\",1/3]"
+                                ]
+                            },
+                            "designerId": "80f2a164-865c-4bf5-9dc8-1042dd5e2b35"
+                        },
+                        {
+                            "type": "Ext.chart.axis.Numeric",
+                            "reference": {
+                                "name": "axes",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fields": [
+                                    "monDataValue"
+                                ],
+                                "title": null
+                            },
+                            "designerId": "795cda6e-81ba-44ad-bfa8-bb89b66fb93e"
+                        },
+                        {
+                            "type": "Ext.chart.series.Line",
+                            "reference": {
+                                "name": "series",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "xField": "regDt",
+                                "yField": [
+                                    "monDataValue"
+                                ],
+                                "smooth": 3
+                            },
+                            "designerId": "eba95e25-ef74-4040-bfbb-4dcf16872e04"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

@@ -14,7 +14,8 @@
             "MyModel",
             "UserGroupMapModel",
             "ASGroupModel",
-            "ChartModel"
+            "ChartModel",
+            "VmModel"
         ],
         "stores": [
             "SoftwareListStore",
@@ -27,7 +28,8 @@
             "ChartTotalMemStore",
             "ChartFreeMemStore",
             "ChartUsedMemStore",
-            "SoftwareComboStore"
+            "SoftwareComboStore",
+            "VmListJsonStore"
         ],
         "views": [
             "MainViewport",
@@ -35,7 +37,8 @@
             "InstanceLaunchWindow",
             "UserGroupFormWindow",
             "UserFormWindow",
-            "SWInstallLaunchWindow"
+            "SWInstallLaunchWindow",
+            "VMTabPanel"
         ],
         "autoCreateViewport": true,
         "controllers": [
