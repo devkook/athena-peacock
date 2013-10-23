@@ -94,11 +94,13 @@ public class SoftwareController {
 	 * @throws Exception
 	 */
 	@RequestMapping("/getInstallLog")
-	public @ResponseBody String getInstallLog(SoftwareDto software) throws Exception {
+	public @ResponseBody SimpleJsonResponse getInstallLog(SimpleJsonResponse jsonRes,SoftwareDto software) throws Exception {
 		Assert.isTrue(software.getSoftwareId() != null, "softwareId must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(software.getMachineId()), "machineId must not be null.");
 		
-		return softwareService.getSoftware(software).getInstallLog();
+		jsonRes.setMsg(softwareService.getSoftware(software).getInstallLog());
+		
+		return jsonRes;
 	}
 
 	/**
@@ -152,10 +154,10 @@ public class SoftwareController {
 			provisioningDetail.setUrlPrefix(urlPrefix);
 			
 			provisioningHandler.install(provisioningDetail);
-			jsonRes.setMsg("Running");
+			jsonRes.setMsg("소프트웨어 설치 요청이 전달되었습니다.\n아래 소프트웨어 탭에서 상태 결과를 조회할 수 있습니다.");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
-			jsonRes.setMsg("Install fail.");
+			jsonRes.setMsg("설치 중 예외가 발생하였습니다.");
 			
 			logger.error("Unhandled Expeption has occurred. ", e);
 		}

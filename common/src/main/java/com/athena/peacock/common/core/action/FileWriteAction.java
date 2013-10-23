@@ -82,7 +82,7 @@ public class FileWriteAction extends Action {
 	 */
 	@Override
 	public String perform() {
-		String result = "F";
+		String result = fileName;
 		
 		try {
 			String separator = File.separator;
@@ -101,11 +101,13 @@ public class FileWriteAction extends Action {
 			
 			IOUtils.write(contents, fos, "UTF-8");
 			IOUtils.closeQuietly(fos);
-			result = "S";
+			result += " saved.\n";
 		} catch (FileNotFoundException e) {
 			logger.error("FileNotFoundException has occurred. : ", e);
+			result += " does not saved.\n";
 		} catch (IOException e) {
 			logger.error("IOException has occurred. : ", e);
+			result += " does not saved.\n";
 		}
 		
 		return result;
