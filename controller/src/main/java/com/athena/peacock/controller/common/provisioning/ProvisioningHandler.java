@@ -348,8 +348,10 @@ public class ProvisioningHandler {
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(targetDir);
 		software.setInstallStat("RUNNING");
-		software.setDescription("Apache HTTP Daemon");
+		software.setDescription("Apache Provisioning");
 		software.setDeleteYn("N");
+		software.setRegUserId(provisioningDetail.getUserId());
+		software.setUpdUserId(provisioningDetail.getUserId());
 		
 		List<ConfigDto> configList = new ArrayList<ConfigDto>();
 		ConfigDto config = new ConfigDto();
@@ -359,6 +361,8 @@ public class ProvisioningHandler {
 		config.setConfigFileName("httpd.conf");
 		config.setConfigFileContents(httpdConf);
 		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
 		configList.add(config);
 		
 		config = new ConfigDto();
@@ -368,6 +372,8 @@ public class ProvisioningHandler {
 		config.setConfigFileName("mod-jk.conf");
 		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/mod-jk.conf"), "UTF-8"));
 		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
 		configList.add(config);
 		
 		config = new ConfigDto();
@@ -377,6 +383,8 @@ public class ProvisioningHandler {
 		config.setConfigFileName("workers.properties");
 		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/workers.properties"), "UTF-8"));
 		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
 		configList.add(config);
 		
 		config = new ConfigDto();
@@ -386,6 +394,8 @@ public class ProvisioningHandler {
 		config.setConfigFileName("uriworkermap.properties");
 		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/uriworkermap.properties"), "UTF-8"));
 		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
 		configList.add(config);
 		
 		config = new ConfigDto();
@@ -395,6 +405,8 @@ public class ProvisioningHandler {
 		config.setConfigFileName("httpd-mpm.conf");
 		config.setConfigFileContents(IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/apache/" + version + "/conf/httpd-mpm.conf"), "UTF-8"));
 		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
 		configList.add(config);
 		
 		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
@@ -511,8 +523,10 @@ public class ProvisioningHandler {
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(dataDir);
 		software.setInstallStat("RUNNING");
-		software.setDescription("MySQL 5.5.34");
+		software.setDescription("MySQL Provisioning");
 		software.setDeleteYn("N");
+		software.setRegUserId(provisioningDetail.getUserId());
+		software.setUpdUserId(provisioningDetail.getUserId());
 		
 		List<ConfigDto> configList = new ArrayList<ConfigDto>();
 		ConfigDto config = new ConfigDto();
@@ -522,21 +536,310 @@ public class ProvisioningHandler {
 		config.setConfigFileName("my.cnf");
 		config.setConfigFileContents(myCnf);
 		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
 		configList.add(config);
 
 		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
 	}
 	
-	private List<String> jbossInstall(ProvisioningDetail provisioningDetail) throws Exception {
+	private void jbossInstall(ProvisioningDetail provisioningDetail) throws Exception {
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
 		
+		/**
+		 * JBoss Variables
+		 */
+		String javaHome = provisioningDetail.getJavaHome();
+		String jbossHome = provisioningDetail.getJbossHome();
+		String serverHome = provisioningDetail.getServerHome();
+		String serverName = provisioningDetail.getServerName();
+		String partitionName = (StringUtils.isEmpty(provisioningDetail.getPartitionName()) ? "partition" : provisioningDetail.getPartitionName());
+		String bindAddress = (StringUtils.isEmpty(provisioningDetail.getBindAddress()) ? "0.0.0.0" : provisioningDetail.getBindAddress());
+		String bindPort = (StringUtils.isEmpty(provisioningDetail.getBindPort()) ? "ports-default" : provisioningDetail.getBindPort());
 		
-		return null;
+		/**
+		 * DataSource Variables
+		 */
+		String databaseType = provisioningDetail.getDatabaseType();
+		String jndiName = provisioningDetail.getJndiName();
+		String connectionUrl = provisioningDetail.getConnectionUrl();
+		String userName = provisioningDetail.getUserName();
+		String password = provisioningDetail.getPassword();
+		String minPoolSize = (StringUtils.isEmpty(provisioningDetail.getMinPoolSize()) ? "10" : provisioningDetail.getMinPoolSize());
+		String maxPoolSize = (StringUtils.isEmpty(provisioningDetail.getMaxPoolSize()) ? "20" : provisioningDetail.getMaxPoolSize());
+		
+		Command command = new Command("Pre-install");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(jbossHome);
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(serverHome);
+		command.addAction(s_action);
+		
+		// Add Pre-install Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("JBoss INSTALL");
+		sequence = 0;
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/jboss/jboss-eap-5.2.0.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("jboss-eap-5.2.0.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(jbossHome);
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/jboss/jboss-cluster-template-5.2.0.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("jboss-cluster-template-5.2.0.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(serverHome + "/" + serverName);
+		command.addAction(s_action);
+		
+		String envSh = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/jboss/env.sh"), "UTF-8");
+		envSh = envSh.replaceAll("\\$\\{java.home\\}", javaHome)
+					.replaceAll("\\$\\{jboss.home\\}", jbossHome)
+					.replaceAll("\\$\\{server.home\\}", serverHome)
+					.replaceAll("\\$\\{server.name\\}", serverName)
+					.replaceAll("\\$\\{partition.name\\}", partitionName)
+					.replaceAll("\\$\\{bind.address\\}", bindAddress)
+					.replaceAll("\\$\\{bind.port\\}", bindPort);
+		
+		FileWriteAction fw_action = new FileWriteAction(sequence++);
+		fw_action.setContents(envSh);
+		fw_action.setFileName(serverHome + "/" + serverName + "/bin/env.sh");
+		command.addAction(fw_action);
+		
+		// Add JBoss INSTALL Command
+		cmdMsg.addCommand(command);
+
+		String datasource = null;
+		if (databaseType != null && (databaseType.equals("oracle") || databaseType.equals("mysql") || databaseType.equals("cubrid"))) {
+			command = new Command("DataSource Configuration");
+			sequence = 0;
+			
+			if (databaseType.equals("oracle")) {
+				datasource = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/jboss/datasource/oracle-ds.xml"), "UTF-8");
+			} else if (databaseType.equals("mysql")) {
+				datasource = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/jboss/datasource/mysql-ds.xml"), "UTF-8");
+			} else if (databaseType.equals("cubrid")) {
+				datasource = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/jboss/datasource/cubrid-ds.xml"), "UTF-8");
+			}
+
+			datasource = datasource.replaceAll("\\$\\{jndi.name\\}", jndiName)
+						.replaceAll("\\$\\{connection.url\\}", connectionUrl)
+						.replaceAll("\\$\\{user.name\\}", userName)
+						.replaceAll("\\$\\{user.password\\}", password)
+						.replaceAll("\\$\\{pool.min\\}", minPoolSize)
+						.replaceAll("\\$\\{pool.max\\}", maxPoolSize);
+			
+			fw_action = new FileWriteAction(sequence++);
+			fw_action.setContents(envSh);
+			fw_action.setFileName(serverHome + "/" + serverName + "/" + serverName + "-ds.xml");
+			command.addAction(fw_action);
+			
+			// Add DataSource Configuration Command
+			cmdMsg.addCommand(command);
+		}
+		
+		if (provisioningDetail.getAutoStart().equals("Y")) {
+			command = new Command("Service Start");
+			sequence = 0;
+			s_action = new ShellAction(sequence++);
+			s_action.setWorkingDiretory(serverHome + "/" + serverName + "/bin");
+			s_action.setCommand("sh");
+			s_action.addArguments("nohup.sh");
+			command.addAction(s_action);
+			
+			cmdMsg.addCommand(command);
+		}
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		software.setInstallLocation(jbossHome + "," + serverHome);
+		software.setInstallStat("RUNNING");
+		software.setDescription("JBoss Provisioning");
+		software.setDeleteYn("N");
+		software.setRegUserId(provisioningDetail.getUserId());
+		software.setUpdUserId(provisioningDetail.getUserId());
+		
+		List<ConfigDto> configList = new ArrayList<ConfigDto>();
+		ConfigDto config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(serverHome + "/" + serverName + "/bin");
+		config.setConfigFileName("env.sh");
+		config.setConfigFileContents(envSh);
+		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
+		configList.add(config);
+		
+		if (datasource != null) {
+			config = new ConfigDto();
+			config.setMachineId(provisioningDetail.getMachineId());
+			config.setSoftwareId(provisioningDetail.getSoftwareId());
+			config.setConfigFileLocation(serverHome + "/" + serverName);
+			config.setConfigFileName(serverName + "-ds.xml");
+			config.setConfigFileContents(datasource);
+			config.setDeleteYn("N");
+			config.setRegUserId(provisioningDetail.getUserId());
+			config.setUpdUserId(provisioningDetail.getUserId());
+			configList.add(config);
+		}
+
+		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
 	}
 	
-	private List<String> tomcatInstall(ProvisioningDetail provisioningDetail) throws Exception {
+	private void tomcatInstall(ProvisioningDetail provisioningDetail) throws Exception {
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
+
+		/**
+		 * Tomcat Variables
+		 */
+		String javaHome = provisioningDetail.getJavaHome();
+		String catalinaHome = provisioningDetail.getCatalinaHome();
+		String catalinaBase = provisioningDetail.getCatalinaBase();
+		String serverName = provisioningDetail.getServerName();
+		String portOffset = (StringUtils.isEmpty(provisioningDetail.getPortOffset()) ? "0" : provisioningDetail.getPortOffset());
+		String compUser = provisioningDetail.getCompUser();
 		
+		Command command = new Command("Pre-install");
+		int sequence = 0;
 		
-		return null;
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(catalinaHome);
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("mkdir");
+		s_action.addArguments("-p");
+		s_action.addArguments(catalinaBase + "/" + serverName);
+		command.addAction(s_action);
+		
+		// Add Pre-install Command
+		cmdMsg.addCommand(command);
+		
+		command = new Command("Tomcat INSTALL");
+		sequence = 0;
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/tomcat/apache-tomcat-6.0.37.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("apache-tomcat-6.0.37.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(catalinaHome);
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("wget");
+		s_action.addArguments("${RepositoryUrl}/tomcat/tomcat-template-6.0.37.zip");
+		command.addAction(s_action);
+
+		s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory("/usr/local/src");
+		s_action.setCommand("unzip");
+		s_action.addArguments("-o");
+		s_action.addArguments("tomcat-template-6.0.37.zip");
+		s_action.addArguments("-d");
+		s_action.addArguments(catalinaBase + "/" + serverName);
+		command.addAction(s_action);
+		
+		String envSh = IOUtils.toString(new URL(provisioningDetail.getUrlPrefix() + "/tomcat/env.sh"), "UTF-8");
+		envSh = envSh.replaceAll("\\$\\{java.home\\}", javaHome)
+					.replaceAll("\\$\\{server.name\\}", serverName)
+					.replaceAll("\\$\\{catalina.home\\}", catalinaHome)
+					.replaceAll("\\$\\{catalina.base\\}", catalinaBase)
+					.replaceAll("\\$\\{port.offset\\}", portOffset)
+					.replaceAll("\\$\\{comp.user\\}", compUser);
+		
+		FileWriteAction fw_action = new FileWriteAction(sequence++);
+		fw_action.setContents(envSh);
+		fw_action.setFileName(catalinaBase + "/" + serverName + "/bin/env.sh");
+		command.addAction(fw_action);
+		
+		// Add Tomcat INSTALL Command
+		cmdMsg.addCommand(command);
+		
+		if (provisioningDetail.getAutoStart().equals("Y")) {
+			command = new Command("Service Start");
+			sequence = 0;
+			s_action = new ShellAction(sequence++);
+			s_action.setWorkingDiretory(catalinaBase + "/" + serverName + "/bin");
+			s_action.setCommand("sh");
+			s_action.addArguments("nohup.sh");
+			command.addAction(s_action);
+			
+			cmdMsg.addCommand(command);
+		}
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		software.setInstallLocation(catalinaHome + "," + catalinaBase + "/" + serverName);
+		software.setInstallStat("RUNNING");
+		software.setDescription("Tomcat Provisioning");
+		software.setDeleteYn("N");
+		software.setRegUserId(provisioningDetail.getUserId());
+		software.setUpdUserId(provisioningDetail.getUserId());
+		
+		List<ConfigDto> configList = new ArrayList<ConfigDto>();
+		ConfigDto config = new ConfigDto();
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setConfigFileLocation(catalinaBase + "/" + serverName + "/bin");
+		config.setConfigFileName("env.sh");
+		config.setConfigFileContents(envSh);
+		config.setDeleteYn("N");
+		config.setRegUserId(provisioningDetail.getUserId());
+		config.setUpdUserId(provisioningDetail.getUserId());
+		configList.add(config);
+
+		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
 	}
 }
 //end of ProvisioningHandler.java

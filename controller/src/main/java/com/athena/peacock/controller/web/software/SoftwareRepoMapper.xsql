@@ -95,7 +95,7 @@
 			   , A.SOFTWARE_VENDOR AS softwareVendor
 			   , A.FILE_LOCATION AS fileLocation
 			   , A.FILE_NAME AS fileName
-			   , B.DESCRIPTION AS description
+			   , A.DESCRIPTION AS description
 			   , 'Y' AS installYn
 			   , B.REG_USER_ID AS regUserId
 			   , B.REG_DT AS regDt
