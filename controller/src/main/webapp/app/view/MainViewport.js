@@ -425,7 +425,7 @@ Ext.define('Peacock.view.MainViewport', {
     },
 
     processMainGridPanel: function(config) {
-        config.viewConfig.loadMask = true;
+        config.loadMask = true;
         return config;
     },
 

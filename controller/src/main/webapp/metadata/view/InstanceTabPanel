@@ -490,6 +490,60 @@
                             "designerId": "27473940-da98-462c-8804-2e473b4d790f"
                         },
                         {
+                            "type": "Ext.grid.column.Action",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|displayName": "DeleteColumn",
+                                "align": "center"
+                            },
+                            "designerId": "06e4faa4-78df-4c1f-bb7f-3c0f199f49f1",
+                            "cn": [
+                                {
+                                    "type": "actioncolumnitem",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "icon": "resources/icons/fam/delete.gif",
+                                        "tooltip": "Delete"
+                                    },
+                                    "designerId": "79ad999d-4a07-4226-88a4-e4c4b5b4f267",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "handler",
+                                                "designer|params": [
+                                                    "view",
+                                                    "rowIndex",
+                                                    "colIndex",
+                                                    "item",
+                                                    "e",
+                                                    "record",
+                                                    "row"
+                                                ],
+                                                "implHandler": [
+                                                    "alert(\"Delete \"+ record.get(\"softwareId\"));"
+                                                ]
+                                            },
+                                            "designerId": "a17e44da-7663-4848-85e2-2a8180dbae4c"
+                                        }
+                                    ]
+                                }
+                            ]
+                        },
+                        {
                             "type": "Ext.grid.View",
                             "reference": {
                                 "name": "viewConfig",

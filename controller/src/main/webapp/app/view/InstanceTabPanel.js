@@ -251,6 +251,19 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     defaultWidth: 200,
                                     dataIndex: 'description',
                                     text: 'Description'
+                                },
+                                {
+                                    xtype: 'actioncolumn',
+                                    align: 'center',
+                                    items: [
+                                        {
+                                            handler: function(view, rowIndex, colIndex, item, e, record, row) {
+                                                alert("Delete "+ record.get("softwareId"));
+                                            },
+                                            icon: 'resources/icons/fam/delete.gif',
+                                            tooltip: 'Delete'
+                                        }
+                                    ]
                                 }
                             ]
                         }

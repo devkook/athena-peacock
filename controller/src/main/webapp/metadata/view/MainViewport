@@ -751,7 +751,7 @@
                                                     "config"
                                                 ],
                                                 "implHandler": [
-                                                    "config.viewConfig.loadMask = true;\r",
+                                                    "config.loadMask = true;\r",
                                                     "return config;"
                                                 ]
                                             },

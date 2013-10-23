@@ -81,6 +81,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "designer|displayName": "DeleteColumn",
                                 "align": "center"
                             },
                             "designerId": "c8521e59-ee64-44a5-b4f0-b3e90bfe57c3",
