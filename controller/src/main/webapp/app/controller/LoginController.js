@@ -45,15 +45,12 @@ Ext.define('Peacock.controller.LoginController', {
         }
     },
 
-    init: function(application) {
-        this.control({
-            "loginWin button": {
-                click: this.onButtonClick
-            },
-            "loginWin textfield": {
-                specialkey: this.onTextfieldSpecialkey
-            }
-        });
+    onWindowShow: function(component, eOpts) {
+        var loginId = Ext.getCmp("lwLoginId");
+
+        if(loginId){
+            loginId.focus();
+        }
     },
 
     doSubmit: function(formPanel) {
@@ -80,6 +77,20 @@ Ext.define('Peacock.controller.LoginController', {
                     case Ext.form.action.Action.SERVER_INVALID:
                     Ext.Msg.alert('Failure', action.result.msg);
                 }
+            }
+        });
+    },
+
+    init: function(application) {
+        this.control({
+            "loginWin button": {
+                click: this.onButtonClick
+            },
+            "loginWin textfield": {
+                specialkey: this.onTextfieldSpecialkey
+            },
+            "loginWin": {
+                show: this.onWindowShow
             }
         });
     }

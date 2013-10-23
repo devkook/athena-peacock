@@ -86,24 +86,6 @@
             "designerId": "1c2beb12-82ba-4a16-b5e6-ce866ddcbbfb"
         },
         {
-            "type": "fixedfunction",
-            "reference": {
-                "name": "items",
-                "type": "array"
-            },
-            "codeClass": null,
-            "userConfig": {
-                "fn": "init",
-                "designer|params": [
-                    "application"
-                ],
-                "implHandler": [
-                    ""
-                ]
-            },
-            "designerId": "198f9fcb-85ac-4e45-821f-cfd93ceab32f"
-        },
-        {
             "type": "basicfunction",
             "reference": {
                 "name": "items",
@@ -144,6 +126,29 @@
                 ]
             },
             "designerId": "64d27198-cc17-4d62-b81e-3a1033753741"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWindowShow",
+                "implHandler": [
+                    "var loginId = Ext.getCmp(\"lwLoginId\");\r",
+                    "\r",
+                    "if(loginId){\r",
+                    "    loginId.focus();\r",
+                    "}"
+                ],
+                "name": "show",
+                "scope": "me",
+                "designer|targetType": "LoginWindow",
+                "designer|controlQuery": "loginWin"
+            },
+            "designerId": "1295124a-e34b-43de-8fe9-ad39af27b359"
         }
     ]
 }

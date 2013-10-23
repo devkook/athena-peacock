@@ -20,6 +20,7 @@ Ext.define('Peacock.view.ASGroupTabPanel', {
     height: 391,
     width: 668,
     activeTab: 0,
+    plain: true,
 
     initComponent: function() {
         var me = this;

@@ -47,6 +47,7 @@
                     "codeClass": null,
                     "userConfig": {
                         "layout|anchor": "100%",
+                        "id": "lwLoginId",
                         "designer|displayName": "",
                         "fieldLabel": "Username",
                         "labelAlign": "right",

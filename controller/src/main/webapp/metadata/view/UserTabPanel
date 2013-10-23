@@ -10,7 +10,8 @@
         "width": 755,
         "designer|userClassName": "UserTabPanel",
         "designer|userAlias": "userTabPanel",
-        "activeTab": 0
+        "activeTab": 0,
+        "plain": true
     },
     "designerId": "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
     "cn": [

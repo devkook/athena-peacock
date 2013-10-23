@@ -20,6 +20,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
     height: 325,
     width: 907,
     activeTab: 0,
+    plain: true,
 
     initComponent: function() {
         var me = this;
@@ -358,6 +359,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     type: 'line',
                                     xField: 'regDt',
                                     yField: 'monDataValue',
+                                    showMarkers: false,
                                     smooth: 3
                                 }
                             ],
@@ -406,6 +408,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     type: 'line',
                                     xField: 'regDt',
                                     yField: 'monDataValue',
+                                    showMarkers: false,
                                     smooth: 3
                                 }
                             ]
@@ -444,6 +447,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     type: 'line',
                                     xField: 'regDt',
                                     yField: 'monDataValue',
+                                    showMarkers: false,
                                     smooth: 3
                                 }
                             ]
@@ -482,6 +486,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     type: 'line',
                                     xField: 'regDt',
                                     yField: 'monDataValue',
+                                    showMarkers: false,
                                     smooth: 3
                                 }
                             ]
@@ -520,6 +525,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     type: 'line',
                                     xField: 'regDt',
                                     yField: 'monDataValue',
+                                    showMarkers: false,
                                     smooth: 3
                                 }
                             ]

@@ -10,7 +10,8 @@
         "width": 668,
         "designer|userClassName": "ASGroupTabPanel",
         "designer|userAlias": "asGroupTabPanel",
-        "activeTab": 0
+        "activeTab": 0,
+        "plain": true
     },
     "designerId": "77c3a327-2f6b-4f5f-8a10-7a1aff66ed09",
     "cn": [

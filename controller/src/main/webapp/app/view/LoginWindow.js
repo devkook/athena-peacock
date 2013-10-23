@@ -42,6 +42,7 @@ Ext.define('Peacock.view.LoginWindow', {
                         {
                             xtype: 'textfield',
                             anchor: '100%',
+                            id: 'lwLoginId',
                             fieldLabel: 'Username',
                             labelAlign: 'right',
                             name: 'login_id',

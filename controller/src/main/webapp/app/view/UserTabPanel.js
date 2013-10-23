@@ -20,6 +20,7 @@ Ext.define('Peacock.view.UserTabPanel', {
     height: 325,
     width: 755,
     activeTab: 0,
+    plain: true,
 
     initComponent: function() {
         var me = this;

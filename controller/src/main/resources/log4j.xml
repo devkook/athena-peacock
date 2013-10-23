@@ -40,6 +40,10 @@
 		<priority value="INFO"/>
 	</category>
 	
+	<category name="org.springframework.web.servlet">
+		<priority value="DEBUG"/>
+	</category>
+	
 	<logger name="java.sql.Connection">
         <level value="DEBUG" />
     </logger>

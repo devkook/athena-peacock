@@ -188,16 +188,6 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         },
                                         {
                                             xtype: 'textfield',
-                                            anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
-                                            fieldLabel: 'Server Name',
-                                            name: 'serverName',
-                                            allowBlank: false
-                                        },
-                                        {
-                                            xtype: 'textfield',
                                             anchor: '100%',
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
@@ -218,14 +208,13 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         },
                                         {
                                             xtype: 'textfield',
-                                            anchor: '30%',
+                                            anchor: '50%',
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
                                             ],
-                                            fieldLabel: 'Port Offset',
-                                            name: 'portOffset',
-                                            allowBlank: false,
-                                            vtype: 'numeric'
+                                            fieldLabel: 'Server Name',
+                                            name: 'serverName',
+                                            allowBlank: false
                                         },
                                         {
                                             xtype: 'textfield',
@@ -238,10 +227,21 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             allowBlank: false
                                         },
                                         {
+                                            xtype: 'textfield',
+                                            anchor: '30%',
+                                            fieldLabel: 'Port Offset',
+                                            name: 'portOffset',
+                                            value: [
+                                                '0'
+                                            ],
+                                            vtype: 'numeric'
+                                        },
+                                        {
                                             xtype: 'checkboxfield',
                                             fieldLabel: 'Start Service',
                                             name: 'autoStart',
                                             boxLabel: 'Start Service after Installation ',
+                                            checked: true,
                                             inputValue: 'Y',
                                             uncheckedValue: 'N'
                                         }
@@ -319,31 +319,29 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Partition Name',
                                             name: 'partitionName',
-                                            allowBlank: false
+                                            value: [
+                                                'partition'
+                                            ]
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Bind Address',
                                             name: 'bindAddress',
-                                            allowBlank: false
+                                            value: [
+                                                '0.0.0.0'
+                                            ]
                                         },
                                         {
                                             xtype: 'combobox',
                                             anchor: '40%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Bind Port',
                                             name: 'bindPort',
+                                            value: [
+                                                'ports-default'
+                                            ],
                                             allowBlank: false,
                                             forceSelection: true,
                                             queryMode: 'local',
@@ -353,6 +351,15 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                                 'ports-02',
                                                 'ports-03'
                                             ]
+                                        },
+                                        {
+                                            xtype: 'checkboxfield',
+                                            fieldLabel: 'Start Service',
+                                            name: 'autoStart',
+                                            boxLabel: 'Start Service after Installation ',
+                                            checked: true,
+                                            inputValue: 'Y',
+                                            uncheckedValue: 'N'
                                         }
                                     ]
                                 },
@@ -365,12 +372,8 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         {
                                             xtype: 'combobox',
                                             anchor: '40%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Database Type',
                                             name: 'databaseType',
-                                            allowBlank: false,
                                             forceSelection: true,
                                             queryMode: 'local',
                                             store: [
@@ -382,46 +385,48 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         {
                                             xtype: 'textfield',
                                             anchor: '60%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'JNDI Name',
-                                            name: 'jndiName',
-                                            allowBlank: false
+                                            name: 'jndiName'
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '100%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'JDBC URL',
-                                            name: 'connectionUrl',
-                                            allowBlank: false
+                                            name: 'connectionUrl'
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'User Name',
-                                            name: 'userName',
-                                            allowBlank: false
+                                            name: 'userName'
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Password',
                                             name: 'Password',
                                             inputType: 'password',
-                                            allowBlank: false,
                                             emptyText: '',
                                             maxLength: 20,
                                             minLength: 4
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            fieldLabel: 'Min Pool Size',
+                                            name: 'minPoolSize',
+                                            value: [
+                                                '10'
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            anchor: '50%',
+                                            fieldLabel: 'Max Pool Size',
+                                            name: 'maxPoolSize',
+                                            value: [
+                                                '20'
+                                            ]
                                         }
                                     ]
                                 }
