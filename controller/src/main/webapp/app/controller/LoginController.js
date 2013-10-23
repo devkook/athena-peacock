@@ -30,12 +30,36 @@ Ext.define('Peacock.controller.LoginController', {
     onButtonClick: function(button, e, eOpts) {
         //alert("button click!!");
 
-        var viewport = this.getViewport();
-        var loginWin = this.getLoginWin();
-
 
         var formPanel = Ext.getCmp("loginForm");
 
+
+        this.doSubmit(formPanel);
+
+
+    },
+
+    onTextfieldSpecialkey: function(field, e, eOpts) {
+        if(e.getKey() == e.ENTER) { 
+            this.doSubmit(Ext.getCmp("loginForm"));
+        }
+    },
+
+    init: function(application) {
+        this.control({
+            "loginWin button": {
+                click: this.onButtonClick
+            },
+            "loginWin textfield": {
+                specialkey: this.onTextfieldSpecialkey
+            }
+        });
+    },
+
+    doSubmit: function(formPanel) {
+
+        var viewport = this.getViewport();
+        var loginWin = this.getLoginWin();
 
         formPanel.getForm().submit({
             clientValidation: true,
@@ -56,16 +80,6 @@ Ext.define('Peacock.controller.LoginController', {
                     case Ext.form.action.Action.SERVER_INVALID:
                     Ext.Msg.alert('Failure', action.result.msg);
                 }
-            }
-        });
-
-
-    },
-
-    init: function(application) {
-        this.control({
-            "loginWin button": {
-                click: this.onButtonClick
             }
         });
     }
