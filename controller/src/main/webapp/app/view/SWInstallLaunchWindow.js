@@ -96,50 +96,47 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             xtype: 'textfield',
                                             anchor: '100%',
                                             id: 'apacheTargetDir',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Target Dir',
                                             name: 'targetDir',
-                                            allowBlank: false
+                                            value: [
+                                                '/usr/local/apache'
+                                            ]
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '100%',
                                             id: 'apacheServerRoot',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Server Root',
                                             name: 'serverRoot',
-                                            allowBlank: false
+                                            value: [
+                                                '/usr/local/apache'
+                                            ]
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '30%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Port',
                                             name: 'port',
-                                            allowBlank: false,
+                                            value: [
+                                                '80'
+                                            ],
                                             vtype: 'numeric'
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
-                                            fieldLabel: 'Server Name',
-                                            name: 'serverName',
-                                            allowBlank: false
+                                            fieldLabel: 'Server Domain',
+                                            name: 'serverDomain',
+                                            value: [
+                                                'localhost'
+                                            ]
                                         },
                                         {
                                             xtype: 'checkboxfield',
                                             fieldLabel: 'Start Service',
                                             name: 'autoStart',
                                             boxLabel: 'Start Service after Installation ',
+                                            checked: true,
                                             inputValue: 'Y',
                                             uncheckedValue: 'N'
                                         }
@@ -463,55 +460,38 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         {
                                             xtype: 'textfield',
                                             anchor: '100%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Data Dir',
                                             name: 'dataDir',
-                                            allowBlank: false
+                                            value: [
+                                                '/var/lib/mysql'
+                                            ]
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '30%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Port',
                                             name: 'port',
-                                            allowBlank: false,
+                                            value: [
+                                                '3306'
+                                            ],
                                             vtype: 'numeric'
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Password',
                                             name: 'password',
                                             inputType: 'password',
-                                            allowBlank: false,
                                             emptyText: '4 ~ 20자',
                                             maxLength: 20,
                                             minLength: 4
-                                        },
-                                        {
-                                            xtype: 'textfield',
-                                            anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
-                                            fieldLabel: 'Confirm Password',
-                                            name: 'passwd2',
-                                            inputType: 'password',
-                                            allowBlank: false,
-                                            vtype: 'password'
                                         },
                                         {
                                             xtype: 'checkboxfield',
                                             fieldLabel: 'Start Service',
                                             name: 'autoStart',
                                             boxLabel: 'Start Service after Installation ',
+                                            checked: true,
                                             inputValue: 'Y',
                                             uncheckedValue: 'N'
                                         }
@@ -625,13 +605,17 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
     },
 
     onButtonClick1: function(button, e, eOpts) {
+        /*
         Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(btn){
 
-            if(btn == "yes"){
-                Ext.getCmp("swParamPanel").up("window").close();
-            }
+        if(btn == "yes"){
+
+        }
 
         });
+        */
+
+        Ext.getCmp("swParamPanel").up("window").close();
     }
 
 });

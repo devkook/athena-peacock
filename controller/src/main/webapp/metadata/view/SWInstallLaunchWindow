@@ -160,26 +160,11 @@
                                         "designer|displayName": "TargetDir",
                                         "fieldLabel": "Target Dir",
                                         "name": "targetDir",
-                                        "allowBlank": false
+                                        "value": [
+                                            "[\"/usr/local/apache\"]"
+                                        ]
                                     },
-                                    "designerId": "24bcab56-b225-490c-a430-1d20d9c8ec14",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "ccd7c720-f396-4f92-89db-ab4cfe7c8687"
-                                        }
-                                    ]
+                                    "designerId": "24bcab56-b225-490c-a430-1d20d9c8ec14"
                                 },
                                 {
                                     "type": "Ext.form.field.Text",
@@ -194,26 +179,11 @@
                                         "designer|displayName": "ServerRoot",
                                         "fieldLabel": "Server Root",
                                         "name": "serverRoot",
-                                        "allowBlank": false
+                                        "value": [
+                                            "[\"/usr/local/apache\"]"
+                                        ]
                                     },
-                                    "designerId": "fd9d7c58-6574-4074-b2d9-f3729a6cdee6",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "b954817b-1571-4958-a82b-2de590504c18"
-                                        }
-                                    ]
+                                    "designerId": "fd9d7c58-6574-4074-b2d9-f3729a6cdee6"
                                 },
                                 {
                                     "type": "Ext.form.field.Text",
@@ -227,27 +197,12 @@
                                         "designer|displayName": "Port",
                                         "fieldLabel": "Port",
                                         "name": "port",
-                                        "allowBlank": false,
+                                        "value": [
+                                            "[\"80\"]"
+                                        ],
                                         "vtype": "numeric"
                                     },
-                                    "designerId": "3fa29d5d-e20a-4cff-a077-38f52556040a",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "483063b5-9578-434e-b65a-3350acf95efa"
-                                        }
-                                    ]
+                                    "designerId": "3fa29d5d-e20a-4cff-a077-38f52556040a"
                                 },
                                 {
                                     "type": "Ext.form.field.Text",
@@ -258,29 +213,14 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|anchor": "50%",
-                                        "designer|displayName": "ServerName",
-                                        "fieldLabel": "Server Name",
-                                        "name": "serverName",
-                                        "allowBlank": false
+                                        "designer|displayName": "ServerDomain",
+                                        "fieldLabel": "Server Domain",
+                                        "name": "serverDomain",
+                                        "value": [
+                                            "[\"localhost\"]"
+                                        ]
                                     },
-                                    "designerId": "75cbc957-f957-4a42-9232-808eecea8b26",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "a2bd08d7-da5c-4af6-8582-72994ed09000"
-                                        }
-                                    ]
+                                    "designerId": "75cbc957-f957-4a42-9232-808eecea8b26"
                                 },
                                 {
                                     "type": "Ext.form.field.Checkbox",
@@ -294,6 +234,7 @@
                                         "fieldLabel": "Start Service",
                                         "name": "autoStart",
                                         "boxLabel": "Start Service after Installation ",
+                                        "checked": true,
                                         "inputValue": "Y",
                                         "uncheckedValue": "N"
                                     },
@@ -1229,26 +1170,11 @@
                                         "designer|displayName": "DataDir",
                                         "fieldLabel": "Data Dir",
                                         "name": "dataDir",
-                                        "allowBlank": false
+                                        "value": [
+                                            "[\"/var/lib/mysql\"]"
+                                        ]
                                     },
-                                    "designerId": "edcaaa94-1b9a-4e03-b3c3-8c968e0f35c9",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "26440686-67e6-4895-9186-3e03edce9c16"
-                                        }
-                                    ]
+                                    "designerId": "edcaaa94-1b9a-4e03-b3c3-8c968e0f35c9"
                                 },
                                 {
                                     "type": "Ext.form.field.Text",
@@ -1262,27 +1188,12 @@
                                         "designer|displayName": "Port",
                                         "fieldLabel": "Port",
                                         "name": "port",
-                                        "allowBlank": false,
+                                        "value": [
+                                            "[\"3306\"]"
+                                        ],
                                         "vtype": "numeric"
                                     },
-                                    "designerId": "ba11d358-c19b-45d8-a4fd-8681e074119e",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "a57250b2-3c37-47cc-b0cc-a44a96b587f1"
-                                        }
-                                    ]
+                                    "designerId": "ba11d358-c19b-45d8-a4fd-8681e074119e"
                                 },
                                 {
                                     "type": "Ext.form.field.Text",
@@ -1297,63 +1208,11 @@
                                         "fieldLabel": "Password",
                                         "name": "password",
                                         "inputType": "password",
-                                        "allowBlank": false,
                                         "emptyText": "4 ~ 20자",
                                         "maxLength": 20,
                                         "minLength": 4
                                     },
-                                    "designerId": "ac10b4e4-7a24-4ba8-9696-affb6293b590",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "b68bb75c-cf5a-4806-9115-a1e99576cce4"
-                                        }
-                                    ]
-                                },
-                                {
-                                    "type": "Ext.form.field.Text",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "layout|anchor": "50%",
-                                        "fieldLabel": "Confirm Password",
-                                        "name": "passwd2",
-                                        "inputType": "password",
-                                        "allowBlank": false,
-                                        "vtype": "password"
-                                    },
-                                    "designerId": "3fbed52f-5dd4-4fac-b5aa-82fbda0683ff",
-                                    "cn": [
-                                        {
-                                            "type": "Ext.XTemplate",
-                                            "reference": {
-                                                "name": "afterLabelTextTpl",
-                                                "type": "object"
-                                            },
-                                            "codeClass": null,
-                                            "userConfig": {
-                                                "implHandler": [
-                                                    "<span style=\"color:red;font-weight:bold\" data-qtip=\"Required\">*</span>"
-                                                ],
-                                                "designer|displayName": "afterLabelTextTpl"
-                                            },
-                                            "designerId": "5087a14c-3668-4acc-bf95-a920aab8ea7a"
-                                        }
-                                    ]
+                                    "designerId": "ac10b4e4-7a24-4ba8-9696-affb6293b590"
                                 },
                                 {
                                     "type": "Ext.form.field.Checkbox",
@@ -1367,6 +1226,7 @@
                                         "fieldLabel": "Start Service",
                                         "name": "autoStart",
                                         "boxLabel": "Start Service after Installation ",
+                                        "checked": true,
                                         "inputValue": "Y",
                                         "uncheckedValue": "N"
                                     },
@@ -1481,13 +1341,17 @@
                             "userConfig": {
                                 "fn": "onButtonClick1",
                                 "implHandler": [
+                                    "/*\r",
                                     "Ext.MessageBox.confirm('Confirm', 'Are you sure you want to do that?', function(btn){\r",
                                     "\r",
                                     "    if(btn == \"yes\"){\r",
-                                    "        Ext.getCmp(\"swParamPanel\").up(\"window\").close();\r",
+                                    "        \r",
                                     "    }\r",
                                     "\r",
-                                    "});"
+                                    "});\r",
+                                    "*/\r",
+                                    "\r",
+                                    "Ext.getCmp(\"swParamPanel\").up(\"window\").close();"
                                 ],
                                 "name": "click",
                                 "scope": "me"

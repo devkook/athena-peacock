@@ -30,30 +30,56 @@ Ext.define('Peacock.controller.LoginController', {
     onButtonClick: function(button, e, eOpts) {
         //alert("button click!!");
 
-        var viewport = this.getViewport();
-        var loginWin = this.getLoginWin();
 
-        Ext.Ajax.request({
-            url: 'static/login.json',
-            params: {
-                id: 1
-            },
-            success: function(response){
-                var text = response.responseText;
-                //alert(text);
-
-                viewport.layout.setActiveItem(1);
-                loginWin.close();
-            }
-        });
+        var formPanel = Ext.getCmp("loginForm");
 
 
+        this.doSubmit(formPanel);
+
+
+    },
+
+    onTextfieldSpecialkey: function(field, e, eOpts) {
+        if(e.getKey() == e.ENTER) { 
+            this.doSubmit(Ext.getCmp("loginForm"));
+        }
     },
 
     init: function(application) {
         this.control({
             "loginWin button": {
                 click: this.onButtonClick
+            },
+            "loginWin textfield": {
+                specialkey: this.onTextfieldSpecialkey
+            }
+        });
+    },
+
+    doSubmit: function(formPanel) {
+
+        var viewport = this.getViewport();
+        var loginWin = this.getLoginWin();
+
+        formPanel.getForm().submit({
+            clientValidation: true,
+            url: "user/login",
+            waitMsg: 'Loging...',
+            success: function(form, action) {
+                viewport.layout.setActiveItem(1);
+                loginWin.close();
+            },
+            failure: function(form, action) {
+                switch (action.failureType) {
+                    case Ext.form.action.Action.CLIENT_INVALID:
+                    Ext.Msg.alert('Failure', '아이디 및 비밀번호를 모두 입력해주세요.');
+                    break;
+                    case Ext.form.action.Action.CONNECT_FAILURE:
+                    Ext.Msg.alert('Failure', 'Server communication failed');
+                    break;
+                    case Ext.form.action.Action.SERVER_INVALID:
+                    Ext.Msg.alert('Failure', action.result.msg);
+                }
             }
         });
     }

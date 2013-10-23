@@ -22,22 +22,11 @@
                 "implHandler": [
                     "//alert(\"button click!!\");\r",
                     "\r",
-                    "var viewport = this.getViewport();\r",
-                    "var loginWin = this.getLoginWin();\r",
                     "\r",
-                    "Ext.Ajax.request({\r",
-                    "    url: 'static/login.json',\r",
-                    "    params: {\r",
-                    "        id: 1\r",
-                    "    },\r",
-                    "    success: function(response){\r",
-                    "        var text = response.responseText;\r",
-                    "        //alert(text);\r",
+                    "var formPanel = Ext.getCmp(\"loginForm\");\r",
                     "\r",
-                    "        viewport.layout.setActiveItem(1);\r",
-                    "        loginWin.close();\r",
-                    "    }\r",
-                    "});\r",
+                    "\r",
+                    "this.doSubmit(formPanel);\r",
                     "\r",
                     ""
                 ],
@@ -74,6 +63,87 @@
                 "selector": "loginWin"
             },
             "designerId": "50bd81ae-421b-4e26-9d3b-1973f4f74354"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTextfieldSpecialkey",
+                "implHandler": [
+                    "if(e.getKey() == e.ENTER) { \r",
+                    "    this.doSubmit(Ext.getCmp(\"loginForm\"));\r",
+                    "}"
+                ],
+                "name": "specialkey",
+                "scope": "me",
+                "designer|targetType": "Ext.form.field.Text",
+                "designer|controlQuery": "loginWin textfield"
+            },
+            "designerId": "1c2beb12-82ba-4a16-b5e6-ce866ddcbbfb"
+        },
+        {
+            "type": "fixedfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "init",
+                "designer|params": [
+                    "application"
+                ],
+                "implHandler": [
+                    ""
+                ]
+            },
+            "designerId": "198f9fcb-85ac-4e45-821f-cfd93ceab32f"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "doSubmit",
+                "designer|params": [
+                    "formPanel"
+                ],
+                "implHandler": [
+                    "\r",
+                    "var viewport = this.getViewport();\r",
+                    "var loginWin = this.getLoginWin();\r",
+                    "\r",
+                    "formPanel.getForm().submit({\r",
+                    "    clientValidation: true,\r",
+                    "    url: \"user/login\",\r",
+                    "    waitMsg: 'Loging...',\r",
+                    "    success: function(form, action) {\r",
+                    "        viewport.layout.setActiveItem(1);\r",
+                    "        loginWin.close();\r",
+                    "    },\r",
+                    "    failure: function(form, action) {\r",
+                    "        switch (action.failureType) {\r",
+                    "            case Ext.form.action.Action.CLIENT_INVALID:\r",
+                    "            Ext.Msg.alert('Failure', '아이디 및 비밀번호를 모두 입력해주세요.');\r",
+                    "            break;\r",
+                    "            case Ext.form.action.Action.CONNECT_FAILURE:\r",
+                    "            Ext.Msg.alert('Failure', 'Server communication failed');\r",
+                    "            break;\r",
+                    "            case Ext.form.action.Action.SERVER_INVALID:\r",
+                    "            Ext.Msg.alert('Failure', action.result.msg);\r",
+                    "        }\r",
+                    "    }\r",
+                    "});"
+                ]
+            },
+            "designerId": "64d27198-cc17-4d62-b81e-3a1033753741"
         }
     ]
 }

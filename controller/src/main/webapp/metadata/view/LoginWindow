@@ -31,6 +31,7 @@
             "codeClass": null,
             "userConfig": {
                 "childEls": null,
+                "id": "loginForm",
                 "bodyPadding": 10,
                 "header": false,
                 "title": "My Form"
@@ -49,7 +50,8 @@
                         "designer|displayName": "",
                         "fieldLabel": "Username",
                         "labelAlign": "right",
-                        "name": "username"
+                        "name": "login_id",
+                        "allowBlank": false
                     },
                     "designerId": "9c8e57e7-1ac7-4bee-80d2-d9b5727deb19"
                 },
@@ -64,7 +66,9 @@
                         "layout|anchor": "100%",
                         "fieldLabel": "Password",
                         "labelAlign": "right",
-                        "name": "password"
+                        "name": "passwd",
+                        "inputType": "password",
+                        "allowBlank": false
                     },
                     "designerId": "41f0f7b6-4550-42b5-9455-6287b7acfa0a"
                 },

@@ -30,8 +30,22 @@ Ext.define('Peacock.controller.TopToolbarController', {
             alert("click! my account.");
 
         }else if(item.getId() == "topLogOutMenu"){
+
             var viewport = this.getViewport();
-            viewport.layout.setActiveItem(0);
+
+            Ext.Ajax.request({
+                url: 'user/logout',
+                disableCaching : true,
+                success: function(response){
+                    //var text = response.responseText;
+                    //alert(text);
+
+                    viewport.layout.setActiveItem(0);
+                }
+            });
+
+
+
         }
     },
 

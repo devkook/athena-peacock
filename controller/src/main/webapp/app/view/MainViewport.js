@@ -158,18 +158,18 @@ Ext.define('Peacock.view.MainViewport', {
                                 },
                                 {
                                     xtype: 'treepanel',
-                                    title: 'IMAGES',
+                                    title: 'RHEV MANAGER',
                                     root: {
                                         text: 'Root',
                                         expanded: true,
                                         children: [
                                             {
-                                                text: 'Templates',
+                                                text: 'Virtual Machines',
                                                 id: 'img-tmp',
                                                 leaf: true
                                             },
                                             {
-                                                text: 'Packages',
+                                                text: 'Templates',
                                                 id: 'img-pkg',
                                                 leaf: true
                                             }

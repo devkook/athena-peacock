@@ -43,13 +43,13 @@ INSERT INTO `peacock`.`roles_tbl` (`ROLE_ID`, `ROLE_NAME`, `PERMISSION`, `REG_DT
 INSERT INTO `peacock`.`roles_tbl` (`ROLE_ID`, `ROLE_NAME`, `PERMISSION`, `REG_DT`) VALUES ('2', 'role2', 'write', NOW());
 
 INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PASSWD`, `USER_NAME`, `DEPT_NAME`, `EMAIL`, `IS_ADMIN`, `STATUS`, `REG_DT`) 
-VALUES ('1', '1', 'idkbj', '1234', '권봉진', '개발팀', 'idkbj@naver.com', '1', '1', NOW());
+VALUES ('1', '1', 'idkbj', password('1234'), '권봉진', '개발팀', 'idkbj@naver.com', '1', '1', NOW());
 INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PASSWD`, `USER_NAME`, `DEPT_NAME`, `EMAIL`, `IS_ADMIN`, `STATUS`, `REG_DT`) 
-VALUES ('2', '1', 'abcd11', '1111', '홍길동', '개발팀', '111@naver.com', '0', '1', NOW());
+VALUES ('2', '1', 'abcd11', password('1234'), '홍길동', '개발팀', '111@naver.com', '0', '1', NOW());
 INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PASSWD`, `USER_NAME`, `DEPT_NAME`, `EMAIL`, `IS_ADMIN`, `STATUS`, `REG_DT`) 
-VALUES ('3', '1', 'test', '1111', '김철수', '개발팀', 'test@naver.com', '0', '1', NOW());
+VALUES ('3', '1', 'test', password('1234'), '김철수', '개발팀', 'test@naver.com', '0', '1', NOW());
 INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PASSWD`, `USER_NAME`, `DEPT_NAME`, `EMAIL`, `IS_ADMIN`, `STATUS`, `REG_DT`) 
-VALUES ('4', '1', '1111', '1111', '1111', '개발팀', '111@naver.com', '0', '1', NOW());
+VALUES ('4', '1', '1111', password('1234'), '1111', '개발팀', '111@naver.com', '0', '1', NOW());
 
 
 INSERT INTO `peacock`.`user_group_tbl` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`, `REG_DT`) VALUES ('1', 'osc-employee', 'Open Source Consulting', NOW());
