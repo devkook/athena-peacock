@@ -114,6 +114,7 @@ public class ShellAction extends Action {
 	@Override
 	public String perform() {
 		StringStreamConsumer consumer = null;
+		String commandStr = null;
 		
 		try {
 			Commandline commandLine = new Commandline();
@@ -135,7 +136,8 @@ public class ShellAction extends Action {
 			}
 			
 			/** verify command string */
-			logger.debug("{} ~]$ {}\n", workingDiretory, commandLine.toString());
+			commandStr = commandLine.toString();
+			logger.debug("{} ~]$ {}\n", workingDiretory, commandStr);
 			
 			/** also enable StringWriter, PrintWriter, WriterStreamConsumer and etc. */
 			consumer = new CommandLineUtils.StringStreamConsumer();
@@ -153,7 +155,7 @@ public class ShellAction extends Action {
 			logger.error("CommandLineException has occurred. : ", e);
 		}
 
-		return consumer.getOutput();
+		return commandStr + "\n" + consumer.getOutput();
 	}
 	
 }

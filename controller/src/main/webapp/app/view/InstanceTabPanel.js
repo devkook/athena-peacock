@@ -313,6 +313,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                     xtype: 'panel',
                     height: 289,
                     width: 755,
+                    autoScroll: true,
                     title: 'Monitoring',
                     items: [
                         {

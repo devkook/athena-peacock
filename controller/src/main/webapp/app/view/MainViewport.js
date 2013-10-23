@@ -354,14 +354,14 @@ Ext.define('Peacock.view.MainViewport', {
                                             split: true,
                                             height: 400,
                                             layout: {
-                                                type: 'anchor'
+                                                align: 'stretch',
+                                                type: 'vbox'
                                             },
                                             title: 'Detail',
                                             items: [
                                                 {
                                                     xtype: 'panel',
-                                                    anchor: '100%',
-                                                    height: 50,
+                                                    flex: 1,
                                                     margin: 5,
                                                     header: false,
                                                     title: 'My Panel',
@@ -369,13 +369,14 @@ Ext.define('Peacock.view.MainViewport', {
                                                         {
                                                             xtype: 'label',
                                                             id: 'detailTitleLabel',
+                                                            style: 'font-size: 16px',
                                                             text: 'title panel'
                                                         }
                                                     ]
                                                 },
                                                 {
                                                     xtype: 'panel',
-                                                    anchor: '100% -1',
+                                                    flex: 10,
                                                     id: 'detailPanel',
                                                     layout: {
                                                         type: 'card'

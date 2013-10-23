@@ -40,7 +40,10 @@
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
 						</manifest>
-					</archive>
+					</archive>                              
+                    <excludes>                                 
+                        <exclude>**/.gitignore</exclude>        
+                    </excludes>  
 				</configuration>
 			</plugin>
 

@@ -769,9 +769,10 @@
                                     "userConfig": {
                                         "layout|region": "south",
                                         "layout|split": true,
+                                        "container|align": "stretch",
                                         "height": 400,
                                         "designer|displayName": "BaseDetailPanel",
-                                        "layout": "anchor",
+                                        "layout": "vbox",
                                         "title": "Detail"
                                     },
                                     "designerId": "944d571c-8653-4b57-86ab-3dff1f00b456",
@@ -784,8 +785,8 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "layout|anchor": "100%",
-                                                "height": 50,
+                                                "layout|flex": 1,
+                                                "height": null,
                                                 "margin": 5,
                                                 "designer|displayName": "TitlePanel",
                                                 "header": false,
@@ -802,7 +803,11 @@
                                                     "codeClass": null,
                                                     "userConfig": {
                                                         "id": "detailTitleLabel",
+                                                        "style": "font-size: 16px",
                                                         "text": "title panel"
+                                                    },
+                                                    "configAlternates": {
+                                                        "style": "string"
                                                     },
                                                     "designerId": "5572d3c7-18a5-4f56-92f1-f0ed0f7bb323"
                                                 }
@@ -816,7 +821,7 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "layout|anchor": "100% -1",
+                                                "layout|flex": 10,
                                                 "height": null,
                                                 "id": "detailPanel",
                                                 "maxHeight": null,

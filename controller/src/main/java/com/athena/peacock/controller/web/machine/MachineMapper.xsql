@@ -118,6 +118,7 @@
 		<if test="sshUsername != null">AND SSH_USERNAME = #{sshUsername}</if>
 		<if test="sshPassword != null">AND SSH_PASSWORD = #{sshPassword}</if>
 		<if test="sshKeyFile != null">AND SSH_KEY_FILE = #{sshKeyFile}</if>
+		 ORDER BY REG_DT
 		 LIMIT #{start}, #{limit}
 	</select>
 

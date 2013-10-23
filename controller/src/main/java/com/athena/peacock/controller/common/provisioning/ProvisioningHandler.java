@@ -33,7 +33,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
-import org.springframework.util.Assert;
 
 import com.athena.peacock.common.core.action.FileWriteAction;
 import com.athena.peacock.common.core.action.ShellAction;
@@ -84,17 +83,15 @@ public class ProvisioningHandler {
 	}
     
 	private void apacheInstall(ProvisioningDetail provisioningDetail) throws Exception {
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getTargetDir()), "targetDir must not be null.");
-		
 		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
 		cmdMsg.setAgentId(provisioningDetail.getMachineId());
 		cmdMsg.setBlocking(true);
 		
-		String targetDir = provisioningDetail.getTargetDir();
+		String targetDir = (StringUtils.isEmpty(provisioningDetail.getTargetDir()) ? "/usr/local/apache" : provisioningDetail.getTargetDir());
+		String serverRoot = (StringUtils.isEmpty(provisioningDetail.getServerRoot()) ? targetDir : provisioningDetail.getServerRoot());
+		String port = (StringUtils.isEmpty(provisioningDetail.getPort()) ? "80" : provisioningDetail.getPort());
+		String serverDomain = (StringUtils.isEmpty(provisioningDetail.getServerDomain()) ? "localhost" : provisioningDetail.getServerDomain());
 		String version = provisioningDetail.getVersion();
-		String serverRoot = (provisioningDetail.getServerRoot() == null ? targetDir : provisioningDetail.getServerRoot());
-		String port = (provisioningDetail.getPort() == null ? "80" : provisioningDetail.getPort());
-		String serverDomain = (provisioningDetail.getServerDomain() == null ? "localhost" : provisioningDetail.getServerDomain());
 		
 		Command command = new Command("Apache INSTALL");
 		int sequence = 0;
@@ -408,9 +405,9 @@ public class ProvisioningHandler {
 		cmdMsg.setAgentId(provisioningDetail.getMachineId());
 		cmdMsg.setBlocking(true);
 
+		String dataDir = (StringUtils.isEmpty(provisioningDetail.getDataDir()) ? "/var/lib/mysql" : provisioningDetail.getDataDir());
+		String port = (StringUtils.isEmpty(provisioningDetail.getPort()) ? "3306" : provisioningDetail.getPort());
 		String version = provisioningDetail.getVersion();
-		String dataDir = (provisioningDetail.getDataDir() == null ? "/var/lib/mysql" : provisioningDetail.getDataDir());
-		String port = (provisioningDetail.getPort() == null ? "3306" : provisioningDetail.getPort());
 		String password = provisioningDetail.getPassword();
 		
 		Command command = new Command("CONFIGURATION");
@@ -564,9 +561,6 @@ class InstallThread extends Thread {
 	@Override
 	public void run() {
 		try {
-			System.out.println("software => " + software);
-			System.out.println("softwareService => " + softwareService);
-			
 			softwareService.insertSoftware(software);
 			
 			PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
