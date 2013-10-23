@@ -39,6 +39,11 @@ public class SimpleJsonResponse {
 	 * 서버 작업 결과 메시지.
 	 */
 	private String msg;
+	
+	/**
+	 * 부가 정보.
+	 */
+	private Object data;
 
 	/**
 	 * <pre>
@@ -49,16 +54,13 @@ public class SimpleJsonResponse {
 		// TODO Auto-generated constructor stub
 	}
 
-
 	public boolean isSuccess() {
 		return success;
 	}
 
-
 	public void setSuccess(boolean success) {
 		this.success = success;
 	}
-
 
 	public String getMsg() {
 		return msg;
@@ -66,6 +68,14 @@ public class SimpleJsonResponse {
 
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+	public Object getData() {
+		return data;
+	}
+
+	public void setData(Object data) {
+		this.data = data;
 	}
 
 }

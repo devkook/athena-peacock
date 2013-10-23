@@ -33,17 +33,29 @@ Ext.define('Peacock.controller.LoginController', {
         var viewport = this.getViewport();
         var loginWin = this.getLoginWin();
 
-        Ext.Ajax.request({
-            url: 'static/login.json',
-            params: {
-                id: 1
-            },
-            success: function(response){
-                var text = response.responseText;
-                //alert(text);
 
+        var formPanel = Ext.getCmp("loginForm");
+
+
+        formPanel.getForm().submit({
+            clientValidation: true,
+            url: "user/login",
+            waitMsg: 'Loging...',
+            success: function(form, action) {
                 viewport.layout.setActiveItem(1);
                 loginWin.close();
+            },
+            failure: function(form, action) {
+                switch (action.failureType) {
+                    case Ext.form.action.Action.CLIENT_INVALID:
+                    Ext.Msg.alert('Failure', '아이디 및 비밀번호를 모두 입력해주세요.');
+                    break;
+                    case Ext.form.action.Action.CONNECT_FAILURE:
+                    Ext.Msg.alert('Failure', 'Server communication failed');
+                    break;
+                    case Ext.form.action.Action.SERVER_INVALID:
+                    Ext.Msg.alert('Failure', action.result.msg);
+                }
             }
         });
 

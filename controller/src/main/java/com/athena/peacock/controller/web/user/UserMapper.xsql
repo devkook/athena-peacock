@@ -126,6 +126,27 @@
 			user_id = #{user_id}
 		
 	</delete>
+	
+	<select id="getLoginUser" parameterType="com.athena.peacock.controller.web.user.UserDto" resultType="com.athena.peacock.controller.web.user.UserDto">
+		SELECT 
+			user_id
+		    ,role_id
+		    ,login_id
+		    ,user_name
+		    ,dept_name
+		    ,email
+		    ,is_admin
+		    ,status
+		    ,last_logon
+		    ,reg_user_id
+		    ,reg_dt
+		    ,upd_user_id
+		    ,upd_dt
+		FROM users_tbl
+		WHERE 
+			login_id = #{login_id}
+			AND hashed_passwd = password(#{passwd})
+	</select>
 
 
 </mapper>

@@ -49,6 +49,10 @@ public class UserDao extends AbstractBaseDao {
 	public void deleteUser(int userId){
 		sqlSession.delete("UserMapper.deleteUser", userId);
 	}
+	
+	public UserDto getLoginUser(UserDto user){
+		return sqlSession.selectOne("UserMapper.getLoginUser", user);
+	}
 
 
 }

@@ -34,6 +34,7 @@ Ext.define('Peacock.view.LoginWindow', {
             items: [
                 {
                     xtype: 'form',
+                    id: 'loginForm',
                     bodyPadding: 10,
                     header: false,
                     title: 'My Form',
@@ -43,14 +44,17 @@ Ext.define('Peacock.view.LoginWindow', {
                             anchor: '100%',
                             fieldLabel: 'Username',
                             labelAlign: 'right',
-                            name: 'username'
+                            name: 'login_id',
+                            allowBlank: false
                         },
                         {
                             xtype: 'textfield',
                             anchor: '100%',
                             fieldLabel: 'Password',
                             labelAlign: 'right',
-                            name: 'password'
+                            name: 'passwd',
+                            inputType: 'password',
+                            allowBlank: false
                         },
                         {
                             xtype: 'container',

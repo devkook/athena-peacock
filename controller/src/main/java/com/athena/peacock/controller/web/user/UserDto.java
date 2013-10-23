@@ -21,11 +21,6 @@
 package com.athena.peacock.controller.web.user;
 
 import java.util.Date;
-import java.text.SimpleDateFormat;
-
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-
-import com.athena.peacock.controller.web.common.json.CustomDateSerializer;
 
 /**
  * <pre>

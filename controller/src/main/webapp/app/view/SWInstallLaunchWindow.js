@@ -96,50 +96,47 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             xtype: 'textfield',
                                             anchor: '100%',
                                             id: 'apacheTargetDir',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Target Dir',
                                             name: 'targetDir',
-                                            allowBlank: false
+                                            value: [
+                                                '/usr/local/apache'
+                                            ]
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '100%',
                                             id: 'apacheServerRoot',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Server Root',
                                             name: 'serverRoot',
-                                            allowBlank: false
+                                            value: [
+                                                '/usr/local/apache'
+                                            ]
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '30%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
                                             fieldLabel: 'Port',
                                             name: 'port',
-                                            allowBlank: false,
+                                            value: [
+                                                '80'
+                                            ],
                                             vtype: 'numeric'
                                         },
                                         {
                                             xtype: 'textfield',
                                             anchor: '50%',
-                                            afterLabelTextTpl: [
-                                                '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
-                                            ],
-                                            fieldLabel: 'Server Name',
-                                            name: 'serverName',
-                                            allowBlank: false
+                                            fieldLabel: 'Server Domain',
+                                            name: 'serverDomain',
+                                            value: [
+                                                'localhost'
+                                            ]
                                         },
                                         {
                                             xtype: 'checkboxfield',
                                             fieldLabel: 'Start Service',
                                             name: 'autoStart',
                                             boxLabel: 'Start Service after Installation ',
+                                            checked: true,
                                             inputValue: 'Y',
                                             uncheckedValue: 'N'
                                         }

@@ -20,6 +20,8 @@
  */
 package com.athena.peacock.controller.web.user;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,6 +43,8 @@ import com.athena.peacock.controller.web.common.model.SimpleJsonResponse;
 @Controller
 @RequestMapping("/user")
 public class UserController {
+	
+	public static final String SESSION_USER_KEY = "loginUser";
 	
 	@Autowired
 	private UserService service;
@@ -123,6 +127,33 @@ public class UserController {
 	public @ResponseBody DtoJsonResponse getUser(DtoJsonResponse jsonRes, @RequestParam("user_id") int user_id){
 		
 		jsonRes.setData(service.getUser(user_id));
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/login")
+	public @ResponseBody SimpleJsonResponse login(SimpleJsonResponse jsonRes, @RequestParam("login_id") String login_id, @RequestParam("passwd") String passwd, HttpSession session){
+		
+		UserDto user = service.getLoginUser(login_id, passwd);
+		
+		if(user == null){
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("login id 또는 비밀번호가 잘못되었습니다.");
+		}else{
+			jsonRes.setData(user);
+			session.setAttribute(SESSION_USER_KEY, user);
+		}
+		
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/logout")
+	public @ResponseBody SimpleJsonResponse logout(SimpleJsonResponse jsonRes, HttpSession session){
+		
+		session.removeAttribute(SESSION_USER_KEY);
+		
+		jsonRes.setMsg("logout success.");
 		
 		return jsonRes;
 	}

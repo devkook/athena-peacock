@@ -68,6 +68,14 @@ public class UserService {
 	public void deleteUser(int userId){
 		dao.deleteUser(userId);
 	}
+	
+	public UserDto getLoginUser(String loginId, String passwd){
+		UserDto user = new UserDto();
+		user.setLogin_id(loginId);
+		user.setPasswd(passwd);
+		
+		return dao.getLoginUser(user);
+	}
 
 }
 //end of UserService.java
