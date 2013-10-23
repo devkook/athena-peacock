@@ -156,6 +156,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|anchor": "100%",
+                                        "id": "apacheTargetDir",
                                         "designer|displayName": "TargetDir",
                                         "fieldLabel": "Target Dir",
                                         "name": "targetDir",
@@ -189,6 +190,7 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|anchor": "100%",
+                                        "id": "apacheServerRoot",
                                         "designer|displayName": "ServerRoot",
                                         "fieldLabel": "Server Root",
                                         "name": "serverRoot",
@@ -298,6 +300,45 @@
                                     "designerId": "ab70cbee-84a5-49e6-9699-559661d266c1"
                                 }
                             ]
+                        },
+                        {
+                            "type": "basiceventbinding",
+                            "reference": {
+                                "name": "listeners",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "fn": "onApacheAfterRender",
+                                "implHandler": [
+                                    "\r",
+                                    "/*\r",
+                                    " * Tooltip Config.\r",
+                                    " */\r",
+                                    "\r",
+                                    "Peacock.app.debug(\"ApacheParamForm.onApacheAfterRender.\");\r",
+                                    "\r",
+                                    "var tooltipConfigs = [\r",
+                                    "    {target:\"apacheTargetDir\", html : \"This is targetDir\"},\r",
+                                    "    {target:\"apacheServerRoot\", html : \"This is serverRoot\"}\r",
+                                    "];\r",
+                                    "\r",
+                                    "Ext.each(tooltipConfigs, function(config) {\r",
+                                    "\tExt.create('Ext.tip.ToolTip', {\r",
+                                    "        target: config.target,\r",
+                                    "        html: config.html\r",
+                                    "    });\r",
+                                    "});\r",
+                                    "\r",
+                                    "\r",
+                                    "\r",
+                                    "\r",
+                                    ""
+                                ],
+                                "name": "afterrender",
+                                "scope": "me"
+                            },
+                            "designerId": "a8ececdb-586a-4bff-af3c-1e578c5a0d94"
                         }
                     ]
                 },

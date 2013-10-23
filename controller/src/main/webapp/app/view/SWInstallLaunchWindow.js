@@ -95,6 +95,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         {
                                             xtype: 'textfield',
                                             anchor: '100%',
+                                            id: 'apacheTargetDir',
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
                                             ],
@@ -105,6 +106,7 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         {
                                             xtype: 'textfield',
                                             anchor: '100%',
+                                            id: 'apacheServerRoot',
                                             afterLabelTextTpl: [
                                                 '<span style="color:red;font-weight:bold" data-qtip="Required">*</span>'
                                             ],
@@ -143,7 +145,13 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                         }
                                     ]
                                 }
-                            ]
+                            ],
+                            listeners: {
+                                afterrender: {
+                                    fn: me.onApacheAfterRender,
+                                    scope: me
+                                }
+                            }
                         },
                         {
                             xtype: 'form',
@@ -551,6 +559,32 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
         });
 
         me.callParent(arguments);
+    },
+
+    onApacheAfterRender: function(component, eOpts) {
+
+        /*
+        * Tooltip Config.
+        */
+
+        Peacock.app.debug("ApacheParamForm.onApacheAfterRender.");
+
+        var tooltipConfigs = [
+        {target:"apacheTargetDir", html : "This is targetDir"},
+        {target:"apacheServerRoot", html : "This is serverRoot"}
+        ];
+
+        Ext.each(tooltipConfigs, function(config) {
+            Ext.create('Ext.tip.ToolTip', {
+                target: config.target,
+                html: config.html
+            });
+        });
+
+
+
+
+
     },
 
     onButtonClick: function(button, e, eOpts) {

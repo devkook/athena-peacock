@@ -661,6 +661,7 @@
             "userConfig": {
                 "height": 289,
                 "width": 755,
+                "autoScroll": true,
                 "title": "Monitoring"
             },
             "designerId": "071642c3-8d16-4ff6-b621-8c2f7b865437",
