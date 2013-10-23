@@ -11,7 +11,7 @@
 		     		, #{fileName}, #{description}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
-	<select id="getSoftwareRepo" parameterType="int" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
+	<select id="getSoftwareRepo" parameterType="int" resultType="com.athena.peacock.controller.web.software.SoftwareRepoDto">
 		SELECT SOFTWARE_ID AS softwareId
 			   , SOFTWARE_NAME AS softwareName
 			   , SOFTWARE_VERSION AS softwareVersion
@@ -95,14 +95,15 @@
 			   , A.SOFTWARE_VENDOR AS softwareVendor
 			   , A.FILE_LOCATION AS fileLocation
 			   , A.FILE_NAME AS fileName
-			   , A.DESCRIPTION AS description
-			   , IFNULL(B.DELETE_YN, 'N') AS installYn
-			   , A.REG_USER_ID AS regUserId
-			   , A.REG_DT AS regDt
-			   , A.UPD_USER_ID AS updUserId
-			   , A.UPD_DT AS updDt
-		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+			   , B.DESCRIPTION AS description
+			   , 'Y' AS installYn
+			   , B.REG_USER_ID AS regUserId
+			   , B.REG_DT AS regDt
+			   , B.UPD_USER_ID AS updUserId
+			   , B.UPD_DT AS updDt
+		  FROM software_repo_tbl A JOIN software_tbl B
 			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+		 WHERE B.DELETE_YN = 'N'
  		   AND B.MACHINE_ID = #{machineId}
 		 LIMIT #{start}, #{limit}
 	</select>
@@ -114,14 +115,15 @@
 			   , A.SOFTWARE_VENDOR AS softwareVendor
 			   , A.FILE_LOCATION AS fileLocation
 			   , A.FILE_NAME AS fileName
-			   , A.DESCRIPTION AS description
-			   , IFNULL(B.DELETE_YN, 'N') AS installYn
-			   , A.REG_USER_ID AS regUserId
-			   , A.REG_DT AS regDt
-			   , A.UPD_USER_ID AS updUserId
-			   , A.UPD_DT AS updDt
-		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+			   , B.DESCRIPTION AS description
+			   , 'Y' AS installYn
+			   , B.REG_USER_ID AS regUserId
+			   , B.REG_DT AS regDt
+			   , B.UPD_USER_ID AS updUserId
+			   , B.UPD_DT AS updDt
+		  FROM software_repo_tbl A JOIN software_tbl B
 			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+		 WHERE B.DELETE_YN = 'N'
  		   AND B.MACHINE_ID = #{machineId}
 	</select>
 

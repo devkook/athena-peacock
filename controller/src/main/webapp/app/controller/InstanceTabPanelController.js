@@ -107,7 +107,7 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
         * 초기 화면 조회시. (목록에서 선택시)
         */
 
-        //this.viewDescription();
+        this.viewDescription();
 
 
 
@@ -121,20 +121,13 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
         * Instance Descript Tab 화면 조회.
         */
 
-        var grid1 = Ext.getCmp("instDescGrid1");
+        var formPanel = Ext.getCmp("instDescForm");
 
-        var jsonObj;
-
-        Ext.Ajax.request({
-            url: 'static/machineDesc.json',
-            params: {
-                machine_id : Peacock.app.selectedRecord.get("machine_id")
+        formPanel.getForm().load({
+            params : {
+                machineId : Peacock.app.selectedRecord.get("machineId")
             },
-            success: function(response){
-                var jsonObj = Ext.JSON.decode(response.responseText);
-
-                grid1.setSource(jsonObj);
-            }
+            url : "machine/getMachine"
         });
     },
 

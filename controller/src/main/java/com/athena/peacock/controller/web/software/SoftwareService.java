@@ -52,6 +52,14 @@ public class SoftwareService {
 	@Named("configDao")
 	private ConfigDao configDao;
 	
+	public void insertSoftware(SoftwareDto software) throws Exception {		
+		if (softwareDao.getSoftware(software) != null) {
+			softwareDao.updateSoftware(software);
+		} else {
+			softwareDao.insertSoftware(software);
+		}
+	}
+	
 	public void insertSoftware(SoftwareDto software, List<ConfigDto> configList) throws Exception {		
 		if (softwareDao.getSoftware(software) != null) {
 			softwareDao.updateSoftware(software);

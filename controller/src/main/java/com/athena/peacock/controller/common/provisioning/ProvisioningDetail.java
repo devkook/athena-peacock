@@ -44,6 +44,7 @@ public class ProvisioningDetail implements Serializable {
 	private String serverName;
 	private String port;
 	private String password;
+	private String autoStart = "Y";
 	
 	/** Apache Variables */
 	private String targetDir;
@@ -183,6 +184,20 @@ public class ProvisioningDetail implements Serializable {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	/**
+	 * @return the autoStart
+	 */
+	public String getAutoStart() {
+		return autoStart;
+	}
+
+	/**
+	 * @param autoStart the autoStart to set
+	 */
+	public void setAutoStart(String autoStart) {
+		this.autoStart = autoStart;
 	}
 
 	/**

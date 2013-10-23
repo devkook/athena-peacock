@@ -5,9 +5,9 @@
 
 	<insert id="insertSoftware" parameterType="com.athena.peacock.controller.web.software.SoftwareDto">
 		INSERT INTO software_tbl 
-			        (MACHINE_ID, SOFTWARE_ID, INSTALL_LOCATION, DESCRIPTION
+			        (MACHINE_ID, SOFTWARE_ID, INSTALL_LOCATION, INSTALL_STAT, INSTALL_LOG, DESCRIPTION
 			        , DELETE_YN, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT) 
-		     VALUES (#{machineId}, #{softwareId}, #{installLocation}, #{description}
+		     VALUES (#{machineId}, #{softwareId}, #{installLocation}, #{installStat}, #{installLog}, #{description}
 		     		, #{deleteYn}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
@@ -15,6 +15,8 @@
 		SELECT MACHINE_ID AS machineId
 		       , SOFTWARE_ID AS softwareId
 		       , INSTALL_LOCATION AS installLocation
+		       , INSTALL_STAT AS installStat
+		       , INSTALL_LOG AS installLog
 		       , DESCRIPTION AS description
 		       , DELETE_YN AS deleteYn
 			   , REG_USER_ID AS regUserId
@@ -29,6 +31,8 @@
 	<update id="updateSoftware" parameterType="com.athena.peacock.controller.web.software.SoftwareDto">
 		UPDATE software_tbl
 		   SET INSTALL_LOCATION = #{installLocation}
+		   	   , INSTALL_STAT = #{installStat}
+		       , INSTALL_LOG = #{installLog}
 		       , DESCRIPTION = #{description}
 		       , DELETE_YN = #{deleteYn}
 			   , UPD_USER_ID = #{updUserId}
@@ -53,6 +57,7 @@
 		<if test="machineId != null">AND MACHINE_ID = #{machineId}</if>
 		<if test="softwareId != null">AND SOFTWARE_ID = #{softwareId}</if>
 		<if test="installLocation != null">AND INSTALL_LOCATION = #{installLocation}</if>
+		<if test="installStat != null">AND INSTALL_STAT = #{installStat}</if>
 		<if test="description != null">AND DESCRIPTION = #{description}</if>
 		<if test="deleteYn != null">AND DELETE_YN = #{deleteYn}</if>
 	</select>
@@ -61,6 +66,7 @@
 		SELECT MACHINE_ID AS machineId
 		       , SOFTWARE_ID AS softwareId
 		       , INSTALL_LOCATION AS installLocation
+		       , INSTALL_STAT = #{installStat}
 		       , DESCRIPTION AS description
 		       , DELETE_YN AS deleteYn
 			   , REG_USER_ID AS regUserId
@@ -72,6 +78,7 @@
 		<if test="machineId != null">AND MACHINE_ID = #{machineId}</if>
 		<if test="softwareId != null">AND SOFTWARE_ID = #{softwareId}</if>
 		<if test="installLocation != null">AND INSTALL_LOCATION = #{installLocation}</if>
+		<if test="installStat != null">AND INSTALL_STAT = #{installStat}</if>
 		<if test="description != null">AND DESCRIPTION = #{description}</if>
 		<if test="deleteYn != null">AND DELETE_YN = #{deleteYn}</if>
 		 LIMIT #{start}, #{limit}

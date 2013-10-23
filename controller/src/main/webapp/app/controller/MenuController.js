@@ -138,24 +138,24 @@ Ext.define('Peacock.controller.MenuController', {
             text: 'ID',
             dataIndex: 'machineId'
         }, {
+            text: 'Host',
+            dataIndex: 'hostName',
+            width: 200
+        }, {
             text: 'OS Name',
             dataIndex: 'osName',
             width: 200
         }, {
-            text: 'Template',
-            dataIndex: 'template',
+            text: 'OS Version',
+            dataIndex: 'osVer',
             width: 200
         }, {
             text: 'Staus',
             dataIndex: 'status'
         }, {
-            text: 'Uptime',
-            dataIndex: 'uptime'
+            text: 'Core',
+            dataIndex: 'cpuNum'
 
-        }, {
-            text: 'Host',
-            dataIndex: 'hostName',
-            width: 200
         }]);
 
 

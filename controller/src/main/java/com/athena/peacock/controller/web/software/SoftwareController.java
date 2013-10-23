@@ -83,6 +83,23 @@ public class SoftwareController {
 		
 		return jsonRes;
 	}
+	
+	/**
+	 * <pre>
+	 * 선택된 Agent(machineID)의 설치 로그 조회
+	 * </pre>
+	 * @param jsonRes
+	 * @param machineId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/getInstallLog")
+	public @ResponseBody String getInstallLog(SoftwareDto software) throws Exception {
+		Assert.isTrue(software.getSoftwareId() != null, "softwareId must not be null.");
+		Assert.isTrue(!StringUtils.isEmpty(software.getMachineId()), "machineId must not be null.");
+		
+		return softwareService.getSoftware(software).getInstallLog();
+	}
 
 	/**
 	 * <pre>
@@ -97,7 +114,6 @@ public class SoftwareController {
 	public @ResponseBody SimpleJsonResponse install(HttpServletRequest request, SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) {
 		Assert.isTrue(provisioningDetail.getSoftwareId() != null, "softwareId must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getTargetDir()), "targetDir must not be null.");
 
 		try {
 			// 기 설치 여부 검사
@@ -136,7 +152,7 @@ public class SoftwareController {
 			provisioningDetail.setUrlPrefix(urlPrefix);
 			
 			provisioningHandler.install(provisioningDetail);
-			jsonRes.setMsg("Install success.");
+			jsonRes.setMsg("Running");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
 			jsonRes.setMsg("Install fail.");

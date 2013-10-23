@@ -52,7 +52,7 @@
                     "\r",
                     "    //tabPanel = Ext.widget('instanceTabPanel');\r",
                     "    tabPanel = this.getInstanceTabPanelView();\r",
-                    "    detailTitleLabel.setText(record.get(\"os_name\"));\r",
+                    "    detailTitleLabel.setText(\"Instance: \"+record.get(\"hostName\") + \" (\" + record.get(\"ipAddr\") + \")\");\r",
                     "\r",
                     "}else if (Peacock.app.menu_id == 'img-tmp'){\r",
                     "\r",
