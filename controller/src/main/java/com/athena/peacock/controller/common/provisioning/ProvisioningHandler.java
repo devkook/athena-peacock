@@ -348,7 +348,7 @@ public class ProvisioningHandler {
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(targetDir);
 		software.setInstallStat("RUNNING");
-		software.setDescription("Apache HTTP Daemon");
+		software.setDescription("Apache Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
 		software.setUpdUserId(provisioningDetail.getUserId());
@@ -523,7 +523,7 @@ public class ProvisioningHandler {
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(dataDir);
 		software.setInstallStat("RUNNING");
-		software.setDescription("MySQL 5.5.34");
+		software.setDescription("MySQL Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
 		software.setUpdUserId(provisioningDetail.getUserId());
@@ -687,7 +687,7 @@ public class ProvisioningHandler {
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(jbossHome + "," + serverHome);
 		software.setInstallStat("RUNNING");
-		software.setDescription("");
+		software.setDescription("JBoss Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
 		software.setUpdUserId(provisioningDetail.getUserId());
@@ -729,9 +729,9 @@ public class ProvisioningHandler {
 		 * Tomcat Variables
 		 */
 		String javaHome = provisioningDetail.getJavaHome();
-		String serverName = provisioningDetail.getServerName();
 		String catalinaHome = provisioningDetail.getCatalinaHome();
 		String catalinaBase = provisioningDetail.getCatalinaBase();
+		String serverName = provisioningDetail.getServerName();
 		String portOffset = (StringUtils.isEmpty(provisioningDetail.getPortOffset()) ? "0" : provisioningDetail.getPortOffset());
 		String compUser = provisioningDetail.getCompUser();
 		
@@ -822,7 +822,7 @@ public class ProvisioningHandler {
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(catalinaHome + "," + catalinaBase + "/" + serverName);
 		software.setInstallStat("RUNNING");
-		software.setDescription("");
+		software.setDescription("Tomcat Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
 		software.setUpdUserId(provisioningDetail.getUserId());
