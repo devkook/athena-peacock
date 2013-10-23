@@ -39,6 +39,8 @@ import com.athena.peacock.controller.common.provisioning.ProvisioningHandler;
 import com.athena.peacock.controller.web.common.model.GridJsonResponse;
 import com.athena.peacock.controller.web.common.model.SimpleJsonResponse;
 import com.athena.peacock.controller.web.machine.MachineDto;
+import com.athena.peacock.controller.web.user.UserController;
+import com.athena.peacock.controller.web.user.UserDto;
 
 /**
  * <pre>
@@ -118,6 +120,11 @@ public class SoftwareController {
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
 
 		try {
+			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
+			if (userDto != null) {
+				provisioningDetail.setUserId(userDto.getUser_id());
+			}
+			
 			// 기 설치 여부 검사
 			boolean installed = false;
 			boolean installedDiffVersion = false;

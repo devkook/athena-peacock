@@ -73,6 +73,8 @@ public class ProvisioningDetail implements Serializable {
 	
 	/** MySQL Variables */
 	private String dataDir;
+	
+	private Integer userId;
 
 	/**
 	 * @return the urlPrefix
@@ -478,6 +480,20 @@ public class ProvisioningDetail implements Serializable {
 	 */
 	public void setDataDir(String dataDir) {
 		this.dataDir = dataDir;
+	}
+
+	/**
+	 * @return the userId
+	 */
+	public Integer getUserId() {
+		return userId;
+	}
+
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 }
 //end of ProvisioningDetail.java
