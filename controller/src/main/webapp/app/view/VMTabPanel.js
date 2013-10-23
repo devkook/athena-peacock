@@ -20,6 +20,7 @@ Ext.define('Peacock.view.VMTabPanel', {
     height: 325,
     width: 907,
     activeTab: 0,
+    plain: true,
 
     initComponent: function() {
         var me = this;
@@ -38,7 +39,7 @@ Ext.define('Peacock.view.VMTabPanel', {
                     items: [
                         {
                             xtype: 'form',
-                            id: 'vmDescForm1',
+                            id: 'vmDescForm',
                             defaults: {
                                 border: false,
                                 xtype: 'panel',
@@ -70,13 +71,13 @@ Ext.define('Peacock.view.VMTabPanel', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'ID',
-                                            name: 'machineId'
+                                            fieldLabel: 'Name',
+                                            name: 'vmId'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'Host',
-                                            name: 'hostName'
+                                            fieldLabel: 'Display Type',
+                                            name: 'display'
                                         }
                                     ]
                                 },
@@ -95,13 +96,13 @@ Ext.define('Peacock.view.VMTabPanel', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'OS Name',
-                                            name: 'osName'
+                                            fieldLabel: 'Description',
+                                            name: 'description'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'OS Version',
-                                            name: 'osVer'
+                                            fieldLabel: 'Origin',
+                                            name: 'origin'
                                         }
                                     ]
                                 },
@@ -120,17 +121,13 @@ Ext.define('Peacock.view.VMTabPanel', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'Mac Address',
-                                            name: 'machineMacAddr'
+                                            fieldLabel: 'Template',
+                                            name: 'template'
                                         },
                                         {
-                                            xtype: 'checkboxfield',
-                                            flex: 1,
-                                            fieldLabel: 'Is VM',
-                                            name: 'isVm',
-                                            boxLabel: 'VM',
-                                            inputValue: 'Y',
-                                            uncheckedValue: 'N'
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Priority',
+                                            name: 'priority'
                                         }
                                     ]
                                 },
@@ -149,8 +146,8 @@ Ext.define('Peacock.view.VMTabPanel', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'IP Address',
-                                            name: 'ipAddr'
+                                            fieldLabel: 'Defined Memory',
+                                            name: 'memory'
                                         },
                                         {
                                             xtype: 'textfield',
@@ -174,38 +171,13 @@ Ext.define('Peacock.view.VMTabPanel', {
                                     items: [
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'CPU Clock',
-                                            name: 'cpuClock'
+                                            fieldLabel: 'OS Name',
+                                            name: 'os'
                                         },
                                         {
                                             xtype: 'textfield',
-                                            fieldLabel: 'Core',
-                                            name: 'cpuNum'
-                                        }
-                                    ]
-                                },
-                                {
-                                    xtype: 'fieldcontainer',
-                                    height: 34,
-                                    defaults: {
-                                        flex: 1
-                                    },
-                                    layout: {
-                                        align: 'middle',
-                                        type: 'hbox'
-                                    },
-                                    fieldLabel: 'Label',
-                                    hideLabel: true,
-                                    items: [
-                                        {
-                                            xtype: 'textfield',
-                                            fieldLabel: 'Memory Size',
-                                            name: 'memSize'
-                                        },
-                                        {
-                                            xtype: 'textfield',
-                                            fieldLabel: 'Create Time',
-                                            name: 'regDt'
+                                            fieldLabel: 'CPU Cores',
+                                            name: 'cores'
                                         }
                                     ]
                                 }
@@ -215,41 +187,49 @@ Ext.define('Peacock.view.VMTabPanel', {
                 },
                 {
                     xtype: 'panel',
-                    title: 'Network Interface',
+                    title: 'Network Interfaces',
                     items: [
                         {
                             xtype: 'gridpanel',
-                            id: 'instSoftGrid1',
+                            id: 'vmNicGrid',
                             header: false,
                             title: 'My Grid Panel',
-                            store: 'SoftwareListStore',
+                            store: 'NicListJsonStore',
                             columns: [
                                 {
                                     xtype: 'rownumberer'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    width: 200,
-                                    dataIndex: 'softwareName',
+                                    width: 138,
+                                    dataIndex: 'name',
                                     text: 'Name'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'softwareVersion',
-                                    text: 'Version'
+                                    width: 151,
+                                    dataIndex: 'networkName',
+                                    text: 'Network Name'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    width: 200,
-                                    dataIndex: 'regDt',
-                                    text: 'Install Date'
+                                    width: 125,
+                                    dataIndex: 'type',
+                                    text: 'Type'
                                 },
                                 {
                                     xtype: 'gridcolumn',
                                     width: 200,
                                     defaultWidth: 200,
-                                    dataIndex: 'description',
-                                    text: 'Description'
+                                    dataIndex: 'macAddress',
+                                    text: 'MAC Address'
+                                },
+                                {
+                                    xtype: 'gridcolumn',
+                                    width: 200,
+                                    defaultWidth: 200,
+                                    dataIndex: 'speed',
+                                    text: 'Speed(Mbps)'
                                 }
                             ]
                         }
@@ -257,7 +237,7 @@ Ext.define('Peacock.view.VMTabPanel', {
                 },
                 {
                     xtype: 'panel',
-                    title: 'Virtual Disk',
+                    title: 'Storages',
                     items: [
                         {
                             xtype: 'gridpanel',

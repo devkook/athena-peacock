@@ -28,7 +28,8 @@ Ext.application({
         'UserGroupMapModel',
         'ASGroupModel',
         'ChartModel',
-        'VmModel'
+        'VmModel',
+        'NicModel'
     ],
     stores: [
         'SoftwareListStore',
@@ -42,7 +43,8 @@ Ext.application({
         'ChartFreeMemStore',
         'ChartUsedMemStore',
         'SoftwareComboStore',
-        'VmListJsonStore'
+        'VmListJsonStore',
+        'NicListJsonStore'
     ],
     views: [
         'MainViewport',
@@ -64,7 +66,8 @@ Ext.application({
         'MainToolbarController',
         'GlobalConfigController',
         'TopToolbarController',
-        'SWinstallController'
+        'SWinstallController',
+        'VmTabPanelController'
     ],
     name: 'Peacock',
 

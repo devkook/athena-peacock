@@ -10,7 +10,8 @@
         "width": 907,
         "designer|userClassName": "VMTabPanel",
         "designer|userAlias": "vmTabPanel",
-        "activeTab": 0
+        "activeTab": 0,
+        "plain": true
     },
     "designerId": "454e2a87-d493-40ad-9408-e56f9ba227ab",
     "cn": [
@@ -48,7 +49,7 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "id": "vmDescForm1",
+                        "id": "vmDescForm",
                         "defaults": [
                             "{\r",
                             "    border: false,\r",
@@ -104,8 +105,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "ID",
-                                        "name": "machineId"
+                                        "fieldLabel": "Name",
+                                        "name": "vmId"
                                     },
                                     "designerId": "f96c96d6-58f0-4e21-b291-ad420f82c071"
                                 },
@@ -118,8 +119,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "Host",
-                                        "name": "hostName"
+                                        "fieldLabel": "Display Type",
+                                        "name": "display"
                                     },
                                     "designerId": "ae957247-8e6e-4cf0-ac43-80bf892b8d17"
                                 }
@@ -155,8 +156,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "OS Name",
-                                        "name": "osName"
+                                        "fieldLabel": "Description",
+                                        "name": "description"
                                     },
                                     "designerId": "179b5a77-bd4f-4e3c-969d-4c95fd3940c7"
                                 },
@@ -169,8 +170,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "OS Version",
-                                        "name": "osVer"
+                                        "fieldLabel": "Origin",
+                                        "name": "origin"
                                     },
                                     "designerId": "ee0677f6-0d57-485c-9f8f-04f3184869b6"
                                 }
@@ -206,27 +207,24 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "Mac Address",
-                                        "name": "machineMacAddr"
+                                        "fieldLabel": "Template",
+                                        "name": "template"
                                     },
                                     "designerId": "b446dbf8-7006-41a5-9c98-2cba9cf622cc"
                                 },
                                 {
-                                    "type": "Ext.form.field.Checkbox",
+                                    "type": "Ext.form.field.Text",
                                     "reference": {
                                         "name": "items",
                                         "type": "array"
                                     },
                                     "codeClass": null,
                                     "userConfig": {
-                                        "layout|flex": 1,
-                                        "fieldLabel": "Is VM",
-                                        "name": "isVm",
-                                        "boxLabel": "VM",
-                                        "inputValue": "Y",
-                                        "uncheckedValue": "N"
+                                        "layout|flex": null,
+                                        "fieldLabel": "Priority",
+                                        "name": "priority"
                                     },
-                                    "designerId": "da52f6bd-c329-4136-b780-8e202af273c6"
+                                    "designerId": "be7d493b-063d-445e-9295-dadeae55bf3b"
                                 }
                             ]
                         },
@@ -260,8 +258,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "IP Address",
-                                        "name": "ipAddr"
+                                        "fieldLabel": "Defined Memory",
+                                        "name": "memory"
                                     },
                                     "designerId": "05c6474d-ed27-419a-860f-aba00906462f"
                                 },
@@ -311,8 +309,8 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "CPU Clock",
-                                        "name": "cpuClock"
+                                        "fieldLabel": "OS Name",
+                                        "name": "os"
                                     },
                                     "designerId": "2ca7cb5d-8107-4f42-84ba-a6d11e353cf8"
                                 },
@@ -325,61 +323,10 @@
                                     "codeClass": null,
                                     "userConfig": {
                                         "layout|flex": null,
-                                        "fieldLabel": "Core",
-                                        "name": "cpuNum"
+                                        "fieldLabel": "CPU Cores",
+                                        "name": "cores"
                                     },
                                     "designerId": "333086c7-c27d-492d-9abc-8e39320d44e9"
-                                }
-                            ]
-                        },
-                        {
-                            "type": "Ext.form.FieldContainer",
-                            "reference": {
-                                "name": "items",
-                                "type": "array"
-                            },
-                            "codeClass": null,
-                            "userConfig": {
-                                "container|align": "middle",
-                                "height": 34,
-                                "defaults": [
-                                    "{\r",
-                                    "    flex: 1\r",
-                                    "}"
-                                ],
-                                "layout": "hbox",
-                                "fieldLabel": "Label",
-                                "hideLabel": true
-                            },
-                            "designerId": "573e9b2f-4759-4343-a621-831f6fd75390",
-                            "cn": [
-                                {
-                                    "type": "Ext.form.field.Text",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "layout|flex": null,
-                                        "fieldLabel": "Memory Size",
-                                        "name": "memSize"
-                                    },
-                                    "designerId": "b24d11f6-a196-4336-ae67-f3e86e1d3bda"
-                                },
-                                {
-                                    "type": "Ext.form.field.Text",
-                                    "reference": {
-                                        "name": "items",
-                                        "type": "array"
-                                    },
-                                    "codeClass": null,
-                                    "userConfig": {
-                                        "layout|flex": null,
-                                        "fieldLabel": "Create Time",
-                                        "name": "regDt"
-                                    },
-                                    "designerId": "be7d493b-063d-445e-9295-dadeae55bf3b"
                                 }
                             ]
                         }
@@ -395,7 +342,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "title": "Network Interface"
+                "title": "Network Interfaces"
             },
             "designerId": "a8011dfa-7e82-418c-9cb9-682e51cc4dc3",
             "cn": [
@@ -416,10 +363,10 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "id": "instSoftGrid1",
+                        "id": "vmNicGrid",
                         "header": false,
                         "title": "My Grid Panel",
-                        "store": "SoftwareListStore"
+                        "store": "NicListJsonStore"
                     },
                     "designerId": "3065ad71-bd91-4437-a77b-67af7d008bb3",
                     "cn": [
@@ -440,8 +387,8 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "width": 200,
-                                "dataIndex": "softwareName",
+                                "width": 138,
+                                "dataIndex": "name",
                                 "text": "Name"
                             },
                             "designerId": "c647764d-5e1a-48da-b380-f9e07b09a6a6"
@@ -454,8 +401,9 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "softwareVersion",
-                                "text": "Version"
+                                "width": 151,
+                                "dataIndex": "networkName",
+                                "text": "Network Name"
                             },
                             "designerId": "445f1630-4968-42a5-99e6-2d90e2230829"
                         },
@@ -467,9 +415,9 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "width": 200,
-                                "dataIndex": "regDt",
-                                "text": "Install Date"
+                                "width": 125,
+                                "dataIndex": "type",
+                                "text": "Type"
                             },
                             "designerId": "19674f18-694b-4aae-b2a1-f18a542f68b2"
                         },
@@ -483,10 +431,25 @@
                             "userConfig": {
                                 "width": 200,
                                 "defaultWidth": 200,
-                                "dataIndex": "description",
-                                "text": "Description"
+                                "dataIndex": "macAddress",
+                                "text": "MAC Address"
                             },
                             "designerId": "35466cb2-3627-48b5-8b3f-954b7acc6c66"
+                        },
+                        {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 200,
+                                "defaultWidth": 200,
+                                "dataIndex": "speed",
+                                "text": "Speed(Mbps)"
+                            },
+                            "designerId": "226e8730-7047-4dbb-b5be-8fd7d5df8104"
                         },
                         {
                             "type": "Ext.grid.View",
@@ -509,7 +472,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "title": "Virtual Disk"
+                "title": "Storages"
             },
             "designerId": "fe4c53ea-593d-4ceb-87f7-dd0fe2b5606c",
             "cn": [

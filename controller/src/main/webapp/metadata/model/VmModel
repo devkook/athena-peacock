@@ -18,6 +18,19 @@
             },
             "codeClass": null,
             "userConfig": {
+                "name": "vmId",
+                "type": "string"
+            },
+            "designerId": "936c4a14-71fd-45fd-8f81-b91b075df278"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
                 "name": "name",
                 "type": "string"
             },

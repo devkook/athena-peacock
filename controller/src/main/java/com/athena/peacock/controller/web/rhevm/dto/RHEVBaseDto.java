@@ -31,7 +31,7 @@ package com.athena.peacock.controller.web.rhevm.dto;
 
 public class RHEVBaseDto {
 	private String rhevmId;
-	private String id;
+	private String vmId;
 	private String name;
 	private String description;
 	
@@ -41,11 +41,12 @@ public class RHEVBaseDto {
 	public void setRhevmId(String rhevmId) {
 		this.rhevmId = rhevmId;
 	}
-	public String getId() {
-		return id;
+	
+	public String getVmId() {
+		return vmId;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setVmId(String vmId) {
+		this.vmId = vmId;
 	}
 	public String getName() {
 		return name;

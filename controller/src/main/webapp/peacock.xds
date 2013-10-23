@@ -387,6 +387,30 @@
                 "app/view/VMTabPanel.js"
             ],
             "className": "VMTabPanel"
+        },
+        "267f636f-eaf1-400b-859d-867fe14a5036": {
+            "paths": [
+                "metadata/controller/VmTabPanelController",
+                "app/controller/override/VmTabPanelController.js",
+                "app/controller/VmTabPanelController.js"
+            ],
+            "className": "VmTabPanelController"
+        },
+        "b4d9b345-fd01-46b0-ac2a-d745c384f6bb": {
+            "paths": [
+                "metadata/store/NicListJsonStore",
+                "app/store/override/NicListJsonStore.js",
+                "app/store/NicListJsonStore.js"
+            ],
+            "className": "NicListJsonStore"
+        },
+        "fe876c4b-ad55-49d7-acac-95f3d8bfb6b0": {
+            "paths": [
+                "metadata/model/NicModel",
+                "app/model/override/NicModel.js",
+                "app/model/NicModel.js"
+            ],
+            "className": "NicModel"
         }
     },
     "viewOrderMap": {
@@ -417,7 +441,8 @@
             "60518488-6347-4c96-80e7-d0eddceb2ebd",
             "2fd3b133-b493-419e-b475-df1433182038",
             "8c147303-3716-45ef-8473-86d87330d2db",
-            "8314ad20-f299-4495-9e22-d9aa015c9af4"
+            "8314ad20-f299-4495-9e22-d9aa015c9af4",
+            "b4d9b345-fd01-46b0-ac2a-d745c384f6bb"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -429,11 +454,13 @@
             "c8b56b31-d9db-4a25-9efd-a0443deea71d",
             "08950a00-7767-4d84-b8e0-a94c8c2ba598",
             "6d5543ba-521b-41bf-b38c-3a24a2395ad1",
-            "68ac6662-84a7-4c61-b9df-05659cec9d2f"
+            "68ac6662-84a7-4c61-b9df-05659cec9d2f",
+            "267f636f-eaf1-400b-859d-867fe14a5036"
         ],
         "model": [
             "0591db92-38ab-44e8-8b5c-c9868aa10269",
             "d1fd0f0a-36d8-4bc1-bf79-5f6ca88e8f48",
+            "fe876c4b-ad55-49d7-acac-95f3d8bfb6b0",
             "cda91240-3441-4f20-9a8d-e95babaf9d47",
             "cc6fdf68-c5f8-48cb-bc6f-bd21f3aca6e2",
             "f6255218-a98d-4d06-b343-412084f7fca0",

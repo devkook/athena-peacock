@@ -37,6 +37,13 @@ public class VMDto extends RHEVBaseDto {
 	private String cluster;
 	private String host;
 	private String os;
+	private String template;
+	private String memory;
+	private String cores;
+	private String priority;
+	private String origin;
+	private String display;
+	
 	private String startTime;
 	private String creationTime;
 	
@@ -82,6 +89,43 @@ public class VMDto extends RHEVBaseDto {
 	public void setOs(String os) {
 		this.os = os;
 	}
+	
+	public String getTemplate() {
+		return template;
+	}
+	public void setTemplate(String template) {
+		this.template = template;
+	}
+	public String getMemory() {
+		return memory;
+	}
+	public void setMemory(String memory) {
+		this.memory = memory;
+	}
+	public String getCores() {
+		return cores;
+	}
+	public void setCores(String cores) {
+		this.cores = cores;
+	}
+	public String getPriority() {
+		return priority;
+	}
+	public void setPriority(String priority) {
+		this.priority = priority;
+	}
+	public String getOrigin() {
+		return origin;
+	}
+	public void setOrigin(String origin) {
+		this.origin = origin;
+	}
+	public String getDisplay() {
+		return display;
+	}
+	public void setDisplay(String display) {
+		this.display = display;
+	}
 	public String getStartTime() {
 		return startTime;
 	}
@@ -94,4 +138,5 @@ public class VMDto extends RHEVBaseDto {
 	public void setCreationTime(String creationTime) {
 		this.creationTime = creationTime;
 	}
+	
 }

@@ -260,7 +260,10 @@ Ext.define('Peacock.controller.MenuController', {
         grid.reconfigure(Ext.getStore('VmListJsonStore'), [{
             text: 'Name',
             dataIndex: 'name',
-            width: 200    
+            width: 200   
+        }, {
+            text: 'ID',
+            dataIndex: 'vmId'
         }, {
             text: 'Domain',
             dataIndex: 'domain'
@@ -294,10 +297,10 @@ Ext.define('Peacock.controller.MenuController', {
         */
         Ext.getCmp("mainButton").setText("Launch");
 
-        Ext.getCmp("tbActionStart").hide();
-        Ext.getCmp("tbActionStop").hide();
+        Ext.getCmp("tbActionStart").show();
+        Ext.getCmp("tbActionStop").show();
         Ext.getCmp("tbActionTerminate").hide();
-        Ext.getCmp("tbActionEdit").show();
+        Ext.getCmp("tbActionEdit").hide();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
 

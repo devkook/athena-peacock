@@ -56,7 +56,7 @@
                     "    detailTitleLabel.setText(\"Instance: \"+record.get(\"hostName\") + \" (\" + record.get(\"ipAddr\") + \")\");\r",
                     "\r",
                     "}else if (Peacock.app.menu_id == 'rhevm-vms'){\r",
-                    "\ttabPanel = this.getVMTabPanelView();\r",
+                    "    tabPanel = this.getVMTabPanelView();\r",
                     "    detailTitleLabel.setText(\"Name: \"+record.get(\"name\"));\r",
                     "\r",
                     "}else if (Peacock.app.menu_id == 'rhevm-tmps'){\r",

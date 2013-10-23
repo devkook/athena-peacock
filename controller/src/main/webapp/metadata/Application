@@ -15,7 +15,8 @@
             "UserGroupMapModel",
             "ASGroupModel",
             "ChartModel",
-            "VmModel"
+            "VmModel",
+            "NicModel"
         ],
         "stores": [
             "SoftwareListStore",
@@ -29,7 +30,8 @@
             "ChartFreeMemStore",
             "ChartUsedMemStore",
             "SoftwareComboStore",
-            "VmListJsonStore"
+            "VmListJsonStore",
+            "NicListJsonStore"
         ],
         "views": [
             "MainViewport",
@@ -51,7 +53,8 @@
             "MainToolbarController",
             "GlobalConfigController",
             "TopToolbarController",
-            "SWinstallController"
+            "SWinstallController",
+            "VmTabPanelController"
         ],
         "name": "Peacock"
     },

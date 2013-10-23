@@ -18,6 +18,10 @@ Ext.define('Peacock.model.VmModel', {
 
     fields: [
         {
+            name: 'vmId',
+            type: 'string'
+        },
+        {
             name: 'name',
             type: 'string'
         },

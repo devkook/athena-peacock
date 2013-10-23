@@ -25,10 +25,10 @@ Ext.define('Peacock.controller.MainToolbarController', {
             var win = Ext.widget('instanceLaunchWindow');
             win.show();
 
-        }else if (Peacock.app.menu_id == 'img-tmp'){
+        }else if (Peacock.app.menu_id == 'rhevm-vms'){
 
 
-        }else if (Peacock.app.menu_id == 'img-pkg'){
+        }else if (Peacock.app.menu_id == 'rhevm-tmps'){
 
 
         }else if (Peacock.app.menu_id == 'scal-grp'){
@@ -101,10 +101,10 @@ Ext.define('Peacock.controller.MainToolbarController', {
         if (Peacock.app.menu_id == 'insts'){
 
 
-        }else if (Peacock.app.menu_id == 'img-tmp'){
+        }else if (Peacock.app.menu_id == 'rhevm-vms'){
 
 
-        }else if (Peacock.app.menu_id == 'img-pkg'){
+        }else if (Peacock.app.menu_id == 'rhevm-tmps'){
 
 
         }else if (Peacock.app.menu_id == 'scal-grp'){
@@ -159,10 +159,10 @@ Ext.define('Peacock.controller.MainToolbarController', {
         if (Peacock.app.menu_id == 'insts'){
 
 
-        }else if (Peacock.app.menu_id == 'img-tmp'){
+        }else if (Peacock.app.menu_id == 'rhevm-vms'){
 
 
-        }else if (Peacock.app.menu_id == 'img-pkg'){
+        }else if (Peacock.app.menu_id == 'rhevm-tmps'){
 
 
         }else if (Peacock.app.menu_id == 'scal-grp'){
