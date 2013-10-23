@@ -31,6 +31,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.athena.peacock.controller.web.config.ConfigDao;
 import com.athena.peacock.controller.web.config.ConfigDto;
+import com.athena.peacock.controller.web.machine.MachineDto;
 import com.athena.peacock.controller.web.software.SoftwareDto;
 
 /**
@@ -91,6 +92,18 @@ public class SoftwareService {
 	
 	public List<SoftwareDto> getSoftwareList(SoftwareDto software) throws Exception {
 		return softwareDao.getSoftwareList(software);
+	}
+	
+	public int getSoftwareInstallListCnt(MachineDto machine) {
+		return softwareDao.getSoftwareInstallListCnt(machine);
+	}
+	
+	public List<SoftwareDto> getSoftwareInstallList(MachineDto machine) throws Exception {
+		return softwareDao.getSoftwareInstallList(machine);
+	}
+	
+	public List<SoftwareDto> getSoftwareInstallListAll(String machineId) throws Exception {
+		return softwareDao.getSoftwareInstallListAll(machineId);
 	}
 
 }

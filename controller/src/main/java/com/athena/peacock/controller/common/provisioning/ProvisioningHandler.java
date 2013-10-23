@@ -42,6 +42,7 @@ import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
 import com.athena.peacock.controller.web.config.ConfigDto;
+import com.athena.peacock.controller.web.config.ConfigService;
 import com.athena.peacock.controller.web.software.SoftwareDto;
 import com.athena.peacock.controller.web.software.SoftwareService;
 
@@ -66,6 +67,10 @@ public class ProvisioningHandler {
 	@Named("softwareService")
 	private SoftwareService softwareService;
 
+	@Inject
+	@Named("configService")
+	private ConfigService configService;
+
 	public void install(ProvisioningDetail provisioningDetail) throws Exception {
 		if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("apache") > -1) {
 			apacheInstall(provisioningDetail);
@@ -78,8 +83,16 @@ public class ProvisioningHandler {
 		}
 	}
 
-	public String remove(ProvisioningDetail provisioningDetail) {
-		return null;
+	public void remove(ProvisioningDetail provisioningDetail) throws Exception {
+		if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("apache") > -1) {
+			apacheRemove(provisioningDetail);
+		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("mysql") > -1) {
+			mysqlRemove(provisioningDetail);
+		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("jboss") > -1) {
+			jbossRemove(provisioningDetail);
+		} else if (provisioningDetail.getSoftwareName().toLowerCase().indexOf("tomcat") > -1) {
+			tomcatRemove(provisioningDetail);
+		}
 	}
     
 	private void apacheInstall(ProvisioningDetail provisioningDetail) throws Exception {
@@ -100,8 +113,8 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/apache/" + version + "/httpd-" + version + ".tar.gz");
-		//s_action.addArguments(">");
-		//s_action.addArguments("/dev/null");
+		s_action.addArguments("-O");
+		s_action.addArguments("httpd-" + version + ".tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -115,12 +128,16 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/apache/apr-1.4.6.tar.gz");
+		s_action.addArguments("-O");
+		s_action.addArguments("apr-1.4.6.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src/httpd-" + version + "/srclib");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/apache/apr-util-1.5.2.tar.gz");
+		s_action.addArguments("-O");
+		s_action.addArguments("apr-util-1.5.2.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -155,12 +172,16 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/apache/pcre-7.8-6.el6.x86_64.rpm");
+		s_action.addArguments("-O");
+		s_action.addArguments("pcre-7.8-6.el6.x86_64.rpm");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/apache/pcre-devel-7.8-6.el6.x86_64.rpm");
+		s_action.addArguments("-O");
+		s_action.addArguments("pcre-devel-7.8-6.el6.x86_64.rpm");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -236,6 +257,8 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/apache/tomcat-connectors-1.2.37-src.tar.gz");
+		s_action.addArguments("-O");
+		s_action.addArguments("tomcat-connectors-1.2.37-src.tar.gz");
 		command.addAction(s_action);
 		
 		s_action = new ShellAction(sequence++);
@@ -347,7 +370,7 @@ public class ProvisioningHandler {
 		software.setSoftwareId(provisioningDetail.getSoftwareId());
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(targetDir);
-		software.setInstallStat("RUNNING");
+		software.setInstallStat("INSTALLING");
 		software.setDescription("Apache Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
@@ -522,7 +545,7 @@ public class ProvisioningHandler {
 		software.setSoftwareId(provisioningDetail.getSoftwareId());
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(dataDir);
-		software.setInstallStat("RUNNING");
+		software.setInstallStat("INSTALLING");
 		software.setDescription("MySQL Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
@@ -595,6 +618,8 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/jboss/jboss-eap-5.2.0.zip");
+		s_action.addArguments("-O");
+		s_action.addArguments("jboss-eap-5.2.0.zip");
 		command.addAction(s_action);
 
 		s_action = new ShellAction(sequence++);
@@ -610,6 +635,8 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/jboss/jboss-cluster-template-5.2.0.zip");
+		s_action.addArguments("-O");
+		s_action.addArguments("jboss-cluster-template-5.2.0.zip");
 		command.addAction(s_action);
 
 		s_action = new ShellAction(sequence++);
@@ -686,7 +713,7 @@ public class ProvisioningHandler {
 		software.setSoftwareId(provisioningDetail.getSoftwareId());
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(jbossHome + "," + serverHome);
-		software.setInstallStat("RUNNING");
+		software.setInstallStat("INSTALLING");
 		software.setDescription("JBoss Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
@@ -760,6 +787,8 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/tomcat/apache-tomcat-6.0.37.zip");
+		s_action.addArguments("-O");
+		s_action.addArguments("apache-tomcat-6.0.37.zip");
 		command.addAction(s_action);
 
 		s_action = new ShellAction(sequence++);
@@ -775,6 +804,8 @@ public class ProvisioningHandler {
 		s_action.setWorkingDiretory("/usr/local/src");
 		s_action.setCommand("wget");
 		s_action.addArguments("${RepositoryUrl}/tomcat/tomcat-template-6.0.37.zip");
+		s_action.addArguments("-O");
+		s_action.addArguments("tomcat-template-6.0.37.zip");
 		command.addAction(s_action);
 
 		s_action = new ShellAction(sequence++);
@@ -821,7 +852,7 @@ public class ProvisioningHandler {
 		software.setSoftwareId(provisioningDetail.getSoftwareId());
 		software.setMachineId(provisioningDetail.getMachineId());
 		software.setInstallLocation(catalinaHome + "," + catalinaBase + "/" + serverName);
-		software.setInstallStat("RUNNING");
+		software.setInstallStat("INSTALLING");
 		software.setDescription("Tomcat Provisioning");
 		software.setDeleteYn("N");
 		software.setRegUserId(provisioningDetail.getUserId());
@@ -840,6 +871,262 @@ public class ProvisioningHandler {
 		configList.add(config);
 
 		new InstallThread(peacockTransmitter, softwareService, cmdMsg, software, configList).start();
+	}
+	
+	private void apacheRemove(ProvisioningDetail provisioningDetail) throws Exception {
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		
+		software = softwareService.getSoftware(software);
+		software.setUpdUserId(provisioningDetail.getUserId());
+		
+		ConfigDto config = new ConfigDto();
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setStart(0);
+		config.setLimit(100);
+		config.setUpdUserId(provisioningDetail.getUserId());
+		
+		List<ConfigDto> configList = configService.getConfigList(config);
+		
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
+		
+		Command command = new Command("Uninstall");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("service");
+		s_action.addArguments("httpd");
+		s_action.addArguments("stop");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("rm");
+		s_action.addArguments("-f");
+		s_action.addArguments("/etc/init.d/httpd");
+		command.addAction(s_action);
+		
+		for (ConfigDto _config : configList) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-f");
+			s_action.addArguments(_config.getConfigFileLocation() + "/" + _config.getConfigFileName());
+			command.addAction(s_action);
+		}
+		
+		String[] installLocation = software.getInstallLocation().split(",");
+		for (String location : installLocation) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-rf");
+			s_action.addArguments(location);
+			command.addAction(s_action);
+		}
+		
+		// Add Uninstall Command
+		cmdMsg.addCommand(command);
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		software.setInstallStat("UNINSTALLING");
+
+		new UninstallThread(peacockTransmitter, softwareService, configService, cmdMsg, software, config).start();
+	}
+	
+	private void mysqlRemove(ProvisioningDetail provisioningDetail) throws Exception {
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		
+		software = softwareService.getSoftware(software);
+		software.setUpdUserId(provisioningDetail.getUserId());
+		
+		ConfigDto config = new ConfigDto();
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setStart(0);
+		config.setLimit(100);
+		config.setUpdUserId(provisioningDetail.getUserId());
+		
+		List<ConfigDto> configList = configService.getConfigList(config);
+		
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
+		
+		Command command = new Command("Uninstall");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setCommand("service");
+		s_action.addArguments("mysql");
+		s_action.addArguments("stop");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("rpm");
+		s_action.addArguments("--erase");
+		s_action.addArguments("MySQL-server");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("rpm");
+		s_action.addArguments("--erase");
+		s_action.addArguments("MySQL-client");
+		command.addAction(s_action);
+		
+		s_action = new ShellAction(sequence++);
+		s_action.setCommand("rm");
+		s_action.addArguments("-rf");
+		s_action.addArguments("/usr/lib64/mysql");
+		command.addAction(s_action);
+		
+		for (ConfigDto _config : configList) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-f");
+			s_action.addArguments(_config.getConfigFileLocation() + "/" + _config.getConfigFileName());
+			command.addAction(s_action);
+		}
+		
+		String[] installLocation = software.getInstallLocation().split(",");
+		for (String location : installLocation) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-rf");
+			s_action.addArguments(location);
+			command.addAction(s_action);
+		}
+		
+		// Add Uninstall Command
+		cmdMsg.addCommand(command);
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		software.setInstallStat("UNINSTALLING");
+
+		new UninstallThread(peacockTransmitter, softwareService, configService, cmdMsg, software, config).start();
+	}
+	
+	private void jbossRemove(ProvisioningDetail provisioningDetail) throws Exception {
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		
+		software = softwareService.getSoftware(software);
+		software.setUpdUserId(provisioningDetail.getUserId());
+		
+		ConfigDto config = new ConfigDto();
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setStart(0);
+		config.setLimit(100);
+		config.setUpdUserId(provisioningDetail.getUserId());
+		
+		List<ConfigDto> configList = configService.getConfigList(config);
+		
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
+		
+		Command command = new Command("Uninstall");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory(configList.get(0).getConfigFileLocation());
+		s_action.setCommand("sh");
+		s_action.addArguments("kill.sh");
+		command.addAction(s_action);
+		
+		for (ConfigDto _config : configList) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-f");
+			s_action.addArguments(_config.getConfigFileLocation() + "/" + _config.getConfigFileName());
+			command.addAction(s_action);
+		}
+		
+		String[] installLocation = software.getInstallLocation().split(",");
+		for (String location : installLocation) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-rf");
+			s_action.addArguments(location);
+			command.addAction(s_action);
+		}
+		
+		// Add Uninstall Command
+		cmdMsg.addCommand(command);
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		software.setInstallStat("UNINSTALLING");
+
+		new UninstallThread(peacockTransmitter, softwareService, configService, cmdMsg, software, config).start();
+	}
+	
+	private void tomcatRemove(ProvisioningDetail provisioningDetail) throws Exception {
+		SoftwareDto software = new SoftwareDto();
+		software.setSoftwareId(provisioningDetail.getSoftwareId());
+		software.setMachineId(provisioningDetail.getMachineId());
+		
+		software = softwareService.getSoftware(software);
+		software.setUpdUserId(provisioningDetail.getUserId());
+		
+		ConfigDto config = new ConfigDto();
+		config.setSoftwareId(provisioningDetail.getSoftwareId());
+		config.setMachineId(provisioningDetail.getMachineId());
+		config.setStart(0);
+		config.setLimit(100);
+		config.setUpdUserId(provisioningDetail.getUserId());
+		
+		List<ConfigDto> configList = configService.getConfigList(config);
+		
+		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
+		cmdMsg.setAgentId(provisioningDetail.getMachineId());
+		cmdMsg.setBlocking(true);
+		
+		Command command = new Command("Uninstall");
+		int sequence = 0;
+		
+		ShellAction s_action = new ShellAction(sequence++);
+		s_action.setWorkingDiretory(configList.get(0).getConfigFileLocation());
+		s_action.setCommand("sh");
+		s_action.addArguments("kill.sh");
+		command.addAction(s_action);
+		
+		for (ConfigDto _config : configList) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-f");
+			s_action.addArguments(_config.getConfigFileLocation() + "/" + _config.getConfigFileName());
+			command.addAction(s_action);
+		}
+		
+		String[] installLocation = software.getInstallLocation().split(",");
+		for (String location : installLocation) {
+			s_action = new ShellAction(sequence++);
+			s_action.setCommand("rm");
+			s_action.addArguments("-rf");
+			s_action.addArguments(location);
+			command.addAction(s_action);
+		}
+		
+		// Add Uninstall Command
+		cmdMsg.addCommand(command);
+		
+		/***************************************************************
+		 *  software_tbl에 소프트웨어 설치 정보 및 config_tbl에 설정파일 정보 추가
+		 ***************************************************************/
+		software.setInstallStat("UNINSTALLING");
+
+		new UninstallThread(peacockTransmitter, softwareService, configService, cmdMsg, software, config).start();
 	}
 }
 //end of ProvisioningHandler.java
@@ -874,12 +1161,60 @@ class InstallThread extends Thread {
 			for (String result : results) {
 				sb.append(result + "\n");
 			}
-			software.setInstallStat("COMPLETE");
+			software.setInstallStat("COMPLETED");
 			software.setInstallLog(sb.toString());
 			
 			softwareService.insertSoftware(software, configList);
 		} catch (Exception e) {
-			software.setInstallStat("ERROR");
+			software.setInstallStat("INST_ERROR");
+			software.setInstallLog(e.getMessage());
+			
+			e.printStackTrace();
+		}
+	}
+}
+
+class UninstallThread extends Thread {
+
+	private PeacockTransmitter peacockTransmitter;
+	private SoftwareService softwareService;
+	private ConfigService configService;
+	private ProvisioningCommandMessage cmdMsg;
+	private SoftwareDto software;
+	private ConfigDto config;
+	
+	public UninstallThread(PeacockTransmitter peacockTransmitter, SoftwareService softwareService,
+			ConfigService configService, ProvisioningCommandMessage cmdMsg, SoftwareDto software, ConfigDto config) {
+		this.peacockTransmitter = peacockTransmitter;
+		this.softwareService = softwareService;
+		this.configService = configService;
+		this.cmdMsg = cmdMsg;
+		this.software = software;
+		this.config = config;
+	}
+	
+	@Override
+	public void run() {
+		try {
+			softwareService.updateSoftware(software);
+			
+			PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+			ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
+			
+			configService.deleteConfig(config);
+			
+			StringBuilder sb = new StringBuilder("");
+			List<String> results = response.getResults();
+			for (String result : results) {
+				sb.append(result + "\n");
+			}
+			software.setDeleteYn("Y");
+			software.setInstallStat("DELETED");
+			software.setInstallLog(sb.toString());
+			
+			softwareService.updateSoftware(software);
+		} catch (Exception e) {
+			software.setInstallStat("UNINST_ERROR");
 			software.setInstallLog(e.getMessage());
 			
 			e.printStackTrace();

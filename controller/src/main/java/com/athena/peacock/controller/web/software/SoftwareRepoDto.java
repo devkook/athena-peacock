@@ -43,9 +43,6 @@ public class SoftwareRepoDto extends BaseDto {
 	private String fileLocation;
 	private String fileName;
 	private String description;
-	
-	/** 선택된 Agent에 해당 소프트웨어가 설치 되어 있는지의 여부 */
-	private String installYn;
 
 	/**
 	 * @return the softwareId
@@ -143,20 +140,6 @@ public class SoftwareRepoDto extends BaseDto {
 	 */
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	/**
-	 * @return the installYn
-	 */
-	public String getInstallYn() {
-		return installYn;
-	}
-
-	/**
-	 * @param installYn the installYn to set
-	 */
-	public void setInstallYn(String installYn) {
-		this.installYn = installYn;
 	}
 }
 //end of SoftwareRepoDto.java

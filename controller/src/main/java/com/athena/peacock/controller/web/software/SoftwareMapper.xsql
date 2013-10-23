@@ -83,5 +83,65 @@
 		<if test="deleteYn != null">AND DELETE_YN = #{deleteYn}</if>
 		 LIMIT #{start}, #{limit}
 	</select>
+	
+	<select id="getSoftwareInstallListCnt" parameterType="com.athena.peacock.controller.web.machine.MachineDto" resultType="int">
+		SELECT COUNT(*)
+		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+ 		   AND B.MACHINE_ID = #{machineId}
+	</select>
+	
+	<select id="getSoftwareInstallList" parameterType="com.athena.peacock.controller.web.machine.MachineDto" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
+		SELECT A.SOFTWARE_ID AS softwareId
+			   , A.SOFTWARE_NAME AS softwareName
+			   , A.SOFTWARE_VERSION AS softwareVersion
+			   , A.SOFTWARE_VENDOR AS softwareVendor
+			   , A.DESCRIPTION AS description
+			   , 'Y' AS installYn
+		       , B.INSTALL_LOCATION AS installLocation
+		       , CASE(B.INSTALL_STAT) 
+		       		WHEN 'INSTALLING' THEN '설치중'
+		       		WHEN 'UNINSTALLING' THEN '삭제중'
+					WHEN 'COMPLETED' THEN '설치 완료'
+					WHEN 'DELETED' THEN '삭제 완료'
+					WHEN 'INST_ERROR' THEN '설치 에러'
+					WHEN 'UNINST_ERROR' THEN '삭제 에러'
+				 END AS installStat
+			   , B.REG_USER_ID AS regUserId
+			   , B.REG_DT AS regDt
+			   , B.UPD_USER_ID AS updUserId
+			   , B.UPD_DT AS updDt
+		  FROM software_repo_tbl A JOIN software_tbl B
+			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+		 WHERE B.DELETE_YN = 'N'
+ 		   AND B.MACHINE_ID = #{machineId}
+		 LIMIT #{start}, #{limit}
+	</select>
+	
+	<select id="getSoftwareInstallListAll" parameterType="String" resultType="com.athena.peacock.controller.web.software.SoftwareDto">
+		SELECT A.SOFTWARE_ID AS softwareId
+			   , A.SOFTWARE_NAME AS softwareName
+			   , A.SOFTWARE_VERSION AS softwareVersion
+			   , A.SOFTWARE_VENDOR AS softwareVendor
+			   , A.DESCRIPTION AS description
+			   , 'Y' AS installYn
+		       , B.INSTALL_LOCATION AS installLocation
+		       , CASE(B.INSTALL_STAT)
+		       		WHEN 'INSTALLING' THEN '설치중'
+		       		WHEN 'UNINSTALLING' THEN '삭제중'
+					WHEN 'COMPLETED' THEN '설치 완료'
+					WHEN 'DELETED' THEN '삭제 완료'
+					WHEN 'INST_ERROR' THEN '설치 에러'
+					WHEN 'UNINST_ERROR' THEN '삭제 에러'
+				 END AS installStat
+			   , B.REG_USER_ID AS regUserId
+			   , B.REG_DT AS regDt
+			   , B.UPD_USER_ID AS updUserId
+			   , B.UPD_DT AS updDt
+		  FROM software_repo_tbl A JOIN software_tbl B
+			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+		 WHERE B.DELETE_YN = 'N'
+ 		   AND B.MACHINE_ID = #{machineId}
+	</select>
 
 </mapper>

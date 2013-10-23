@@ -80,8 +80,8 @@ public class SoftwareController {
 	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, MachineDto machine) throws Exception {
 		Assert.isTrue(!StringUtils.isEmpty(machine.getMachineId()), "machineId must not be null.");
 		
-		jsonRes.setTotal(softwareRepoService.getSoftwareInstallListCnt(machine));
-		jsonRes.setList(softwareRepoService.getSoftwareInstallList(machine));
+		jsonRes.setTotal(softwareService.getSoftwareInstallListCnt(machine));
+		jsonRes.setList(softwareService.getSoftwareInstallList(machine));
 		
 		return jsonRes;
 	}
@@ -129,15 +129,15 @@ public class SoftwareController {
 			boolean installed = false;
 			boolean installedDiffVersion = false;
 			
-			SoftwareRepoDto software = softwareRepoService.getSoftwareRepo(provisioningDetail.getSoftwareId());
-			provisioningDetail.setSoftwareName(software.getSoftwareName());
-			provisioningDetail.setVersion(software.getSoftwareVersion());
+			SoftwareRepoDto softwareRepo = softwareRepoService.getSoftwareRepo(provisioningDetail.getSoftwareId());
+			provisioningDetail.setSoftwareName(softwareRepo.getSoftwareName());
+			provisioningDetail.setVersion(softwareRepo.getSoftwareVersion());
 			
-			List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
+			List<SoftwareDto> softwareList = softwareService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
 			
-			for (SoftwareRepoDto softwareRepo : softwareRepoList) {
-				if (softwareRepo.getSoftwareName().equals(provisioningDetail.getSoftwareName()) && softwareRepo.getInstallYn().equals("Y")) {
-					if (softwareRepo.getSoftwareVersion().equals(provisioningDetail.getVersion())) {
+			for (SoftwareDto software : softwareList) {
+				if (software.getSoftwareName().equals(provisioningDetail.getSoftwareName()) && software.getInstallYn().equals("Y")) {
+					if (software.getSoftwareVersion().equals(provisioningDetail.getVersion())) {
 						installed = true;
 					} else {
 						installedDiffVersion = true;
@@ -161,7 +161,7 @@ public class SoftwareController {
 			provisioningDetail.setUrlPrefix(urlPrefix);
 			
 			provisioningHandler.install(provisioningDetail);
-			jsonRes.setMsg("소프트웨어 설치 요청이 전달되었습니다.\n아래 소프트웨어 탭에서 상태 결과를 조회할 수 있습니다.");
+			jsonRes.setMsg("소프트웨어 설치 요청이 전달되었습니다. 아래 소프트웨어 탭에서 상태 결과를 조회할 수 있습니다.");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
 			jsonRes.setMsg("설치 중 예외가 발생하였습니다.");
@@ -182,17 +182,44 @@ public class SoftwareController {
 	 * @throws Exception 
 	 */
 	@RequestMapping("/remove")
-	public @ResponseBody SimpleJsonResponse remove(SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) throws Exception {
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getSoftwareName()), "softwareName must not be null.");
-		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getVersion()), "version must not be null.");
+	public @ResponseBody SimpleJsonResponse remove(HttpServletRequest request, SimpleJsonResponse jsonRes, ProvisioningDetail provisioningDetail) throws Exception {
+		Assert.isTrue(provisioningDetail.getSoftwareId() != null, "softwareId must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(provisioningDetail.getMachineId()), "machineId must not be null.");
 		
 		try {
+			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
+			if (userDto != null) {
+				provisioningDetail.setUserId(userDto.getUser_id());
+			}
+			
+			// 기 삭제 여부 검사
+			boolean removed = true;
+			
+			SoftwareRepoDto softwareRepo = softwareRepoService.getSoftwareRepo(provisioningDetail.getSoftwareId());
+			provisioningDetail.setSoftwareName(softwareRepo.getSoftwareName());
+			provisioningDetail.setVersion(softwareRepo.getSoftwareVersion());
+			
+			List<SoftwareDto> softwareList = softwareService.getSoftwareInstallListAll(provisioningDetail.getMachineId());
+			
+			for (SoftwareDto software : softwareList) {
+				if (software.getSoftwareName().equals(provisioningDetail.getSoftwareName()) && software.getInstallYn().equals("Y")) {
+					if (software.getSoftwareVersion().equals(provisioningDetail.getVersion())) {
+						removed = false;
+					}
+				}
+			}
+			
+			if (removed) {
+				jsonRes.setSuccess(false);
+				jsonRes.setMsg("이미 삭제되었거나 설치되지 않은 소프트웨어입니다.");
+				return jsonRes;
+			} 
+			
 			provisioningHandler.remove(provisioningDetail);
-			jsonRes.setMsg("remove success.");
+			jsonRes.setMsg("소프트웨어 삭제 요청이 전달되었습니다.");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
-			jsonRes.setMsg("remove fail.");
+			jsonRes.setMsg("삭제 중 예외가 발생하였습니다.");
 			
 			logger.error("Unhandled Expeption has occurred. ", e);
 		}

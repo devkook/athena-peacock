@@ -25,8 +25,6 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
-import com.athena.peacock.controller.web.machine.MachineDto;
-import com.athena.peacock.controller.web.software.SoftwareRepoDto;
 
 /**
  * <pre>
@@ -56,18 +54,6 @@ public class SoftwareRepoDao extends AbstractBaseDao {
 
 	public List<SoftwareRepoDto> getSoftwareRepoList(SoftwareRepoDto softwareRepo) {
 		return sqlSession.selectList("SoftwareRepoMapper.getSoftwareRepoList", softwareRepo);
-	}
-
-	public int getSoftwareInstallListCnt(MachineDto machine) {
-		return sqlSession.selectOne("SoftwareRepoMapper.getSoftwareInstallListCnt", machine);
-	}
-
-	public List<SoftwareRepoDto> getSoftwareInstallList(MachineDto machine) {
-		return sqlSession.selectList("SoftwareRepoMapper.getSoftwareInstallList", machine);
-	}
-
-	public List<SoftwareRepoDto> getSoftwareInstallListAll(String machineId) {
-		return sqlSession.selectList("SoftwareRepoMapper.getSoftwareInstallListAll", machineId);
 	}
 }
 //end of SoftwareRepoDao.java

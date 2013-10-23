@@ -37,9 +37,9 @@ public class BaseDto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	private int regUserId;
+	private Integer regUserId;
 	private Date regDt;
-	private int updUserId;
+	private Integer updUserId;
 	private Date updDt;
 	
 	/** 페이징 관련 */
@@ -49,14 +49,14 @@ public class BaseDto implements Serializable {
 	/**
 	 * @return the regUserId
 	 */
-	public int getRegUserId() {
+	public Integer getRegUserId() {
 		return regUserId;
 	}
 	
 	/**
 	 * @param regUserId the regUserId to set
 	 */
-	public void setRegUserId(int regUserId) {
+	public void setRegUserId(Integer regUserId) {
 		this.regUserId = regUserId;
 	}
 	
@@ -77,14 +77,14 @@ public class BaseDto implements Serializable {
 	/**
 	 * @return the updUserId
 	 */
-	public int getUpdUserId() {
+	public Integer getUpdUserId() {
 		return updUserId;
 	}
 	
 	/**
 	 * @param updUserId the updUserId to set
 	 */
-	public void setUpdUserId(int updUserId) {
+	public void setUpdUserId(Integer updUserId) {
 		this.updUserId = updUserId;
 	}
 	

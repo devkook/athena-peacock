@@ -40,6 +40,13 @@ public class SoftwareDto extends BaseDto {
 	private String installLog;
 	private String description;
 	private String deleteYn;
+
+	// SoftwareRepoDto 에 존재하는 컬럼으로 ExtJS에서 Dto -> Dto 를 표시할 수 없어 추가된 필드임.
+	/** 선택된 Agent에 해당 소프트웨어가 설치 되어 있는지의 여부 */
+	private String installYn;
+	private String softwareName;
+	private String softwareVersion;
+	private String softwareVendor;
 	
 	/**
 	 * @return the machineId
@@ -137,6 +144,62 @@ public class SoftwareDto extends BaseDto {
 	 */
 	public void setDeleteYn(String deleteYn) {
 		this.deleteYn = deleteYn;
+	}
+
+	/**
+	 * @return the installYn
+	 */
+	public String getInstallYn() {
+		return installYn;
+	}
+
+	/**
+	 * @param installYn the installYn to set
+	 */
+	public void setInstallYn(String installYn) {
+		this.installYn = installYn;
+	}
+
+	/**
+	 * @return the softwareName
+	 */
+	public String getSoftwareName() {
+		return softwareName;
+	}
+
+	/**
+	 * @param softwareName the softwareName to set
+	 */
+	public void setSoftwareName(String softwareName) {
+		this.softwareName = softwareName;
+	}
+
+	/**
+	 * @return the softwareVersion
+	 */
+	public String getSoftwareVersion() {
+		return softwareVersion;
+	}
+
+	/**
+	 * @param softwareVersion the softwareVersion to set
+	 */
+	public void setSoftwareVersion(String softwareVersion) {
+		this.softwareVersion = softwareVersion;
+	}
+
+	/**
+	 * @return the softwareVendor
+	 */
+	public String getSoftwareVendor() {
+		return softwareVendor;
+	}
+
+	/**
+	 * @param softwareVendor the softwareVendor to set
+	 */
+	public void setSoftwareVendor(String softwareVendor) {
+		this.softwareVendor = softwareVendor;
 	}
 }
 //end of SoftwareDto.java

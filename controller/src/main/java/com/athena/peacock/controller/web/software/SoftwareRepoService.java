@@ -29,9 +29,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.athena.peacock.controller.web.machine.MachineDto;
-import com.athena.peacock.controller.web.software.SoftwareRepoDto;
-
 /**
  * <pre>
  * 
@@ -65,18 +62,6 @@ public class SoftwareRepoService {
 	
 	public List<SoftwareRepoDto> getSoftwareRepoList(SoftwareRepoDto softwareRepo) throws Exception {
 		return softwareRepoDao.getSoftwareRepoList(softwareRepo);
-	}
-	
-	public int getSoftwareInstallListCnt(MachineDto machine) {
-		return softwareRepoDao.getSoftwareInstallListCnt(machine);
-	}
-	
-	public List<SoftwareRepoDto> getSoftwareInstallList(MachineDto machine) throws Exception {
-		return softwareRepoDao.getSoftwareInstallList(machine);
-	}
-	
-	public List<SoftwareRepoDto> getSoftwareInstallListAll(String machineId) throws Exception {
-		return softwareRepoDao.getSoftwareInstallListAll(machineId);
 	}
 }
 //end of SoftwareRepoService.java
