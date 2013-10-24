@@ -86,8 +86,9 @@
 	
 	<select id="getSoftwareInstallListCnt" parameterType="com.athena.peacock.controller.web.machine.MachineDto" resultType="int">
 		SELECT COUNT(*)
-		  FROM software_repo_tbl A LEFT OUTER JOIN software_tbl B
+		  FROM software_repo_tbl A JOIN software_tbl B
 			ON A.SOFTWARE_ID = B.SOFTWARE_ID
+		 WHERE B.DELETE_YN = 'N'
  		   AND B.MACHINE_ID = #{machineId}
 	</select>
 	
