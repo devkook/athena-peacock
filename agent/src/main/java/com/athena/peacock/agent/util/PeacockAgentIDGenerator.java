@@ -45,7 +45,8 @@ public final class PeacockAgentIDGenerator {
 		
 		try {
 			// Agent의 mac address 목록 중 가장 큰 값을 하나 가져온다.
-			hardware = MacAddressUtil.getMacAddressList().get(0);
+			//hardware = MacAddressUtil.getMacAddressList().get(0);
+			hardware = MacAddressUtil.getMacAddress("eth0");
 		} catch (Exception e) {
 			// ignore..
 		}

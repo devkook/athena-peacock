@@ -55,5 +55,13 @@ public class SoftwareRepoDao extends AbstractBaseDao {
 	public List<SoftwareRepoDto> getSoftwareRepoList(SoftwareRepoDto softwareRepo) {
 		return sqlSession.selectList("SoftwareRepoMapper.getSoftwareRepoList", softwareRepo);
 	}
+
+	public List<String> getSoftwareNames() {
+		return sqlSession.selectList("SoftwareRepoMapper.getSoftwareNames");
+	}
+
+	public List<SoftwareRepoDto> getSoftwareVersions(String softwareName) {
+		return sqlSession.selectList("SoftwareRepoMapper.getSoftwareVersions", softwareName);
+	}
 }
 //end of SoftwareRepoDao.java

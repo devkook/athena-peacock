@@ -88,6 +88,40 @@ public class SoftwareController {
 	
 	/**
 	 * <pre>
+	 * 소프트웨어 이름 조회
+	 * </pre>
+	 * @param jsonRes
+	 * @param machineId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/getNames")
+	public @ResponseBody List<String> getNames() throws Exception {
+		return softwareRepoService.getSoftwareNames();
+	}
+	
+	/**
+	 * <pre>
+	 * 소프트웨어 버전 조회
+	 * </pre>
+	 * @param jsonRes
+	 * @param machineId
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/getVersions")
+	public @ResponseBody GridJsonResponse getVersions(GridJsonResponse jsonRes, String softwareName) throws Exception {
+		
+		List<SoftwareRepoDto> softwareRepoList = softwareRepoService.getSoftwareVersions(softwareName);
+		
+		jsonRes.setTotal(softwareRepoList.size());
+		jsonRes.setList(softwareRepoList);
+		
+		return jsonRes;
+	}
+	
+	/**
+	 * <pre>
 	 * 선택된 Agent(machineID)의 설치 로그 조회
 	 * </pre>
 	 * @param jsonRes

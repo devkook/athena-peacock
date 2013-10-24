@@ -712,7 +712,7 @@ public class ProvisioningHandler {
 		SoftwareDto software = new SoftwareDto();
 		software.setSoftwareId(provisioningDetail.getSoftwareId());
 		software.setMachineId(provisioningDetail.getMachineId());
-		software.setInstallLocation(jbossHome + "," + serverHome);
+		software.setInstallLocation(jbossHome + "," + serverHome + "/" + serverName);
 		software.setInstallStat("INSTALLING");
 		software.setDescription("JBoss Provisioning");
 		software.setDeleteYn("N");

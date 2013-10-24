@@ -50,6 +50,8 @@ INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PAS
 VALUES ('3', '1', 'test', password('1234'), '김철수', '개발팀', 'test@naver.com', '0', '1', NOW());
 INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PASSWD`, `USER_NAME`, `DEPT_NAME`, `EMAIL`, `IS_ADMIN`, `STATUS`, `REG_DT`) 
 VALUES ('4', '1', '1111', password('1234'), '1111', '개발팀', '111@naver.com', '0', '1', NOW());
+INSERT INTO `peacock`.`users_tbl` (`USER_ID`, `ROLE_ID`, `LOGIN_ID`, `HASHED_PASSWD`, `USER_NAME`, `DEPT_NAME`, `EMAIL`, `IS_ADMIN`, `STATUS`, `REG_DT`) 
+VALUES ('5', '1', 'admin', password('admin'), 'Administrator', '개발팀', 'admin@yopmail.com', '0', '1', NOW());
 
 
 INSERT INTO `peacock`.`user_group_tbl` (`GROUP_ID`, `GROUP_NAME`, `DESCRIPTION`, `REG_DT`) VALUES ('1', 'osc-employee', 'Open Source Consulting', NOW());

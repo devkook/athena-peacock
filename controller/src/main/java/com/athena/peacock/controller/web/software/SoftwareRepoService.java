@@ -63,5 +63,13 @@ public class SoftwareRepoService {
 	public List<SoftwareRepoDto> getSoftwareRepoList(SoftwareRepoDto softwareRepo) throws Exception {
 		return softwareRepoDao.getSoftwareRepoList(softwareRepo);
 	}
+
+	public List<String> getSoftwareNames() {
+		return softwareRepoDao.getSoftwareNames();
+	}
+
+	public List<SoftwareRepoDto> getSoftwareVersions(String softwareName) {
+		return softwareRepoDao.getSoftwareVersions(softwareName);
+	}
 }
 //end of SoftwareRepoService.java

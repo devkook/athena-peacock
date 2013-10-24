@@ -57,9 +57,9 @@ public class MacAddressUtil {
 	 * @return
 	 * @throws Exception
 	 */
-	public static String getMacAddress(String host) throws Exception {
-		return getMacAddress(InetAddress.getByName(host));
-	}//end of getMacAddress()
+//	public static String getMacAddress(String host) throws Exception {
+//		return getMacAddress(InetAddress.getByName(host));
+//	}//end of getMacAddress()
 
 	/**
 	 * <pre>
@@ -88,6 +88,58 @@ public class MacAddressUtil {
 		}
 		
 		return macAddress;
+	}//end of getMacAddress()
+
+	/**
+	 * <pre>
+	 * 주어진 NetworkInterface 이름에 대한 mac address를 조회한다.
+	 * </pre>
+	 * @param host
+	 * @return
+	 * @throws Exception
+	 */
+	public static String getMacAddress(String name) throws Exception {
+		String macAddress = null;
+		List<String> macAddressList = null;
+		Set<String> macAddressSet = null;
+		Enumeration<NetworkInterface> ifs = NetworkInterface.getNetworkInterfaces();
+		
+		if (ifs != null) {
+			macAddressSet = new LinkedHashSet<String>();
+			
+			NetworkInterface nifs = null;
+            while (ifs.hasMoreElements()) {
+            	nifs = ifs.nextElement();
+            	Enumeration<InetAddress> hosts = nifs.getInetAddresses();
+                
+            	if (hosts != null) {
+            		macAddress = null;
+                	
+            		while (hosts.hasMoreElements()) {
+            			macAddress = getMacAddress(hosts.nextElement());
+            			
+            			if (macAddress != null) {
+            				if (nifs.getName().equals(name)) {
+            					return macAddress;
+            				} else {
+            					macAddressSet.add(macAddress);
+            				}
+            			}
+            		}
+            	}
+            }
+        }
+		
+		if(macAddressSet == null) {
+			return null;
+		}
+		
+		// 중복 제거 후 내림차순으로 정렬한다.
+		macAddressList = new ArrayList<String>(macAddressSet);
+		Collections.sort(macAddressList);
+		Collections.reverse(macAddressList);
+		
+		return macAddressList.get(0);
 	}//end of getMacAddress()
 	
 	/**
