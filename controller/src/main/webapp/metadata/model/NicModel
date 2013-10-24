@@ -1,0 +1,92 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "NicModel"
+    },
+    "designerId": "fe876c4b-ad55-49d7-acac-95f3d8bfb6b0",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "vmId",
+                "type": "string"
+            },
+            "designerId": "a6326230-f3d4-46f8-8c9f-5d9cf429f156"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "name",
+                "type": "string"
+            },
+            "designerId": "5b842835-e97d-45f8-8a64-1ca54e294949"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "networkName",
+                "type": "string"
+            },
+            "designerId": "27deb7cc-09f2-4008-8fa8-613114b5e2df"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "type",
+                "type": "string"
+            },
+            "designerId": "ab6cf280-3c2c-47fd-bf22-b57ac39a712e"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "macAddress",
+                "type": "string"
+            },
+            "designerId": "b910c9dc-40b5-4420-9cda-faf158b8f7c7"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "speed",
+                "type": "string"
+            },
+            "designerId": "04accb88-4e5f-488d-933e-bf228d039cb5"
+        }
+    ]
+}
