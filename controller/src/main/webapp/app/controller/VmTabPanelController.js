@@ -71,9 +71,7 @@ Ext.define('Peacock.controller.VmTabPanelController', {
     init: function(application) {
         this.control({
             "vmTabPanel": {
-                tabchange: this.onTabpanelTabChange
-            },
-            "tabpanel": {
+                tabchange: this.onTabpanelTabChange,
                 added: this.onTabpanelAdded
             }
         });

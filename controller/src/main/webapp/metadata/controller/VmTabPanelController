@@ -98,7 +98,7 @@
                 "name": "added",
                 "scope": "me",
                 "designer|targetType": "VMTabPanel",
-                "designer|controlQuery": "tabpanel"
+                "designer|controlQuery": "vmTabPanel"
             },
             "designerId": "ce45241d-085b-49ac-b8a7-8507b8d4af63"
         }
