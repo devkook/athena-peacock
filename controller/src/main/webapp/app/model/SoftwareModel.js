@@ -56,6 +56,10 @@ Ext.define('Peacock.model.SoftwareModel', {
         {
             name: 'install_dt',
             type: 'string'
+        },
+        {
+            name: 'installStat',
+            type: 'string'
         }
     ]
 });

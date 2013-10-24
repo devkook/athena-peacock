@@ -1114,7 +1114,7 @@
                                         "fieldLabel": "Password",
                                         "name": "password",
                                         "inputType": "password",
-                                        "emptyText": "4 ~ 20자",
+                                        "emptyText": null,
                                         "maxLength": 20,
                                         "minLength": 4
                                     },

@@ -1,0 +1,66 @@
+{
+    "type": "Ext.data.Model",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "designer|userClassName": "DashSoftware"
+    },
+    "designerId": "dee4c508-b29d-4a28-b522-771ed375d120",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "softwareName",
+                "type": "string"
+            },
+            "designerId": "83f39dbb-d041-4f53-b1d6-b0f4ce853b61"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "installNum",
+                "type": "int"
+            },
+            "designerId": "3ff385a7-0aaf-4f44-9726-cc43292f7a1b"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "runningNum",
+                "type": "int"
+            },
+            "designerId": "a6d709bf-a470-4678-acf8-06962888f17a"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "stopNum",
+                "type": "int"
+            },
+            "designerId": "ae239391-09fa-42f6-b4f6-c91d87ef30bc"
+        }
+    ]
+}

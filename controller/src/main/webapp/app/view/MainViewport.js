@@ -242,7 +242,174 @@ Ext.define('Peacock.view.MainViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
-                                    title: 'Dash Board'
+                                    layout: {
+                                        align: 'stretch',
+                                        type: 'vbox'
+                                    },
+                                    title: 'Machine status',
+                                    items: [
+                                        {
+                                            xtype: 'panel',
+                                            flex: 1,
+                                            layout: {
+                                                align: 'middle',
+                                                pack: 'center',
+                                                padding: 10,
+                                                type: 'hbox'
+                                            },
+                                            header: false,
+                                            title: 'Machine Board',
+                                            items: [
+                                                {
+                                                    xtype: 'image',
+                                                    src: 'resources/images/nestedList.png'
+                                                },
+                                                {
+                                                    xtype: 'label',
+                                                    flex: 1,
+                                                    text: 'My Label'
+                                                },
+                                                {
+                                                    xtype: 'image',
+                                                    src: 'resources/images/picker.png'
+                                                },
+                                                {
+                                                    xtype: 'label',
+                                                    flex: 1,
+                                                    text: 'My Label'
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'panel',
+                                            flex: 2,
+                                            layout: {
+                                                align: 'stretch',
+                                                type: 'hbox'
+                                            },
+                                            title: 'Resources status',
+                                            items: [
+                                                {
+                                                    xtype: 'chart',
+                                                    flex: 1,
+                                                    height: 250,
+                                                    width: 400,
+                                                    animate: true,
+                                                    insetPadding: 35,
+                                                    store: 'DashGuage1Store',
+                                                    axes: [
+                                                        {
+                                                            position: 'gauge',
+                                                            type: 'Gauge',
+                                                            margin: 8,
+                                                            maximum: 100,
+                                                            minimum: 0,
+                                                            title: 'CPU'
+                                                        }
+                                                    ],
+                                                    series: [
+                                                        me.processMyGaugeSeries3({
+                                                            type: 'gauge',
+                                                            angleField: 'data1',
+                                                            donut: 30
+                                                        })
+                                                    ]
+                                                },
+                                                {
+                                                    xtype: 'chart',
+                                                    flex: 1,
+                                                    height: 250,
+                                                    width: 400,
+                                                    animate: true,
+                                                    insetPadding: 35,
+                                                    store: 'DashGuage2Store',
+                                                    axes: [
+                                                        {
+                                                            position: 'gauge',
+                                                            type: 'Gauge',
+                                                            margin: 8,
+                                                            maximum: 100,
+                                                            minimum: 0,
+                                                            title: 'Memory'
+                                                        }
+                                                    ],
+                                                    series: [
+                                                        me.processMyGaugeSeries4({
+                                                            type: 'gauge',
+                                                            angleField: 'data1',
+                                                            donut: 30
+                                                        })
+                                                    ]
+                                                },
+                                                {
+                                                    xtype: 'chart',
+                                                    flex: 1,
+                                                    height: 250,
+                                                    width: 400,
+                                                    animate: true,
+                                                    insetPadding: 35,
+                                                    store: 'DashGuage3Store',
+                                                    axes: [
+                                                        {
+                                                            position: 'gauge',
+                                                            type: 'Gauge',
+                                                            margin: 8,
+                                                            maximum: 100,
+                                                            minimum: 0,
+                                                            title: 'Disk'
+                                                        }
+                                                    ],
+                                                    series: [
+                                                        me.processMyGaugeSeries5({
+                                                            type: 'gauge',
+                                                            angleField: 'data1',
+                                                            donut: 30
+                                                        })
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            xtype: 'gridpanel',
+                                            flex: 3,
+                                            title: 'Software status',
+                                            columnLines: true,
+                                            forceFit: false,
+                                            store: 'DashSoftwareStore',
+                                            columns: [
+                                                {
+                                                    xtype: 'gridcolumn',
+                                                    width: 160,
+                                                    dataIndex: 'softwareName',
+                                                    text: 'Software'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    width: 150,
+                                                    align: 'center',
+                                                    dataIndex: 'installNum',
+                                                    text: '설치된 갯수',
+                                                    format: '0,000'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    width: 150,
+                                                    align: 'center',
+                                                    dataIndex: 'runningNum',
+                                                    text: '실행중',
+                                                    format: '0,000'
+                                                },
+                                                {
+                                                    xtype: 'numbercolumn',
+                                                    width: 150,
+                                                    align: 'center',
+                                                    dataIndex: 'stopNum',
+                                                    text: '비실행',
+                                                    format: '0,000'
+                                                }
+                                            ]
+                                        }
+                                    ]
                                 },
                                 {
                                     xtype: 'container',
@@ -422,6 +589,22 @@ Ext.define('Peacock.view.MainViewport', {
         });
 
         me.callParent(arguments);
+    },
+
+    processMyGaugeSeries3: function(config) {
+        config.colorSet = ['#F49D10', '#ddd'];
+
+        return config;
+    },
+
+    processMyGaugeSeries4: function(config) {
+        config.colorSet = ['#82B525', '#ddd'];
+        return config;
+    },
+
+    processMyGaugeSeries5: function(config) {
+        config.colorSet = ['#3AA8CB', '#ddd'];
+        return config;
     },
 
     processMainGridPanel: function(config) {

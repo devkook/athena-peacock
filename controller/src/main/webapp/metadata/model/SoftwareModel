@@ -139,6 +139,19 @@
                 "type": "string"
             },
             "designerId": "da3becb2-df87-422c-8f30-15a8591228c5"
+        },
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "installStat",
+                "type": "string"
+            },
+            "designerId": "cf317c08-671b-4804-bf6f-724e6f1d79a5"
         }
     ]
 }

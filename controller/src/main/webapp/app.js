@@ -29,7 +29,8 @@ Ext.application({
         'ASGroupModel',
         'ChartModel',
         'VmModel',
-        'NicModel'
+        'NicModel',
+        'DashSoftware'
     ],
     stores: [
         'SoftwareListStore',
@@ -44,7 +45,11 @@ Ext.application({
         'ChartUsedMemStore',
         'SoftwareComboStore',
         'VmListJsonStore',
-        'NicListJsonStore'
+        'NicListJsonStore',
+        'DashSoftwareStore',
+        'DashGuage1Store',
+        'DashGuage2Store',
+        'DashGuage3Store'
     ],
     views: [
         'MainViewport',

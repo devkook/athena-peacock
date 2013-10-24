@@ -487,7 +487,6 @@ Ext.define('Peacock.view.SWInstallLaunchWindow', {
                                             fieldLabel: 'Password',
                                             name: 'password',
                                             inputType: 'password',
-                                            emptyText: '4 ~ 20자',
                                             maxLength: 20,
                                             minLength: 4
                                         },

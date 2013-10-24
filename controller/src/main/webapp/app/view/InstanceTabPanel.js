@@ -253,6 +253,11 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     text: 'Description'
                                 },
                                 {
+                                    xtype: 'gridcolumn',
+                                    dataIndex: 'installStat',
+                                    text: 'Status'
+                                },
+                                {
                                     xtype: 'actioncolumn',
                                     align: 'center',
                                     items: [

@@ -459,9 +459,415 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "title": "Dash Board"
+                                "container|align": "stretch",
+                                "designer|displayName": "Dash Board Panel",
+                                "layout": "vbox",
+                                "title": "Machine status"
                             },
-                            "designerId": "33ca4996-ca3c-4852-a15e-275e1dd435d4"
+                            "designerId": "33ca4996-ca3c-4852-a15e-275e1dd435d4",
+                            "cn": [
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 1,
+                                        "container|align": "middle",
+                                        "container|pack": "center",
+                                        "container|padding": 10,
+                                        "layout": "hbox",
+                                        "bodyPadding": null,
+                                        "header": false,
+                                        "title": "Machine Board"
+                                    },
+                                    "designerId": "8b7bd2fb-805e-4781-9c48-a1101fb77b14",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.Img",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "dock": null,
+                                                "src": "resources/images/nestedList.png"
+                                            },
+                                            "designerId": "075745c3-0ccf-4630-9800-3a26b915e0c6"
+                                        },
+                                        {
+                                            "type": "Ext.form.Label",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": 1,
+                                                "text": "My Label"
+                                            },
+                                            "designerId": "635bb5c3-3800-4818-aa34-73f7accfb2d8"
+                                        },
+                                        {
+                                            "type": "Ext.Img",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "src": "resources/images/picker.png"
+                                            },
+                                            "designerId": "2e11eeb5-9852-45de-92a2-5477cde62b18"
+                                        },
+                                        {
+                                            "type": "Ext.form.Label",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": 1,
+                                                "text": "My Label"
+                                            },
+                                            "designerId": "d27d4668-d762-4990-91c4-a618a0e4af63"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.panel.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 2,
+                                        "container|align": "stretch",
+                                        "layout": "hbox",
+                                        "title": "Resources status"
+                                    },
+                                    "designerId": "84634a37-6222-4ace-9dee-0bc116a393d4",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.chart.Chart",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": 1,
+                                                "height": 250,
+                                                "width": 400,
+                                                "animate": [
+                                                    "true"
+                                                ],
+                                                "insetPadding": 35,
+                                                "store": "DashGuage1Store"
+                                            },
+                                            "designerId": "a5267780-7e96-4992-aaa1-ed744dd561eb",
+                                            "isBuiltIn": true,
+                                            "iconCls": "icon-gauge-chart",
+                                            "autoName": "GaugeChart",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.chart.axis.Gauge",
+                                                    "reference": {
+                                                        "name": "axes",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "margin": 8,
+                                                        "maximum": 100,
+                                                        "minimum": 0,
+                                                        "title": "CPU"
+                                                    },
+                                                    "designerId": "6c6931bd-97bf-4646-9cd9-febedc33170b"
+                                                },
+                                                {
+                                                    "type": "Ext.chart.series.Gauge",
+                                                    "reference": {
+                                                        "name": "series",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "angleField": "data1",
+                                                        "donut": 30
+                                                    },
+                                                    "designerId": "81518f56-0439-4652-a605-46c5b360e4f1",
+                                                    "cn": [
+                                                        {
+                                                            "type": "processcfgfunction",
+                                                            "reference": {
+                                                                "name": "items",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "processMyGaugeSeries3",
+                                                                "designer|params": [
+                                                                    "config"
+                                                                ],
+                                                                "implHandler": [
+                                                                    "config.colorSet = ['#F49D10', '#ddd'];\r",
+                                                                    "\r",
+                                                                    "return config;"
+                                                                ]
+                                                            },
+                                                            "designerId": "aad05b60-da84-49d2-9653-72b78c0e002c"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.chart.Chart",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": 1,
+                                                "height": 250,
+                                                "width": 400,
+                                                "animate": [
+                                                    "true"
+                                                ],
+                                                "insetPadding": 35,
+                                                "store": "DashGuage2Store"
+                                            },
+                                            "designerId": "70d6147b-56a7-4846-af5a-261e28f74872",
+                                            "isBuiltIn": true,
+                                            "iconCls": "icon-gauge-chart",
+                                            "autoName": "GaugeChart",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.chart.axis.Gauge",
+                                                    "reference": {
+                                                        "name": "axes",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "margin": 8,
+                                                        "maximum": 100,
+                                                        "minimum": 0,
+                                                        "title": "Memory"
+                                                    },
+                                                    "designerId": "4a621959-6c89-43a9-b313-d5cb282912a7"
+                                                },
+                                                {
+                                                    "type": "Ext.chart.series.Gauge",
+                                                    "reference": {
+                                                        "name": "series",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "angleField": "data1",
+                                                        "donut": 30
+                                                    },
+                                                    "designerId": "14752070-a65c-4fd5-a2af-a0d5b14b64da",
+                                                    "cn": [
+                                                        {
+                                                            "type": "processcfgfunction",
+                                                            "reference": {
+                                                                "name": "items",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "processMyGaugeSeries4",
+                                                                "designer|params": [
+                                                                    "config"
+                                                                ],
+                                                                "implHandler": [
+                                                                    "config.colorSet = ['#82B525', '#ddd'];\r",
+                                                                    "return config;"
+                                                                ]
+                                                            },
+                                                            "designerId": "582b8ba1-88f3-4852-bd78-d73ea61b9c59"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "type": "Ext.chart.Chart",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": 1,
+                                                "height": 250,
+                                                "width": 400,
+                                                "animate": [
+                                                    "true"
+                                                ],
+                                                "insetPadding": 35,
+                                                "store": "DashGuage3Store"
+                                            },
+                                            "designerId": "5b46c77d-908e-441f-97b6-b2ea2c407d11",
+                                            "isBuiltIn": true,
+                                            "iconCls": "icon-gauge-chart",
+                                            "autoName": "GaugeChart",
+                                            "cn": [
+                                                {
+                                                    "type": "Ext.chart.axis.Gauge",
+                                                    "reference": {
+                                                        "name": "axes",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "margin": 8,
+                                                        "maximum": 100,
+                                                        "minimum": 0,
+                                                        "title": "Disk"
+                                                    },
+                                                    "designerId": "ca25e298-4a5a-461b-9663-2b36ee69a4b6"
+                                                },
+                                                {
+                                                    "type": "Ext.chart.series.Gauge",
+                                                    "reference": {
+                                                        "name": "series",
+                                                        "type": "array"
+                                                    },
+                                                    "codeClass": null,
+                                                    "userConfig": {
+                                                        "title": null,
+                                                        "angleField": "data1",
+                                                        "donut": 30
+                                                    },
+                                                    "designerId": "68292882-1aeb-46bd-966b-640fda5de0ce",
+                                                    "cn": [
+                                                        {
+                                                            "type": "processcfgfunction",
+                                                            "reference": {
+                                                                "name": "items",
+                                                                "type": "array"
+                                                            },
+                                                            "codeClass": null,
+                                                            "userConfig": {
+                                                                "fn": "processMyGaugeSeries5",
+                                                                "designer|params": [
+                                                                    "config"
+                                                                ],
+                                                                "implHandler": [
+                                                                    "\tconfig.colorSet = ['#3AA8CB', '#ddd'];\r",
+                                                                    "return config;"
+                                                                ]
+                                                            },
+                                                            "designerId": "6de8ebe0-7b88-4c6a-997c-784b3c168b83"
+                                                        }
+                                                    ]
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.grid.Panel",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": 3,
+                                        "title": "Software status",
+                                        "columnLines": true,
+                                        "forceFit": false,
+                                        "store": "DashSoftwareStore"
+                                    },
+                                    "designerId": "bdc85adb-4548-42b4-badc-03ca6d9ca725",
+                                    "cn": [
+                                        {
+                                            "type": "Ext.grid.column.Column",
+                                            "reference": {
+                                                "name": "columns",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "width": 160,
+                                                "dataIndex": "softwareName",
+                                                "text": "Software"
+                                            },
+                                            "designerId": "5b44d266-f620-470e-a3a7-29732bb11170"
+                                        },
+                                        {
+                                            "type": "Ext.grid.column.Number",
+                                            "reference": {
+                                                "name": "columns",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "width": 150,
+                                                "align": "center",
+                                                "dataIndex": "installNum",
+                                                "text": "설치된 갯수",
+                                                "format": "0,000"
+                                            },
+                                            "designerId": "c8c887c2-b0c1-47ef-a599-0b0beaf75801"
+                                        },
+                                        {
+                                            "type": "Ext.grid.column.Number",
+                                            "reference": {
+                                                "name": "columns",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "width": 150,
+                                                "align": "center",
+                                                "dataIndex": "runningNum",
+                                                "text": "실행중",
+                                                "format": "0,000"
+                                            },
+                                            "designerId": "00a1fcb8-459a-4433-b513-16d1d66fc5f2"
+                                        },
+                                        {
+                                            "type": "Ext.grid.column.Number",
+                                            "reference": {
+                                                "name": "columns",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "width": 150,
+                                                "align": "center",
+                                                "dataIndex": "stopNum",
+                                                "text": "비실행",
+                                                "format": "0,000"
+                                            },
+                                            "designerId": "fdce8cf4-d3ac-4e2a-bd8c-edb99d506b0a"
+                                        },
+                                        {
+                                            "type": "Ext.grid.View",
+                                            "reference": {
+                                                "name": "viewConfig",
+                                                "type": "object"
+                                            },
+                                            "codeClass": null,
+                                            "designerId": "7334a12c-4d73-46ad-a4a3-f512aefd6c07"
+                                        }
+                                    ]
+                                }
+                            ]
                         },
                         {
                             "type": "Ext.container.Container",

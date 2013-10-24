@@ -490,6 +490,19 @@
                             "designerId": "27473940-da98-462c-8804-2e473b4d790f"
                         },
                         {
+                            "type": "Ext.grid.column.Column",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dataIndex": "installStat",
+                                "text": "Status"
+                            },
+                            "designerId": "0c708715-c661-4c74-8ca7-fc1036c584de"
+                        },
+                        {
                             "type": "Ext.grid.column.Action",
                             "reference": {
                                 "name": "columns",

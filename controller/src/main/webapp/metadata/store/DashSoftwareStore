@@ -1,0 +1,43 @@
+{
+    "type": "arraystore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "model": "DashSoftware",
+        "designer|userClassName": "DashSoftwareStore",
+        "data": [
+            "[\r",
+            "    ['Apache',4,3,1],\r",
+            "    ['JBoss',2,2,0],\r",
+            "    ['MySQL',1,1,0],\r",
+            "    ['Tomcat',3,1,2]\r",
+            "]"
+        ]
+    },
+    "designerId": "c8887242-6717-4935-9606-debc4e18fcd7",
+    "cn": [
+        {
+            "type": "Ext.data.proxy.Ajax",
+            "reference": {
+                "name": "proxy",
+                "type": "object"
+            },
+            "codeClass": null,
+            "designerId": "1a8190a2-3e29-49c2-aef6-453a6d3b1e62",
+            "cn": [
+                {
+                    "type": "Ext.data.reader.Array",
+                    "reference": {
+                        "name": "reader",
+                        "type": "object"
+                    },
+                    "codeClass": null,
+                    "designerId": "6e63dd5c-08fa-4591-93ec-a1d39391b15b"
+                }
+            ]
+        }
+    ]
+}

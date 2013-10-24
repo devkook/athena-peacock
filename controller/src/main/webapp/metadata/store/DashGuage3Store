@@ -1,0 +1,30 @@
+{
+    "type": "jsonstore",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "storeId": "MyJsonStore1",
+        "designer|userClassName": "DashGuage3Store",
+        "data": [
+            "[{data1: 30}]"
+        ]
+    },
+    "designerId": "fc1438fb-7bbb-4582-a9cb-7b1ac71de7eb",
+    "cn": [
+        {
+            "type": "Ext.data.Field",
+            "reference": {
+                "name": "fields",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "name": "data1"
+            },
+            "designerId": "f4001ba3-63d2-4f72-99a0-bbed157b6dd9"
+        }
+    ]
+}

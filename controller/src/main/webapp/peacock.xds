@@ -411,6 +411,46 @@
                 "app/model/NicModel.js"
             ],
             "className": "NicModel"
+        },
+        "c8887242-6717-4935-9606-debc4e18fcd7": {
+            "paths": [
+                "metadata/store/DashSoftwareStore",
+                "app/store/override/DashSoftwareStore.js",
+                "app/store/DashSoftwareStore.js"
+            ],
+            "className": "DashSoftwareStore"
+        },
+        "dee4c508-b29d-4a28-b522-771ed375d120": {
+            "paths": [
+                "metadata/model/DashSoftware",
+                "app/model/override/DashSoftware.js",
+                "app/model/DashSoftware.js"
+            ],
+            "className": "DashSoftware"
+        },
+        "3f1ad9c7-09ec-4b82-aa7f-182e44481bb3": {
+            "paths": [
+                "metadata/store/DashGuage1Store",
+                "app/store/override/DashGuage1Store.js",
+                "app/store/DashGuage1Store.js"
+            ],
+            "className": "DashGuage1Store"
+        },
+        "ecc9cfeb-1848-4698-ae80-5a814dedfe07": {
+            "paths": [
+                "metadata/store/DashGuage2Store",
+                "app/store/override/DashGuage2Store.js",
+                "app/store/DashGuage2Store.js"
+            ],
+            "className": "DashGuage2Store"
+        },
+        "fc1438fb-7bbb-4582-a9cb-7b1ac71de7eb": {
+            "paths": [
+                "metadata/store/DashGuage3Store",
+                "app/store/override/DashGuage3Store.js",
+                "app/store/DashGuage3Store.js"
+            ],
+            "className": "DashGuage3Store"
         }
     },
     "viewOrderMap": {
@@ -442,7 +482,11 @@
             "2fd3b133-b493-419e-b475-df1433182038",
             "8c147303-3716-45ef-8473-86d87330d2db",
             "8314ad20-f299-4495-9e22-d9aa015c9af4",
-            "b4d9b345-fd01-46b0-ac2a-d745c384f6bb"
+            "b4d9b345-fd01-46b0-ac2a-d745c384f6bb",
+            "c8887242-6717-4935-9606-debc4e18fcd7",
+            "3f1ad9c7-09ec-4b82-aa7f-182e44481bb3",
+            "ecc9cfeb-1848-4698-ae80-5a814dedfe07",
+            "fc1438fb-7bbb-4582-a9cb-7b1ac71de7eb"
         ],
         "controller": [
             "69a40ace-9cfa-4847-b6e9-8ec48302c3bd",
@@ -468,7 +512,8 @@
             "8d2a757a-bf6c-4e15-bb88-b4e8d92bcbc8",
             "ed1de570-cef0-403e-8446-f832008b8a7d",
             "dec0f37a-8134-4eae-9e8c-48adf859aaaf",
-            "8a217455-79b3-42ff-9a47-c9a44bd1f234"
+            "8a217455-79b3-42ff-9a47-c9a44bd1f234",
+            "dee4c508-b29d-4a28-b522-771ed375d120"
         ],
         "resource": [
             "e45f6741-dc61-42e0-a350-8cf64d373b1c",
