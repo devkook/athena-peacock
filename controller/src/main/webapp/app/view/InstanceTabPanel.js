@@ -391,11 +391,10 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     ],
                                     position: 'bottom',
                                     title: 'Idle CPU',
-                                    constrain: true,
                                     dateFormat: 'm/d G:i',
                                     step: [
-                                        'h',
-                                        1/3
+                                        'mi',
+                                        1
                                     ]
                                 },
                                 {
@@ -443,8 +442,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     title: 'Combined CPU',
                                     dateFormat: 'm/d G:i',
                                     step: [
-                                        'h',
-                                        1/3
+                                        'mi',
+                                        1
                                     ]
                                 },
                                 {
@@ -482,8 +481,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     title: 'Total Memory',
                                     dateFormat: 'm/d G:i',
                                     step: [
-                                        'h',
-                                        1/3
+                                        'mi',
+                                        1
                                     ]
                                 },
                                 {
@@ -521,8 +520,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     title: 'Free Memory',
                                     dateFormat: 'm/d G:i',
                                     step: [
-                                        'h',
-                                        1/3
+                                        'mi',
+                                        1
                                     ]
                                 },
                                 {
@@ -560,8 +559,8 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     title: 'Used Memory',
                                     dateFormat: 'm/d G:i',
                                     step: [
-                                        'h',
-                                        1/3
+                                        'mi',
+                                        1
                                     ]
                                 },
                                 {

@@ -857,10 +857,9 @@
                                 "designer|displayName": "TimeAxis",
                                 "position": "bottom",
                                 "title": "Idle CPU",
-                                "constrain": true,
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/3]"
+                                    "[\"mi\",1]"
                                 ]
                             },
                             "designerId": "be59972c-35e2-4af0-94d4-5dc39a9ec09f"
@@ -979,7 +978,7 @@
                                 "title": "Combined CPU",
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/3]"
+                                    "[\"mi\",1]"
                                 ]
                             },
                             "designerId": "82021933-07f0-4152-82bc-dd7b1d48745b"
@@ -1056,7 +1055,7 @@
                                 "title": "Total Memory",
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/3]"
+                                    "[\"mi\",1]"
                                 ]
                             },
                             "designerId": "84df3e36-4816-4e87-8b3f-84e834d16f2f"
@@ -1133,7 +1132,7 @@
                                 "title": "Free Memory",
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/3]"
+                                    "[\"mi\",1]"
                                 ]
                             },
                             "designerId": "008f43ed-84ed-44dc-989f-0fa80d21bbc6"
@@ -1210,7 +1209,7 @@
                                 "title": "Used Memory",
                                 "dateFormat": "m/d G:i",
                                 "step": [
-                                    "[\"h\",1/3]"
+                                    "[\"mi\",1]"
                                 ]
                             },
                             "designerId": "ec7b8834-cd20-49a2-baa9-2e6fe05b4874"

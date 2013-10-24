@@ -85,7 +85,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                 },
                                                 {
                                                     xtype: 'splitbutton',
-                                                    text: 'idkbj@naver.com',
+                                                    text: 'top@osci.kr',
                                                     menu: {
                                                         xtype: 'menu',
                                                         width: 120,
@@ -581,7 +581,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                         {
                                                             xtype: 'label',
                                                             id: 'detailTitleLabel',
-                                                            style: '',
+                                                            style: 'font-size : 16px',
                                                             text: 'title panel'
                                                         }
                                                     ]
