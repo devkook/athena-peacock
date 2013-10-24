@@ -509,13 +509,31 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "layout|flex": null,
-                                                "style": "font-size : 16px; font-weight : bold",
-                                                "text": "Total Instances : 2,345"
+                                                "layout|margins": "0 5 0 0",
+                                                "style": "font-size : 16px",
+                                                "text": "Total Instances : "
                                             },
                                             "configAlternates": {
                                                 "style": "string"
                                             },
                                             "designerId": "635bb5c3-3800-4818-aa34-73f7accfb2d8"
+                                        },
+                                        {
+                                            "type": "Ext.form.Label",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "style": "font-size : 16px; font-weight : bold",
+                                                "text": "2,345"
+                                            },
+                                            "configAlternates": {
+                                                "style": "string"
+                                            },
+                                            "designerId": "cbf2c659-738e-4aa6-a610-6b4d3482367b"
                                         },
                                         {
                                             "type": "Ext.Img",
@@ -540,13 +558,31 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "layout|flex": null,
-                                                "style": "font-size : 16px; font-weight : bold",
-                                                "text": "Total VM : 3,456"
+                                                "layout|margins": "0 5 0 0",
+                                                "style": "font-size : 16px;",
+                                                "text": "Total VM : "
                                             },
                                             "configAlternates": {
                                                 "style": "string"
                                             },
                                             "designerId": "d27d4668-d762-4990-91c4-a618a0e4af63"
+                                        },
+                                        {
+                                            "type": "Ext.form.Label",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "layout|flex": null,
+                                                "style": "font-size : 16px; font-weight : bold",
+                                                "text": "3,456"
+                                            },
+                                            "configAlternates": {
+                                                "style": "string"
+                                            },
+                                            "designerId": "96710a16-556a-41a6-b68c-380ca40bfff3"
                                         }
                                     ]
                                 },

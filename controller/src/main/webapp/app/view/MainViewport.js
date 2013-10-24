@@ -267,8 +267,14 @@ Ext.define('Peacock.view.MainViewport', {
                                                 },
                                                 {
                                                     xtype: 'label',
+                                                    margins: '0 5 0 0',
+                                                    style: 'font-size : 16px',
+                                                    text: 'Total Instances : '
+                                                },
+                                                {
+                                                    xtype: 'label',
                                                     style: 'font-size : 16px; font-weight : bold',
-                                                    text: 'Total Instances : 2,345'
+                                                    text: '2,345'
                                                 },
                                                 {
                                                     xtype: 'image',
@@ -277,8 +283,14 @@ Ext.define('Peacock.view.MainViewport', {
                                                 },
                                                 {
                                                     xtype: 'label',
+                                                    margins: '0 5 0 0',
+                                                    style: 'font-size : 16px;',
+                                                    text: 'Total VM : '
+                                                },
+                                                {
+                                                    xtype: 'label',
                                                     style: 'font-size : 16px; font-weight : bold',
-                                                    text: 'Total VM : 3,456'
+                                                    text: '3,456'
                                                 }
                                             ]
                                         },

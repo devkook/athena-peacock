@@ -263,7 +263,28 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                     items: [
                                         {
                                             handler: function(view, rowIndex, colIndex, item, e, record, row) {
-                                                alert("Delete "+ record.get("softwareId"));
+
+                                                Ext.MessageBox.confirm('Confirm', '삭제 하시겠습니까?', function(btn){
+
+                                                    if(btn == "yes"){
+                                                        view.setLoading(true);
+                                                        Ext.Ajax.request({
+                                                            url: 'software/remove',
+                                                            params : {
+                                                                machineId : Peacock.app.selectedRecord.get("machineId"),
+                                                                softwareId : record.get("softwareId")
+                                                            },
+                                                            disableCaching : true,
+                                                            success: function(response){
+                                                                //var text = response.responseText;
+                                                                //alert(text);
+                                                                view.setLoading(false);
+                                                                view.getStore().reload();
+                                                            }
+                                                        });
+                                                    }
+
+                                                });
                                             },
                                             icon: 'resources/icons/fam/delete.gif',
                                             tooltip: 'Delete'

@@ -547,7 +547,28 @@
                                                     "row"
                                                 ],
                                                 "implHandler": [
-                                                    "alert(\"Delete \"+ record.get(\"softwareId\"));"
+                                                    "\r",
+                                                    "Ext.MessageBox.confirm('Confirm', '삭제 하시겠습니까?', function(btn){\r",
+                                                    "\r",
+                                                    "    if(btn == \"yes\"){\r",
+                                                    "        view.setLoading(true);\r",
+                                                    "        Ext.Ajax.request({\r",
+                                                    "            url: 'software/remove',\r",
+                                                    "            params : {\r",
+                                                    "                machineId : Peacock.app.selectedRecord.get(\"machineId\"),\r",
+                                                    "                softwareId : record.get(\"softwareId\")\r",
+                                                    "            },\r",
+                                                    "            disableCaching : true,\r",
+                                                    "            success: function(response){\r",
+                                                    "                //var text = response.responseText;\r",
+                                                    "                //alert(text);\r",
+                                                    "                view.setLoading(false);\r",
+                                                    "                view.getStore().reload();\r",
+                                                    "            }\r",
+                                                    "        });\r",
+                                                    "    }\r",
+                                                    "\r",
+                                                    "});"
                                                 ]
                                             },
                                             "designerId": "a17e44da-7663-4848-85e2-2a8180dbae4c"
