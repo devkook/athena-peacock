@@ -16,9 +16,16 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 7. 18.		First Draft.
+ * Sang-cheon Park	2013. 10. 24.		First Draft.
  */
-package com.athena.peacock.common.netty.message;
+package com.athena.peacock.controller.web.ospackage;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <pre>
@@ -27,20 +34,12 @@ package com.athena.peacock.common.netty.message;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public enum MessageType {
+@Service("packageService")
+@Transactional(rollbackFor = {Throwable.class}, propagation = Propagation.REQUIRED)
+public class PackageService {
 
-	COMMAND,
-	RESPONSE,
-	SYSTEM_STATUS,
-	INITIAL_INFO,
-	PACKAGE_INFO;
-
-    public String value() {
-        return name();
-    }
-
-    public static MessageType fromValue(String value) {
-        return valueOf(value);
-    }
+	@Inject
+	@Named("packageDao")
+	private PackageDao packageDao;
 }
-//end of MessageType.java
+//end of PackageService.java

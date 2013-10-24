@@ -29,6 +29,10 @@ import java.io.File;
 import java.net.InetAddress;
 
 import org.apache.commons.io.IOUtils;
+import org.codehaus.plexus.util.cli.CommandLineException;
+import org.codehaus.plexus.util.cli.CommandLineUtils;
+import org.codehaus.plexus.util.cli.Commandline;
+import org.codehaus.plexus.util.cli.CommandLineUtils.StringStreamConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,6 +45,8 @@ import com.athena.peacock.common.constant.PeacockConstant;
 import com.athena.peacock.common.netty.PeacockDatagram;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.MessageType;
+import com.athena.peacock.common.netty.message.OSPackageInfoMessage;
+import com.athena.peacock.common.netty.message.PackageInfo;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 
@@ -69,6 +75,7 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
     	connected = true;
     	channel = ctx.channel();
 		ctx.writeAndFlush(getAgentInitialInfo());
+		new PackageGatherThread(ctx).start();
     }
 
 	@SuppressWarnings("unchecked")
@@ -183,3 +190,127 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
     }//end of getAgentInitialInfo()
 }
 //end of PeacockClientHandler.java
+
+/**
+ * <pre>
+ * Agent의 패키지 정보를 수집하는 스레드
+ * </pre>
+ * @author Sang-cheon Park
+ * @version 1.0
+ */
+class PackageGatherThread extends Thread {
+
+    private static final Logger logger = LoggerFactory.getLogger(PackageGatherThread.class);
+	
+	private ChannelHandlerContext ctx;
+	
+	public PackageGatherThread(ChannelHandlerContext ctx) {
+		this.ctx = ctx;
+	}
+	
+	@Override
+	public void run() {
+		// SELECT STR_TO_DATE('Thu 24 Oct 2013 02:54:59 PM KST', '%W %d %M %Y %h:%i:%s %p');
+		
+		try {
+			// rpm -qa 로 전체 패키지 조회
+			Commandline commandLine = new Commandline();
+			commandLine.setExecutable("rpm");
+			commandLine.createArg().setValue("-qa");
+
+			StringStreamConsumer consumer = new CommandLineUtils.StringStreamConsumer();
+			
+			logger.debug("Start Package(rpm) info gathering...");
+			logger.debug("~]$ {}\n", commandLine.toString());
+
+			int returnCode = CommandLineUtils.executeCommandLine(commandLine, consumer, consumer, Integer.MAX_VALUE);
+			
+			if (returnCode == 0) {
+				String[] rpms = consumer.getOutput().split("\n");
+				
+				OSPackageInfoMessage msg = new OSPackageInfoMessage(MessageType.PACKAGE_INFO);
+				PackageInfo packageInfo = null;
+				for (String rpm : rpms) {
+					try {
+						// rpm -q --qf "%{NAME}\n%{ARCH}\n%{SIZE}\n%{VERSION}\n%{RELEASE}\n%{INSTALLTIME:date}\n%{SUMMARY}\n%{DESCRIPTION}" ${PACKAGE_NAME} 으로 각 패키지 세부사항 조회
+						packageInfo = getPackageInfo(rpm);
+						
+						if (packageInfo != null) {
+							msg.addPackageInfo(packageInfo);
+						}
+					} catch (Exception e) {
+						logger.error("Unhandled Exception has occurred. ", e);
+					}
+				}
+				
+				if (msg.getPackageInfoList().size() > 0) {
+					ctx.writeAndFlush(msg);
+				}
+				
+				logger.debug("End Package(rpm) info gathering...");
+			} else {
+				// when command execute failed.
+				// especially command not found.
+				logger.debug("End Package(rpm) info gathering with error(command execute failed)...");
+			}
+		} catch (Exception e) {
+			logger.error("Unhandled Exception has occurred. ", e);
+		}
+	}
+	
+	private PackageInfo getPackageInfo(String rpm) throws CommandLineException {
+		Commandline commandLine = new Commandline();
+		commandLine.setExecutable("rpm");
+		commandLine.createArg().setValue("-q");
+		commandLine.createArg().setValue("--qf");
+		commandLine.createArg().setValue("%{NAME}\n%{ARCH}\n%{SIZE}\n%{VERSION}\n%{RELEASE}\n%{INSTALLTIME:date}\n%{SUMMARY}\n%{DESCRIPTION}");
+		commandLine.createArg().setValue(rpm);
+		
+		//logger.debug("~]$ {}\n", commandLine.toString());
+
+		StringStreamConsumer consumer = new CommandLineUtils.StringStreamConsumer();
+		int returnCode = CommandLineUtils.executeCommandLine(commandLine, consumer, consumer, Integer.MAX_VALUE);
+		
+		if (returnCode == 0) {
+			PackageInfo packageInfo = new PackageInfo();
+			
+			String result = consumer.getOutput();
+			int start = 0, end = 0;
+			
+			start = 0;
+			end = result.indexOf("\n", start);
+			packageInfo.setName(result.substring(start, end));
+			
+			start = end + 1;
+			end = result.indexOf("\n", start);
+			packageInfo.setArch(result.substring(start, end));
+			
+			start = end + 1;
+			end = result.indexOf("\n", start);
+			packageInfo.setSize(result.substring(start, end));
+			
+			start = end + 1;
+			end = result.indexOf("\n", start);
+			packageInfo.setVersion(result.substring(start, end));
+			
+			start = end + 1;
+			end = result.indexOf("\n", start);
+			packageInfo.setRelease(result.substring(start, end));
+			
+			start = end + 1;
+			end = result.indexOf("\n", start);
+			packageInfo.setInstallDate(result.substring(start, end));
+			
+			start = end + 1;
+			end = result.indexOf("\n", start);
+			packageInfo.setSummary(result.substring(start, end));
+			
+			start = end + 1;
+			packageInfo.setDescription(result.substring(start));
+			
+			return packageInfo;
+		} else {
+			return null;
+		}
+	}
+}

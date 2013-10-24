@@ -16,9 +16,9 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 7. 18.		First Draft.
+ * Sang-cheon Park	2013. 10. 24.		First Draft.
  */
-package com.athena.peacock.common.netty.message;
+package com.athena.peacock.controller.web.ospackage;
 
 /**
  * <pre>
@@ -27,20 +27,7 @@ package com.athena.peacock.common.netty.message;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public enum MessageType {
+public class PackageDto {
 
-	COMMAND,
-	RESPONSE,
-	SYSTEM_STATUS,
-	INITIAL_INFO,
-	PACKAGE_INFO;
-
-    public String value() {
-        return name();
-    }
-
-    public static MessageType fromValue(String value) {
-        return valueOf(value);
-    }
 }
-//end of MessageType.java
+//end of PackageDto.java

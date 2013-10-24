@@ -16,9 +16,13 @@
  * Revision History
  * Author			Date				Description
  * ---------------	----------------	------------
- * Sang-cheon Park	2013. 7. 18.		First Draft.
+ * Sang-cheon Park	2013. 10. 24.		First Draft.
  */
-package com.athena.peacock.common.netty.message;
+package com.athena.peacock.controller.web.ospackage;
+
+import org.springframework.stereotype.Repository;
+
+import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
 
 /**
  * <pre>
@@ -27,20 +31,8 @@ package com.athena.peacock.common.netty.message;
  * @author Sang-cheon Park
  * @version 1.0
  */
-public enum MessageType {
+@Repository("packageDao")
+public class PackageDao extends AbstractBaseDao {
 
-	COMMAND,
-	RESPONSE,
-	SYSTEM_STATUS,
-	INITIAL_INFO,
-	PACKAGE_INFO;
-
-    public String value() {
-        return name();
-    }
-
-    public static MessageType fromValue(String value) {
-        return valueOf(value);
-    }
 }
-//end of MessageType.java
+//end of PackageDao.java
