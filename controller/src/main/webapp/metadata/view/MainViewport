@@ -494,6 +494,7 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "layout|flex": null,
+                                                "layout|margins": "0 20",
                                                 "dock": null,
                                                 "src": "resources/images/nestedList.png"
                                             },
@@ -507,8 +508,12 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "layout|flex": 1,
-                                                "text": "My Label"
+                                                "layout|flex": null,
+                                                "style": "font-size : 16px; font-weight : bold",
+                                                "text": "Total Instances : 2,345"
+                                            },
+                                            "configAlternates": {
+                                                "style": "string"
                                             },
                                             "designerId": "635bb5c3-3800-4818-aa34-73f7accfb2d8"
                                         },
@@ -521,6 +526,7 @@
                                             "codeClass": null,
                                             "userConfig": {
                                                 "layout|flex": null,
+                                                "layout|margins": "0 20 0 60",
                                                 "src": "resources/images/picker.png"
                                             },
                                             "designerId": "2e11eeb5-9852-45de-92a2-5477cde62b18"
@@ -533,8 +539,12 @@
                                             },
                                             "codeClass": null,
                                             "userConfig": {
-                                                "layout|flex": 1,
-                                                "text": "My Label"
+                                                "layout|flex": null,
+                                                "style": "font-size : 16px; font-weight : bold",
+                                                "text": "Total VM : 3,456"
+                                            },
+                                            "configAlternates": {
+                                                "style": "string"
                                             },
                                             "designerId": "d27d4668-d762-4990-91c4-a618a0e4af63"
                                         }
@@ -566,6 +576,7 @@
                                                 "layout|flex": 1,
                                                 "height": 250,
                                                 "width": 400,
+                                                "shadow": true,
                                                 "animate": [
                                                     "true"
                                                 ],
@@ -585,6 +596,7 @@
                                                     },
                                                     "codeClass": null,
                                                     "userConfig": {
+                                                        "label": null,
                                                         "margin": 8,
                                                         "maximum": 100,
                                                         "minimum": 0,
@@ -600,6 +612,19 @@
                                                     },
                                                     "codeClass": null,
                                                     "userConfig": {
+                                                        "highlight": null,
+                                                        "showInLegend": true,
+                                                        "tips": [
+                                                            "{\r",
+                                                            "    trackMouse: true,\r",
+                                                            "    width: 140,\r",
+                                                            "    height: 28,\r",
+                                                            "    renderer: function(storeItem, item) {\r",
+                                                            "        \r",
+                                                            "        this.setTitle('Used CPU : ' + storeItem.get('data1') + '%');\r",
+                                                            "    }\r",
+                                                            "}"
+                                                        ],
                                                         "angleField": "data1",
                                                         "donut": 30
                                                     },
@@ -640,6 +665,7 @@
                                                 "layout|flex": 1,
                                                 "height": 250,
                                                 "width": 400,
+                                                "shadow": true,
                                                 "animate": [
                                                     "true"
                                                 ],
@@ -674,6 +700,17 @@
                                                     },
                                                     "codeClass": null,
                                                     "userConfig": {
+                                                        "tips": [
+                                                            "{\r",
+                                                            "    trackMouse: true,\r",
+                                                            "    width: 140,\r",
+                                                            "    height: 28,\r",
+                                                            "    renderer: function(storeItem, item) {\r",
+                                                            "        \r",
+                                                            "        this.setTitle('Used Memory : ' + storeItem.get('data1') + '%');\r",
+                                                            "    }\r",
+                                                            "}"
+                                                        ],
                                                         "angleField": "data1",
                                                         "donut": 30
                                                     },
@@ -713,6 +750,7 @@
                                                 "layout|flex": 1,
                                                 "height": 250,
                                                 "width": 400,
+                                                "shadow": true,
                                                 "animate": [
                                                     "true"
                                                 ],
@@ -747,6 +785,17 @@
                                                     },
                                                     "codeClass": null,
                                                     "userConfig": {
+                                                        "tips": [
+                                                            "{\r",
+                                                            "    trackMouse: true,\r",
+                                                            "    width: 140,\r",
+                                                            "    height: 28,\r",
+                                                            "    renderer: function(storeItem, item) {\r",
+                                                            "        \r",
+                                                            "        this.setTitle('Used Disk : ' + storeItem.get('data1') + '%');\r",
+                                                            "    }\r",
+                                                            "}"
+                                                        ],
                                                         "title": null,
                                                         "angleField": "data1",
                                                         "donut": 30

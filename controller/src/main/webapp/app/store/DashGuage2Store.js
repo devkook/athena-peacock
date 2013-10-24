@@ -23,7 +23,7 @@ Ext.define('Peacock.store.DashGuage2Store', {
             storeId: 'MyJsonStore',
             data: [
                 {
-                    data1: 30
+                    data1: 43
                 }
             ],
             fields: [

@@ -22,7 +22,7 @@ Ext.define('Peacock.store.DashGuage1Store', {
         me.callParent([Ext.apply({
             data: [
                 {
-                    data1: 30
+                    data1: 23
                 }
             ],
             fields: [

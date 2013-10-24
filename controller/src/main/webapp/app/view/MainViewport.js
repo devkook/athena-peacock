@@ -262,21 +262,23 @@ Ext.define('Peacock.view.MainViewport', {
                                             items: [
                                                 {
                                                     xtype: 'image',
+                                                    margins: '0 20',
                                                     src: 'resources/images/nestedList.png'
                                                 },
                                                 {
                                                     xtype: 'label',
-                                                    flex: 1,
-                                                    text: 'My Label'
+                                                    style: 'font-size : 16px; font-weight : bold',
+                                                    text: 'Total Instances : 2,345'
                                                 },
                                                 {
                                                     xtype: 'image',
+                                                    margins: '0 20 0 60',
                                                     src: 'resources/images/picker.png'
                                                 },
                                                 {
                                                     xtype: 'label',
-                                                    flex: 1,
-                                                    text: 'My Label'
+                                                    style: 'font-size : 16px; font-weight : bold',
+                                                    text: 'Total VM : 3,456'
                                                 }
                                             ]
                                         },
@@ -294,6 +296,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                     flex: 1,
                                                     height: 250,
                                                     width: 400,
+                                                    shadow: true,
                                                     animate: true,
                                                     insetPadding: 35,
                                                     store: 'DashGuage1Store',
@@ -310,6 +313,16 @@ Ext.define('Peacock.view.MainViewport', {
                                                     series: [
                                                         me.processMyGaugeSeries3({
                                                             type: 'gauge',
+                                                            showInLegend: true,
+                                                            tips: {
+                                                                trackMouse: true,
+                                                                width: 140,
+                                                                height: 28,
+                                                                renderer: function(storeItem, item) {
+                                                                    
+                                                                    this.setTitle('Used CPU : ' + storeItem.get('data1') + '%');
+                                                                }
+                                                            },
                                                             angleField: 'data1',
                                                             donut: 30
                                                         })
@@ -320,6 +333,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                     flex: 1,
                                                     height: 250,
                                                     width: 400,
+                                                    shadow: true,
                                                     animate: true,
                                                     insetPadding: 35,
                                                     store: 'DashGuage2Store',
@@ -336,6 +350,15 @@ Ext.define('Peacock.view.MainViewport', {
                                                     series: [
                                                         me.processMyGaugeSeries4({
                                                             type: 'gauge',
+                                                            tips: {
+                                                                trackMouse: true,
+                                                                width: 140,
+                                                                height: 28,
+                                                                renderer: function(storeItem, item) {
+                                                                    
+                                                                    this.setTitle('Used Memory : ' + storeItem.get('data1') + '%');
+                                                                }
+                                                            },
                                                             angleField: 'data1',
                                                             donut: 30
                                                         })
@@ -346,6 +369,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                     flex: 1,
                                                     height: 250,
                                                     width: 400,
+                                                    shadow: true,
                                                     animate: true,
                                                     insetPadding: 35,
                                                     store: 'DashGuage3Store',
@@ -362,6 +386,15 @@ Ext.define('Peacock.view.MainViewport', {
                                                     series: [
                                                         me.processMyGaugeSeries5({
                                                             type: 'gauge',
+                                                            tips: {
+                                                                trackMouse: true,
+                                                                width: 140,
+                                                                height: 28,
+                                                                renderer: function(storeItem, item) {
+                                                                    
+                                                                    this.setTitle('Used Disk : ' + storeItem.get('data1') + '%');
+                                                                }
+                                                            },
                                                             angleField: 'data1',
                                                             donut: 30
                                                         })
