@@ -134,7 +134,7 @@ public class SoftwareController {
 		Assert.isTrue(software.getSoftwareId() != null, "softwareId must not be null.");
 		Assert.isTrue(!StringUtils.isEmpty(software.getMachineId()), "machineId must not be null.");
 		
-		jsonRes.setMsg(softwareService.getSoftware(software).getInstallLog());
+		jsonRes.setData(softwareService.getSoftware(software));
 		
 		return jsonRes;
 	}

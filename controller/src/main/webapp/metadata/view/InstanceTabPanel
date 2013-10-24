@@ -510,8 +510,9 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "designer|displayName": "DeleteColumn",
-                                "align": "center"
+                                "designer|displayName": "ActionColumn",
+                                "align": "center",
+                                "menuText": "menuTest"
                             },
                             "designerId": "06e4faa4-78df-4c1f-bb7f-3c0f199f49f1",
                             "cn": [
@@ -523,10 +524,56 @@
                                     },
                                     "codeClass": null,
                                     "userConfig": {
+                                        "designer|displayName": "LogViewActionItem",
+                                        "icon": "resources/icons/fam/application_view_list.png",
+                                        "iconCls": "action-column-icon",
+                                        "tooltip": "veiw install log"
+                                    },
+                                    "designerId": "79ad999d-4a07-4226-88a4-e4c4b5b4f267",
+                                    "cn": [
+                                        {
+                                            "type": "fixedfunction",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "handler",
+                                                "designer|params": [
+                                                    "view",
+                                                    "rowIndex",
+                                                    "colIndex",
+                                                    "item",
+                                                    "e",
+                                                    "record",
+                                                    "row"
+                                                ],
+                                                "implHandler": [
+                                                    "var win = Ext.widget(\"swLogWindow\");\r",
+                                                    "\r",
+                                                    "win.swid = record.get(\"softwareId\");\r",
+                                                    "\r",
+                                                    "win.show();"
+                                                ]
+                                            },
+                                            "designerId": "a17e44da-7663-4848-85e2-2a8180dbae4c"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "actioncolumnitem",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|displayName": "DeleteActionItem",
                                         "icon": "resources/icons/fam/delete.gif",
                                         "tooltip": "Delete"
                                     },
-                                    "designerId": "79ad999d-4a07-4226-88a4-e4c4b5b4f267",
+                                    "designerId": "b6c7f5da-825d-4046-9af6-5dc2d4beca60",
                                     "cn": [
                                         {
                                             "type": "fixedfunction",
@@ -571,7 +618,7 @@
                                                     "});"
                                                 ]
                                             },
-                                            "designerId": "a17e44da-7663-4848-85e2-2a8180dbae4c"
+                                            "designerId": "04b7c887-ceda-47a6-8477-23be5bf006a4"
                                         }
                                     ]
                                 }

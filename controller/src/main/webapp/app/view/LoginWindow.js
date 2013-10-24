@@ -38,6 +38,7 @@ Ext.define('Peacock.view.LoginWindow', {
                     bodyPadding: 10,
                     header: false,
                     title: 'My Form',
+                    waitMsgTarget: true,
                     items: [
                         {
                             xtype: 'textfield',

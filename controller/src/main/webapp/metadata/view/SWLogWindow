@@ -1,0 +1,117 @@
+{
+    "type": "Ext.window.Window",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "height": 537,
+        "width": 700,
+        "designer|userClassName": "SWLogWindow",
+        "designer|userAlias": "swLogWindow",
+        "layout": "fit",
+        "title": "Software Install Log"
+    },
+    "designerId": "814868c8-6aec-4a5b-a02d-6dee6bdb919b",
+    "cn": [
+        {
+            "type": "Ext.form.Panel",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "container|align": "stretch",
+                "layout": "vbox",
+                "bodyPadding": 10,
+                "header": false,
+                "title": "My Form",
+                "waitMsgTarget": [
+                    "true"
+                ]
+            },
+            "designerId": "d0467dec-5dbe-4ed2-a7fa-2da50898ae57",
+            "cn": [
+                {
+                    "type": "Ext.form.field.TextArea",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout|anchor": "100%",
+                        "layout|flex": 1,
+                        "fieldLabel": "Install Log",
+                        "labelAlign": "top",
+                        "name": "installLog"
+                    },
+                    "designerId": "d33b6ced-6a2c-4e00-8194-1ffb0e461d68"
+                }
+            ]
+        },
+        {
+            "type": "basiceventbinding",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onWindowShow",
+                "implHandler": [
+                    "var formPanel = component.down(\"form\");\r",
+                    "\r",
+                    "formPanel.getForm().load({\r",
+                    "    params : {\r",
+                    "        machineId : Peacock.app.selectedRecord.get(\"machineId\"),\r",
+                    "        softwareId : component.swid\r",
+                    "    },\r",
+                    "    url : \"software/getInstallLog\",\r",
+                    "    waitMsg: 'Loading...'\r",
+                    "});"
+                ],
+                "name": "show",
+                "scope": "me"
+            },
+            "designerId": "001f3cce-f64c-4921-b58d-fc8e9c642b26"
+        },
+        {
+            "type": "Ext.panel.Tool",
+            "reference": {
+                "name": "tools",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "designer|displayName": "Refresh Tool",
+                "tooltip": "Refresh",
+                "type": "refresh"
+            },
+            "designerId": "67405e79-0fd4-4269-99e1-81e20322aac4",
+            "cn": [
+                {
+                    "type": "fixedfunction",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "fn": "handler",
+                        "designer|params": [
+                            "event",
+                            "toolEl",
+                            "owner",
+                            "tool"
+                        ],
+                        "implHandler": null
+                    },
+                    "designerId": "0ffaab97-6fd8-4594-b8b4-661e0c27ee6d"
+                }
+            ]
+        }
+    ]
+}

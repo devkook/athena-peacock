@@ -58,7 +58,8 @@ Ext.application({
         'UserGroupFormWindow',
         'UserFormWindow',
         'SWInstallLaunchWindow',
-        'VMTabPanel'
+        'VMTabPanel',
+        'SWLogWindow'
     ],
     autoCreateViewport: true,
     controllers: [

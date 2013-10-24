@@ -451,6 +451,14 @@
                 "app/store/DashGuage3Store.js"
             ],
             "className": "DashGuage3Store"
+        },
+        "814868c8-6aec-4a5b-a02d-6dee6bdb919b": {
+            "paths": [
+                "metadata/view/SWLogWindow",
+                "app/view/override/SWLogWindow.js",
+                "app/view/SWLogWindow.js"
+            ],
+            "className": "SWLogWindow"
         }
     },
     "viewOrderMap": {
@@ -465,7 +473,8 @@
             "f7029523-2528-4ff5-b4b9-dfdf237e504a",
             "a9a8894c-9fd2-4eb9-a1ce-b233cb93e581",
             "cbc69f81-8fff-4115-963e-644323176928",
-            "abb635b8-446b-4a74-a3f6-5b0bfb607329"
+            "abb635b8-446b-4a74-a3f6-5b0bfb607329",
+            "814868c8-6aec-4a5b-a02d-6dee6bdb919b"
         ],
         "store": [
             "ca8fcdc4-3ff2-48ae-9651-5316c0569d0c",

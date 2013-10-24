@@ -260,7 +260,20 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 {
                                     xtype: 'actioncolumn',
                                     align: 'center',
+                                    menuText: 'menuTest',
                                     items: [
+                                        {
+                                            handler: function(view, rowIndex, colIndex, item, e, record, row) {
+                                                var win = Ext.widget("swLogWindow");
+
+                                                win.swid = record.get("softwareId");
+
+                                                win.show();
+                                            },
+                                            icon: 'resources/icons/fam/application_view_list.png',
+                                            iconCls: 'action-column-icon',
+                                            tooltip: 'veiw install log'
+                                        },
                                         {
                                             handler: function(view, rowIndex, colIndex, item, e, record, row) {
 

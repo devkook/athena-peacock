@@ -1,0 +1,8 @@
+.noBorder .x-form-text, .noBorder textarea.x-form-field {
+    border : none;
+}
+
+.action-column-icon {
+	margin-left: 10px;
+	margin-right: 10px;
+}
