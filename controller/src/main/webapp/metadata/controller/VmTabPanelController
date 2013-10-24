@@ -1,0 +1,106 @@
+{
+    "type": "Ext.app.Controller",
+    "reference": {
+        "name": "items",
+        "type": "array"
+    },
+    "codeClass": null,
+    "userConfig": {
+        "views": [
+            "VMTabPanel"
+        ],
+        "designer|userClassName": "VmTabPanelController"
+    },
+    "designerId": "267f636f-eaf1-400b-859d-867fe14a5036",
+    "cn": [
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTabpanelTabChange",
+                "implHandler": [
+                    "\r",
+                    "var grid;\r",
+                    "\r",
+                    "if(newCard.title == \"General\"){\r",
+                    "\r",
+                    "    this.viewGeneral();\r",
+                    "\r",
+                    "}else if(newCard.title == \"Network Interfaces\"){\r",
+                    "\r",
+                    "    grid = Ext.getCmp('vmNicGrid');\r",
+                    "\r",
+                    "\r",
+                    "    grid.getStore().load({\r",
+                    "        params:{\r",
+                    "            vmId : Peacock.app.selectedRecord.get(\"vmId\")\r",
+                    "        }\r",
+                    "    });\r",
+                    "\r",
+                    "\r",
+                    "}"
+                ],
+                "name": "tabchange",
+                "scope": "me",
+                "designer|targetType": "Ext.tab.Panel",
+                "designer|controlQuery": "vmTabPanel"
+            },
+            "designerId": "fdd83b77-be42-49eb-b6fd-dc1e789ef0b9"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "viewGeneral",
+                "implHandler": [
+                    "/*\r",
+                    "* Virtual Machine General Tab 화면 조회.\r",
+                    "*/\r",
+                    "\r",
+                    "var formPanel = Ext.getCmp(\"vmDescForm\");\r",
+                    "\r",
+                    "formPanel.getForm().load({\r",
+                    "    params : {\r",
+                    "        vmId : Peacock.app.selectedRecord.get(\"vmId\")\r",
+                    "    },\r",
+                    "    url : \"rhevm/vms/info\"\r",
+                    "});"
+                ]
+            },
+            "designerId": "4557fc31-1940-486a-895d-137a7c2047b1"
+        },
+        {
+            "type": "controlleraction",
+            "reference": {
+                "name": "listeners",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "onTabpanelAdded",
+                "implHandler": [
+                    "/*\r",
+                    "* 초기 화면 조회시. (목록에서 선택시)\r",
+                    "*/\r",
+                    "\r",
+                    "this.viewGeneral();\r",
+                    "\r",
+                    ""
+                ],
+                "name": "added",
+                "scope": "me",
+                "designer|targetType": "VMTabPanel",
+                "designer|controlQuery": "tabpanel"
+            },
+            "designerId": "ce45241d-085b-49ac-b8a7-8507b8d4af63"
+        }
+    ]
+}
