@@ -20,6 +20,8 @@
  */
 package com.athena.peacock.controller.web.ospackage;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
@@ -34,5 +36,21 @@ import com.athena.peacock.controller.web.common.dao.AbstractBaseDao;
 @Repository("packageDao")
 public class PackageDao extends AbstractBaseDao {
 
+	public void insertPackage(PackageDto ospackage) {
+		sqlSession.selectOne("PackageMapper.insertPackage", ospackage);
+	}
+	
+	public int getPackageListCnt(PackageDto ospackage) {
+		return sqlSession.selectOne("PackageMapper.getPackageListCnt", ospackage);
+	}
+	
+	public List<PackageDto> getPackageList(PackageDto ospackage) {
+		return sqlSession.selectList("PackageMapper.getPackageList", ospackage);
+	}
+
+	public void deletePackage(String machineId) {
+		sqlSession.delete("PackageMapper.deletePackage", machineId);
+	}
+	
 }
 //end of PackageDao.java

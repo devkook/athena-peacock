@@ -48,10 +48,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import com.athena.peacock.common.netty.PeacockDatagram;
+import com.athena.peacock.common.netty.message.AbstractMessage;
 import com.athena.peacock.common.netty.message.AgentInitialInfoMessage;
 import com.athena.peacock.common.netty.message.AgentSystemStatusMessage;
 import com.athena.peacock.common.netty.message.MessageType;
-import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
+import com.athena.peacock.common.netty.message.OSPackageInfoMessage;
+import com.athena.peacock.common.netty.message.PackageInfo;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.common.core.handler.MonFactorHandler;
 import com.athena.peacock.controller.common.provider.AppContext;
@@ -60,6 +62,8 @@ import com.athena.peacock.controller.web.machine.MachineService;
 import com.athena.peacock.controller.web.monitor.MonDataDto;
 import com.athena.peacock.controller.web.monitor.MonFactorDto;
 import com.athena.peacock.controller.web.monitor.MonitorService;
+import com.athena.peacock.controller.web.ospackage.PackageDto;
+import com.athena.peacock.controller.web.ospackage.PackageService;
 
 /**
  * <pre>
@@ -83,6 +87,10 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 	@Inject
 	@Named("monitorService")
 	private MonitorService monitorService;
+	
+	@Inject
+	@Named("packageService")
+	private PackageService packageService;
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -90,7 +98,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 		logger.info("channelRead0() has invoked.");
 		logger.info("[Server] IP Address => " + ctx.channel().remoteAddress().toString());
 		logger.info("[Server] Object => " + msg.getClass().getName());
-		logger.info("[Server] Contents => " + msg.toString());
+		//logger.info("[Server] Contents => " + msg.toString());
 		
 		if("bye".equals(msg.toString())) {
 			// Response and exit.
@@ -99,17 +107,12 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 		} else {
 			if(msg instanceof PeacockDatagram) {
 				MessageType messageType = ((PeacockDatagram<?>)msg).getMessageType();
-				
-				System.out.println("messageType => " + messageType.toString());
 
 				switch (messageType) {
 					case COMMAND : 
-						ProvisioningCommandMessage commandMsg = ((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage();
-						System.out.println("Message => " + commandMsg);
 						break;
 					case RESPONSE : 
 						ProvisioningResponseMessage responseMsg = ((PeacockDatagram<ProvisioningResponseMessage>)msg).getMessage();
-						System.out.println("Message => " + responseMsg);
 						
 						if (responseMsg.isBlocking()) {
 							CallbackManagement.poll().handle(responseMsg);
@@ -174,6 +177,39 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
 						}
 						
 						machineService.insertMachine(machine);
+						
+						break;
+					case PACKAGE_INFO :
+						OSPackageInfoMessage packageMsg = ((PeacockDatagram<OSPackageInfoMessage>)msg).getMessage();
+						List<PackageInfo> packageInfoList = packageMsg.getPackageInfoList();
+						PackageInfo packageInfo = null;
+						List<PackageDto> packageList = new ArrayList<PackageDto>();
+						PackageDto ospackage = null;
+						for (int i = 0; i < packageInfoList.size(); i++) {
+							packageInfo = packageInfoList.get(i);
+							
+							ospackage = new PackageDto();
+							ospackage.setPkgId(i + 1);
+							ospackage.setMachineId(packageMsg.getAgentId());
+							ospackage.setName(packageInfo.getName());
+							ospackage.setArch(packageInfo.getArch());
+							ospackage.setSize(packageInfo.getSize());
+							ospackage.setVersion(packageInfo.getVersion());
+							ospackage.setReleaseInfo(packageInfo.getRelease());
+							ospackage.setInstallDate(packageInfo.getInstallDate());
+							ospackage.setSummary(packageInfo.getSummary());
+							ospackage.setDescription(packageInfo.getDescription());
+							
+							packageList.add(ospackage);
+						}
+						
+						if (packageList.size() > 0) {
+							if (packageService == null) {
+								packageService = AppContext.getBean(PackageService.class);
+							}
+							
+							packageService.insertPackageList(packageList);
+						}
 						
 						break;
 				}
@@ -243,7 +279,7 @@ public class PeacockServerHandler extends SimpleChannelInboundHandler<Object> {
      * @param datagram
      * @return
      */
-    public ProvisioningResponseMessage sendMessage(PeacockDatagram<ProvisioningCommandMessage> datagram) {
+    public ProvisioningResponseMessage sendMessage(PeacockDatagram<AbstractMessage> datagram) {
     	Channel channel = ChannelManagement.getChannel(datagram.getMessage().getAgentId());
     	boolean isBlocking = datagram.getMessage().isBlocking();
 

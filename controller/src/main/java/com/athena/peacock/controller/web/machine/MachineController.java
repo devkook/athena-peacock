@@ -38,6 +38,7 @@ import com.athena.peacock.common.core.action.ShellAction;
 import com.athena.peacock.common.core.action.support.Property;
 import com.athena.peacock.common.core.command.Command;
 import com.athena.peacock.common.netty.PeacockDatagram;
+import com.athena.peacock.common.netty.message.AbstractMessage;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
@@ -120,7 +121,7 @@ public class MachineController {
 		command.addAction(action);
 		cmdMsg.addCommand(command);
 		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 		
 		ModelAndView mav = new ModelAndView();
@@ -389,8 +390,8 @@ public class MachineController {
 
 		// Add CHECK Command
 		cmdMsg.addCommand(command);
-		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+
+		PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 		
 		ModelAndView mav = new ModelAndView();
@@ -528,7 +529,7 @@ public class MachineController {
 		// Add Change Password Command
 		cmdMsg.addCommand(command);
 		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 		
 		ModelAndView mav = new ModelAndView();
@@ -581,7 +582,7 @@ public class MachineController {
 		// Add DELETE Command
 		cmdMsg.addCommand(command);
 		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 		
 		ModelAndView mav = new ModelAndView();
@@ -774,7 +775,7 @@ public class MachineController {
 		// Add DataSource Configuration Command
 		cmdMsg.addCommand(command);
 		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 		
 		ModelAndView mav = new ModelAndView();
@@ -900,7 +901,7 @@ public class MachineController {
 		// Add Tomcat INSTALL Command
 		cmdMsg.addCommand(command);
 		
-		PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+		PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 		ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 		
 		ModelAndView mav = new ModelAndView();

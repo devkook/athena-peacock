@@ -38,6 +38,7 @@ import com.athena.peacock.common.core.action.FileWriteAction;
 import com.athena.peacock.common.core.action.ShellAction;
 import com.athena.peacock.common.core.command.Command;
 import com.athena.peacock.common.netty.PeacockDatagram;
+import com.athena.peacock.common.netty.message.AbstractMessage;
 import com.athena.peacock.common.netty.message.ProvisioningCommandMessage;
 import com.athena.peacock.common.netty.message.ProvisioningResponseMessage;
 import com.athena.peacock.controller.netty.PeacockTransmitter;
@@ -1153,7 +1154,7 @@ class InstallThread extends Thread {
 		try {
 			softwareService.insertSoftware(software);
 			
-			PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+			PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 			ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 			
 			StringBuilder sb = new StringBuilder("");
@@ -1198,7 +1199,7 @@ class UninstallThread extends Thread {
 		try {
 			softwareService.updateSoftware(software);
 			
-			PeacockDatagram<ProvisioningCommandMessage> datagram = new PeacockDatagram<ProvisioningCommandMessage>(cmdMsg);
+			PeacockDatagram<AbstractMessage> datagram = new PeacockDatagram<AbstractMessage>(cmdMsg);
 			ProvisioningResponseMessage response = peacockTransmitter.sendMessage(datagram);
 			
 			configService.deleteConfig(config);

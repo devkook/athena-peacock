@@ -20,6 +20,8 @@
  */
 package com.athena.peacock.controller.web.ospackage;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -41,5 +43,27 @@ public class PackageService {
 	@Inject
 	@Named("packageDao")
 	private PackageDao packageDao;
+
+	public void insertPackageList(List<PackageDto> packageList) throws Exception {
+		if (packageList.size() > 0) {
+			packageDao.deletePackage(packageList.get(0).getMachineId());
+		}
+		
+		for (PackageDto ospackage : packageList) {
+			packageDao.insertPackage(ospackage);
+		}
+	}
+
+	public void insertPackage(PackageDto ospackage) throws Exception {
+		packageDao.insertPackage(ospackage);
+	}
+	
+	public int getPackageListCnt(PackageDto ospackage) throws Exception {
+		return packageDao.getPackageListCnt(ospackage);
+	}
+	
+	public List<PackageDto> getPackageList(PackageDto ospackage) throws Exception {
+		return packageDao.getPackageList(ospackage);
+	}
 }
 //end of PackageService.java

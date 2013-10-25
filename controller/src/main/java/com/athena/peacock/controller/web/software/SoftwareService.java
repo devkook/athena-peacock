@@ -94,7 +94,7 @@ public class SoftwareService {
 		return softwareDao.getSoftwareList(software);
 	}
 	
-	public int getSoftwareInstallListCnt(MachineDto machine) {
+	public int getSoftwareInstallListCnt(MachineDto machine) throws Exception {
 		return softwareDao.getSoftwareInstallListCnt(machine);
 	}
 	

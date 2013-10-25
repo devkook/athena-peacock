@@ -60,7 +60,7 @@ public class ConfigRepoService {
 		return configRepoDao.getConfigRepo(configRepo);
 	}
 
-	public int getConfigRepoListCnt(ConfigRepoDto configRepo) {
+	public int getConfigRepoListCnt(ConfigRepoDto configRepo) throws Exception {
 		return configRepoDao.getConfigRepoListCnt(configRepo);
 	}
 	

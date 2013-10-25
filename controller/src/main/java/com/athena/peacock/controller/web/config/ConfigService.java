@@ -70,7 +70,7 @@ public class ConfigService {
 		return configDao.getConfig(config);
 	}
 
-	public int getConfigListCnt(ConfigDto config) {
+	public int getConfigListCnt(ConfigDto config) throws Exception {
 		return configDao.getConfigListCnt(config);
 	}
 	

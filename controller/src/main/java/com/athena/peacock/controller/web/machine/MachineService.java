@@ -52,7 +52,7 @@ public class MachineService {
 		}
 	}
 
-	public int getMachineListCnt(MachineDto machine) {
+	public int getMachineListCnt(MachineDto machine) throws Exception {
 		return machineDao.getMachineListCnt(machine);
 	}
 

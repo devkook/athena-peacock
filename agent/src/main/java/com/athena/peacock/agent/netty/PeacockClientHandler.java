@@ -26,13 +26,16 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.net.InetAddress;
+import java.util.Date;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.plexus.util.cli.CommandLineException;
 import org.codehaus.plexus.util.cli.CommandLineUtils;
-import org.codehaus.plexus.util.cli.Commandline;
 import org.codehaus.plexus.util.cli.CommandLineUtils.StringStreamConsumer;
+import org.codehaus.plexus.util.cli.Commandline;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -75,7 +78,25 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
     	connected = true;
     	channel = ctx.channel();
 		ctx.writeAndFlush(getAgentInitialInfo());
-		new PackageGatherThread(ctx).start();
+		
+		// 패키지 정보 수집 이력이 없을 경우 수행
+		String packageFile = null;
+		
+		try {
+			packageFile = PropertyUtil.getProperty(PeacockConstant.PACKAGE_FILE_KEY);
+		} catch (Exception e) {
+			// nothing to do.
+		} finally {
+			if (StringUtils.isEmpty(packageFile)) {
+				packageFile = "/peacock/agent/config/package.log";
+			}
+		}
+		
+		File file = new File(packageFile);
+		
+		if(!file.exists()) {
+			new PackageGatherThread(ctx, packageFile).start();
+		}
     }
 
 	@SuppressWarnings("unchecked")
@@ -97,6 +118,22 @@ public class PeacockClientHandler extends SimpleChannelInboundHandler<Object> {
 				((PeacockDatagram<ProvisioningCommandMessage>)msg).getMessage().executeCommands(response);
 				
 				ctx.writeAndFlush(new PeacockDatagram<ProvisioningResponseMessage>(response));
+			} else if (messageType.equals(MessageType.PACKAGE_INFO)) {
+				ctx.writeAndFlush("Start OS Package collecting...");
+
+				String packageFile = null;
+				
+				try {
+					packageFile = PropertyUtil.getProperty(PeacockConstant.PACKAGE_FILE_KEY);
+				} catch (Exception e) {
+					// nothing to do.
+				} finally {
+					if (StringUtils.isEmpty(packageFile)) {
+						packageFile = "/peacock/agent/config/package.log";
+					}
+				}
+				
+				new PackageGatherThread(ctx, packageFile).start();
 			}
 		}
 	}
@@ -203,16 +240,18 @@ class PackageGatherThread extends Thread {
     private static final Logger logger = LoggerFactory.getLogger(PackageGatherThread.class);
 	
 	private ChannelHandlerContext ctx;
+	private String packageFile;
 	
-	public PackageGatherThread(ChannelHandlerContext ctx) {
+	public PackageGatherThread(ChannelHandlerContext ctx, String packageFile) {
 		this.ctx = ctx;
+		this.packageFile = packageFile;
 	}
 	
 	@Override
 	public void run() {
-		// SELECT STR_TO_DATE('Thu 24 Oct 2013 02:54:59 PM KST', '%W %d %M %Y %h:%i:%s %p');
-		
 		try {
+			String agentId = IOUtils.toString(new File(PropertyUtil.getProperty(PeacockConstant.AGENT_ID_FILE_KEY)).toURI());
+			
 			// rpm -qa 로 전체 패키지 조회
 			Commandline commandLine = new Commandline();
 			commandLine.setExecutable("rpm");
@@ -229,6 +268,7 @@ class PackageGatherThread extends Thread {
 				String[] rpms = consumer.getOutput().split("\n");
 				
 				OSPackageInfoMessage msg = new OSPackageInfoMessage(MessageType.PACKAGE_INFO);
+				msg.setAgentId(agentId);
 				PackageInfo packageInfo = null;
 				for (String rpm : rpms) {
 					try {
@@ -243,8 +283,16 @@ class PackageGatherThread extends Thread {
 					}
 				}
 				
+				StringBuilder sb = new StringBuilder("CurrenDate : ") .append(new Date()) .append(", RPM Count : ") .append(rpms.length).append("\r\n");
+				
+				FileWriter fw = new FileWriter(packageFile, true);
+				fw.write(sb.toString());
+				fw.flush();
+				
+				IOUtils.closeQuietly(fw);
+				
 				if (msg.getPackageInfoList().size() > 0) {
-					ctx.writeAndFlush(msg);
+					ctx.writeAndFlush(new PeacockDatagram<OSPackageInfoMessage>(msg));
 				}
 				
 				logger.debug("End Package(rpm) info gathering...");
@@ -263,7 +311,7 @@ class PackageGatherThread extends Thread {
 		commandLine.setExecutable("rpm");
 		commandLine.createArg().setValue("-q");
 		commandLine.createArg().setValue("--qf");
-		commandLine.createArg().setValue("%{NAME}\n%{ARCH}\n%{SIZE}\n%{VERSION}\n%{RELEASE}\n%{INSTALLTIME:date}\n%{SUMMARY}\n%{DESCRIPTION}");
+		commandLine.createArg().setValue("%{NAME}\n%{ARCH}\n%{SIZE}\n%{VERSION}\n%{RELEASE}\n%{INSTALLTIME}\n%{SUMMARY}\n%{DESCRIPTION}");
 		commandLine.createArg().setValue(rpm);
 		
 		//logger.debug("~]$ {}\n", commandLine.toString());
@@ -299,7 +347,7 @@ class PackageGatherThread extends Thread {
 			
 			start = end + 1;
 			end = result.indexOf("\n", start);
-			packageInfo.setInstallDate(result.substring(start, end));
+			packageInfo.setInstallDate(new Date(Long.parseLong(result.substring(start, end)) * 1000));
 			
 			start = end + 1;
 			end = result.indexOf("\n", start);

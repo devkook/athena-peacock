@@ -33,6 +33,8 @@ public final class PeacockConstant {
 	public static final String CONFIG_FILE_KEY 		= "peacock.agent.config.file.name";
 	/** Agent ID가 저장된 파일 경로 */
 	public static final String AGENT_ID_FILE_KEY	= "peacock.agent.agent.file.name";
+	/** 패키지 정보 수집 이력이 저장된 파일 경로 */
+	public static final String PACKAGE_FILE_KEY		= "peacock.agent.package.file.name";
 	/** Agent에서 접속할 서버의 IP */
 	public static final String SERVER_IP 			= "ServerIP";
 	/** Agent에서 접속할 서버의 포트 */
