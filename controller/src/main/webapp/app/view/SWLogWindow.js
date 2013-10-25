@@ -42,7 +42,6 @@ Ext.define('Peacock.view.SWLogWindow', {
                     items: [
                         {
                             xtype: 'textareafield',
-                            anchor: '100%',
                             flex: 1,
                             fieldLabel: 'Install Log',
                             labelAlign: 'top',

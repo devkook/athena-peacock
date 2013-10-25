@@ -27,7 +27,19 @@ Ext.define('Peacock.controller.TopToolbarController', {
 
         if(item.getId() == "topMyAccountMenu"){
 
-            alert("click! my account.");
+            Ext.widget('userFormWindow').show();
+
+            var formPanel = Ext.getCmp("userForm");
+
+            formPanel.up('window').setTitle("My Account");
+
+            formPanel.getForm().load({
+                params : {
+                    user_id : Peacock.app.loginUser.user_id
+                },
+                url : "user/getUser",
+                waitMsg: 'Loading...'
+            });
 
         }else if(item.getId() == "topLogOutMenu"){
 

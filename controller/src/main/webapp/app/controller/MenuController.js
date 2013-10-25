@@ -21,12 +21,15 @@ Ext.define('Peacock.controller.MenuController', {
         'MachineListStore'
     ],
 
-    onTreepanelItemClick: function(dataview, record, item, index, e, eOpts) {
+    onTreepanelSelectionChange: function(model, selected, eOpts) {
 
-        Peacock.app.debug("MenuController.onTreepanelItemClick. " + record.get('id'));
+        var record = selected[0];
+        Peacock.app.debug("MenuController.onTreepanelSelectionChange. " + record.get('id'));
+
+        this.deselectPreMenu(record.get('id'));
+
 
         Peacock.app.menu_id = record.get('id');//선택한 메뉴 id 저장.
-
 
 
         Ext.getCmp("tbActionMenu").setDisabled(true);
@@ -85,6 +88,8 @@ Ext.define('Peacock.controller.MenuController', {
 
             grid.getStore().load();
         }
+
+
     },
 
     viewUsers: function(grid) {
@@ -124,6 +129,7 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionEdit").show();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
+        Ext.getCmp("tbActionSWInstall").hide();
 
     },
 
@@ -170,6 +176,7 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionEdit").hide();
         Ext.getCmp("tbActionDelete").hide();
         Ext.getCmp("tbActionRegister").hide();
+        Ext.getCmp("tbActionSWInstall").show();
 
 
     },
@@ -209,6 +216,7 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionEdit").show();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
+        Ext.getCmp("tbActionSWInstall").hide();
     },
 
     viewScalingGroups: function(grid) {
@@ -248,6 +256,7 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionEdit").hide();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
+        Ext.getCmp("tbActionSWInstall").hide();
     },
 
     viewVirtualMachines: function(grid) {
@@ -303,13 +312,28 @@ Ext.define('Peacock.controller.MenuController', {
         Ext.getCmp("tbActionEdit").hide();
         Ext.getCmp("tbActionDelete").show();
         Ext.getCmp("tbActionRegister").hide();
+        Ext.getCmp("tbActionSWInstall").hide();
 
+    },
+
+    deselectPreMenu: function(current_menu_id) {
+        /*
+        * 이전에 선택된 메뉴 deselect 처리.
+        */
+
+        Ext.each(Ext.ComponentQuery.query("#westPanel treepanel"), function(cmp){
+            var record = cmp.getSelectionModel().getLastSelected();
+
+            if(record && record.get("id") != current_menu_id){
+                cmp.getSelectionModel().deselect(record, true);
+            }
+        });
     },
 
     init: function(application) {
         this.control({
             "#westPanel treepanel": {
-                itemclick: this.onTreepanelItemClick
+                selectionchange: this.onTreepanelSelectionChange
             }
         });
     }

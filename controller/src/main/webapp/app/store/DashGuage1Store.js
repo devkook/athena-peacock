@@ -20,6 +20,7 @@ Ext.define('Peacock.store.DashGuage1Store', {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
+            storeId: 'DashGuage1Store',
             data: [
                 {
                     data1: 23

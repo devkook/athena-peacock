@@ -85,6 +85,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                 },
                                                 {
                                                     xtype: 'splitbutton',
+                                                    id: 'loginUserBtn',
                                                     text: 'top@osci.kr',
                                                     menu: {
                                                         xtype: 'menu',
@@ -108,6 +109,7 @@ Ext.define('Peacock.view.MainViewport', {
                                                 },
                                                 {
                                                     xtype: 'tbtext',
+                                                    id: 'loginUserLabel',
                                                     text: '관리자'
                                                 }
                                             ]
@@ -132,9 +134,9 @@ Ext.define('Peacock.view.MainViewport', {
                             items: [
                                 {
                                     xtype: 'treepanel',
+                                    id: 'smTreePanel',
                                     title: 'Server Management',
-                                    titleCollapse: false,
-                                    lines: false,
+                                    titleCollapse: true,
                                     root: {
                                         text: 'Root',
                                         expanded: true,
@@ -242,23 +244,27 @@ Ext.define('Peacock.view.MainViewport', {
                             items: [
                                 {
                                     xtype: 'panel',
+                                    autoScroll: true,
                                     layout: {
                                         align: 'stretch',
+                                        padding: 5,
                                         type: 'vbox'
                                     },
-                                    title: 'Machine status',
+                                    header: false,
+                                    title: 'Dash Board',
                                     items: [
                                         {
                                             xtype: 'panel',
                                             flex: 1,
+                                            frame: true,
+                                            minHeight: 130,
                                             layout: {
                                                 align: 'middle',
                                                 pack: 'center',
                                                 padding: 10,
                                                 type: 'hbox'
                                             },
-                                            header: false,
-                                            title: 'Machine Board',
+                                            title: 'Machine status',
                                             items: [
                                                 {
                                                     xtype: 'image',
@@ -297,6 +303,9 @@ Ext.define('Peacock.view.MainViewport', {
                                         {
                                             xtype: 'panel',
                                             flex: 2,
+                                            margins: '5 0',
+                                            frame: true,
+                                            minHeight: 200,
                                             layout: {
                                                 align: 'stretch',
                                                 type: 'hbox'
@@ -417,6 +426,8 @@ Ext.define('Peacock.view.MainViewport', {
                                         {
                                             xtype: 'gridpanel',
                                             flex: 3,
+                                            frame: true,
+                                            minHeight: 150,
                                             title: 'Software status',
                                             columnLines: true,
                                             forceFit: false,

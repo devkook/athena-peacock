@@ -6,7 +6,7 @@
     },
     "codeClass": null,
     "userConfig": {
-        "storeId": "MyJsonStore",
+        "storeId": "DashGuage2Store",
         "designer|userClassName": "DashGuage2Store",
         "data": [
             "[{data1: 43}]"

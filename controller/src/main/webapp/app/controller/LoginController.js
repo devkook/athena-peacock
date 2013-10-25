@@ -63,8 +63,24 @@ Ext.define('Peacock.controller.LoginController', {
             url: "user/login",
             waitMsg: 'Loging...',
             success: function(form, action) {
-                viewport.layout.setActiveItem(1);
+
                 loginWin.close();
+
+                Peacock.app.loginUser = action.result.data;
+                Ext.getCmp("loginUserBtn").setText(Peacock.app.loginUser.email);
+                Ext.getCmp("loginUserLabel").setText(Peacock.app.loginUser.user_name);
+
+
+                viewport.layout.setActiveItem(1);
+
+                var treePanel = Ext.getCmp('smTreePanel');
+                treePanel.expand();
+
+                // dash board menu select.
+                var record = treePanel.getStore().getNodeById('inst-dash');
+                treePanel.getSelectionModel().select(record);
+
+
             },
             failure: function(form, action) {
                 switch (action.failureType) {

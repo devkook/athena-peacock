@@ -42,7 +42,6 @@
                     },
                     "codeClass": null,
                     "userConfig": {
-                        "layout|anchor": "100%",
                         "layout|flex": 1,
                         "fieldLabel": "Install Log",
                         "labelAlign": "top",

@@ -22,13 +22,16 @@
             },
             "codeClass": null,
             "userConfig": {
-                "fn": "onTreepanelItemClick",
+                "fn": "onTreepanelSelectionChange",
                 "implHandler": [
                     "\r",
-                    "Peacock.app.debug(\"MenuController.onTreepanelItemClick. \" + record.get('id'));\r",
+                    "var record = selected[0];\r",
+                    "Peacock.app.debug(\"MenuController.onTreepanelSelectionChange. \" + record.get('id'));\r",
+                    "\r",
+                    "this.deselectPreMenu(record.get('id'));\r",
+                    "\r",
                     "\r",
                     "Peacock.app.menu_id = record.get('id');//선택한 메뉴 id 저장.\r",
-                    "\r",
                     "\r",
                     "\r",
                     "Ext.getCmp(\"tbActionMenu\").setDisabled(true);\r",
@@ -86,9 +89,11 @@
                     "    Ext.resumeLayouts(true);\r",
                     "\r",
                     "    grid.getStore().load();\r",
-                    "}"
+                    "}\r",
+                    "\r",
+                    ""
                 ],
-                "name": "itemclick",
+                "name": "selectionchange",
                 "scope": "me",
                 "designer|targetType": "Ext.tree.Panel",
                 "designer|controlQuery": "#westPanel treepanel"
@@ -144,6 +149,7 @@
                     "Ext.getCmp(\"tbActionEdit\").show();\r",
                     "Ext.getCmp(\"tbActionDelete\").show();\r",
                     "Ext.getCmp(\"tbActionRegister\").hide();\r",
+                    "Ext.getCmp(\"tbActionSWInstall\").hide();\r",
                     ""
                 ]
             },
@@ -204,6 +210,7 @@
                     "Ext.getCmp(\"tbActionEdit\").hide();\r",
                     "Ext.getCmp(\"tbActionDelete\").hide();\r",
                     "Ext.getCmp(\"tbActionRegister\").hide();\r",
+                    "Ext.getCmp(\"tbActionSWInstall\").show();\r",
                     "\r",
                     ""
                 ]
@@ -256,7 +263,8 @@
                     "Ext.getCmp(\"tbActionTerminate\").hide();\r",
                     "Ext.getCmp(\"tbActionEdit\").show();\r",
                     "Ext.getCmp(\"tbActionDelete\").show();\r",
-                    "Ext.getCmp(\"tbActionRegister\").hide();"
+                    "Ext.getCmp(\"tbActionRegister\").hide();\r",
+                    "Ext.getCmp(\"tbActionSWInstall\").hide();"
                 ]
             },
             "designerId": "32b57f72-8f90-47bc-acc5-aab5791d207a"
@@ -309,7 +317,8 @@
                     "Ext.getCmp(\"tbActionTerminate\").hide();\r",
                     "Ext.getCmp(\"tbActionEdit\").hide();\r",
                     "Ext.getCmp(\"tbActionDelete\").show();\r",
-                    "Ext.getCmp(\"tbActionRegister\").hide();"
+                    "Ext.getCmp(\"tbActionRegister\").hide();\r",
+                    "Ext.getCmp(\"tbActionSWInstall\").hide();"
                 ]
             },
             "designerId": "8201c6ba-ff47-4c5f-8599-c25ed5d0db69"
@@ -379,10 +388,39 @@
                     "Ext.getCmp(\"tbActionEdit\").hide();\r",
                     "Ext.getCmp(\"tbActionDelete\").show();\r",
                     "Ext.getCmp(\"tbActionRegister\").hide();\r",
+                    "Ext.getCmp(\"tbActionSWInstall\").hide();\r",
                     ""
                 ]
             },
             "designerId": "520d9703-315d-4b24-8fae-0b17bc302fae"
+        },
+        {
+            "type": "basicfunction",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "fn": "deselectPreMenu",
+                "designer|params": [
+                    "current_menu_id"
+                ],
+                "implHandler": [
+                    "/*\r",
+                    "* 이전에 선택된 메뉴 deselect 처리.\r",
+                    "*/\r",
+                    "\r",
+                    "Ext.each(Ext.ComponentQuery.query(\"#westPanel treepanel\"), function(cmp){\r",
+                    "\tvar record = cmp.getSelectionModel().getLastSelected();\r",
+                    "    \r",
+                    "    if(record && record.get(\"id\") != current_menu_id){\r",
+                    "        cmp.getSelectionModel().deselect(record, true);\r",
+                    "    }\r",
+                    "});"
+                ]
+            },
+            "designerId": "d0724aee-1a59-4462-9628-fd69a5e7a601"
         }
     ]
 }

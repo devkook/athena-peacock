@@ -25,6 +25,7 @@ Ext.define('Peacock.store.DashSoftwareStore', {
         cfg = cfg || {};
         me.callParent([Ext.apply({
             model: 'Peacock.model.DashSoftware',
+            storeId: 'DashSoftwareStore',
             data: [
                 [
                     'Apache',

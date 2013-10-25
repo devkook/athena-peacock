@@ -20,7 +20,7 @@ Ext.define('Peacock.store.DashGuage2Store', {
         var me = this;
         cfg = cfg || {};
         me.callParent([Ext.apply({
-            storeId: 'MyJsonStore',
+            storeId: 'DashGuage2Store',
             data: [
                 {
                     data1: 43
