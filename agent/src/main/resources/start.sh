@@ -1,4 +1,2 @@
 #!/bin/sh
-nohup java -cp .:lib/* com.athena.peacock.agent.Starter > /dev/null 2>&1 &
-sleep 1
-tail -f log/athena-peacock-agent.log
+ps -ef | grep java | grep -v grep | grep "com.athena.peacock.agent.Starter" | awk {'print "kill -9 " $2'} | sh -x
