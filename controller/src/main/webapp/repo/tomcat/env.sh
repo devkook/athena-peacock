@@ -58,10 +58,10 @@ if [ "x$JAVA_OPTS" = "x" ]; then
    JAVA_OPTS="$JAVA_OPTS -XX:+HeapDumpOnOutOfMemoryError"
    JAVA_OPTS="$JAVA_OPTS -XX:HeapDumpPath=$CATALINA_BASE/logs/java_pid.hprof"
 
-   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote"
-   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.port=8086"
-   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.ssl=false"
-   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
+#   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote"
+#   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.port=8086"
+#   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.ssl=false"
+#   JAVA_OPTS="$JAVA_OPTS -Dcom.sun.management.jmxremote.authenticate=false"
 
    JAVA_OPTS="$JAVA_OPTS -Djava.net.preferIPv4Stack=true"
    JAVA_OPTS="$JAVA_OPTS -Dsun.rmi.dgc.client.gcInterval=3600000"
