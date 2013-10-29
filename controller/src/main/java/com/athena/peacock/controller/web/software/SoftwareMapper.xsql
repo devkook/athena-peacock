@@ -41,14 +41,14 @@
 		   AND SOFTWARE_ID = #{softwareId}
 	</update>
 	
-	<delete id="deleteSoftware" parameterType="com.athena.peacock.controller.web.software.SoftwareDto">
+	<update id="deleteSoftware" parameterType="com.athena.peacock.controller.web.software.SoftwareDto">
 		UPDATE software_tbl
 		   SET DELETE_YN = #{deleteYn}
 			   , UPD_USER_ID = #{updUserId}
 			   , UPD_DT = NOW()
 		 WHERE MACHINE_ID = #{machineId}
 		   AND SOFTWARE_ID = #{softwareId}
-	</delete>
+	</update>
 	
 	<select id="getSoftwareListCnt" parameterType="com.athena.peacock.controller.web.software.SoftwareDto" resultType="int">
 		SELECT COUNT(*)

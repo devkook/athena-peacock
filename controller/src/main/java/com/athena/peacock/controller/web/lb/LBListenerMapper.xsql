@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="LBListenerMapper">
+
+	<insert id="insertLBListener" parameterType="com.athena.peacock.controller.web.lb.LBListenerDto">
+		<selectKey keyProperty="listenerId" resultType="int" order="BEFORE" statementType="PREPARED">
+			SELECT IFNULL(MAX(LISTENER_ID), 0) + 1
+			  FROM lb_listener_tbl
+			 WHERE LOAD_BALANCER_ID = #{loadBalancerId}
+		</selectKey>
+		INSERT INTO lb_listener_tbl 
+			        (LOAD_BALANCER_ID, LISTENER_ID, PROTOCOL, LISTEN_PORT, STICKINESS_YN
+			         , BACKEND_PORT, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT) 
+		     VALUES (#{loadBalancerId}, #{listenerId}, #{protocol}, #{listenPort}, #{stickunessYn}
+		     		 , #{backendPort}, #{regUserId}, NOW(), #{updUserId}, NOW())
+	</insert>
+
+	<select id="getLBListener" parameterType="com.athena.peacock.controller.web.lb.LBListenerDto" resultType="com.athena.peacock.controller.web.lb.LBListenerDto">
+		SELECT LOAD_BALANCER_ID AS loadBalancerId
+			   , LISTENER_ID AS listenerId
+			   , PROTOCOL AS protocol
+			   , LISTEN_PORT AS listenPort
+			   , STICKINESS_YN AS stickunessYn
+			   , BACKEND_PORT AS backendPort
+			   , REG_USER_ID AS regUserId
+			   , REG_DT AS regDt
+			   , UPD_USER_ID AS updUserId
+			   , UPD_DT AS updDt
+		  FROM lb_listener_tbl
+		 WHERE LOAD_BALANCER_ID = #{loadBalancerId}
+		   AND LISTENER_ID = #{listenerId}
+	</select>
+	
+	<update id="updateLBListener" parameterType="com.athena.peacock.controller.web.lb.LBListenerDto">
+		UPDATE lb_listener_tbl
+		   SET PROTOCOL = #{protocol}
+			   , LISTEN_PORT = #{listenPort}
+			   , STICKINESS_YN = #{stickunessYn}
+			   , BACKEND_PORT = #{backendPort}
+			   , UPD_USER_ID = #{updUserId}
+			   , UPD_DT = NOW()
+		 WHERE LOAD_BALANCER_ID = #{loadBalancerId}
+		   AND LISTENER_ID = #{listenerId}
+	</update>
+	
+	<delete id="deleteLBListener" parameterType="com.athena.peacock.controller.web.lb.LBListenerDto">
+		DELETE FROM lb_listener_tbl 
+		 WHERE LOAD_BALANCER_ID = #{loadBalancerId}
+		   AND LISTENER_ID = #{listenerId}
+	</delete>
+	
+	<select id="getLBListenerList" parameterType="com.athena.peacock.controller.web.lb.LBListenerDto" resultType="int">
+		SELECT COUNT(*)
+		  FROM lb_listener_tbl
+		 WHERE 1=1
+		<if test="loadBalancerId != null">AND LOAD_BALANCER_ID = #{loadBalancerId}</if>
+		<if test="listenerId != null">AND LISTENER_ID = #{listenerId}</if>
+	</select>
+	
+	<select id="getLBListenerList" parameterType="com.athena.peacock.controller.web.lb.LBListenerDto" resultType="com.athena.peacock.controller.web.lb.LBListenerDto">
+		SELECT LOAD_BALANCER_ID AS loadBalancerId
+			   , LISTENER_ID AS listenerId
+			   , PROTOCOL AS protocol
+			   , LISTEN_PORT AS listenPort
+			   , STICKINESS_YN AS stickunessYn
+			   , BACKEND_PORT AS backendPort
+			   , REG_USER_ID AS regUserId
+			   , REG_DT AS regDt
+			   , UPD_USER_ID AS updUserId
+			   , UPD_DT AS updDt
+		  FROM lb_listener_tbl
+		 WHERE 1=1
+		<if test="loadBalancerId != null">AND LOAD_BALANCER_ID = #{loadBalancerId}</if>
+		<if test="listenerId != null">AND LISTENER_ID = #{listenerId}</if>
+		 LIMIT #{start}, #{limit}
+	</select>
+
+</mapper>
