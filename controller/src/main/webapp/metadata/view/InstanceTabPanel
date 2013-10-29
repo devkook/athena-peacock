@@ -645,6 +645,7 @@
             },
             "codeClass": null,
             "userConfig": {
+                "layout": "fit",
                 "title": "OS Package"
             },
             "designerId": "b215bd85-68ad-49c8-bc54-bfc7665ae384",
@@ -666,9 +667,18 @@
                     },
                     "codeClass": null,
                     "userConfig": {
+                        "data": [
+                            "[\r",
+                            "    ['11','222','3333','4444']\r",
+                            "]"
+                        ],
                         "id": "instOSPkgGrid",
+                        "autoScroll": true,
+                        "bodyBorder": true,
                         "header": false,
                         "title": "My Grid Panel",
+                        "columnLines": true,
+                        "forceFit": false,
                         "store": "OSPackageListStore"
                     },
                     "designerId": "48dd858f-5c9d-4c1d-b2cf-b984d3ec4930",
@@ -690,7 +700,8 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "pkg_name",
+                                "width": 200,
+                                "dataIndex": "name",
                                 "text": "Name"
                             },
                             "designerId": "4a336289-a3fd-40ec-842b-9e9d7b703cf9"
@@ -703,7 +714,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "pkg_arch",
+                                "dataIndex": "arch",
                                 "text": "Arch"
                             },
                             "designerId": "0da896a6-6903-43dc-8545-e2f11a5076ca"
@@ -729,7 +740,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "dataIndex": "release",
+                                "dataIndex": "releaseInfo",
                                 "text": "Release"
                             },
                             "designerId": "4692e5ff-5f05-49b1-94b4-23b52973acee"
@@ -755,6 +766,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
+                                "width": 200,
                                 "dataIndex": "summary",
                                 "text": "Summary"
                             },
@@ -768,7 +780,7 @@
                             },
                             "codeClass": null,
                             "userConfig": {
-                                "width": 200,
+                                "width": 300,
                                 "dataIndex": "description",
                                 "text": "Description"
                             },
@@ -781,7 +793,150 @@
                                 "type": "object"
                             },
                             "codeClass": null,
+                            "userConfig": {
+                                "id": null
+                            },
                             "designerId": "1182c72c-9c4f-4824-92be-ce471fcad0a9"
+                        },
+                        {
+                            "type": "Ext.toolbar.Paging",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "bottom",
+                                "border": null,
+                                "width": 360,
+                                "displayInfo": true,
+                                "store": "OSPackageListStore"
+                            },
+                            "designerId": "94d21a17-cc3f-4873-9316-5d6c52c94986"
+                        },
+                        {
+                            "type": "Ext.toolbar.Toolbar",
+                            "reference": {
+                                "name": "dockedItems",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "dock": "top"
+                            },
+                            "designerId": "eadd6e0e-b8ab-4eaa-84ab-e3dfebf11063",
+                            "cn": [
+                                {
+                                    "type": "Ext.button.Button",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "text": "Reload",
+                                        "tooltip": "패키지 정보 재 수집 요청"
+                                    },
+                                    "configAlternates": {
+                                        "tooltip": "string"
+                                    },
+                                    "designerId": "699e4a31-a6b9-430c-9530-7e832a668498",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onButtonClick",
+                                                "implHandler": [
+                                                    "\r",
+                                                    "Ext.MessageBox.confirm('Confirm', '패키지 정보를 재 수집합니다. 하시겠습니까?', function(btn){\r",
+                                                    "\r",
+                                                    "    if(btn == \"yes\"){\r",
+                                                    "\r",
+                                                    "        Ext.Ajax.request({\r",
+                                                    "            url: \"package/reload\",\r",
+                                                    "            params: {\r",
+                                                    "                machineId : Peacock.app.selectedRecord.get(\"machineId\")\r",
+                                                    "            },\r",
+                                                    "            waitMsg: 'request package reload...',\r",
+                                                    "            success: function(response){\r",
+                                                    "                var msg = Ext.JSON.decode(response.responseText).msg;\r",
+                                                    "\t\t\t\tExt.MessageBox.alert('알림', msg);\r",
+                                                    "               \r",
+                                                    "            }\r",
+                                                    "        });\r",
+                                                    "    }\r",
+                                                    "\r",
+                                                    "});"
+                                                ],
+                                                "name": "click",
+                                                "scope": "me"
+                                            },
+                                            "designerId": "18157775-20a1-4b50-a3e9-855063e613be"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "type": "Ext.toolbar.Separator",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null
+                                    },
+                                    "designerId": "42729d96-01af-4a41-afef-e599e5cd51dd"
+                                },
+                                {
+                                    "type": "Ext.form.field.Text",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "layout|flex": null,
+                                        "designer|displayName": "SearchTextField",
+                                        "fieldLabel": "Name :",
+                                        "labelWidth": 45,
+                                        "name": "name",
+                                        "enableKeyEvents": true
+                                    },
+                                    "designerId": "57969c48-469e-49c2-ae6f-685a71500ad6",
+                                    "cn": [
+                                        {
+                                            "type": "basiceventbinding",
+                                            "reference": {
+                                                "name": "listeners",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "fn": "onTextfieldSpecialkey",
+                                                "implHandler": [
+                                                    "if(e.getKey() == e.ENTER){\r",
+                                                    "\r",
+                                                    "    var gridStore = field.up(\"gridpanel\").getStore();\r",
+                                                    "\r",
+                                                    "    gridStore.getProxy().setExtraParam( \"name\", field.getRawValue() );\r",
+                                                    "\r",
+                                                    "    gridStore.load();\r",
+                                                    "}"
+                                                ],
+                                                "name": "specialkey",
+                                                "scope": "me"
+                                            },
+                                            "designerId": "84b835ab-ac40-4665-8006-2ec9ae773f40"
+                                        }
+                                    ]
+                                }
+                            ]
                         }
                     ]
                 }

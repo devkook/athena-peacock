@@ -18,7 +18,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "pkg_id",
+                "name": "pkgId",
                 "type": "int"
             },
             "designerId": "b56cc277-8631-4be1-930a-d8b8a1b4b5f6"
@@ -31,7 +31,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "pkg_name",
+                "name": "name",
                 "type": "string"
             },
             "designerId": "3e5ba4d5-e051-4ce9-91ed-94508dea4c2f"
@@ -44,7 +44,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "pkg_arch",
+                "name": "arch",
                 "type": "string"
             },
             "designerId": "478be659-f36b-402d-a2bf-8bce43aeca73"
@@ -70,7 +70,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "release",
+                "name": "releaseInfo",
                 "type": "string"
             },
             "designerId": "2bacfbd9-7107-4828-a9e3-5e2c6c2e8509"
@@ -96,7 +96,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "name": "iinstall_date",
+                "name": "installDate",
                 "type": "string"
             },
             "designerId": "5906e855-2675-47f6-8c23-f52f23b0361b"

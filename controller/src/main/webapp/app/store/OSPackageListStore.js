@@ -26,9 +26,11 @@ Ext.define('Peacock.store.OSPackageListStore', {
         me.callParent([Ext.apply({
             model: 'Peacock.model.OSPackageModel',
             storeId: 'MyJsonStore',
+            pageSize: 10,
+            trailingBufferZone: 20,
             proxy: {
                 type: 'ajax',
-                url: 'static/machineOSPkgList.json',
+                url: 'package/list',
                 reader: {
                     type: 'json',
                     root: 'list'

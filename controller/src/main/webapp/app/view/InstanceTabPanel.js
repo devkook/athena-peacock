@@ -310,13 +310,28 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                 },
                 {
                     xtype: 'panel',
+                    layout: {
+                        type: 'fit'
+                    },
                     title: 'OS Package',
                     items: [
                         {
                             xtype: 'gridpanel',
+                            data: [
+                                [
+                                    '11',
+                                    '222',
+                                    '3333',
+                                    '4444'
+                                ]
+                            ],
                             id: 'instOSPkgGrid',
+                            autoScroll: true,
+                            bodyBorder: true,
                             header: false,
                             title: 'My Grid Panel',
+                            columnLines: true,
+                            forceFit: false,
                             store: 'OSPackageListStore',
                             columns: [
                                 {
@@ -324,12 +339,13 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'pkg_name',
+                                    width: 200,
+                                    dataIndex: 'name',
                                     text: 'Name'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'pkg_arch',
+                                    dataIndex: 'arch',
                                     text: 'Arch'
                                 },
                                 {
@@ -339,7 +355,7 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    dataIndex: 'release',
+                                    dataIndex: 'releaseInfo',
                                     text: 'Release'
                                 },
                                 {
@@ -349,14 +365,57 @@ Ext.define('Peacock.view.InstanceTabPanel', {
                                 },
                                 {
                                     xtype: 'gridcolumn',
+                                    width: 200,
                                     dataIndex: 'summary',
                                     text: 'Summary'
                                 },
                                 {
                                     xtype: 'gridcolumn',
-                                    width: 200,
+                                    width: 300,
                                     dataIndex: 'description',
                                     text: 'Description'
+                                }
+                            ],
+                            dockedItems: [
+                                {
+                                    xtype: 'pagingtoolbar',
+                                    dock: 'bottom',
+                                    width: 360,
+                                    displayInfo: true,
+                                    store: 'OSPackageListStore'
+                                },
+                                {
+                                    xtype: 'toolbar',
+                                    dock: 'top',
+                                    items: [
+                                        {
+                                            xtype: 'button',
+                                            text: 'Reload',
+                                            tooltip: '패키지 정보 재 수집 요청',
+                                            listeners: {
+                                                click: {
+                                                    fn: me.onButtonClick,
+                                                    scope: me
+                                                }
+                                            }
+                                        },
+                                        {
+                                            xtype: 'tbseparator'
+                                        },
+                                        {
+                                            xtype: 'textfield',
+                                            fieldLabel: 'Name :',
+                                            labelWidth: 45,
+                                            name: 'name',
+                                            enableKeyEvents: true,
+                                            listeners: {
+                                                specialkey: {
+                                                    fn: me.onTextfieldSpecialkey,
+                                                    scope: me
+                                                }
+                                            }
+                                        }
+                                    ]
                                 }
                             ]
                         }
@@ -587,6 +646,40 @@ Ext.define('Peacock.view.InstanceTabPanel', {
         });
 
         me.callParent(arguments);
+    },
+
+    onButtonClick: function(button, e, eOpts) {
+
+        Ext.MessageBox.confirm('Confirm', '패키지 정보를 재 수집합니다. 하시겠습니까?', function(btn){
+
+            if(btn == "yes"){
+
+                Ext.Ajax.request({
+                    url: "package/reload",
+                    params: {
+                        machineId : Peacock.app.selectedRecord.get("machineId")
+                    },
+                    waitMsg: 'request package reload...',
+                    success: function(response){
+                        var msg = Ext.JSON.decode(response.responseText).msg;
+                        Ext.MessageBox.alert('알림', msg);
+
+                    }
+                });
+            }
+
+        });
+    },
+
+    onTextfieldSpecialkey: function(field, e, eOpts) {
+        if(e.getKey() == e.ENTER){
+
+            var gridStore = field.up("gridpanel").getStore();
+
+            gridStore.getProxy().setExtraParam( "name", field.getRawValue() );
+
+            gridStore.load();
+        }
     },
 
     onChartMouseEnter: function(e, eOpts) {

@@ -121,11 +121,11 @@
                 "implHandler": [
                     "if(e.getKey() == e.ENTER){\r",
                     "\r",
-                    "    Ext.getCmp(\"mainGridPanel\").getStore().load({\r",
-                    "        params:{\r",
-                    "            search: textfield.getRawValue()\r",
-                    "        }\r",
-                    "    });\r",
+                    "    var mainGridStore = Ext.getCmp(\"mainGridPanel\").getStore();\r",
+                    "\r",
+                    "    mainGridStore.getProxy().setExtraParam( \"search\", textfield.getRawValue() );\r",
+                    "\r",
+                    "    mainGridStore.load();\r",
                     "}"
                 ],
                 "name": "keydown",

@@ -88,11 +88,11 @@ Ext.define('Peacock.controller.MainToolbarController', {
     onTextfieldKeydown: function(textfield, e, eOpts) {
         if(e.getKey() == e.ENTER){
 
-            Ext.getCmp("mainGridPanel").getStore().load({
-                params:{
-                    search: textfield.getRawValue()
-                }
-            });
+            var mainGridStore = Ext.getCmp("mainGridPanel").getStore();
+
+            mainGridStore.getProxy().setExtraParam( "search", textfield.getRawValue() );
+
+            mainGridStore.load();
         }
     },
 

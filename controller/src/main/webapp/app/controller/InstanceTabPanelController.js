@@ -50,11 +50,9 @@ Ext.define('Peacock.controller.InstanceTabPanelController', {
             grid = Ext.getCmp('instOSPkgGrid');
 
 
-            grid.getStore().load({
-                params:{
-                    machineId : Peacock.app.selectedRecord.get("machineId")
-                }
-            });
+            grid.getStore().getProxy().setExtraParam( "machineId", Peacock.app.selectedRecord.get("machineId") )
+            grid.getStore().load();
+
 
         }else if(newCard.title == "Monitoring"){
 

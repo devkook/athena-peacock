@@ -479,6 +479,7 @@ Ext.define('Peacock.view.MainViewport', {
                                             region: 'center',
                                             id: 'mainGridPanel',
                                             minHeight: 100,
+                                            autoScroll: true,
                                             title: 'Grid Panel',
                                             columnLines: true,
                                             columns: [

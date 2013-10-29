@@ -8,7 +8,9 @@
     "userConfig": {
         "model": "OSPackageModel",
         "storeId": "MyJsonStore",
-        "designer|userClassName": "OSPackageListStore"
+        "designer|userClassName": "OSPackageListStore",
+        "pageSize": 10,
+        "trailingBufferZone": 20
     },
     "designerId": "dc9724ff-cc6e-4218-a964-0eef30683695",
     "cn": [
@@ -20,7 +22,7 @@
             },
             "codeClass": null,
             "userConfig": {
-                "url": "static/machineOSPkgList.json"
+                "url": "package/list"
             },
             "designerId": "5ac0eab6-fdc4-437f-a76a-b5f5fdcc2c5a",
             "cn": [

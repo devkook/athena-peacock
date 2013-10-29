@@ -18,15 +18,15 @@ Ext.define('Peacock.model.OSPackageModel', {
 
     fields: [
         {
-            name: 'pkg_id',
+            name: 'pkgId',
             type: 'int'
         },
         {
-            name: 'pkg_name',
+            name: 'name',
             type: 'string'
         },
         {
-            name: 'pkg_arch',
+            name: 'arch',
             type: 'string'
         },
         {
@@ -34,7 +34,7 @@ Ext.define('Peacock.model.OSPackageModel', {
             type: 'string'
         },
         {
-            name: 'release',
+            name: 'releaseInfo',
             type: 'string'
         },
         {
@@ -42,7 +42,7 @@ Ext.define('Peacock.model.OSPackageModel', {
             type: 'string'
         },
         {
-            name: 'iinstall_date',
+            name: 'installDate',
             type: 'string'
         },
         {
