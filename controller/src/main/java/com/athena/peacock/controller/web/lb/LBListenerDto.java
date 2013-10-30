@@ -34,9 +34,8 @@ public class LBListenerDto extends BaseDto {
 	private static final long serialVersionUID = 1L;
 	
 	private Integer loadBalancerId;
-	private Integer listenerId;
-	private String protocol;
 	private Integer listenPort;
+	private String protocol;
 	private String stickinessYn;
 	private Integer backendPort;
 
@@ -55,17 +54,17 @@ public class LBListenerDto extends BaseDto {
 	}
 
 	/**
-	 * @return the listenerId
+	 * @return the listenPort
 	 */
-	public Integer getListenerId() {
-		return listenerId;
+	public Integer getListenPort() {
+		return listenPort;
 	}
 
 	/**
-	 * @param listenerId the listenerId to set
+	 * @param listenPort the listenPort to set
 	 */
-	public void setListenerId(Integer listenerId) {
-		this.listenerId = listenerId;
+	public void setListenPort(Integer listenPort) {
+		this.listenPort = listenPort;
 	}
 
 	/**
@@ -80,20 +79,6 @@ public class LBListenerDto extends BaseDto {
 	 */
 	public void setProtocol(String protocol) {
 		this.protocol = protocol;
-	}
-
-	/**
-	 * @return the listenPort
-	 */
-	public Integer getListenPort() {
-		return listenPort;
-	}
-
-	/**
-	 * @param listenPort the listenPort to set
-	 */
-	public void setListenPort(Integer listenPort) {
-		this.listenPort = listenPort;
 	}
 
 	/**

@@ -57,9 +57,18 @@ public class LoadBalancerController {
 	@Named("lbListenerService")
 	private LBListenerService lbListenerService;
 	
+	/**
+	 * <pre>
+	 * L/B 목록을 조회한다.
+	 * </pre>
+	 * @param jsonRes
+	 * @param loadBalancer
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/list")
 	public @ResponseBody GridJsonResponse list(GridJsonResponse jsonRes, LoadBalancerDto loadBalancer) throws Exception {
-		Assert.notNull(loadBalancer.getMachineId(), "machineId can not be null.");
+		//Assert.notNull(loadBalancer.getMachineId(), "machineId can not be null.");
 		
 		jsonRes.setTotal(loadBalancerService.getLoadBalancerListCnt(loadBalancer));
 		jsonRes.setList(loadBalancerService.getLoadBalancerList(loadBalancer));
@@ -67,8 +76,17 @@ public class LoadBalancerController {
 		return jsonRes;
 	}
 	
-	@RequestMapping("/getListenerlist")
-	public @ResponseBody GridJsonResponse getListenerlist(GridJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
+	/**
+	 * <pre>
+	 * 해당 L/B의 Listener 목록을 조회한다.
+	 * </pre>
+	 * @param jsonRes
+	 * @param lbListener
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/listenerlist")
+	public @ResponseBody GridJsonResponse listenerlist(GridJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
 		Assert.notNull(lbListener.getLoadBalancerId(), "loadBalancerId can not be null.");
 		
 		jsonRes.setTotal(lbListenerService.getLBListenerListCnt(lbListener));
@@ -77,6 +95,35 @@ public class LoadBalancerController {
 		return jsonRes;
 	}
 	
+	/**
+	 * <pre>
+	 * 해당 L/B에 등록된 Agent(Machine) 목록을 조회한다.
+	 * </pre>
+	 * @param jsonRes
+	 * @param lbListener
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/machinelist")
+	public @ResponseBody GridJsonResponse machinelist(GridJsonResponse jsonRes, LoadBalancerDto loadBalancer) throws Exception {
+		Assert.notNull(loadBalancer.getLoadBalancerId(), "loadBalancerId can not be null.");
+		
+		jsonRes.setTotal(loadBalancerService.getLBMachineMapListCnt(loadBalancer));
+		jsonRes.setList(loadBalancerService.getLBMachineMapList(loadBalancer));
+		
+		return jsonRes;
+	}
+	
+	/**
+	 * <pre>
+	 * 새로운 L/B를 생성한다.
+	 * </pre>
+	 * @param request
+	 * @param jsonRes
+	 * @param loadBalancer
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("/create")
 	public @ResponseBody SimpleJsonResponse create(HttpServletRequest request, SimpleJsonResponse jsonRes, LoadBalancerDto loadBalancer) throws Exception {
 		Assert.notNull(loadBalancer.getMachineId(), "machineId can not be null.");
@@ -100,9 +147,78 @@ public class LoadBalancerController {
 		return jsonRes;
 	}
 	
-	@RequestMapping("/addRule")
-	public @ResponseBody SimpleJsonResponse addRule(HttpServletRequest request, SimpleJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
+	/**
+	 * <pre>
+	 * L/B에 Instance를 추가한다.
+	 * </pre>
+	 * @param request
+	 * @param jsonRes
+	 * @param loadBalancer
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/addMachine")
+	public @ResponseBody SimpleJsonResponse addMachine(HttpServletRequest request, SimpleJsonResponse jsonRes, LoadBalancerDto loadBalancer) throws Exception {
+		Assert.notNull(loadBalancer.getLoadBalancerId(), "loadBalancerId can not be null.");
+		Assert.notNull(loadBalancer.getMachineId(), "machineId can not be null.");
+
+		try {
+			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
+			if (userDto != null) {
+				loadBalancer.setRegUserId(userDto.getUser_id());
+				loadBalancer.setUpdUserId(userDto.getUser_id());
+			}
+			
+			loadBalancerService.insertLBMachineMap(loadBalancer);
+			jsonRes.setMsg("Instance가 추가되었습니다.");
+		} catch (Exception e) {
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("Instance 추가 중 에러가 발생하였습니다.");
+			
+			logger.error("Unhandled Expeption has occurred. ", e);
+		}
+		
+		return jsonRes;
+	}
+	
+	/**
+	 * <pre>
+	 * L/B에서 Instance를 제거한다.
+	 * </pre>
+	 * @param request
+	 * @param jsonRes
+	 * @param loadBalancer
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping("/deleteMachine")
+	public @ResponseBody SimpleJsonResponse deleteMachine(HttpServletRequest request, SimpleJsonResponse jsonRes, LoadBalancerDto loadBalancer) throws Exception {
+		Assert.notNull(loadBalancer.getLoadBalancerId(), "loadBalancerId can not be null.");
+		Assert.notNull(loadBalancer.getMachineId(), "machineId can not be null.");
+
+		try {
+			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
+			if (userDto != null) {
+				loadBalancer.setRegUserId(userDto.getUser_id());
+				loadBalancer.setUpdUserId(userDto.getUser_id());
+			}
+			
+			loadBalancerService.deleteLBMachineMap(loadBalancer);
+			jsonRes.setMsg("Instance가 삭제되었습니다.");
+		} catch (Exception e) {
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("Instance 삭제 중 에러가 발생하였습니다.");
+			
+			logger.error("Unhandled Expeption has occurred. ", e);
+		}
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/addListener")
+	public @ResponseBody SimpleJsonResponse addListener(HttpServletRequest request, SimpleJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
 		Assert.notNull(lbListener.getLoadBalancerId(), "loadBalancerId can not be null.");
+		Assert.notNull(lbListener.getListenPort(), "listenPort can not be null.");
 
 		try {
 			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
@@ -112,10 +228,10 @@ public class LoadBalancerController {
 			}
 			
 			lbListenerService.insertLBListener(lbListener);
-			jsonRes.setMsg("Load Balancer Rule이 추가되었습니다.");
+			jsonRes.setMsg("Load Balancer Listener 설정이 추가되었습니다.");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
-			jsonRes.setMsg("Load Balancer Rule 추가 중 에러가 발생하였습니다.");
+			jsonRes.setMsg("Load Balancer Listener 설정 추가 중 에러가 발생하였습니다.");
 			
 			logger.error("Unhandled Expeption has occurred. ", e);
 		}
@@ -123,9 +239,10 @@ public class LoadBalancerController {
 		return jsonRes;
 	}
 	
-	@RequestMapping("/updateRule")
-	public @ResponseBody SimpleJsonResponse updateRule(HttpServletRequest request, SimpleJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
+	@RequestMapping("/updateListener")
+	public @ResponseBody SimpleJsonResponse updateListener(HttpServletRequest request, SimpleJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
 		Assert.notNull(lbListener.getLoadBalancerId(), "loadBalancerId can not be null.");
+		Assert.notNull(lbListener.getListenPort(), "listenPort can not be null.");
 
 		try {
 			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
@@ -135,10 +252,34 @@ public class LoadBalancerController {
 			}
 			
 			lbListenerService.updateLBListener(lbListener);
-			jsonRes.setMsg("Load Balancer Rule이 수정되었습니다.");
+			jsonRes.setMsg("Load Balancer Listener 설정이 수정되었습니다.");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
-			jsonRes.setMsg("Load Balancer Rule 수정 중 에러가 발생하였습니다.");
+			jsonRes.setMsg("Load Balancer Listener 설정 수정 중 에러가 발생하였습니다.");
+			
+			logger.error("Unhandled Expeption has occurred. ", e);
+		}
+		
+		return jsonRes;
+	}
+	
+	@RequestMapping("/deleteListener")
+	public @ResponseBody SimpleJsonResponse deleteListener(HttpServletRequest request, SimpleJsonResponse jsonRes, LBListenerDto lbListener) throws Exception {
+		Assert.notNull(lbListener.getLoadBalancerId(), "loadBalancerId can not be null.");
+		Assert.notNull(lbListener.getListenPort(), "listenPort can not be null.");
+
+		try {
+			UserDto userDto = (UserDto)request.getSession().getAttribute(UserController.SESSION_USER_KEY);
+			if (userDto != null) {
+				lbListener.setRegUserId(userDto.getUser_id());
+				lbListener.setUpdUserId(userDto.getUser_id());
+			}
+			
+			lbListenerService.deleteLBListener(lbListener);
+			jsonRes.setMsg("Load Balancer Listener 설정이 삭제되었습니다.");
+		} catch (Exception e) {
+			jsonRes.setSuccess(false);
+			jsonRes.setMsg("Load Balancer Listener 설정 삭제 중 에러가 발생하였습니다.");
 			
 			logger.error("Unhandled Expeption has occurred. ", e);
 		}
@@ -154,10 +295,10 @@ public class LoadBalancerController {
 		try {			
 			String urlPrefix = "http://" + request.getServerName() + ":" + request.getServerPort() + "/" + request.getContextPath() + "/repo";
 			lbListenerService.applyListener(loadBalancer, urlPrefix);
-			jsonRes.setMsg("Load Balancer Rule이 적용되었습니다.");
+			jsonRes.setMsg("Load Balancer Listener 설정이 적용되었습니다.");
 		} catch (Exception e) {
 			jsonRes.setSuccess(false);
-			jsonRes.setMsg("Load Balancer Rule 적용 중 에러가 발생하였습니다.");
+			jsonRes.setMsg("Load Balancer Listener 설정 적용 중 에러가 발생하였습니다.");
 			
 			logger.error("Unhandled Expeption has occurred. ", e);
 		}

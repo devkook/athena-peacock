@@ -59,6 +59,10 @@ public class LoadBalancerService {
 	private LoadBalancerDao loadBalancerDao;
 	
 	@Inject
+	@Named("lbMachineMapDao")
+	private LBMachineMapDao lbMachineMapDao;
+	
+	@Inject
 	@Named("machineDao")
 	private MachineDao machineDao;
 	
@@ -88,6 +92,22 @@ public class LoadBalancerService {
 	
 	public List<LoadBalancerDto> getLoadBalancerList(LoadBalancerDto loadBalancer) throws Exception {
 		return loadBalancerDao.getLoadBalancerList(loadBalancer);
+	}
+
+	public void insertLBMachineMap(LoadBalancerDto loadBalancer) {
+		lbMachineMapDao.insertLBMachineMap(loadBalancer);
+	}
+
+	public void deleteLBMachineMap(LoadBalancerDto loadBalancer) {
+		lbMachineMapDao.deleteLBMachineMap(loadBalancer);
+	}
+
+	public int getLBMachineMapListCnt(LoadBalancerDto loadBalancer) {
+		return lbMachineMapDao.getLBMachineMapListCnt(loadBalancer);
+	}
+
+	public List<?> getLBMachineMapList(LoadBalancerDto loadBalancer) {
+		return lbMachineMapDao.getLBMachineMapList(loadBalancer);
 	}
 
 	public boolean createLoadBalancer(LoadBalancerDto loadBalancer) throws Exception {

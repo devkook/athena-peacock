@@ -104,10 +104,10 @@ public class LBListenerService {
 		
 		List<LoadBalancerDto> machineList = lbMachineMapDao.getLBMachineMapList(dto2);
 		
-		int idx1 = 1, idx2 = 1;
+		int idx = 1;
 		StringBuilder sb = new StringBuilder();
 		for (LBListenerDto lbListener : lbListenerList) {
-			sb.append("listen").append("\t").append("listener-" + idx1++).append(" :").append(lbListener.getListenPort()).append("\n");
+			sb.append("\n").append("listen").append("\t").append("listener-" + lbListener.getListenPort()).append(" :").append(lbListener.getListenPort()).append("\n");
 
 			if (lbListener.getProtocol().toLowerCase().equals("tcp")) {
 				sb.append("\t").append("mode").append("\t").append("tcp").append("\n");
@@ -124,18 +124,19 @@ public class LBListenerService {
 				}
 			}
 			
-			idx2 = 1;
+			idx = 1;
 			for (LoadBalancerDto machine : machineList) {
-				sb.append("\t").append("server").append("\t").append("s-" + idx2).append(" ").append(machine.getIpAddr()).append(":").append(lbListener.getBackendPort()).append(" check");
+				sb.append("\t").append("server").append("\t").append("svr-" + idx).append(" ").append(machine.getIpAddr()).append(":").append(lbListener.getBackendPort()).append(" check");
 				
 				if (lbListener.getProtocol().toLowerCase().equals("http") && "Y".equals(lbListener.getStickinessYn().toUpperCase())) {
-					sb.append(" cookie ").append("s-" + idx2);
+					sb.append(" cookie ").append("svr-" + idx);
 				}
 				
 				sb.append("\n");
-				idx2++;
+				idx++;
 			}
 		}
+		sb.append("\n");
 
 		ProvisioningCommandMessage cmdMsg = new ProvisioningCommandMessage();
 		cmdMsg.setAgentId(loadBalancer.getMachineId());
@@ -145,7 +146,7 @@ public class LBListenerService {
 		int sequence = 0;
 		
 		String haproxyCfg = IOUtils.toString(new URL(urlPrefix + "/haproxy/haproxy.cfg"), "UTF-8");
-		haproxyCfg = haproxyCfg.replaceAll("\\$\\{PROXY_SETTING\\}", sb.toString());
+		haproxyCfg = haproxyCfg.replaceAll("#\\$\\{PROXY_SETTING\\}", sb.toString());
 		
 		FileWriteAction fw_action = new FileWriteAction(sequence++);
 		fw_action.setContents(haproxyCfg);

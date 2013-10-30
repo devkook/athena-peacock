@@ -40,12 +40,12 @@ public class LBMachineMapDao extends AbstractBaseDao {
 		sqlSession.insert("LBMachineMapMapper.insertLBMachineMap", loadBalancer);
 	}
 	
-	public void deleteLBMachineMap(int loadBalancerId) {
-		sqlSession.delete("LBMachineMapMapper.deleteLBMachineMap", loadBalancerId);
+	public void deleteLBMachineMap(LoadBalancerDto loadBalancer) {
+		sqlSession.delete("LBMachineMapMapper.deleteLBMachineMap", loadBalancer);
 	}
 	
-	public LoadBalancerDto getLBMachineMap(int loadBalancerId) {
-		return sqlSession.selectOne("LBMachineMapMapper.getLBMachineMap", loadBalancerId);
+	public LoadBalancerDto getLBMachineMap(LoadBalancerDto loadBalancer) {
+		return sqlSession.selectOne("LBMachineMapMapper.getLBMachineMap", loadBalancer);
 	}
 
 	public int getLBMachineMapListCnt(LoadBalancerDto loadBalancer) {
