@@ -203,6 +203,9 @@ public class RHEVMRestTemplate implements InitializingBean {
 		RestTemplate rt = new RestTemplate();
 		ResponseEntity<?> response = rt.exchange(getUrl(api), HttpMethod.GET, setHTTPHeader(), clazz);
 		
+		logger.debug("[Request URL] : {}", getUrl(api));
+		logger.debug("[Response] : {}", response);
+		
 		return clazz.cast(response.getBody());
 	}//end of submit()
 }
