@@ -48,7 +48,7 @@
 		   AND CONFIG_FILE_ID = #{configFileId}
 	</update>
 	
-	<delete id="deleteConfig" parameterType="com.athena.peacock.controller.web.config.ConfigDto">
+	<update id="deleteConfig" parameterType="com.athena.peacock.controller.web.config.ConfigDto">
 		UPDATE config_tbl
 		   SET DELETE_YN = 'Y'
 			   , UPD_USER_ID = #{updUserId}
@@ -57,7 +57,7 @@
 		   AND SOFTWARE_ID = #{softwareId}
 		   AND DELETE_YN = 'N'
 		<if test="configFileId != null">AND CONFIG_FILE_ID = #{configFileId}</if>
-	</delete>
+	</update>
 	
 	<select id="getConfigListCnt" parameterType="com.athena.peacock.controller.web.config.ConfigDto" resultType="int">
 		SELECT COUNT(*)

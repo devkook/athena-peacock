@@ -332,9 +332,10 @@ ENGINE = InnoDB;
 -- Table `peacock`.`load_balancer_tbl`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `peacock`.`load_balancer_tbl` (
-  `LOAD_BALANCER_ID` INT(11) NOT NULL,
-  `LOAD_BALANCER_NAME` VARCHAR(45) NULL,
-  `LB_IP_ADDR` VARCHAR(45) NULL,
+  `LOAD_BALANCER_ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `MACHINE_ID` VARCHAR(32) NOT NULL,
+  `LB_NAME` VARCHAR(45) NULL,
+  `LB_DNS_NAME` VARCHAR(255) NULL,
   `AS_GROUP_ID` INT(11) NULL,
   `REG_USER_ID` INT(11) NULL,
   `REG_DT` DATETIME NULL,
@@ -342,32 +343,13 @@ CREATE TABLE IF NOT EXISTS `peacock`.`load_balancer_tbl` (
   `UPD_DT` DATETIME NULL,
   PRIMARY KEY (`LOAD_BALANCER_ID`),
   INDEX `fk_LOAD_BALANCER_TBL_AS_GROUP_TBL1_idx` (`AS_GROUP_ID` ASC),
+  INDEX `fk_load_balancer_tbl_machine_tbl1_idx` (`MACHINE_ID` ASC),
   CONSTRAINT `fk_LOAD_BALANCER_TBL_AS_GROUP_TBL1`
     FOREIGN KEY (`AS_GROUP_ID`)
     REFERENCES `peacock`.`as_group_tbl` (`AS_GROUP_ID`)
     ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `peacock`.`lb_machine_map_tbl`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `peacock`.`lb_machine_map_tbl` (
-  `LOAD_BALANCER_ID` INT(11) NOT NULL,
-  `MACHINE_ID` VARCHAR(32) NOT NULL,
-  `REG_USER_ID` INT(11) NULL,
-  `REG_DT` DATETIME NULL,
-  `UPD_USER_ID` INT(11) NULL,
-  `UPD_DT` DATETIME NULL,
-  INDEX `fk_LB_MACHINE_MAP_TBL_LOAD_BALANCER_TBL1_idx` (`LOAD_BALANCER_ID` ASC),
-  INDEX `fk_LB_MACHINE_MAP_TBL_MACHINE_TBL1_idx` (`MACHINE_ID` ASC),
-  CONSTRAINT `fk_LB_MACHINE_MAP_TBL_LOAD_BALANCER_TBL1`
-    FOREIGN KEY (`LOAD_BALANCER_ID`)
-    REFERENCES `peacock`.`load_balancer_tbl` (`LOAD_BALANCER_ID`)
-    ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `fk_LB_MACHINE_MAP_TBL_MACHINE_TBL1`
+  CONSTRAINT `fk_load_balancer_tbl_machine_tbl1`
     FOREIGN KEY (`MACHINE_ID`)
     REFERENCES `peacock`.`machine_tbl` (`MACHINE_ID`)
     ON DELETE NO ACTION
@@ -445,6 +427,54 @@ CREATE TABLE IF NOT EXISTS `peacock`.`provisioning_item_tbl` (
   CONSTRAINT `fk_provisioning_item_tbl_software_repo_tbl1`
     FOREIGN KEY (`SOFTWARE_ID`)
     REFERENCES `peacock`.`software_repo_tbl` (`SOFTWARE_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `peacock`.`lb_listener_tbl`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `peacock`.`lb_listener_tbl` (
+  `LOAD_BALANCER_ID` INT(11) NOT NULL,
+  `LISTEN_PORT` INT(11) NOT NULL,
+  `PROTOCOL` VARCHAR(5) NULL,
+  `STICKINESS_YN` CHAR(1) NOT NULL DEFAULT 'N',
+  `BACKEND_PORT` INT(11) NULL,
+  `REG_USER_ID` INT(11) NULL,
+  `REG_DT` DATETIME NULL,
+  `UPD_USER_ID` INT(11) NULL,
+  `UPD_DT` DATETIME NULL,
+  PRIMARY KEY (`LOAD_BALANCER_ID`, `LISTEN_PORT`),
+  INDEX `fk_lb_rules_tbl_load_balancer_tbl1_idx` (`LOAD_BALANCER_ID` ASC),
+  CONSTRAINT `fk_lb_rules_tbl_load_balancer_tbl1`
+    FOREIGN KEY (`LOAD_BALANCER_ID`)
+    REFERENCES `peacock`.`load_balancer_tbl` (`LOAD_BALANCER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `peacock`.`lb_machine_map_tbl`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `peacock`.`lb_machine_map_tbl` (
+  `LOAD_BALANCER_ID` INT(11) NOT NULL,
+  `MACHINE_ID` VARCHAR(32) NOT NULL,
+  `REG_USER_ID` INT(11) NULL,
+  `REG_DT` DATETIME NULL,
+  `UPD_USER_ID` INT(11) NULL,
+  `UPD_DT` DATETIME NULL,
+  PRIMARY KEY (`LOAD_BALANCER_ID`, `MACHINE_ID`),
+  INDEX `fk_lb_machine_map_tbl_machine_tbl1_idx` (`MACHINE_ID` ASC),
+  CONSTRAINT `fk_lb_machine_map_tbl_load_balancer_tbl1`
+    FOREIGN KEY (`LOAD_BALANCER_ID`)
+    REFERENCES `peacock`.`load_balancer_tbl` (`LOAD_BALANCER_ID`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_lb_machine_map_tbl_machine_tbl1`
+    FOREIGN KEY (`MACHINE_ID`)
+    REFERENCES `peacock`.`machine_tbl` (`MACHINE_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
