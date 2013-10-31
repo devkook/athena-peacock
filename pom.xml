@@ -447,6 +447,12 @@
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.21</version>
-		</dependency>		            
+		</dependency>		
+		
+		<dependency>
+			<groupId>com.redhat.rhevm.api</groupId>
+			<artifactId>rhevm-api</artifactId>
+			<version>1.0-rc1.21</version>
+		</dependency>            
 	</dependencies>
 </project>
