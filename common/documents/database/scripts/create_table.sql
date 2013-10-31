@@ -461,6 +461,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `peacock`.`lb_machine_map_tbl` (
   `LOAD_BALANCER_ID` INT(11) NOT NULL,
   `MACHINE_ID` VARCHAR(32) NOT NULL,
+  `BACKUP_YN` CHAR(1) NOT NULL DEFAULT 'N' COMMENT 'The server is only used in load balancing when all other non-backup servers are unavailable.',
   `REG_USER_ID` INT(11) NULL,
   `REG_DT` DATETIME NULL,
   `UPD_USER_ID` INT(11) NULL,

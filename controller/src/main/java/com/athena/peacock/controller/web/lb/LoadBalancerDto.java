@@ -41,6 +41,7 @@ public class LoadBalancerDto extends BaseDto {
 	
 	// machine_tbl의 IP_ADDR 조회 용
 	private String ipAddr;
+	private String backupYn;
 
 	/**
 	 * @return the loadBalancerId
@@ -124,6 +125,20 @@ public class LoadBalancerDto extends BaseDto {
 	 */
 	public void setIpAddr(String ipAddr) {
 		this.ipAddr = ipAddr;
+	}
+
+	/**
+	 * @return the backupYn
+	 */
+	public String getBackupYn() {
+		return backupYn;
+	}
+
+	/**
+	 * @param backupYn the backupYn to set
+	 */
+	public void setBackupYn(String backupYn) {
+		this.backupYn = backupYn;
 	}
 }
 //end of LoadBalancerDto.java

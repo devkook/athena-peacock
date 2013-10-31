@@ -104,7 +104,6 @@ public class LBListenerService {
 		
 		List<LoadBalancerDto> machineList = lbMachineMapDao.getLBMachineMapList(dto2);
 		
-		int idx = 1;
 		StringBuilder sb = new StringBuilder();
 		for (LBListenerDto lbListener : lbListenerList) {
 			sb.append("\n").append("listen").append("\t").append("listener-" + lbListener.getListenPort()).append(" :").append(lbListener.getListenPort()).append("\n");
@@ -124,16 +123,18 @@ public class LBListenerService {
 				}
 			}
 			
-			idx = 1;
 			for (LoadBalancerDto machine : machineList) {
-				sb.append("\t").append("server").append("\t").append("svr-" + idx).append(" ").append(machine.getIpAddr()).append(":").append(lbListener.getBackendPort()).append(" check");
+				sb.append("\t").append("server").append("\t").append(machine.getIpAddr()).append(" ").append(machine.getIpAddr()).append(":").append(lbListener.getBackendPort()).append(" check");
 				
 				if (lbListener.getProtocol().toLowerCase().equals("http") && "Y".equals(lbListener.getStickinessYn().toUpperCase())) {
-					sb.append(" cookie ").append("svr-" + idx);
+					sb.append(" cookie ").append(machine.getIpAddr());
+				}
+				
+				if ("Y".equals(machine.getBackupYn())) {
+					sb.append(" backup");
 				}
 				
 				sb.append("\n");
-				idx++;
 			}
 		}
 		sb.append("\n");
@@ -156,7 +157,7 @@ public class LBListenerService {
 		ShellAction s_action = new ShellAction(sequence++);
 		s_action.setCommand("service");
 		s_action.addArguments("haproxy");
-		s_action.addArguments("restart");
+		s_action.addArguments("reload");
 		command.addAction(s_action);
 		
 		// Add HAProxy INSTALL Command
