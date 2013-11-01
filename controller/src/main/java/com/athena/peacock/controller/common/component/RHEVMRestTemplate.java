@@ -73,8 +73,6 @@ public class RHEVMRestTemplate implements InitializingBean {
 	@Value("#{contextProperties['rhev.manager.password']}")
 	private String password;
 	
-	private final String credential = getCredential(username, domain, password);
-	
 	/* (non-Javadoc)
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
 	 */
@@ -137,7 +135,7 @@ public class RHEVMRestTemplate implements InitializingBean {
 	private HttpEntity<Object> setHTTPHeader() {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.set(HOST_HEADER_KEY, host);
-		requestHeaders.set(AUTH_HEADER_KEY, credential);
+		requestHeaders.set(AUTH_HEADER_KEY, getCredential(username, domain, password));
 		
 		return new HttpEntity<Object>(requestHeaders);
 	}//end of addAuth()
