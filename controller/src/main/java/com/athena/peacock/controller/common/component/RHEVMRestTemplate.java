@@ -34,6 +34,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.InitializingBean;
@@ -43,6 +44,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -72,6 +75,8 @@ public class RHEVMRestTemplate implements InitializingBean {
 	private String username;
 	@Value("#{contextProperties['rhev.manager.password']}")
 	private String password;
+	
+	private String credential;
 	
 	/* (non-Javadoc)
 	 * @see org.springframework.beans.factory.InitializingBean#afterPropertiesSet()
@@ -135,7 +140,7 @@ public class RHEVMRestTemplate implements InitializingBean {
 	private HttpEntity<Object> setHTTPHeader() {
 		HttpHeaders requestHeaders = new HttpHeaders();
 		requestHeaders.set(HOST_HEADER_KEY, host);
-		requestHeaders.set(AUTH_HEADER_KEY, getCredential(username, domain, password));
+		requestHeaders.set(AUTH_HEADER_KEY, getCredential());
 		
 		return new HttpEntity<Object>(requestHeaders);
 	}//end of addAuth()
@@ -144,19 +149,16 @@ public class RHEVMRestTemplate implements InitializingBean {
 	 * <pre>
 	 * RHEV Manager에 전달하기 위한 인증 정보를 생성한다. 
 	 * </pre>
-	 * @param username
-	 * @param domain
-	 * @param password
 	 * @return
 	 */
-	public String getCredential(String username, String domain, String password) {
-		String credential = null;
-		
-		try {
-			String plain = username + "@" + domain + ":" + password;
-			credential = "Basic " + Base64.encodeBase64String(plain.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			logger.error("UnsupportedEncodingException has occurred.", e);
+	public String getCredential() {
+		if (credential == null) {
+			try {
+				String plain = username + "@" + domain + ":" + password;
+				credential = "Basic " + Base64.encodeBase64String(plain.getBytes("UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				logger.error("UnsupportedEncodingException has occurred.", e);
+			}
 		}
 		
 		return credential;
@@ -196,15 +198,28 @@ public class RHEVMRestTemplate implements InitializingBean {
 	 * @param api RHEV Manager API (/api, /api/vms 등)
 	 * @param clazz 변환될 Target Object Class
 	 * @return
+	 * @throws RestClientException
+	 * @throws Exception
 	 */
-	public <T> T submit(String api, Class<T> clazz) {
-		RestTemplate rt = new RestTemplate();
-		ResponseEntity<?> response = rt.exchange(getUrl(api), HttpMethod.GET, setHTTPHeader(), clazz);
+	public <T> T submit(String api, Class<T> clazz) throws RestClientException, Exception {
+		Assert.isTrue(StringUtils.isNotEmpty(api), "api must not be null");
+		Assert.notNull(clazz, "clazz must not be null.");
 		
-		logger.debug("[Request URL] : {}", getUrl(api));
-		logger.debug("[Response] : {}", response);
-		
-		return clazz.cast(response.getBody());
+		try {
+			RestTemplate rt = new RestTemplate();
+			ResponseEntity<?> response = rt.exchange(getUrl(api), HttpMethod.GET, setHTTPHeader(), clazz);
+			
+			logger.debug("[Request URL] : {}", getUrl(api));
+			logger.debug("[Response] : {}", response);
+			
+			return clazz.cast(response.getBody());
+		} catch (RestClientException e) {
+			logger.error("RestClientException has occurred.", e);
+			throw e;
+		} catch (Exception e) {
+			logger.error("Unhandled Exception has occurred.", e);
+			throw e;
+		}
 	}//end of submit()
 }
 //end of RHEVMRestTemplate.java

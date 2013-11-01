@@ -265,40 +265,19 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `peacock`.`as_launch_config_tbl`
+-- Table `peacock`.`auto_scaling_tbl`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `peacock`.`as_launch_config_tbl` (
-  `LAUNCH_CONFIG_ID` VARCHAR(20) NOT NULL,
-  `LAUNCH_IMG_ID` VARCHAR(45) NULL,
-  `INSTANCE_TYPE` VARCHAR(20) NULL,
+CREATE TABLE IF NOT EXISTS `peacock`.`auto_scaling_tbl` (
+  `AUTO_SCALING_ID` INT(11) NOT NULL AUTO_INCREMENT,
+  `AUTO_SCALING_NAME` VARCHAR(45) NULL,
+  `VM_TEMPLATE_ID` VARCHAR(45) NULL COMMENT 'RHEV에 생성되어 있는 VM Image Template ID',
+  `MIN_MACHINE_SIZE` INT(11) NULL COMMENT 'Auto Scaling 시 동작되어지는 최소 머신(인스턴스) 수',
+  `MAX_MACHINE_SIZE` INT(11) NULL COMMENT 'Auto Scaling 시 동작되어지는 최대 머신(인스턴스) 수',
   `REG_USER_ID` INT(11) NULL,
   `REG_DT` DATETIME NULL,
   `UPD_USER_ID` INT(11) NULL,
   `UPD_DT` DATETIME NULL,
-  PRIMARY KEY (`LAUNCH_CONFIG_ID`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `peacock`.`as_group_tbl`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `peacock`.`as_group_tbl` (
-  `AS_GROUP_ID` INT(11) NOT NULL,
-  `AS_GROU_NAME` VARCHAR(45) NULL,
-  `MIN_SIZE` INT(11) NULL,
-  `MAX_SIZE` INT(11) NULL,
-  `LAUNCH_CONFIG_ID` VARCHAR(20) NOT NULL,
-  `REG_USER_ID` INT(11) NULL,
-  `REG_DT` DATETIME NULL,
-  `UPD_USER_ID` INT(11) NULL,
-  `UPD_DT` DATETIME NULL,
-  PRIMARY KEY (`AS_GROUP_ID`, `LAUNCH_CONFIG_ID`),
-  INDEX `fk_AS_GROUP_AS_LAUNCH_CONFIG_TBL1_idx` (`LAUNCH_CONFIG_ID` ASC),
-  CONSTRAINT `fk_AS_GROUP_AS_LAUNCH_CONFIG_TBL1`
-    FOREIGN KEY (`LAUNCH_CONFIG_ID`)
-    REFERENCES `peacock`.`as_launch_config_tbl` (`LAUNCH_CONFIG_ID`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  PRIMARY KEY (`AUTO_SCALING_ID`))
 ENGINE = InnoDB;
 
 
@@ -306,23 +285,24 @@ ENGINE = InnoDB;
 -- Table `peacock`.`as_policy_tbl`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `peacock`.`as_policy_tbl` (
-  `POLICY_ID` INT(11) NOT NULL,
-  `AS_GROUP_ID` INT(11) NOT NULL,
+  `AUTO_SCALING_ID` INT(11) NOT NULL,
   `POLICY_NAME` VARCHAR(45) NULL,
-  `ADJUST_SIZE` INT(11) NULL,
-  `CHECK_TYPE` INT(1) NULL,
-  `PERIOD` INT(11) NULL,
-  `INCREASE_BASE` INT(3) NULL,
-  `DECREASE_BASE` INT(3) NULL,
+  `MON_FACTOR_ID` VARCHAR(10) NULL COMMENT '검사 대상 모니터링 항목',
+  `THRESHOLD_UP_LIMIT` INT(11) NULL COMMENT '사용자 정의 임계치 최대 값',
+  `THRESHOLD_DOWN_LIMIT` INT(11) NULL COMMENT '사용자 정의 임계치 최소 값',
+  `THRESHOLD_UP_PERIOD` INT(11) NULL COMMENT '정의된 모니터링 항목의 측정 값이 최대 임계치를 초과하여 유지될 수 있는 분단위 값으로 해당 시간동안 최대 임계치 이상을 유지할 경우 Scale Up 대상이 된다.',
+  `THRESHOLD_DOWN_PERIOD` INT(11) NULL COMMENT '정의된 모니터링 항목의 측정 값이 최소 임계치 이하에서 유지될 수 있는 분단위 값으로 해당 시간동안 최소 임계치 이하를 유지할 경우 Scale Down 대상이 된다.',
+  `INCREASE_UNIT` INT(3) NULL COMMENT 'Scale Up 시 생성되어야 할 머신(인스턴스) 갯수',
+  `DECREASE_UNIT` INT(3) NULL COMMENT 'Scale Down 시 생성되어야 할 머신(인스턴스) 갯수',
   `REG_USER_ID` INT(11) NULL,
   `REG_DT` DATETIME NULL,
   `UPD_USER_ID` INT(11) NULL,
   `UPD_DT` DATETIME NULL,
-  PRIMARY KEY (`POLICY_ID`, `AS_GROUP_ID`),
-  INDEX `fk_AS_POLICY_AS_GROUP1_idx` (`AS_GROUP_ID` ASC),
-  CONSTRAINT `fk_AS_POLICY_AS_GROUP1`
-    FOREIGN KEY (`AS_GROUP_ID`)
-    REFERENCES `peacock`.`as_group_tbl` (`AS_GROUP_ID`)
+  PRIMARY KEY (`AUTO_SCALING_ID`),
+  INDEX `fk_as_policy_tbl_auto_scaling_tbl1_idx` (`AUTO_SCALING_ID` ASC),
+  CONSTRAINT `fk_as_policy_tbl_auto_scaling_tbl1`
+    FOREIGN KEY (`AUTO_SCALING_ID`)
+    REFERENCES `peacock`.`auto_scaling_tbl` (`AUTO_SCALING_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -336,17 +316,17 @@ CREATE TABLE IF NOT EXISTS `peacock`.`load_balancer_tbl` (
   `MACHINE_ID` VARCHAR(32) NOT NULL,
   `LB_NAME` VARCHAR(45) NULL,
   `LB_DNS_NAME` VARCHAR(255) NULL,
-  `AS_GROUP_ID` INT(11) NULL,
+  `AUTO_SCALING_ID` INT(11) NULL,
   `REG_USER_ID` INT(11) NULL,
   `REG_DT` DATETIME NULL,
   `UPD_USER_ID` INT(11) NULL,
   `UPD_DT` DATETIME NULL,
   PRIMARY KEY (`LOAD_BALANCER_ID`),
-  INDEX `fk_LOAD_BALANCER_TBL_AS_GROUP_TBL1_idx` (`AS_GROUP_ID` ASC),
+  INDEX `fk_LOAD_BALANCER_TBL_AS_GROUP_TBL1_idx` (`AUTO_SCALING_ID` ASC),
   INDEX `fk_load_balancer_tbl_machine_tbl1_idx` (`MACHINE_ID` ASC),
   CONSTRAINT `fk_LOAD_BALANCER_TBL_AS_GROUP_TBL1`
-    FOREIGN KEY (`AS_GROUP_ID`)
-    REFERENCES `peacock`.`as_group_tbl` (`AS_GROUP_ID`)
+    FOREIGN KEY (`AUTO_SCALING_ID`)
+    REFERENCES `peacock`.`auto_scaling_tbl` (`AUTO_SCALING_ID`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_load_balancer_tbl_machine_tbl1`

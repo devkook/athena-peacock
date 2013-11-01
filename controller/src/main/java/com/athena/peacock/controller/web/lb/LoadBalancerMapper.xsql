@@ -5,8 +5,8 @@
 
 	<insert id="insertLoadBalancer" parameterType="com.athena.peacock.controller.web.lb.LoadBalancerDto">
 		INSERT INTO load_balancer_tbl 
-			        (MACHINE_ID, LB_NAME, LB_DNS_NAME, AS_GROUP_ID, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT) 
-		     VALUES (#{machineId}, #{lbName}, #{lbDnsName}, #{asGroupId}, #{regUserId}, NOW(), #{updUserId}, NOW())
+			        (MACHINE_ID, LB_NAME, LB_DNS_NAME, AUTO_SCALING_ID, REG_USER_ID, REG_DT, UPD_USER_ID, UPD_DT) 
+		     VALUES (#{machineId}, #{lbName}, #{lbDnsName}, #{autoScalingId}, #{regUserId}, NOW(), #{updUserId}, NOW())
 	</insert>
 
 	<select id="getLoadBalancer" parameterType="int" resultType="com.athena.peacock.controller.web.lb.LoadBalancerDto">
@@ -14,7 +14,7 @@
 			   , MACHINE_ID AS machineId
 			   , LB_NAME AS lbName
 			   , LB_DNS_NAME AS lbDnsName
-			   , AS_GROUP_ID AS asGroupId
+			   , AUTO_SCALING_ID AS autoScalingId
 			   , REG_USER_ID AS regUserId
 			   , REG_DT AS regDt
 			   , UPD_USER_ID AS updUserId
@@ -27,7 +27,7 @@
 		UPDATE load_balancer_tbl
 		   SET LB_NAME = #{lbName}
 			   , LB_DNS_NAME = #{lbDnsName}
-			   , AS_GROUP_ID = #{asGroupId}
+			   , AUTO_SCALING_ID = #{autoScalingId}
 			   , UPD_USER_ID = #{updUserId}
 			   , UPD_DT = NOW()
 		 WHERE LOAD_BALANCER_ID = #{loadBalancerId}
@@ -45,7 +45,7 @@
 		<if test="machineId != null">AND MACHINE_ID = #{machineId}</if>
 		<if test="lbName != null">AND LB_NAME = #{lbName}</if>
 		<if test="lbDnsName != null">AND LB_DNS_NAME = #{lbDnsName}</if>
-		<if test="asGroupId != null">AND AS_GROUP_ID = #{asGroupId}</if>
+		<if test="autoScalingId != null">AND AUTO_SCALING_ID = #{autoScalingId}</if>
 	</select>
 	
 	<select id="getLoadBalancerList" parameterType="com.athena.peacock.controller.web.lb.LoadBalancerDto" resultType="com.athena.peacock.controller.web.lb.LoadBalancerDto">
@@ -53,7 +53,7 @@
 			   , MACHINE_ID AS machineId
 			   , LB_NAME AS lbName
 			   , LB_DNS_NAME AS lbDnsName
-			   , AS_GROUP_ID AS asGroupId
+			   , AUTO_SCALING_ID AS autoScalingId
 			   , REG_USER_ID AS regUserId
 			   , REG_DT AS regDt
 			   , UPD_USER_ID AS updUserId
@@ -64,7 +64,7 @@
 		<if test="machineId != null">AND MACHINE_ID = #{machineId}</if>
 		<if test="lbName != null">AND LB_NAME = #{lbName}</if>
 		<if test="lbDnsName != null">AND LB_DNS_NAME = #{lbDnsName}</if>
-		<if test="asGroupId != null">AND AS_GROUP_ID = #{asGroupId}</if>
+		<if test="autoScalingId != null">AND AUTO_SCALING_ID = #{autoScalingId}</if>
 		 LIMIT #{start}, #{limit}
 	</select>
 

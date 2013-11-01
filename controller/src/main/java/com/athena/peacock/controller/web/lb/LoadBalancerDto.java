@@ -37,7 +37,7 @@ public class LoadBalancerDto extends BaseDto {
 	private String machineId;
 	private String lbName;
 	private String lbDnsName;
-	private Integer asGroupId;
+	private Integer autoScalingId;
 	
 	// machine_tbl의 IP_ADDR 조회 용
 	private String ipAddr;
@@ -100,17 +100,17 @@ public class LoadBalancerDto extends BaseDto {
 	}
 
 	/**
-	 * @return the asGroupId
+	 * @return the autoScalingId
 	 */
-	public Integer getAsGroupId() {
-		return asGroupId;
+	public Integer getAutoScalingId() {
+		return autoScalingId;
 	}
 
 	/**
-	 * @param asGroupId the asGroupId to set
+	 * @param autoScalingId the autoScalingId to set
 	 */
-	public void setAsGroupId(Integer asGroupId) {
-		this.asGroupId = asGroupId;
+	public void setAutoScalingId(Integer autoScalingId) {
+		this.autoScalingId = autoScalingId;
 	}
 
 	/**
